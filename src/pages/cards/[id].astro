@@ -57,6 +57,25 @@ const displayThreads =
 >
   <CardHero card={card} />
 
+{
+  card.officialShortAnswer && (
+    <section
+      class="official-answer"
+      aria-labelledby="official-answer-heading"
+    >
+      <div class="official-answer-label">
+        Kurzantwort
+      </div>
+
+      <h2 id="official-answer-heading">
+        Einwände auf einen Blick
+      </h2>
+
+      <p>{card.officialShortAnswer}</p>
+    </section>
+  )
+}
+
   <section class="argument-explainer compact">
   <div class="argument-explainer-header">
     <p class="eyebrow">Argument verstehen</p>

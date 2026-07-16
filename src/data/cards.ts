@@ -12,6 +12,7 @@ export type ArgumentCard = {
   slug: string;
   title: string;
   argument: string;
+  officialShortAnswer: string;
   meaning: string;
   notMeaning: string;
   commonFormulations: string[];
@@ -26,6 +27,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-01",
     "title": "Pflanzen haben auch Gefühle.",
     "argument": "Pflanzen haben auch Gefühle.",
+    officialShortAnswer: "Pflanzen besitzen nach heutigem Kenntnisstand kein Nervensystem und kein bewusstes Schmerzempfinden. Außerdem werden für Tierprodukte aktuell mehr Pflanzen verbraucht als für eine direkte pflanzliche Ernährung.",
     "ratings": {
       "verbreitung": 69,
       "komplexitaet": 26,
