@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CreateThreadForm from "../../../components/forum/CreateThreadForm";
+import { cards } from "../../../data/cards";
+
+export const prerender = false;
+
+const cardId = Number(Astro.params.cardId);
+const card = cards.find((item) => item.id === cardId);
+
+if (!card) {
+  return Astro.redirect("/forum");
+}
+---
+
+<BaseLayout title={`Thread erstellen · ${card.title}`}>
+  <section class="create-thread-page">
+    <a href={`/cards/${card.id}`} class="back-link">
+      ← Zurück zur Karte
+    </a>
+
+    <div class="create-thread-header">
+      <p class="eyebrow">Neuer Thread</p>
+      <h1>Diskussion starten</h1>
+      <p>
+        Erstelle einen neuen Thread zu dieser Karte. Achte auf einen klaren
+        Titel und eine faire, hilfreiche Formulierung.
+      </p>
+    </div>
+
+    <CreateThreadForm
+      client:load
+      cardId={card.id}
+      cardTitle={card.title}
+    />
+  </section>
+</BaseLayout>

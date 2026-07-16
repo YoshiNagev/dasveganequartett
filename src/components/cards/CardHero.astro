@@ -1,0 +1,55 @@
+---
+import type { ArgumentCard } from "../../data/cards";
+
+type Props = {
+  card: ArgumentCard;
+};
+
+const { card } = Astro.props;
+---
+
+<section class="argument-detail-hero">
+  <div class="argument-detail-copy">
+    <p class="eyebrow">Argument #{String(card.id).padStart(2, "0")}</p>
+
+    <h1>{card.title}</h1>
+  </div>
+
+  <aside class="argument-stats-card">
+    <div class="argument-stat-category">
+      {card.categoryLabel}
+    </div>
+
+    <div class="argument-stat-grid">
+      <div>
+        <span>Verbreitung</span>
+        <strong>{card.ratings.verbreitung}</strong>
+      </div>
+
+      <div>
+        <span>Komplexität</span>
+        <strong>{card.ratings.komplexitaet}</strong>
+      </div>
+
+      <div>
+        <span>Emotionalität</span>
+        <strong>{card.ratings.emotionalitaet}</strong>
+      </div>
+
+      <div>
+        <span>Delulu-Faktor</span>
+        <strong>{card.ratings.deluluFaktor}</strong>
+      </div>
+
+      <div>
+        <span>Ragebait-Faktor</span>
+        <strong>{card.ratings.ragebaitFaktor}</strong>
+      </div>
+
+      <div>
+        <span>Ablenkungsfaktor</span>
+        <strong>{card.ratings.ablenkungsfaktor}</strong>
+      </div>
+    </div>
+  </aside>
+</section>

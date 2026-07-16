@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NotificationsPanel from "../../components/account/NotificationsPanel";
+---
+
+<BaseLayout title="Benachrichtigungen">
+  <section class="profile-page">
+    <div class="page-header">
+      <p class="eyebrow">Account</p>
+      <h1>Benachrichtigungen</h1>
+      <p>
+        Hier siehst du Antworten auf deine Kommentare und später weitere
+        Aktivitäten im Forum.
+      </p>
+    </div>
+
+    <NotificationsPanel client:load />
+  </section>
+</BaseLayout>

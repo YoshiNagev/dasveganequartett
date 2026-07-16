@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { cards } from "../../data/cards";
+import { supabase } from "../../lib/supabaseClient";
+
+export const prerender = false;
+
+const { data: threads, error } = await supabase
+  .from("threads")
+  .select("card_id")
+  .eq("is_hidden", false);
+
+if (error) {
+  console.error(error);
+}
+
+const cardsWithThreads = cards.map((card) => ({
+  ...card,
+  threadCount:
+    threads?.filter((thread) => thread.card_id === card.id).length ?? 0,
+}));
+---
+
+<BaseLayout title="Forum">
+  <section class="page-header">
+    <p class="eyebrow">Forum</p>
+
+    <h1>Diskussionen zu allen Karten</h1>
+
+    <p>
+      Finde schnell das Argument, über das du diskutieren möchtest.
+      Angemeldete Nutzer:innen können Threads erstellen.
+    </p>
+  </section>
+
+  <section class="forum-card-grid">
+    {cardsWithThreads.map((card) => (
+      <a href={`/forum/card/${card.id}`} class="forum-card-link">
+        <span>#{String(card.id).padStart(2, "0")}</span>
+
+        <h2>{card.title}</h2>
+
+        <p>{card.category}</p>
+
+        <strong>
+          {card.threadCount === 1
+            ? "1 Thread"
+            : `${card.threadCount} Threads`}
+        </strong>
+      </a>
+    ))}
+  </section>
+
+  <div class="forum-action-grid">
+    <a
+      class="create-thread-link full-width"
+      href="/forum/threads"
+    >
+      Alle Threads ansehen
+    </a>
+
+    <a
+      class="create-thread-link full-width"
+      href="/forum/suggest"
+    >
+      Zusätzliche Argumente ansehen
+    </a>
+  </div>
+</BaseLayout>

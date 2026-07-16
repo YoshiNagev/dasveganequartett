@@ -1,0 +1,78 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
+
+type Props = {
+  variant?: "landing" | "profile";
+};
+
+export default function AuthCta({ variant = "landing" }: Props) {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    async function loadSession() {
+      const { data } = await supabase.auth.getSession();
+      setIsLoggedIn(Boolean(data.session));
+    }
+
+    loadSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLoggedIn(Boolean(session));
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function logout() {
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  }
+
+  if (isLoggedIn === null) {
+    return null;
+  }
+
+  if (isLoggedIn) {
+    return (
+      <section className="auth-cta-card">
+        <p className="eyebrow">Account</p>
+
+        <h2>{variant === "profile" ? "Du bist angemeldet" : "Willkommen zurück"}</h2>
+
+        <p>
+          {variant === "profile"
+            ? "Du kannst dein Profil verwalten oder dich abmelden."
+            : "Du kannst jetzt Threads erstellen, kommentieren und Hinweise erhalten."}
+        </p>
+
+        <div className="auth-cta-actions">
+          <a href="/account/profile">Profil öffnen</a>
+
+          <button type="button" onClick={logout}>
+            Abmelden
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="auth-cta-card">
+      <p className="eyebrow">Account</p>
+
+      <h2>{variant === "profile" ? "Du bist nicht eingeloggt" : "Diskutiere mit"}</h2>
+
+      <p>
+        Melde dich an, um Threads zu erstellen, Antworten zu schreiben und dein
+        Profil zu verwalten.
+      </p>
+
+      <div className="auth-cta-actions">
+        <a href="/account/login">Einloggen</a>
+        <a href="/account/register">Registrieren</a>
+      </div>
+    </section>
+  );
+}

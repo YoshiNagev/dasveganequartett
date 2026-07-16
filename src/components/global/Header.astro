@@ -1,0 +1,30 @@
+---
+import Button from "./Button.astro";
+import AuthNav from "../account/AuthNav";
+import NotificationBadge from "../account/NotificationBadge";
+import MobileMenu from "./MobileMenu";
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <div class="logo-mark"></div>
+      <span>Das Vegane Quartett</span>
+    </a>
+
+    <nav class="header-nav desktop-nav">
+      <a href="/cards">Argumente</a>
+      <a href="/">Home</a>
+      <a href="/forum">Forum</a>
+
+      <NotificationBadge client:load />
+      <AuthNav client:load />
+
+      <Button href="/preorder">
+        Vorbestellen
+      </Button>
+    </nav>
+
+    <MobileMenu client:load />
+  </div>
+</header>

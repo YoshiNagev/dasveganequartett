@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ThreadPreview from "../../components/forum/ThreadPreview.astro";
+import MarkdownText from "../../components/forum/MarkdownText";
+import { supabase } from "../../lib/supabaseClient";
+
+export const prerender = false;
+
+const nickname = Astro.params.nickname;
+
+const { data: profile, error: profileError } = await supabase
+  .from("profiles")
+  .select("id, nickname, bio, avatar_url, role, created_at")
+  .eq("nickname", nickname)
+  .maybeSingle();
+
+if (profileError || !profile) {
+  return Astro.redirect("/forum");
+}
+
+const { data: threads } = await supabase
+  .from("threads")
+  .select(`
+    id,
+    card_id,
+    suggested_argument_id,
+    title,
+    body,
+    slug,
+    created_at,
+    comments (
+      id
+    )
+  `)
+  .eq("user_id", profile.id)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: false });
+
+const { data: comments } = await supabase
+  .from("comments")
+  .select(`
+    id,
+    thread_id,
+    body,
+    created_at,
+    threads (
+      slug,
+      title
+    )
+  `)
+  .eq("user_id", profile.id)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: false })
+  .limit(10);
+
+const displayThreads =
+  threads?.map((thread) => ({
+    id: thread.slug,
+    cardId: thread.card_id,
+    title: thread.title,
+    excerpt: thread.body,
+    author: profile.nickname,
+    replies: thread.comments?.length ?? 0,
+    createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
+  })) ?? [];
+
+const displayComments = comments ?? [];
+---
+
+<BaseLayout title={`${profile.nickname} · Profil`}>
+  <section class="public-profile-page">
+    <div class="public-profile-hero upgraded">
+      <div class="profile-avatar public">
+        {profile.avatar_url ? (
+          <img src={profile.avatar_url} alt={`Avatar von ${profile.nickname}`} />
+        ) : (
+          profile.nickname.slice(0, 2).toUpperCase()
+        )}
+      </div>
+
+      <div>
+        <p class="eyebrow">Profil</p>
+        <h1>{profile.nickname}</h1>
+        <p>{profile.bio || "Dieses Profil hat noch keine Bio."}</p>
+
+        <div class="profile-stat-row">
+          <span>{profile.role}</span>
+          <span>Seit {new Date(profile.created_at).toLocaleDateString("de-DE")}</span>
+          <span>{displayThreads.length} Threads</span>
+          <span>{displayComments.length} Kommentare</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="profile-activity-grid">
+      <div class="threads-section">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Aktivität</p>
+            <h2>Threads von {profile.nickname}</h2>
+          </div>
+        </div>
+
+        {
+          displayThreads.length > 0 ? (
+            <div class="thread-list">
+              {displayThreads.map((thread) => (
+                <ThreadPreview thread={thread} />
+              ))}
+            </div>
+          ) : (
+            <div class="empty-state">
+              <h3>Noch keine Threads</h3>
+              <p>Diese Person hat noch keine Diskussionen gestartet.</p>
+            </div>
+          )
+        }
+      </div>
+
+      <aside class="latest-comments-card">
+        <p class="eyebrow">Kommentare</p>
+        <h2>Neueste Antworten</h2>
+
+        {
+          displayComments.length > 0 ? (
+            <div class="latest-comment-list">
+              {displayComments.map((comment) => (
+                <a
+                  class="latest-comment-item"
+                  href={`/forum/thread/${comment.threads?.slug ?? ""}`}
+                >
+                  <strong>{comment.threads?.title ?? "Unbekannter Thread"}</strong>
+
+                  <MarkdownText>
+                    {comment.body.length > 180
+                      ? `${comment.body.slice(0, 180)}...`
+                      : comment.body}
+                  </MarkdownText>
+
+                  <small>
+                    {new Date(comment.created_at).toLocaleDateString("de-DE")}
+                  </small>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="muted-text">Noch keine Kommentare.</p>
+          )
+        }
+      </aside>
+    </section>
+  </section>
+</BaseLayout>

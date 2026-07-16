@@ -1,0 +1,350 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RealtimeComments from "../../../components/forum/RealtimeComments";
+import MarkdownText from "../../../components/forum/MarkdownText";
+import { supabase } from "../../../lib/supabaseClient";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const { data: thread, error: threadError } = await supabase
+  .from("threads")
+  .select(`
+    id,
+    user_id,
+    card_id,
+    suggested_argument_id,
+    title,
+    body,
+    slug,
+    created_at,
+    profiles (
+      nickname
+    )
+  `)
+  .eq("slug", slug)
+  .eq("is_hidden", false)
+  .single();
+
+if (threadError || !thread) {
+  return Astro.redirect("/forum");
+}
+
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+
+const { data: comments, error: commentsError } = await supabase
+  .from("comments")
+  .select(`
+    id,
+    thread_id,
+    parent_id,
+    user_id,
+    body,
+    created_at,
+    profiles (
+      nickname
+    ),
+    comment_votes (
+      id,
+      user_id
+    )
+  `)
+  .eq("thread_id", thread.id)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: true });
+
+if (commentsError) {
+  console.error(commentsError);
+}
+
+const flatComments =
+  comments?.map((comment) => ({
+    id: comment.id,
+    threadId: comment.thread_id,
+    parentId: comment.parent_id,
+    userId: comment.user_id,
+    author: comment.profiles?.nickname ?? "Unbekannt",
+    createdAt: new Date(comment.created_at).toLocaleDateString("de-DE"),
+    body: comment.body,
+    votes: comment.comment_votes?.length ?? 0,
+    userVoted:
+      user && comment.comment_votes
+        ? comment.comment_votes.some((vote) => vote.user_id === user.id)
+        : false,
+  })) ?? [];
+
+const backHref = thread.card_id
+  ? `/forum/card/${thread.card_id}`
+  : thread.suggested_argument_id
+    ? `/forum/suggest/${thread.suggested_argument_id}`
+    : "/forum";
+
+const backLabel = thread.card_id
+  ? `← Zurück zur Karte #${String(thread.card_id).padStart(2, "0")}`
+  : "← Zurück zum vorgeschlagenen Argument";
+---
+
+<BaseLayout title={`${thread.title} · Das Vegane Quartett`}>
+  <section class="thread-page">
+    <a class="back-link" href={backHref}>
+      {backLabel}
+    </a>
+
+    <div
+      class="thread-hero upgraded"
+      data-thread-owner-id={thread.user_id}
+      data-thread-id={thread.id}
+    >
+      <div class="thread-hero-main">
+        <p class="eyebrow">Diskussion</p>
+
+        <h1 data-thread-title-display>{thread.title}</h1>
+
+        <article class="thread-description-card" data-thread-display>
+          <p class="eyebrow">Threadbeschreibung</p>
+          <MarkdownText content={thread.body} />
+        </article>
+
+        <form class="thread-edit-form" data-thread-edit-form hidden>
+          <label>
+            Titel
+            <input
+              data-thread-title-input
+              value={thread.title}
+              minLength="5"
+              maxLength="160"
+              required
+            />
+          </label>
+
+          <label>
+            Beschreibung
+            <textarea
+              data-thread-body-input
+              rows="7"
+              minLength="10"
+              maxLength="3000"
+              required
+            >{thread.body}</textarea>
+          </label>
+
+          <div class="comment-actions">
+            <button type="submit" data-thread-save-button>
+              Speichern
+            </button>
+
+            <button type="button" data-thread-cancel-button>
+              Abbrechen
+            </button>
+          </div>
+        </form>
+
+        <div class="comment-actions thread-owner-actions">
+          <button
+            type="button"
+            data-edit-thread-button
+            hidden
+          >
+            Thread bearbeiten
+          </button>
+
+          <button
+            type="button"
+            class="danger-action"
+            data-hide-thread-button
+            hidden
+          >
+            Thread verbergen
+          </button>
+
+          <button
+            type="button"
+            class="danger-action"
+            data-report-thread-button
+            hidden
+          >
+            Thread melden
+          </button>
+        </div>
+      </div>
+
+      <div class="thread-hero-meta">
+        <a
+          class="profile-pill"
+          href={`/user/${thread.profiles?.nickname ?? ""}`}
+        >
+          {thread.profiles?.nickname ?? "Unbekannt"}
+        </a>
+
+        <span>
+          {flatComments.length === 1
+            ? "1 Antwort"
+            : `${flatComments.length} Antworten`}
+        </span>
+
+        <span>
+          {new Date(thread.created_at).toLocaleDateString("de-DE")}
+        </span>
+      </div>
+    </div>
+
+    <section class="comments-section">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Antworten</p>
+          <h2>Diskussion</h2>
+        </div>
+      </div>
+
+      <RealtimeComments
+        client:load
+        threadId={thread.id}
+        initialComments={flatComments}
+      />
+    </section>
+  </section>
+
+  <script>
+    import { supabase } from "../../../lib/supabaseClient";
+    import { editThread, hideThread, reportThread } from "../../../lib/threads";
+
+    const hero = document.querySelector("[data-thread-owner-id]");
+    const titleDisplay = document.querySelector("[data-thread-title-display]");
+    const displayBox = document.querySelector("[data-thread-display]");
+    const editForm = document.querySelector("[data-thread-edit-form]");
+    const titleInput = document.querySelector("[data-thread-title-input]");
+    const bodyInput = document.querySelector("[data-thread-body-input]");
+
+    const editButton = document.querySelector("[data-edit-thread-button]");
+    const hideButton = document.querySelector("[data-hide-thread-button]");
+    const reportButton = document.querySelector("[data-report-thread-button]");
+    const cancelButton = document.querySelector("[data-thread-cancel-button]");
+
+    if (hero) {
+      const ownerId = hero.getAttribute("data-thread-owner-id");
+      const threadId = hero.getAttribute("data-thread-id");
+
+      const { data } = await supabase.auth.getSession();
+      const currentUserId = data.session?.user.id ?? null;
+
+      const isOwner = Boolean(currentUserId && ownerId && currentUserId === ownerId);
+
+      if (isOwner) {
+        if (editButton instanceof HTMLButtonElement) editButton.hidden = false;
+        if (hideButton instanceof HTMLButtonElement) hideButton.hidden = false;
+      }
+
+      if (currentUserId && !isOwner) {
+        if (reportButton instanceof HTMLButtonElement) reportButton.hidden = false;
+      }
+
+      if (
+        editButton instanceof HTMLButtonElement &&
+        editForm instanceof HTMLFormElement &&
+        displayBox instanceof HTMLElement
+      ) {
+        editButton.addEventListener("click", () => {
+          editForm.hidden = false;
+          displayBox.hidden = true;
+          editButton.hidden = true;
+        });
+      }
+
+      if (
+        cancelButton instanceof HTMLButtonElement &&
+        editForm instanceof HTMLFormElement &&
+        displayBox instanceof HTMLElement &&
+        editButton instanceof HTMLButtonElement
+      ) {
+        cancelButton.addEventListener("click", () => {
+          editForm.hidden = true;
+          displayBox.hidden = false;
+          editButton.hidden = false;
+        });
+      }
+
+      if (
+        editForm instanceof HTMLFormElement &&
+        titleInput instanceof HTMLInputElement &&
+        bodyInput instanceof HTMLTextAreaElement
+      ) {
+        editForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (!threadId) return;
+
+          const newTitle = titleInput.value.trim();
+          const newBody = bodyInput.value.trim();
+
+          if (newTitle.length < 5 || newBody.length < 10) {
+            alert("Titel oder Beschreibung ist zu kurz.");
+            return;
+          }
+
+          try {
+            await editThread({
+              threadId,
+              title: newTitle,
+              body: newBody,
+            });
+
+            if (titleDisplay) titleDisplay.textContent = newTitle;
+
+            window.location.reload();
+          } catch (error) {
+            alert(
+              error instanceof Error
+                ? error.message
+                : "Thread konnte nicht bearbeitet werden."
+            );
+          }
+        });
+      }
+
+      if (hideButton instanceof HTMLButtonElement) {
+        hideButton.addEventListener("click", async () => {
+          const confirmed = window.confirm(
+            "Diesen Thread wirklich verbergen? Er verschwindet dann aus dem Forum."
+          );
+
+          if (!confirmed || !threadId) return;
+
+          try {
+            await hideThread(threadId);
+            window.location.href = "/forum";
+          } catch (error) {
+            alert(
+              error instanceof Error
+                ? error.message
+                : "Thread konnte nicht verborgen werden."
+            );
+          }
+        });
+      }
+
+      if (reportButton instanceof HTMLButtonElement) {
+        reportButton.addEventListener("click", async () => {
+          if (!threadId) return;
+
+          const reason = window.prompt("Warum möchtest du diesen Thread melden?");
+
+          if (!reason || reason.trim().length < 5) return;
+
+          try {
+            await reportThread(threadId, reason.trim());
+            alert("Danke, deine Meldung wurde gespeichert.");
+          } catch (error) {
+            alert(
+              error instanceof Error
+                ? error.message
+                : "Thread konnte nicht gemeldet werden."
+            );
+          }
+        });
+      }
+    }
+  </script>
+</BaseLayout>

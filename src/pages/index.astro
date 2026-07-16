@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/landing/Hero.astro";
+import QRFeature from "../components/landing/QRFeature.astro";
+import PreorderSection from "../components/landing/PreorderSection.astro";
+import AuthCta from "../components/account/AuthCta.tsx";
+---
+
+<BaseLayout title="Das Vegane Quartett">
+  <Hero />
+
+  <AuthCta client:load variant="landing" />
+
+  <section class="intro-section">
+    <p class="eyebrow">Idee</p>
+    <h2>Ein Kartenspiel, das Gespräche startet.</h2>
+    <p>
+      Das Vegane Quartett sammelt 54 typische Argumente gegen Veganismus
+      und macht daraus ein spielerisches Gesprächsformat. Die Website
+      ergänzt das physische Spiel durch Diskussionen, Quellen und ausführliche
+      Antworten zu jeder Karte.
+    </p>
+  </section>
+
+  <QRFeature />
+
+  <PreorderSection />
+</BaseLayout>

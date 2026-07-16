@@ -1,0 +1,28 @@
+{
+  "name": "dasveganequartett",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.0",
+    "@astrojs/vercel": "latest",
+    "@supabase/supabase-js": "^2.106.2",
+    "astro": "latest",
+    "canvas": "^3.2.3",
+    "qr-code-styling-node": "^1.5.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}

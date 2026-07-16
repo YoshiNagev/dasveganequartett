@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getSuggestedArguments } from "../../../lib/suggestedArguments";
+
+export const prerender = false;
+
+let suggestedArguments = [];
+
+try {
+  suggestedArguments = await getSuggestedArguments();
+} catch (error) {
+  console.error(error);
+}
+---
+
+<BaseLayout title="Vorgeschlagene Argumente">
+  <section class="page-header">
+    <p class="eyebrow">Forum · Community</p>
+    <h1>Vorgeschlagene Argumente</h1>
+    <p>
+      Hier sammeln Nutzerinnen und Nutzer seltene oder neue Argumente, die nicht zu den
+      54 offiziellen Quartett-Karten gehören.
+    </p>
+
+    <div style="margin-top: 1.5rem;">
+      <a class="create-thread-link" href="/forum/suggest/new">
+        Neues Argument vorschlagen
+      </a>
+    </div>
+  </section>
+
+  <section class="suggested-argument-grid">
+    {
+      suggestedArguments.length > 0 ? (
+        suggestedArguments.map((argument) => (
+          <a
+            class="suggested-argument-card"
+            href={`/forum/suggest/${argument.id}`}
+          >
+            <div>
+              <span class="suggested-status">{argument.status}</span>
+              <h2>{argument.title}</h2>
+              <p>{argument.description}</p>
+            </div>
+
+            <div class="suggested-meta">
+              <span>{argument.profiles?.nickname ?? "Unbekannt"}</span>
+              <span>
+                {argument.threads?.length === 1
+                  ? "1 Thread"
+                  : `${argument.threads?.length ?? 0} Threads`}
+              </span>
+              <span>
+                {new Date(argument.created_at).toLocaleDateString("de-DE")}
+              </span>
+            </div>
+          </a>
+        ))
+      ) : (
+        <div class="empty-state">
+          <h3>Noch keine Vorschläge</h3>
+          <p>
+            Bisher wurden keine zusätzlichen Argumente vorgeschlagen.
+            Starte den ersten Vorschlag.
+          </p>
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

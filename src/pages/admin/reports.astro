@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ReportsPanel from "../../components/admin/ReportsPanel.tsx";
+
+export const prerender = false;
+---
+
+<BaseLayout title="Moderation · Reports">
+  <section class="page-header">
+    <p class="eyebrow">Admin</p>
+    <h1>Reports</h1>
+    <p>
+      Prüfe gemeldete Kommentare und Threads, verbirg problematische Inhalte
+      und markiere Meldungen als erledigt.
+    </p>
+  </section>
+
+  <ReportsPanel client:load />
+</BaseLayout>

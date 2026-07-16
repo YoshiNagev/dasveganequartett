@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProfileForm from "../../components/account/ProfileForm";
+import LogoutButton from "../../components/account/LogoutButton";
+import AuthCta from "../../components/account/AuthCta";
+---
+
+<BaseLayout title="Profil">
+  <section class="profile-page">
+    <div class="profile-hero">
+      
+      <div>
+        <p class="eyebrow">Account</p>
+        <h1>Dein Profil</h1>
+        <p>
+          Hier kannst du deinen öffentlichen Nickname und deine Bio bearbeiten.
+          Deine E-Mail bleibt privat.
+        </p>
+      </div>
+    </div>
+
+    <div class="profile-layout">
+      <ProfileForm client:load />
+
+      <aside class="profile-info-card">
+        <h2>Was öffentlich sichtbar ist</h2>
+
+        <ul>
+          <li>Dein Nickname</li>
+          <li>Deine Bio</li>
+          <li>Deine Threads</li>
+          <li>Deine Kommentare</li>
+        </ul>
+
+        <p>
+          Deine E-Mail-Adresse wird im Forum nicht angezeigt.
+        </p>
+
+        <AuthCta client:load variant="profile" />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

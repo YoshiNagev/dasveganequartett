@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ThreadSortBrowser from "../../components/forum/ThreadSortBrowser";
+import { getAllThreads } from "../../lib/threadQueries";
+
+export const prerender = false;
+
+let threads = [];
+
+try {
+  threads = await getAllThreads();
+} catch (error) {
+  console.error(error);
+}
+---
+
+<BaseLayout title="Alle Threads">
+  <section class="page-header">
+    <p class="eyebrow">Forum</p>
+    <h1>Alle Diskussionen</h1>
+    <p>
+      Sortiere Threads nach neuen Diskussionen, aktueller Aktivität oder Anzahl
+      der Antworten.
+    </p>
+  </section>
+
+  <ThreadSortBrowser client:load threads={threads} />
+</BaseLayout>

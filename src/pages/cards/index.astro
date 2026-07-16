@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardBrowser from "../../components/cards/CardBrowser";
+import { cards } from "../../data/cards";
+
+const categories = Array.from(
+  new Set(cards.map((card) => card.category).filter(Boolean))
+).sort();
+---
+
+<BaseLayout title="Argumentkarten | Das Vegane Quartett">
+  <section class="page-header">
+    <p class="eyebrow">Alle Karten</p>
+    <h1>Finde jedes Argument schnell wieder.</h1>
+    <p>
+      Suche nach Argumenten oder Kategorien. Die QR-Codes auf den physischen
+      Karten führen später direkt zu den passenden Detailseiten.
+    </p>
+  </section>
+
+  <CardBrowser
+    client:load
+    cards={cards}
+    categories={categories}
+  />
+</BaseLayout>

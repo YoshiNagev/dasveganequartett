@@ -1,0 +1,17 @@
+---
+const {
+  title,
+  text,
+  href,
+  linkText,
+} = Astro.props;
+---
+
+<div class="auth-card">
+  <h2>{title}</h2>
+  <p>{text}</p>
+
+  <a href={href}>
+    {linkText}
+  </a>
+</div>

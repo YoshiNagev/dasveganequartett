@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
+import CreateThreadBox from "../../../components/forum/CreateThreadBox";
+import { cards } from "../../../data/cards";
+import { supabase } from "../../../lib/supabaseClient";
+
+export const prerender = false;
+
+const id = Number(Astro.params.id);
+const card = cards.find((card) => card.id === id);
+
+if (!card) {
+  return Astro.redirect("/forum");
+}
+
+const { data: threads, error } = await supabase
+  .from("threads")
+  .select(`
+    id,
+    card_id,
+    title,
+    body,
+    slug,
+    created_at,
+    profiles (
+      nickname
+    ),
+    comments (
+      id
+    )
+  `)
+  .eq("card_id", card.id)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: false });
+
+if (error) {
+  console.error(error);
+}
+
+const displayThreads =
+  threads?.map((thread) => ({
+    id: thread.slug,
+    cardId: thread.card_id,
+    title: thread.title,
+    excerpt: thread.body,
+    author: thread.profiles?.nickname ?? "Unbekannt",
+    replies: thread.comments?.length ?? 0,
+    createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
+  })) ?? [];
+---
+
+<BaseLayout title={`Forum zu Karte ${card.id}`}>
+  <section class="page-header">
+    <p class="eyebrow">Forum · Karte #{String(card.id).padStart(2, "0")}</p>
+    <h1>{card.title}</h1>
+    <p>
+      Alle Diskussionen zu dieser Argumentkarte. Von hier aus können neue
+      Threads gestartet und bestehende Antworten gelesen werden.
+    </p>
+  </section>
+
+  <section class="thread-list">
+    {
+      displayThreads.length > 0 ? (
+        displayThreads.map((thread) => <ThreadPreview thread={thread} />)
+      ) : (
+        <div class="empty-state">
+          <h3>Noch keine Threads</h3>
+          <p>Zu dieser Karte gibt es bisher keine Diskussionen.</p>
+        </div>
+      )
+    }
+  </section>
+
+  <div class="create-thread-wrapper">
+  <div style="margin-top: 2rem;">
+  <CreateThreadBox client:load cardId={card.id} />
+</div>
+</div>
+</BaseLayout>

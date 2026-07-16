@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { product } from "../data/product";
+---
+
+<BaseLayout title="Vorbestellen">
+  <section class="preorder-page">
+    <div>
+      <p class="eyebrow">Preorder</p>
+      <h1>{product.name}</h1>
+
+      <p class="preorder-lead">
+        Das Quartett der Argumente gegen Veganismus erscheint nach aktuellem
+        Plan mit Produktionsstart im März 2027.
+      </p>
+
+      <ul class="preorder-list">
+        {product.contents.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+
+    <aside class="preorder-checkout-card">
+      <span class="preorder-price">{product.price}</span>
+      <p>{product.delivery}</p>
+
+      <button>
+        Stripe Checkout folgt
+      </button>
+
+      <small>
+        Diese Seite ist aktuell noch ein Mockup. Die echte Zahlung wird später
+        über Stripe Checkout angebunden.
+      </small>
+    </aside>
+  </section>
+</BaseLayout>

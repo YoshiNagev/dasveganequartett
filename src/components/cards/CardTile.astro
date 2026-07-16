@@ -1,0 +1,21 @@
+---
+const { card } = Astro.props;
+---
+
+<a class="card-tile" href={`/cards/${card.id}`}>
+  <div class="card-tile-top">
+    <span class="card-id">#{String(card.id).padStart(2, "0")}</span>
+    <span class="card-category">{card.category}</span>
+  </div>
+
+  <h3>{card.title}</h3>
+
+  <p class="card-argument">
+    {card.argument}
+  </p>
+
+  <div class="card-objection">
+    <span>Einwand</span>
+    <p>{card.objection}</p>
+  </div>
+</a>

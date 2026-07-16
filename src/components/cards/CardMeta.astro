@@ -1,0 +1,20 @@
+---
+const { card } = Astro.props;
+---
+
+<section class="card-meta-grid">
+  <div class="meta-box">
+    <span>Kategorie</span>
+    <strong>{card.category}</strong>
+  </div>
+
+  <div class="meta-box">
+    <span>QR-Ziel</span>
+    <strong>/cards/{card.id}</strong>
+  </div>
+
+  <div class="meta-box">
+    <span>Status</span>
+    <strong>Diskussion offen</strong>
+  </div>
+</section>

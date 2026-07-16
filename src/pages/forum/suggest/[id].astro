@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
+import CreateSuggestedThreadForm from "../../../components/forum/CreateSuggestedThreadForm";
+import { supabase } from "../../../lib/supabaseClient";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+const { data: argument, error } = await supabase
+  .from("suggested_arguments")
+  .select(`
+    id,
+    title,
+    description,
+    status,
+    created_at,
+    profiles (
+      nickname
+    ),
+    threads (
+      id,
+      title,
+      body,
+      slug,
+      created_at,
+      comments (
+        id
+      ),
+      profiles (
+        nickname
+      )
+    )
+  `)
+  .eq("id", id)
+  .eq("is_hidden", false)
+  .maybeSingle();
+
+if (error || !argument) {
+  return Astro.redirect("/forum/suggest");
+}
+
+const displayThreads =
+  argument.threads?.map((thread) => ({
+    id: thread.slug,
+    cardId: null,
+    title: thread.title,
+    excerpt: thread.body,
+    author: thread.profiles?.nickname ?? "Unbekannt",
+    replies: thread.comments?.length ?? 0,
+    createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
+  })) ?? [];
+---
+
+<BaseLayout title={`${argument.title} · Vorgeschlagenes Argument`}>
+  <section class="thread-page">
+    <a class="back-link" href="/forum/suggest">
+      ← Zurück zu vorgeschlagenen Argumenten
+    </a>
+
+    <div class="thread-hero upgraded">
+      <div>
+        <p class="eyebrow">Vorgeschlagenes Argument</p>
+        <h1>{argument.title}</h1>
+        <p>{argument.description}</p>
+      </div>
+
+      <div class="thread-hero-meta">
+        <span>{argument.status}</span>
+        <span>{argument.profiles?.nickname ?? "Unbekannt"}</span>
+        <span>
+          {new Date(argument.created_at).toLocaleDateString("de-DE")}
+        </span>
+      </div>
+    </div>
+
+    <section class="threads-section">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Diskussionen</p>
+          <h2>Threads zu diesem Argument</h2>
+        </div>
+      </div>
+
+      {
+        displayThreads.length > 0 ? (
+          <div class="thread-list">
+            {displayThreads.map((thread) => (
+              <ThreadPreview thread={thread} />
+            ))}
+          </div>
+        ) : (
+          <div class="empty-state">
+            <h3>Noch keine Threads</h3>
+            <p>
+              Starte die erste Diskussion zu diesem vorgeschlagenen Argument.
+            </p>
+          </div>
+        )
+      }
+
+      <div style="margin-top: 2rem;">
+        <CreateSuggestedThreadForm
+          client:load
+          suggestedArgumentId={argument.id}
+        />
+      </div>
+    </section>
+  </section>
+</BaseLayout>

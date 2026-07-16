@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SuggestArgumentForm from "../../../components/forum/SuggestArgumentForm";
+---
+
+<BaseLayout title="Argument vorschlagen">
+  <section class="create-thread-page">
+    <a class="back-link" href="/forum/suggest">
+      ← Zurück zu vorgeschlagenen Argumenten
+    </a>
+
+    <div class="create-thread-header">
+      <p class="eyebrow">Community</p>
+      <h1>Neues Argument vorschlagen</h1>
+      <p>
+        Nutze diese Funktion für seltene Argumente, Spezialfälle oder neue
+        Einwände, die nicht im offiziellen Quartett enthalten sind.
+      </p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <SuggestArgumentForm client:load />
+    </div>
+  </section>
+</BaseLayout>

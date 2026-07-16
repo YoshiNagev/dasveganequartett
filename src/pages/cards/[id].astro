@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardHero from "../../components/cards/CardHero.astro";
+import ThreadPreview from "../../components/forum/ThreadPreview.astro";
+import CreateThreadBox from "../../components/forum/CreateThreadBox";
+import { cards } from "../../data/cards";
+import { supabase } from "../../lib/supabaseClient";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+const card = cards.find((card) => card.id === Number(id));
+
+if (!card) {
+  return Astro.redirect("/cards");
+}
+
+const { data: threads, error } = await supabase
+  .from("threads")
+  .select(`
+    id,
+    card_id,
+    title,
+    body,
+    slug,
+    created_at,
+    profiles (
+      nickname
+    ),
+    comments (
+      id
+    )
+  `)
+  .eq("card_id", card.id)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: false });
+
+if (error) {
+  console.error(error);
+}
+
+const displayThreads =
+  threads?.map((thread) => ({
+    id: thread.slug,
+    cardId: thread.card_id,
+    title: thread.title,
+    excerpt: thread.body,
+    author: thread.profiles?.nickname ?? "Unbekannt",
+    replies: thread.comments?.length ?? 0,
+    createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
+  })) ?? [];
+---
+
+<BaseLayout
+  title={`${card.title} | Argumentkarte`}
+  description={`Argumentkarte #${card.id}: ${card.title}`}
+>
+  <CardHero card={card} />
+
+  <section class="argument-explainer compact">
+  <div class="argument-explainer-header">
+    <p class="eyebrow">Argument verstehen</p>
+    <h2>Einordnung des Arguments</h2>
+  </div>
+
+  <article class="argument-info-card">
+    <div>
+      <h3>Worum es bei diesem Argument geht</h3>
+      <p>{card.meaning}</p>
+    </div>
+
+    <div>
+      <h3>Wo die Grenzen dieses Arguments liegen</h3>
+      <p>{card.notMeaning}</p>
+    </div>
+
+    <div>
+      <h3>Typische Formulierungen</h3>
+      <ul>
+        {card.commonFormulations.map((formulation) => (
+          <li>„{formulation}“</li>
+        ))}
+      </ul>
+    </div>
+  </article>
+</section>
+
+  <section class="threads-section">
+    <div class="section-heading-row">
+      <div>
+        <p class="eyebrow">Forum</p>
+        <h2>Diskussionen zu dieser Karte</h2>
+      </div>
+
+      <a class="subtle-link" href={`/forum/card/${card.id}`}>
+        Alle Threads ansehen →
+      </a>
+    </div>
+
+    {
+      displayThreads.length > 0 ? (
+        <div class="thread-list">
+          {displayThreads.map((thread) => (
+            <ThreadPreview thread={thread} />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <h3>Noch keine Diskussionen</h3>
+          <p>
+            Zu dieser Karte gibt es noch keine Threads. Starte die erste
+            Diskussion zu diesem Argument.
+          </p>
+        </div>
+      )
+    }
+
+    <CreateThreadBox client:load cardId={card.id} />
+  </section>
+</BaseLayout>

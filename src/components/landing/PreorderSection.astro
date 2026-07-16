@@ -1,0 +1,28 @@
+---
+import { product } from "../../data/product";
+import Button from "../global/Button.astro";
+---
+
+<section class="preorder-section">
+  <div>
+    <p class="eyebrow">Preorder</p>
+    <h2>{product.name}</h2>
+
+    <p>
+      {product.description}
+    </p>
+
+    <ul class="product-list">
+      {product.contents.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="price-card">
+    <span class="price">{product.price}</span>
+    <p>{product.delivery}</p>
+
+    <Button href="/preorder">Vorbestellung ansehen</Button>
+  </div>
+</section>
