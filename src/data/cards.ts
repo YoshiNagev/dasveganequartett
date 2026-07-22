@@ -27,7 +27,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-01",
     "title": "Pflanzen haben auch Gefühle.",
     "argument": "Pflanzen haben auch Gefühle.",
-    officialShortAnswer: "Pflanzen besitzen nach heutigem Kenntnisstand kein Nervensystem und kein bewusstes Schmerzempfinden. Außerdem werden für Tierprodukte aktuell mehr Pflanzen verbraucht als für eine direkte pflanzliche Ernährung.",
+    "officialShortAnswer": "Pflanzen besitzen nach heutigem Kenntnisstand kein Nervensystem und kein bewusstes Schmerzempfinden. Außerdem werden für Tierprodukte aktuell mehr Pflanzen verbraucht als für eine direkte pflanzliche Ernährung.",
     "ratings": {
       "verbreitung": 69,
       "komplexitaet": 26,
@@ -50,6 +50,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-02",
     "title": "Ein Veganer mehr oder weniger ändert nichts.",
     "argument": "Ein Veganer mehr oder weniger ändert nichts.",
+    "officialShortAnswer": "Jede Kaufentscheidung beeinflusst Angebot und Nachfrage. Schon eine einzelne vegane Lebensweise erspart im Durchschnitt vielen Tieren Leid und trägt zusammen mit den Entscheidungen anderer zu gesellschaftlichem Wandel bei.",
     "ratings": {
       "verbreitung": 62,
       "komplexitaet": 27,
@@ -60,7 +61,7 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
-    "meaning": "Befürworter dieses Arguments meinen, dass Veganwerden nichts beiehungsweise nahezu nichts bewirken würde, da die Tiere dann von jemand anderem ausgebeutet werden würden. Eine einzige Person kann das etablierte System nicht ändern.",
+    "meaning": "Befürworter dieses Arguments meinen, dass veganwerden nichts beziehungsweise nahezu nichts bewirken würde, da die Tiere dann von jemand anderem ausgebeutet werden würden. Eine einzige Person kann das etablierte System nicht ändern.",
     "notMeaning": "Das Argument verneint nicht, dass Tierhaltung moralisch verwerflich sei. Es meint nur, dass dass der Unterschied, den eine einzelne Person bewirken kann, praktisch gesehen zu vernachlässigen sei.",
     "commonFormulations": [
       "Ein einzelner Veganer ändert doch gar nichts.",
@@ -73,6 +74,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-03",
     "title": "Die große Mehrheit der Menschen isst Tierprodukte.",
     "argument": "Die große Mehrheit der Menschen isst Tierprodukte.",
+    "officialShortAnswer": "Die Beliebtheit einer Handlung entscheidet nicht über ihre moralische Richtigkeit. Viele heute als falsch anerkannte Praktiken waren einst gesellschaftliche Mehrheit. Zudem sind die Tiere in der Mehrheit und sie wollen leben.",
     "ratings": {
       "verbreitung": 71,
       "komplexitaet": 13,
@@ -83,11 +85,12 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
-    "meaning": "Befürworter dieses Arguments beziehen sich auf das Gute im Menschen. Die Menschheit besteht aus hauptsächlich guten Menschen, also kan es gar nicht sein, dass der Konsum von Tierprodukten so verwerflich sein.",
+    "meaning": "Befürworter dieses Arguments beziehen sich auf das Gute im Menschen. Die Menschheit besteht aus hauptsächlich guten Menschen, also kann es gar nicht sein, dass der Konsum von Tierprodukten so verwerflich sei.",
     "notMeaning": "Dieses Argument versucht nicht, zu zeigen, dass Veganismus eine unzureichende Lösung für ein Problem sei. Stattdessen versucht es, zu zeigen, dass nicht-vegan-sein gar kein gravierendes Problem sei.",
     "commonFormulations": [
       "Wenn es so schlimm wäre, würden es nicht alle machen.",
-      "Die Mehrheit kann doch nicht komplett falsch liegen."
+      "Die Mehrheit kann doch nicht komplett falsch liegen.",
+      "Ich kenne gute Menschen, die Fleisch essen."
     ]
   },
   {
@@ -95,6 +98,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-04",
     "title": "Das Fleisch im Supermarkt ist ja bereits tot.",
     "argument": "Das Fleisch im Supermarkt ist ja bereits tot.",
+    "officialShortAnswer": "Dass ein Tier bereits getötet wurde, macht den Kauf nicht folgenlos. Jeder Kauf erhöht die Nachfrage und trägt dazu bei, dass weitere Tiere gezüchtet, ausgebeutet und getötet werden.",
     "ratings": {
       "verbreitung": 54,
       "komplexitaet": 25,
@@ -118,6 +122,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-05",
     "title": "Wir schenken Tieren das Leben, also dürfen wir es auch nehmen.",
     "argument": "Wir schenken Tieren das Leben, also dürfen wir es auch nehmen.",
+    "officialShortAnswer": "Jemandem das Leben zu schenken bedeutet nicht, das Recht zu besitzen, es nach Belieben wieder zu beenden. Nach derselben Logik dürften Eltern auch über Leben und Tod ihrer Kinder entscheiden.",
     "ratings": {
       "verbreitung": 46,
       "komplexitaet": 30,
@@ -129,7 +134,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
     "meaning": "Dieses Argument rechtfertigt das Töten nichtmenschlicher Tiere mit einer Art Hierarchie. Wir haben den Tieren einen Platz in dieser Welt geschaffen, den sie ohne uns nicht hätten, was uns das Recht gibt, Ihnen diesen Platz auch wieder zu nehmen.",
-    "notMeaning": "Dieses Argument behauptet, dass wir die Macht haben über das Leben der Tiere, weil sie ohne uns nicht mal leben könnten.",
+    "notMeaning": "Dieses Argument behauptet nicht, dass wir das Recht haben, alles mit den Tieren zu tun, das uns gefällt. Diese Hierarchie gäbe uns lediglich das Recht, sie zu töten, nicht aber, sie zu foltern.",
     "commonFormulations": [
       "Ohne uns gäbe es diese Tiere gar nicht.",
       "Die Tiere verdanken uns ihr Leben."
@@ -140,6 +145,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-06",
     "title": "Man lebt nur einmal, also gönn dir!",
     "argument": "Man lebt nur einmal, also gönn dir!",
+    "officialShortAnswer": "Dass wir nur einmal leben, gilt auch für die Tiere. Persönlicher Genuss allein rechtfertigt nicht, einem anderen fühlenden Lebewesen vermeidbares Leid oder den Tod zuzufügen.",
     "ratings": {
       "verbreitung": 22,
       "komplexitaet": 7,
@@ -151,7 +157,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
     "meaning": "Dieses Argument beruft sich auf Genuss, Endlichkeit und Lebensfreude. Es stellt moralische Einschränkungen als unnötigen Verzicht dar.",
-    "notMeaning": "Es verharmlost das Leid der Tiere und wägt dieses Leid ab mit jenem Leid, was durch moralische Einschränkungen entstehen würde.",
+    "notMeaning": "Es sagt nicht, dass durch Tierprodukte kein Leid entstünde. Stattdessen zieht es den eigenen Genuss den Tieren vor.",
     "commonFormulations": [
       "Man lebt nur einmal.",
       "Gönn dir doch einfach.",
@@ -163,6 +169,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-07",
     "title": "Alles in Maßen, einmal die Woche ist okay.",
     "argument": "Alles in Maßen, einmal die Woche ist okay.",
+    "officialShortAnswer": "Weniger Tierprodukte zu konsumieren verursacht zwar weniger Schaden als häufiger Konsum. Für das einzelne Tier wird die Ausbeutung aber nicht dadurch gerechtfertigt, dass sie nur selten stattfindet. Weniger Tierausbeutung ist besser, Ausbeutung von Tieren sollte dennoch vermieden werden.",
     "ratings": {
       "verbreitung": 89,
       "komplexitaet": 24,
@@ -174,19 +181,20 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
     "meaning": "Dieses Argument akzeptiert teilweise, dass Tierausbeutung problematisch sein kann, zieht daraus aber nur eine Reduktionsforderung. Befürworter stellen seltenen Konsum als vernünftigen Mittelweg dar: weniger Fleisch, weniger Schuld, weniger Extrem. Es appelliert an Maßhalten, Kompromissbereitschaft und das Gefühl, dass kleine Mengen moralisch kaum ins Gewicht fallen.",
-    "notMeaning": "Das Argument zeigt nicht, dass einzelne Handlungen unproblematisch sind, nur weil sie seltener passieren. Es verwechselt eine Verringerung des Schadens mit einer Rechtfertigung des verbleibenden Schadens. Außerdem beantwortet es nicht, warum ein vermeidbarer Akt gegenüber einem Tier durch Seltenheit moralisch akzeptabel werden sollte.",
+    "notMeaning": "Das Argument zeigt nicht, dass Tierausbeutung gerechtfertigt sei. Es wägt lediglich ein Extrem mit einem anderen ab und versucht, einen guten Mittelweg zu finden.",
     "commonFormulations": [
       "Alles in Maßen.",
       "Einmal die Woche Fleisch ist doch okay.",
       "Ich esse ja schon viel weniger als früher.",
-      "Man muss nicht gleich komplett extrem werden."
-    ]
+      "Man muss nicht gleich komplett extrem werden.",
+      "Ich bin doch schon zu 90% vegetarisch"    ]
   },
   {
     "id": 8,
     "slug": "argument-08",
     "title": "Auf einer einsamen Insel würdest du auch Tiere essen.",
     "argument": "Auf einer einsamen Insel würdest du auch Tiere essen.",
+    "officialShortAnswer": "In Extremsituationen sind viele Handlungen ethisch vertretbar, die es im Alltag nicht wären. Glücklicherweise sind wir aber nicht auf einer einsamen Insel und müssen uns gegenseitig Meucheln, sondern können in den Supermarkt gehen und uns unser Essen kaufen.",
     "ratings": {
       "verbreitung": 57,
       "komplexitaet": 29,
@@ -198,7 +206,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
     "meaning": "Dieses Argument nutzt eine extreme Notsituation, um die Alltagstauglichkeit von Veganismus infrage zu stellen. Befürworter wollen zeigen, dass Veganismus keine absolut ausnahmslose Regel sein könne, wenn selbst Veganer in einer Überlebenssituation Tiere essen würden. Es verschiebt die Diskussion von normalen Konsumentscheidungen zu Grenzfällen.",
-    "notMeaning": "Das Argument zeigt nicht, dass Tierprodukte in einer normalen Supermarkt- oder Restaurant-Situation notwendig sind. Eine hypothetische Notlage begründet keine alltägliche Gewohnheit, wenn pflanzliche Alternativen verfügbar sind. Es widerlegt höchstens einen unrealistisch absoluten Veganismus, nicht aber den praktischen Verzicht auf vermeidbare Tierausbeutung.",
+    "notMeaning": "Das Argument zeigt nicht, dass Tierprodukte in einer normalen Supermarkt- oder Restaurant-Situation notwendig sind. Stattdessen versucht das Argument lediglich, zu begründen, warum Veganismus keine universelle Lösung für alle Menschen in allen Situationen sein kann.",
     "commonFormulations": [
       "Auf einer einsamen Insel würdest du auch Tiere essen.",
       "Was wäre, wenn du sonst verhungerst?",
@@ -211,6 +219,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-09",
     "title": "Vielleicht spüren Tiere gar keinen Schmerz.",
     "argument": "Vielleicht spüren Tiere gar keinen Schmerz.",
+    "officialShortAnswer": "Bei vielen Tieren sprechen Nervensystem, Gehirnstrukturen, Verhalten und Reaktionen auf Schmerzmittel deutlich für bewusstes Schmerzempfinden. Absolute Gewissheit über fremdes Erleben haben wir auch bei anderen Menschen nicht. Vernünftig ist deshalb, die starke Evidenz ernst zu nehmen und im Zweifel kein vermeidbares Leid zu riskieren.",
     "ratings": {
       "verbreitung": 37,
       "komplexitaet": 23,
@@ -222,7 +231,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "philosophie",
     "categoryLabel": "Philosophische Argumente",
     "meaning": "Dieses Argument stellt die Leidensfähigkeit von Tieren infrage. Befürworter verlangen eine besonders hohe Gewissheit darüber, ob Tiere Schmerz bewusst erleben, bevor ihnen moralische Rücksicht eingeräumt wird. Es versucht, Unsicherheit über inneres Erleben gegen die vegane Position zu verwenden.",
-    "notMeaning": "Das Argument beweist nicht, dass Tiere keine Schmerzen oder kein Leid empfinden. Es ignoriert häufig Verhalten, Nervensysteme, Schmerzreaktionen und evolutionäre Kontinuitäten. Außerdem würde Unsicherheit normalerweise eher Vorsicht nahelegen, statt die Nutzung und Tötung empfindungsfähiger Wesen zu rechtfertigen.",
+    "notMeaning": "Das Argument beweist nicht, dass Tiere keine Schmerzen oder kein Leid empfinden. Es verlangt lediglich, dass tierisches Empfinden ohne Zweifel bewiesen werden muss, bevor wir sie ethisch in Erwägung ziehen.",
     "commonFormulations": [
       "Vielleicht spüren Tiere gar keinen Schmerz.",
       "Das sind doch nur Reflexe.",
@@ -235,6 +244,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-10",
     "title": "Es ist Tradition. Menschen haben schon immer Tierprodukte gegessen.",
     "argument": "Es ist Tradition. Menschen haben schon immer Tierprodukte gegessen.",
+    "officialShortAnswer": "Dass Menschen etwas schon lange tun, macht es nicht automatisch moralisch richtig. Es gibt viele Beispiele von unmoralischen Dingen, die lange Zeit als Tradition galten.",
     "ratings": {
       "verbreitung": 88,
       "komplexitaet": 17,
@@ -245,8 +255,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument beruft sich auf historische Kontinuität und kulturelle Gewohnheit. Befürworter sehen den Konsum von Tierprodukten als etwas, das zur menschlichen Geschichte, Familie, Festen und Identität gehört. Dadurch wirkt Veganismus wie ein Bruch mit vertrauten sozialen Praktiken.",
-    "notMeaning": "Das Argument zeigt nicht, dass eine Tradition moralisch richtig ist. Viele frühere Praktiken wurden später kritisch hinterfragt, obwohl sie lange normal waren. Es beantwortet auch nicht die konkrete Frage, ob heutige, vermeidbare Tierausbeutung gerechtfertigt ist.",
+    "meaning": "Dieses Argument beruft sich auf historische Kontinuität und Gewohnheit. Wenn etwas bereits seit Generationen gemacht wird, dann kann es doch gar nicht so schlimm sein. Außerdem sei Tradition wertvoll und die Abschaffung einer Tradition kann größeren Schaden anrichten als die Tradition selbst.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede traditionelle Handlung richtig oder unveränderlich sei. Es argumentiert vielmehr, dass die lange kulturelle Verankerung des Tierproduktkonsums für seine Legitimität spricht und dass eine Abkehr davon einen begründungsbedürftigen Bruch mit bewährten Lebensweisen darstellt.",
     "commonFormulations": [
       "Menschen haben schon immer Fleisch gegessen.",
       "Das gehört zu unserer Tradition.",
@@ -259,6 +269,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-11",
     "title": "Veganismus gefährdet meine Kultur und Identität.",
     "argument": "Veganismus gefährdet meine Kultur und Identität.",
+    "officialShortAnswer": "Kulturen verändern sich fortlaufend, und traditionelle Gerichte oder Rituale können oft tierfrei weitergeführt werden. Außerdem sollte man hinterfragen, ob andere unmoralischen Dinge akzeptabel werden, nur weil sie jemandes Kultur oder Identität bilden.",
     "ratings": {
       "verbreitung": 27,
       "komplexitaet": 28,
@@ -270,7 +281,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
     "meaning": "Dieses Argument betrachtet Veganismus als Angriff auf kulturelle Zugehörigkeit. Befürworter fürchten, dass typische Gerichte, Familienrituale oder religiös geprägte Essgewohnheiten abgewertet werden. Es geht dabei oft weniger um Nährstoffe als um Identität, Anerkennung und soziale Bindung.",
-    "notMeaning": "Das Argument zeigt nicht, dass jede kulturelle Praxis moralisch unangreifbar ist. Kultur kann sich verändern, ohne komplett verloren zu gehen. Es erklärt auch nicht, warum Identität zwingend an die Ausbeutung oder Tötung von Tieren gebunden sein muss.",
+    "notMeaning": "Das Argument soll zeigen, dass kulturelle Praktiken moralisch unangreifbar sind, wenn sie Menschen Identität schenken. Wenn das nicht so wäre, dann wäre es in Ordnung, andere Kulturen auszulöschen.",
     "commonFormulations": [
       "Veganismus bedroht meine Kultur.",
       "Unsere Gerichte gehören zu unserer Identität.",
@@ -283,6 +294,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-12",
     "title": "Fleischkonsum ist natürlich.",
     "argument": "Fleischkonsum ist natürlich.",
+    "officialShortAnswer": "Nur weil etwas natürlich ist, ist es nicht gleich erstrebenswewrt. Ebenso ist etwas nicht automatisch schlecht, wenn es unnatürlich ist. Außerdem hat moderne Tierhaltung nichts mehr mit Natur zu tun.",
     "ratings": {
       "verbreitung": 86,
       "komplexitaet": 31,
@@ -293,12 +305,10 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument verweist darauf, dass Menschen biologisch in der Lage sind, Fleisch zu essen. Befürworter schließen aus Zähnen, Verdauung oder Evolution, dass Fleischkonsum natürlich und daher legitim sei. Es verbindet biologische Möglichkeit mit moralischer Erlaubnis.",
-    "notMeaning": "Das Argument zeigt nicht, dass alles Natürliche moralisch richtig ist. Menschen können vieles tun, was nicht automatisch gerechtfertigt ist. Außerdem beantwortet die biologische Fähigkeit zum Fleischessen nicht, ob heutige Tierausbeutung notwendig oder vermeidbar ist.",
+    "meaning": "Dieses Argument verweist auf die Natürlichkeit von Fleichkonsum, um diesen zu rechtfertigen.",
+    "notMeaning": "Dieses Argument ist separat von dem Argument, dass Menschen biologisch gesehen Allesfresser sind.",
     "commonFormulations": [
       "Fleisch essen ist natürlich.",
-      "Wir haben schon immer gejagt.",
-      "Unsere Zähne sind für Fleisch gemacht.",
       "Der Mensch ist eben ein Tier."
     ]
   },
@@ -307,6 +317,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-13",
     "title": "Der Mensch steht an der Spitze der Nahrungskette.",
     "argument": "Der Mensch steht an der Spitze der Nahrungskette.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 70,
       "komplexitaet": 19,
@@ -331,6 +342,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-14",
     "title": "Menschen sind Allesfresser, also sollen sie auch alles essen dürfen.",
     "argument": "Menschen sind Allesfresser, also sollen sie auch alles essen dürfen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 67,
       "komplexitaet": 29,
@@ -355,6 +367,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-15",
     "title": "Die Tiere sterben ja sowieso irgendwann.",
     "argument": "Die Tiere sterben ja sowieso irgendwann.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 16,
@@ -379,6 +392,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-16",
     "title": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
     "argument": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 86,
       "komplexitaet": 11,
@@ -403,6 +417,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-17",
     "title": "Mein Gott erlaubt es mir, (gewisses) Fleisch zu essen.",
     "argument": "Mein Gott erlaubt es mir, (gewisses) Fleisch zu essen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 80,
       "komplexitaet": 53,
@@ -427,6 +442,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-18",
     "title": "Tiere sind zum Essen da. Dafür wurden sie erschaffen.",
     "argument": "Tiere sind zum Essen da. Dafür wurden sie erschaffen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 73,
       "komplexitaet": 31,
@@ -451,6 +467,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-19",
     "title": "Tiere würden uns auch essen, wenn sie könnten.",
     "argument": "Tiere würden uns auch essen, wenn sie könnten.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 42,
       "komplexitaet": 22,
@@ -475,6 +492,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-20",
     "title": "Tiere würden sich unkontrolliert vermehren, wenn wir sie nicht essen.",
     "argument": "Tiere würden sich unkontrolliert vermehren, wenn wir sie nicht essen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 15,
@@ -499,6 +517,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-21",
     "title": "Wenn alle vegan werden, würden Landwirt:innen ihren Job verlieren.",
     "argument": "Wenn alle vegan werden, würden Landwirt:innen ihren Job verlieren.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 46,
       "komplexitaet": 32,
@@ -523,6 +542,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-22",
     "title": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
     "argument": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 57,
@@ -547,6 +567,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-23",
     "title": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
     "argument": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 52,
       "komplexitaet": 26,
@@ -571,6 +592,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-24",
     "title": "Ich kannte mal einen Veganer und der ist gestorben!",
     "argument": "Ich kannte mal einen Veganer und der ist gestorben!",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 15,
@@ -595,6 +617,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-25",
     "title": "Wenn alle vegan werden würden, gäbe es nicht genug Essen für alle.",
     "argument": "Wenn alle vegan werden würden, gäbe es nicht genug Essen für alle.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 47,
       "komplexitaet": 22,
@@ -619,6 +642,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-26",
     "title": "Wir müssen Jagen, um Ökosysteme im Gleichgewicht zu halten.",
     "argument": "Wir müssen Jagen, um Ökosysteme im Gleichgewicht zu halten.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 42,
       "komplexitaet": 65,
@@ -643,6 +667,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-27",
     "title": "Als nächstes schreibst du mir vor, was ich denken oder wen ich lieben soll!",
     "argument": "Als nächstes schreibst du mir vor, was ich denken oder wen ich lieben soll!",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 27,
       "komplexitaet": 10,
@@ -667,6 +692,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-28",
     "title": "Viele Anbauflächen sind nur für Tierhaltung nutzbar.",
     "argument": "Viele Anbauflächen sind nur für Tierhaltung nutzbar.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 37,
       "komplexitaet": 58,
@@ -691,6 +717,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-29",
     "title": "Wir brauchen Tiere für Dünger.",
     "argument": "Wir brauchen Tiere für Dünger.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 22,
       "komplexitaet": 49,
@@ -715,6 +742,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-30",
     "title": "Fleischkonsum ist legal, daher kann es nicht so schlimm sein.",
     "argument": "Fleischkonsum ist legal, daher kann es nicht so schlimm sein.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 54,
       "komplexitaet": 11,
@@ -739,6 +767,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-31",
     "title": "Vegane Alternativen sind viel teurer als Tierprodukte.",
     "argument": "Vegane Alternativen sind viel teurer als Tierprodukte.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 76,
       "komplexitaet": 25,
@@ -763,6 +792,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-32",
     "title": "Wir sollten erst menschliches Leid lösen.",
     "argument": "Wir sollten erst menschliches Leid lösen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 60,
       "komplexitaet": 28,
@@ -787,6 +817,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-33",
     "title": "Der Anbau von Soja zerstört den Regenwald.",
     "argument": "Der Anbau von Soja zerstört den Regenwald.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 66,
       "komplexitaet": 36,
@@ -811,6 +842,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-34",
     "title": "Es ist eine persönliche Entscheidung, ob jemand Tierprodukte unterstützt.",
     "argument": "Es ist eine persönliche Entscheidung, ob jemand Tierprodukte unterstützt.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 79,
       "komplexitaet": 26,
@@ -835,6 +867,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-35",
     "title": "Vegane Alternativen schmecken mir einfach nicht.",
     "argument": "Vegane Alternativen schmecken mir einfach nicht.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 82,
       "komplexitaet": 21,
@@ -859,6 +892,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-36",
     "title": "Die Politik trägt die Verantwortung.",
     "argument": "Die Politik trägt die Verantwortung.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 60,
       "komplexitaet": 30,
@@ -883,6 +917,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-37",
     "title": "Veganern mangelt es oft an Proteinen, Vitamin B12, Kalzium und so weiter.",
     "argument": "Veganern mangelt es oft an Proteinen, Vitamin B12, Kalzium und so weiter.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 80,
       "komplexitaet": 36,
@@ -907,6 +942,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-38",
     "title": "Unsere Körper können pflanzliche Nährstoffe oft schlechter aufnehmen.",
     "argument": "Unsere Körper können pflanzliche Nährstoffe oft schlechter aufnehmen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 32,
       "komplexitaet": 57,
@@ -931,6 +967,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-39",
     "title": "Warum supplementieren, wenn es auch mit Tierprodukten geht?",
     "argument": "Warum supplementieren, wenn es auch mit Tierprodukten geht?",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 53,
       "komplexitaet": 30,
@@ -955,6 +992,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-40",
     "title": "Gerade Kinder, Schwangere, Stillende und Ältere sollten Tierprodukte essen.",
     "argument": "Gerade Kinder, Schwangere, Stillende und Ältere sollten Tierprodukte essen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 43,
       "komplexitaet": 61,
@@ -979,6 +1017,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-41",
     "title": "Manche Menschen haben besondere Krankheiten, die Veganismus erschweren.",
     "argument": "Manche Menschen haben besondere Krankheiten, die Veganismus erschweren.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 29,
       "komplexitaet": 75,
@@ -1003,6 +1042,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-42",
     "title": "Vegane Ersatzprodukte sind oft hochverarbeitet.",
     "argument": "Vegane Ersatzprodukte sind oft hochverarbeitet.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 63,
       "komplexitaet": 25,
@@ -1027,6 +1067,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-43",
     "title": "Avokados und Mandeln sind schlimmer für die Umwelt als Fleisch.",
     "argument": "Avokados und Mandeln sind schlimmer für die Umwelt als Fleisch.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 32,
       "komplexitaet": 27,
@@ -1051,6 +1092,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-44",
     "title": "Regionale Bio-Fleischproduktion ist nachhaltig.",
     "argument": "Regionale Bio-Fleischproduktion ist nachhaltig.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 79,
       "komplexitaet": 28,
@@ -1075,6 +1117,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-45",
     "title": "Pestizide zerstören die Umwelt.",
     "argument": "Pestizide zerstören die Umwelt.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 30,
       "komplexitaet": 41,
@@ -1099,6 +1142,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-46",
     "title": "Veganer sind militant und missionieren ein extremes, absolutistisches Weltbild.",
     "argument": "Veganer sind militant und missionieren ein extremes, absolutistisches Weltbild.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 67,
       "komplexitaet": 10,
@@ -1123,6 +1167,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-47",
     "title": "Veganer lügen und zeigen immer nur die schlimmsten Zustände der Industrie.",
     "argument": "Veganer lügen und zeigen immer nur die schlimmsten Zustände der Industrie.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 49,
       "komplexitaet": 31,
@@ -1147,6 +1192,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-48",
     "title": "Veganer hassen Bauern und lieben Tiere mehr als Menschen.",
     "argument": "Veganer hassen Bauern und lieben Tiere mehr als Menschen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 44,
       "komplexitaet": 21,
@@ -1171,6 +1217,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-49",
     "title": "Veganer halten sich für was besseres und für moralisch überlegen.",
     "argument": "Veganer halten sich für was besseres und für moralisch überlegen.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 53,
       "komplexitaet": 14,
@@ -1195,6 +1242,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-50",
     "title": "Veganer sind Heuchler, da sie SUVs fahren und jedes Jahr ein neues Handy haben.",
     "argument": "Veganer sind Heuchler, da sie SUVs fahren und jedes Jahr ein neues Handy haben.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 45,
       "komplexitaet": 43,
@@ -1219,6 +1267,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-51",
     "title": "Veganer sind privilegiert und realitätsfern.",
     "argument": "Veganer sind privilegiert und realitätsfern.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 44,
       "komplexitaet": 21,
@@ -1243,6 +1292,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-52",
     "title": "Hitler war Vegetarier.",
     "argument": "Hitler war Vegetarier.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 11,
@@ -1267,6 +1317,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-53",
     "title": "Warum lassen Veganer ihr Essen aussehen und schmecken wie Tierprodukte?",
     "argument": "Warum lassen Veganer ihr Essen aussehen und schmecken wie Tierprodukte?",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 5,
@@ -1291,6 +1342,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-54",
     "title": "Vegane Landwirtschaft tötet auch Tiere, zum Beispiel bei der Ernte.",
     "argument": "Vegane Landwirtschaft tötet auch Tiere, zum Beispiel bei der Ernte.",
+    "officialShortAnswer": "",
     "ratings": {
       "verbreitung": 40,
       "komplexitaet": 51,
