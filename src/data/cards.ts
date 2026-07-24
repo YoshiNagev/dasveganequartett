@@ -249,7 +249,7 @@ export const cards: ArgumentCard[] = [
       "verbreitung": 88,
       "komplexitaet": 17,
       "emotionalitaet": 79,
-      "deluluFaktor": 47,
+      "deluluFaktor": 49,
       "ragebaitFaktor": 60,
       "ablenkungsfaktor": 70
     },
@@ -393,7 +393,7 @@ export const cards: ArgumentCard[] = [
     "argument": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
     "officialShortAnswer": "In der Wildnis sind Löwen auf tierische Nahrung angewiesen. Außerdem können sie ihr Verhalten nicht moralisch reflektieren. Menschen verfügen dagegen über Alternativen und können die Folgen ihrer Entscheidungen verstehen. Was ein Raubtier zum Überleben tun muss, rechtfertigt daher keinen vermeidbaren menschlichen Fleischkonsum.",
     "ratings": {
-      "verbreitung": 86,
+      "verbreitung": 87,
       "komplexitaet": 11,
       "emotionalitaet": 65,
       "deluluFaktor": 74,
@@ -1120,7 +1120,7 @@ export const cards: ArgumentCard[] = [
     "ratings": {
       "verbreitung": 30,
       "komplexitaet": 41,
-      "emotionalitaet": 40,
+      "emotionalitaet": 41,
       "deluluFaktor": 43,
       "ragebaitFaktor": 28,
       "ablenkungsfaktor": 83
