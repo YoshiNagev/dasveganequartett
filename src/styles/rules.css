@@ -568,21 +568,51 @@
 
   .rules-hero {
     min-height: auto;
-    padding: 64px 0 70px;
+    padding: 52px 0 60px;
   }
 
   .rules-hero__grid,
   .rules-card-guide__grid {
     grid-template-columns: 1fr;
+    gap: 42px;
   }
 
-  .rules-hero__card,
+  .rules-hero__copy {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .rules-hero__title {
+    max-width: 100%;
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  .rules-hero__intro {
+    margin-inline: auto;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
   .rules-card-guide__image {
     grid-row: 1;
+    margin-bottom: 4px;
+  }
+
+  .rules-hero__card {
+    grid-row: auto;
+    gap: 14px;
+  }
+
+  .rules-hero__card a {
+    justify-content: center;
+    text-align: center;
   }
 
   .rules-hero__card img {
-    max-width: 285px;
+    max-width: 240px;
   }
 
   .rules-card-guide__image img {
@@ -595,9 +625,11 @@
   }
 
   .rules-stat {
+    justify-content: center;
     padding: 10px 0;
     border-right: 0;
     border-bottom: 1px solid var(--rules-line);
+    text-align: left;
   }
 
   .rules-stat:last-child {
@@ -623,11 +655,38 @@
   .rules-bottom-grid {
     grid-template-columns: 1fr;
   }
+
+  .rules-mode-card,
+  .rules-rating-card,
+  .rules-bottom-card {
+    min-width: 0;
+  }
+
+  .rules-mode-card p,
+  .rules-rating-card p,
+  .rules-bottom-card p {
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (max-width: 480px) {
   .rules-hero__title {
-    font-size: clamp(3.4rem, 18vw, 4.8rem);
+    font-size: clamp(2.75rem, 11.5vw, 3.5rem);
+  }
+
+  .rules-eyebrow {
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .rules-hero__card img {
+    max-width: min(215px, 70vw);
+  }
+
+  .rules-scan-note {
+    align-items: flex-start;
+    padding: 15px;
+    text-align: left;
   }
 
   .rules-card-part {
@@ -645,6 +704,11 @@
   .rules-rating-card__icon {
     width: 50px;
     font-size: 1.3rem;
+  }
+
+  .rules-rating-card__icon svg {
+    width: 25px;
+    height: 25px;
   }
 
   .rules-mode-card {
