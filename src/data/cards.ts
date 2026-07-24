@@ -317,7 +317,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-13",
     "title": "Der Mensch steht an der Spitze der Nahrungskette.",
     "argument": "Der Mensch steht an der Spitze der Nahrungskette.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine Nahrungskette beschreibt, wer wen frisst, sie rechtfertigt es jedoch nicht. Eine Beschreibung der Zustände ist nicht gleichzusetzen mit einer Rechtfertigung.",
     "ratings": {
       "verbreitung": 70,
       "komplexitaet": 19,
@@ -328,8 +328,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument nutzt ein hierarchisches Naturbild. Befürworter sehen Menschen als überlegene Spezies, die aufgrund von Intelligenz, Macht oder technologischer Dominanz über andere Tiere verfügen darf. Die Nahrungskette wird dabei als moralische Ordnung verstanden.",
-    "notMeaning": "Das Argument zeigt nicht, dass Macht moralisches Recht erzeugt. Aus der Fähigkeit, andere zu dominieren, folgt nicht, dass man es tun sollte. Außerdem leben Menschen in modernen Gesellschaften nicht einfach wie wilde Raubtiere innerhalb einer natürlichen Nahrungskette.",
+    "meaning": "Dieses Argument nutzt ein hierarchisches Naturbild. Befürworter sehen Menschen darin gerechtfertigt, andere Tiere zu essen, da es die natürliche Nahrungskette so vorgesehen hat.",
+    "notMeaning": "Dieses Argument ist separat von dem Argument, dass Menschen biologisch gesehen Allesfresser sind.",
     "commonFormulations": [
       "Der Mensch steht an der Spitze der Nahrungskette.",
       "Wir sind nun mal überlegen.",
@@ -342,7 +342,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-14",
     "title": "Menschen sind Allesfresser, also sollen sie auch alles essen dürfen.",
     "argument": "Menschen sind Allesfresser, also sollen sie auch alles essen dürfen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Allesfresser zu sein bedeutet, sowohl pflanzliche als auch tierische Nahrung verwerten zu können, nicht aber, beides essen zu müssen. Unsere biologische Flexibilität eröffnet uns eine Wahl. Wenn eine ausgewogene pflanzliche Ernährung möglich ist, rechtfertigt die Fähigkeit zum Fleischkonsum noch keine Tierausbeutung.",
     "ratings": {
       "verbreitung": 67,
       "komplexitaet": 29,
@@ -354,11 +354,11 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
     "meaning": "Dieses Argument verweist auf den Menschen als Allesfresser. Befürworter meinen, dass eine omnivore Fähigkeit auch eine omnivore Ernährung rechtfertige. Veganismus erscheint dadurch als künstliche Einschränkung einer natürlichen Bandbreite.",
-    "notMeaning": "Das Argument zeigt nicht, dass alles, was Menschen verdauen können, moralisch genutzt werden sollte. Aus Können folgt kein Sollen. Es beantwortet auch nicht, ob Tierprodukte unter heutigen Bedingungen nötig sind, wenn pflanzliche Ernährung möglich ist.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Menschen ausschließlich oder besonders viele Tierprodukte essen müssten. Es argumentiert vielmehr, dass Tierprodukte aufgrund der omnivoren Natur des Menschen einen legitimen Bestandteil seiner Ernährung darstellen und nicht grundsätzlich ausgeschlossen werden sollten.",
     "commonFormulations": [
       "Menschen sind Allesfresser.",
       "Wir sollen von allem etwas essen.",
-      "Unser Körper ist nicht für rein pflanzlich gemacht.",
+      "Wir haben Eckzähne, frontal ausgerichtete Augen und viele weitere Merkmale von Karnivoren.",
       "Warum sollte man eine ganze Lebensmittelgruppe streichen?"
     ]
   },
@@ -367,7 +367,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-15",
     "title": "Die Tiere sterben ja sowieso irgendwann.",
     "argument": "Die Tiere sterben ja sowieso irgendwann.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Dass jedes Lebewesen irgendwann stirbt, rechtfertigt nicht, seinen Tod absichtlich vorzuverlegen. Durch die Tötung verliert ein Tier die gesamte Zukunft, die es andernfalls noch erlebt hätte. Mit derselben Begründung ließe sich auch das Töten eines Menschen nicht rechtfertigen.",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 16,
@@ -379,12 +379,11 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
     "meaning": "Dieses Argument relativiert das Töten von Tieren durch den Hinweis auf ihre Sterblichkeit. Befürworter stellen den Tod als unvermeidbaren Teil des Lebens dar und sehen deshalb weniger Problem darin, Tiere früher für menschliche Zwecke zu töten.",
-    "notMeaning": "Das Argument zeigt nicht, dass es egal ist, wann und warum ein Lebewesen stirbt. Auch sterbliche Menschen haben ein Interesse daran, nicht getötet zu werden. Die Tatsache, dass jedes Leben endet, rechtfertigt nicht automatisch ein absichtliches, vermeidbares Töten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Tiere während ihres Lebens leiden dürfen oder dass die Art ihrer Tötung bedeutungslos sei. Es argumentiert vielmehr, dass der Tod selbst weniger problematisch ist, weil er ohnehin eintreten wird, und dass Menschen ihn deshalb unter geeigneten Bedingungen vorziehen dürfen.",
     "commonFormulations": [
       "Die Tiere sterben doch sowieso irgendwann.",
       "Niemand lebt für immer.",
-      "In der Natur sterben Tiere auch.",
-      "Ein schneller Tod ist doch nicht schlimm."
+      "In der Natur sterben Tiere auch."
     ]
   },
   {
@@ -392,7 +391,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-16",
     "title": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
     "argument": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "In der Wildnis sind Löwen auf tierische Nahrung angewiesen. Außerdem können sie ihr Verhalten nicht moralisch reflektieren. Menschen verfügen dagegen über Alternativen und können die Folgen ihrer Entscheidungen verstehen. Was ein Raubtier zum Überleben tun muss, rechtfertigt daher keinen vermeidbaren menschlichen Fleischkonsum.",
     "ratings": {
       "verbreitung": 86,
       "komplexitaet": 11,
