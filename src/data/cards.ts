@@ -391,7 +391,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-16",
     "title": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
     "argument": "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.",
-    "officialShortAnswer": "In der Wildnis sind Löwen auf tierische Nahrung angewiesen. Außerdem können sie ihr Verhalten nicht moralisch reflektieren. Menschen verfügen dagegen über Alternativen und können die Folgen ihrer Entscheidungen verstehen. Was ein Raubtier zum Überleben tun muss, rechtfertigt daher keinen vermeidbaren menschlichen Fleischkonsum.",
+    "officialShortAnswer": "In der Wildnis sind Löwen auf tierische Nahrung angewiesen. Aber in der Wildnis töten Löwen auch die Jungtiere ihrer Rivalen. Wieso sollte eine willkürliche Verhaltensweise einer anderen Spezies unser Verhalten vorschreiben? Außerdem können sie ihr Verhalten nicht moralisch reflektieren. Menschen verfügen dagegen über Alternativen und können die Folgen ihrer Entscheidungen verstehen.",
     "ratings": {
       "verbreitung": 87,
       "komplexitaet": 11,
@@ -402,13 +402,12 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument vergleicht menschlichen Fleischkonsum mit Raubtieren. Befürworter verweisen darauf, dass Löwen und andere Tiere Fleisch essen und teilweise darauf angewiesen sind. Dadurch soll Fleischkonsum als natürlich und normal dargestellt werden.",
-    "notMeaning": "Das Argument zeigt nicht, dass Menschen moralisch wie Löwen handeln sollten. Löwen haben keine Supermärkte, keine moralische Reflexion und keine praktikablen pflanzlichen Alternativen. Aus dem Verhalten eines Raubtiers folgt keine Rechtfertigung für menschliche Konsumentscheidungen.",
+    "meaning": "Dieses Argument vergleicht den Menschen mit fleischfressenden Tieren. Weil Raubtiere andere Tiere töten und fressen, wird Fleischkonsum als natürlicher Bestandteil des Lebens betrachtet. Wenn Löwen für dieses Verhalten nicht moralisch verurteilt werden, erscheint es inkonsequent, dieselbe grundlegende Handlung beim Menschen abzulehnen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Menschen dieselben Bedürfnisse und Fähigkeiten wie Löwen besitzen. Es argumentiert vielmehr, dass das Fressen anderer Tiere ein natürlicher und grundsätzlich legitimer Vorgang ist und dass Menschen als Teil der Natur ebenfalls daran teilnehmen dürfen.",
     "commonFormulations": [
       "Löwen essen auch Fleisch.",
       "Raubtiere sind auch nicht vegan.",
-      "Willst du Löwen jetzt auch moralisch verurteilen?",
-      "Fressen und gefressen werden ist Natur."
+      "Willst du Löwen jetzt auch moralisch verurteilen?"
     ]
   },
   {
@@ -416,7 +415,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-17",
     "title": "Mein Gott erlaubt es mir, (gewisses) Fleisch zu essen.",
     "argument": "Mein Gott erlaubt es mir, (gewisses) Fleisch zu essen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine religiöse Erlaubnis ist nicht gleichzusetzen mit einem Gebot oder einer moralischen Empfehlung. Viele Glaubenstraditionen betonen zugleich Mitgefühl, Barmherzigkeit und den verantwortungsvollen Umgang mit Tieren. Außerdem kann argumentiert werden, dass die Religion zunächst als wahr erwiesen werden muss, bevor man mit ihr etwas potentiell schädliches rechtfertigt.",
     "ratings": {
       "verbreitung": 80,
       "komplexitaet": 53,
@@ -427,12 +426,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument beruft sich auf religiöse Autorität oder religiöse Tradition. Befürworter verstehen bestimmte Tierprodukte als erlaubt, vorgesehen oder sogar kulturell-religiös bedeutsam. Die moralische Bewertung wird damit teilweise an göttliche Gebote oder Auslegungstraditionen gebunden.",
-    "notMeaning": "Das Argument zeigt nicht automatisch, dass jede erlaubte Handlung moralisch ideal oder notwendig ist. Auch religiöse Traditionen werden unterschiedlich ausgelegt und weiterentwickelt. Es beantwortet nicht, ob Mitgefühl, Vermeidbarkeit und heutige Produktionsbedingungen stärker gewichtet werden sollten.",
+    "meaning": "Dieses Argument gründet die moralische Erlaubnis des Fleischkonsums auf göttliche Autorität. Wenn religiöse Schriften oder Überlieferungen den Verzehr bestimmter Tiere gestatten, wird daraus geschlossen, dass diese Handlung nicht grundsätzlich unmoralisch sein kann. Religiöse Gebote und Erlaubnisse erhalten dabei Vorrang vor einer rein säkularen tierethischen Bewertung.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Gläubige Fleisch essen müssen oder dass jede Form der Tierhaltung religiös erwünscht ist. Es argumentiert vielmehr, dass der Konsum religiös erlaubter Tierprodukte moralisch zulässig ist und nicht allein aufgrund veganer Maßstäbe als grundsätzlich falsch bezeichnet werden kann.",
     "commonFormulations": [
       "Mein Gott erlaubt mir Fleisch zu essen.",
       "In meiner Religion ist das erlaubt.",
-      "Tieropfer gab es schon immer.",
       "Wenn Gott es verboten hätte, stünde es klar da."
     ]
   },
@@ -441,7 +439,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-18",
     "title": "Tiere sind zum Essen da. Dafür wurden sie erschaffen.",
     "argument": "Tiere sind zum Essen da. Dafür wurden sie erschaffen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Wenn Tiere für uns erschaffen wurden, warum hat Gott ihnen dann eigene Interessen gegeben? Nur weil Menschen Tiere für bestimmte Zwecke gezüchtet haben und sie als „Nutztiere“ bezeichnen, existieren Tiere nicht ausschließlich für die Zwecke der Menschen.",
     "ratings": {
       "verbreitung": 73,
       "komplexitaet": 31,
@@ -452,8 +450,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "natur-kultur-religion",
     "categoryLabel": "Natur, Kultur & Religion",
-    "meaning": "Dieses Argument beschreibt Tiere über ihren Nutzen für Menschen. Befürworter sehen bestimmte Tiere als dafür bestimmt, gegessen oder verwendet zu werden. Dadurch werden ihre eigenen Interessen hinter einer zugeschriebenen Funktion zurückgestellt.",
-    "notMeaning": "Das Argument beweist nicht, dass Tiere tatsächlich für diesen Zweck existieren. Eine menschliche Zuschreibung macht ein empfindungsfähiges Wesen nicht automatisch zu einem bloßen Mittel. Es erklärt auch nicht, warum Zucht oder Tradition moralische Ansprüche der Tiere aufheben sollte.",
+    "meaning": "Dieses Argument betrachtet bestimmte Tierarten aufgrund ihrer Zuchtgeschichte oder religiösen Bestimmung als für den menschlichen Gebrauch vorgesehen. Ihre Funktion besteht demnach darin, Nahrung und andere Produkte bereitzustellen. Weil sie gerade zu diesem Zweck gehalten oder erschaffen wurden, erscheint ihre Nutzung als Erfüllung ihrer vorgesehenen Rolle.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Menschen Tiere beliebig quälen oder ihre Bedürfnisse vollständig ignorieren dürfen. Es argumentiert vielmehr, dass sogenannte Nutztiere grundsätzlich für menschliche Zwecke verwendet und getötet werden dürfen, sofern dies ihrer zugeschriebenen Bestimmung entsprechend und unter angemessenen Bedingungen geschieht.",
     "commonFormulations": [
       "Tiere sind zum Essen da.",
       "Nutztiere heißen nicht ohne Grund Nutztiere.",
@@ -466,7 +464,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-19",
     "title": "Tiere würden uns auch essen, wenn sie könnten.",
     "argument": "Tiere würden uns auch essen, wenn sie könnten.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Wir züchten und essen Tiere nicht aus Gründen der Selbstverteidigung. Wenn uns gewisse Tiere wirklich essen würden, wenn sie könnten, dann sollten wir sie sie in Schach halten, und nicht extra züchten und essen. Laut derselben Logik müssten wir auch Kannibalen essen, bevor sie uns essen würden. Außerdem sind Hühner, Kühe und Schweine keine Prädatoren.",
     "ratings": {
       "verbreitung": 42,
       "komplexitaet": 22,
@@ -478,12 +476,11 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
     "meaning": "Dieses Argument beruft sich auf hypothetische Gegenseitigkeit. Befürworter meinen, dass Tiere Menschen ebenfalls verletzen oder essen würden, wenn sie könnten, und dass Menschen deshalb keine besondere Rücksicht schulden. Es stellt Moral als eine Art gegenseitigen Vertrag dar.",
-    "notMeaning": "Das Argument zeigt nicht, dass moralische Rücksicht nur gegenüber Wesen gilt, die selbst moralisch handeln können. Viele Menschen, etwa Kinder, handeln ebenfalls nicht voll verantwortlich und verdienen trotzdem Schutz. Außerdem rechtfertigt ein hypothetisches Verhalten anderer nicht das eigene vermeidbare Handeln.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jedes Tier tatsächlich Menschen fressen würde oder aktiv bösartig sei. Es argumentiert vielmehr, dass Wesen, die selbst keine moralische Rücksicht auf uns nehmen würden, auch keinen Anspruch auf eine solche Rücksicht durch uns haben.",
     "commonFormulations": [
       "Tiere würden uns auch essen, wenn sie könnten.",
       "Ein Schwein würde dich auch nicht verschonen.",
-      "Warum soll ich Rücksicht nehmen, wenn Tiere es nicht tun?",
-      "In der Natur gibt es auch keine Moral."
+      "Warum soll ich Rücksicht nehmen, wenn Tiere es nicht tun?"
     ]
   },
   {
@@ -491,7 +488,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-20",
     "title": "Tiere würden sich unkontrolliert vermehren, wenn wir sie nicht essen.",
     "argument": "Tiere würden sich unkontrolliert vermehren, wenn wir sie nicht essen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Die meisten sogenannten Nutztiere existieren in so großer Zahl, weil Menschen sie gezielt künstlich züchten. Wenn die Nachfrage nach Tierprodukten sinkt, werden schrittweise weniger Tiere gezüchtet, die bestehenden Tiere werden nicht plötzlich freigelassen und vermehren sich unkontrolliert. Eine vegane Entwicklung würde die Populationen daher verkleinern, nicht vergrößern.",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 15,
@@ -502,8 +499,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument behauptet, menschlicher Konsum kontrolliere Tierpopulationen. Befürworter stellen Tierhaltung oder Jagd als notwendiges Mittel dar, damit bestimmte Tiere nicht überhandnehmen. Es verwechselt oft gezüchtete Nutztierbestände mit wildlebenden Populationen.",
-    "notMeaning": "Das Argument zeigt nicht, dass wir Tiere züchten müssen, um sie anschließend zu töten. Bei Nutztieren entsteht die hohe Anzahl gerade durch menschliche Zuchtentscheidungen. Es beantwortet auch nicht, warum ein künstlich geschaffenes Problem weitere Ausbeutung rechtfertigen soll.",
+    "meaning": "Dieses Argument behauptet, menschlicher Konsum kontrolliere Tierpopulationen. Befürworter stellen Tierhaltung oder Jagd als notwendiges Mittel dar, damit bestimmte Tiere nicht überhandnehmen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass die heutige Anzahl landwirtschaftlich gehaltener Tiere wünschenswert sei. Es argumentiert vielmehr, dass ihre regelmäßige Tötung und Nutzung notwendig ist, um ihre weitere Vermehrung zu begrenzen und eine unkontrollierbare Überpopulation zu verhindern.",
     "commonFormulations": [
       "Wenn wir sie nicht essen, vermehren sie sich unkontrolliert.",
       "Dann wären überall Kühe und Schweine.",
@@ -514,9 +511,9 @@ export const cards: ArgumentCard[] = [
   {
     "id": 21,
     "slug": "argument-21",
-    "title": "Wenn alle vegan werden, würden Landwirt:innen ihren Job verlieren.",
-    "argument": "Wenn alle vegan werden, würden Landwirt:innen ihren Job verlieren.",
-    "officialShortAnswer": "",
+    "title": "Wenn alle vegan werden, würden Landwirte ihren Job verlieren.",
+    "argument": "Wenn alle vegan werden, würden Landwirte ihren Job verlieren.",
+    "officialShortAnswer": "Eine vegane Gesellschaft entsteht nicht über Nacht. Mit sinkender Nachfrage würden sich landwirtschaftliche Betriebe schrittweise umstellen und neue Arbeitsplätze in anderen Bereichen der Lebensmittelproduktion entstehen. Betroffene Menschen sollten bei diesem Wandel unterstützt werden, aber die wirtschaftliche Abhängigkeit von einer Praxis macht diese nicht automatisch moralisch richtig. Unmoralische Berufe sind nicht gerechtfertigt, weil jemand davon finanziell abhängig ist.",
     "ratings": {
       "verbreitung": 46,
       "komplexitaet": 32,
@@ -528,7 +525,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
     "meaning": "Dieses Argument verweist auf wirtschaftliche Folgen eines veganen Wandels. Befürworter sorgen sich um Landwirt:innen, Arbeitsplätze und ländliche Strukturen. Die Kritik richtet sich oft weniger gegen das ethische Ziel als gegen die sozialen Kosten einer Umstellung.",
-    "notMeaning": "Das Argument zeigt nicht, dass Tierausbeutung moralisch richtig ist, nur weil Menschen wirtschaftlich davon abhängen. Gesellschaftliche Veränderungen können Übergänge, Umschulungen und Unterstützung erfordern. Es beantwortet nicht, ob Arbeitsplätze auf Dauer eine problematische Praxis rechtfertigen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Tierhaltung moralisch unproblematisch sei. Es argumentiert vielmehr, dass ihre Abschaffung wegen der wirtschaftlichen Abhängigkeit vieler Menschen unverhältnismäßige soziale Schäden verursachen würde und deshalb zumindest nicht vollständig oder zu schnell erfolgen sollte.",
     "commonFormulations": [
       "Dann verlieren Bauern ihren Job.",
       "Was soll aus der Landwirtschaft werden?",
@@ -541,7 +538,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-22",
     "title": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
     "argument": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Es besteht ein moralischer Unterschied zwischen unvermeidbaren Nebenfolgen des Lebens und einem System, das Tiere gezielt hervorbringt, besitzt und tötet. Wildlebende Kleintiere sind unabhängig von uns einem ständigen Überlebenskampf und einer hohen natürlichen Sterblichkeit ausgesetzt; Todesfälle bleiben tragisch, nehmen ihnen aber nicht dasselbe geschützte Leben, das wir Kühen, Schweinen oder Hühnern absichtlich verwehren. Unbeabsichtigte Todesfälle rechtfertigen daher keine zusätzliche, institutionalisierte Tierausbeutung.",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 57,
@@ -553,7 +550,7 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
     "meaning": "Dieses Argument treibt vegane Konsequenz ins Extreme. Befürworter weisen darauf hin, dass auch im Alltag unbeabsichtigt Tiere sterben, etwa durch Verkehr, Wohnen oder Landwirtschaft. Daraus soll folgen, dass Veganismus inkonsequent oder unmöglich sei.",
-    "notMeaning": "Das Argument zeigt nicht, dass vermeidbare und absichtliche Ausbeutung gleichzusetzen ist mit unvermeidbaren Nebenfolgen. Veganismus verlangt nicht, jedes Risiko auf null zu senken, sondern vermeidbare Tierausbeutung soweit wie praktikabel zu reduzieren.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass es keinen Unterschied zwischen absichtlicher Tierausbeutung und unbeabsichtigten Schäden gibt. Es argumentiert vielmehr, dass Veganismus keine klare Grenze ziehen kann, wenn jedes vermeidbare Tierleid berücksichtigt werden soll, und deshalb entweder inkonsequent bleibt oder zu praktisch unmöglichen Forderungen führt.",
     "commonFormulations": [
       "Beim Spazieren tötest du auch Insekten.",
       "Konsequente Veganer dürften ihr Haus nicht verlassen.",
@@ -566,7 +563,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-23",
     "title": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
     "argument": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Vegane Spitzensportler:innen liefern direkte Gegenbeispiele, eine simple Google Suche liefert zahlreiche davon. Diese Beispiele beweisen nicht, dass jede vegane Ernährung gesund ist, widerlegen aber die Behauptung, sie führe zwangsläufig zu Schwäche oder Untergewicht. Entscheidend sind eine ausreichende Energie-, Protein- und Nährstoffzufuhr sowie die Ergänzung von Vitamin B12.",
     "ratings": {
       "verbreitung": 52,
       "komplexitaet": 26,
@@ -577,13 +574,13 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument stellt Veganismus als gesundheitlichen Verfall dar. Befürworter verbinden vegane Ernährung mit Schwäche, Blässe, Mangel und Untergewicht. Oft beruhen solche Aussagen auf Einzelfällen, Bildern oder Stereotypen statt auf einer differenzierten Betrachtung.",
-    "notMeaning": "Das Argument zeigt nicht, dass vegane Ernährung grundsätzlich mangelhaft ist. Es kann schlechte vegane Ernährung geben, so wie es schlechte omnivore Ernährung gibt. Entscheidend ist Planung, Nährstoffversorgung und gegebenenfalls Supplementierung, nicht das Etikett allein.",
+    "meaning": "Dieses Argument warnt vor gesundheitlichen Folgen einer veganen Ernährung. Der Verzicht auf sämtliche Tierprodukte wird mit Nährstoffmängeln, Gewichtsverlust, körperlicher Schwäche und einem kränklichen Erscheinungsbild verbunden. Tierische Lebensmittel gelten dabei als notwendig, um langfristig gesund und leistungsfähig zu bleiben.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede vegan lebende Person sofort krank oder untergewichtig wird. Es argumentiert vielmehr, dass eine rein pflanzliche Ernährung ein erhebliches oder langfristiges Gesundheitsrisiko darstellt und Tierprodukte für eine sichere Nährstoffversorgung benötigt werden.",
     "commonFormulations": [
       "Veganer sehen immer so blass aus.",
       "Ohne Fleisch wird man schwach.",
       "Du bekommst doch keine Muskeln.",
-      "Am Ende hast du nur Mängel."
+      "Von Salat schrumpft der Biceps."
     ]
   },
   {
@@ -591,7 +588,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-24",
     "title": "Ich kannte mal einen Veganer und der ist gestorben!",
     "argument": "Ich kannte mal einen Veganer und der ist gestorben!",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Einzelne Anekdoten fallen mitunter den schwächsten Formen der Evidenz. Sie sind oft ausgearbeitet oder verallgemeinern eine ungesunde pflanzliche Ernährung als Veganismus. Außerdem sind sie in den aller meisten Fällen nicht falsifizierbar. Studien mit sehr vielen Teilnehmenden zeigen keine höhere Gesamtsterblichkeit in Verbindung mit einer veganen Ernährung.",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 15,
@@ -602,13 +599,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument nutzt eine Anekdote als Gegenbeweis. Befürworter verweisen auf eine einzelne vegane Person, die krank wurde, gestorben ist oder aufgehört hat vegan zu leben. Daraus wird eine allgemeine Aussage über Veganismus abgeleitet.",
-    "notMeaning": "Das Argument zeigt nicht, dass Veganismus die Ursache des Ereignisses war. Einzelbeispiele können täuschen und ersetzen keine systematische Betrachtung. Menschen sterben aus vielen Gründen, unabhängig von ihrer Ernährungsform.",
+    "meaning": "Dieses Argument verwendet die Erfahrung mit einer vegan lebenden Person als Beleg gegen Veganismus. Wenn vegane Personen krank wurden, Mängel entwickelten, ihre Ernährung abbrechen mussten oder starben, wird daraus geschlossen, dass die vegane Lebensweise selbst gefährlich oder nicht dauerhaft durchführbar ist.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass ausschließlich Veganerinnen und Veganer krank werden oder dass jede vegane Person dasselbe Schicksal erleiden wird. Es argumentiert vielmehr, dass ein konkreter negativer Fall die möglichen Gefahren veganer Ernährung sichtbar macht und deshalb gegen ihre allgemeine Sicherheit spricht.",
     "commonFormulations": [
       "Ich kannte mal einen Veganer und der ist gestorben.",
-      "Eine Bekannte musste wegen Veganismus ins Krankenhaus.",
-      "Mein Cousin war vegan und hatte Mängel.",
-      "Veganismus kann also nicht gesund sein."
+      "Eine Bekannte musste wegen Veganismus ins Krankenhaus."
     ]
   },
   {
@@ -616,7 +611,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-25",
     "title": "Wenn alle vegan werden würden, gäbe es nicht genug Essen für alle.",
     "argument": "Wenn alle vegan werden würden, gäbe es nicht genug Essen für alle.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Für Tierprodukte müssen große Mengen an Pflanzen zunächst an Tiere verfüttert werden, wobei ein erheblicher Teil der enthaltenen Energie verloren geht. Wenn Menschen mehr Pflanzen direkt essen, werden insgesamt meist weniger Anbauflächen und Futtermittel benötigt. Eine stärker pflanzliche Landwirtschaft könnte daher mehr Nahrung für Menschen bereitstellen, nicht weniger.",
     "ratings": {
       "verbreitung": 47,
       "komplexitaet": 22,
@@ -627,8 +622,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument behauptet, eine vegane Welt könne nicht genug Nahrung bereitstellen. Befürworter befürchten Ernteausfälle, Flächenprobleme oder zu wenig Kalorien und Nährstoffe. Es stellt Veganismus als global unrealistische Versorgungsidee dar.",
-    "notMeaning": "Das Argument zeigt nicht automatisch, dass Tierhaltung effizienter ist. Viele Tierprodukte benötigen Futterpflanzen, Flächen, Wasser und Energie, bevor daraus menschliche Nahrung wird. Es müsste konkret zeigen, warum pflanzliche Versorgung schlechter funktionieren sollte.",
+    "meaning": "Dieses Argument bezweifelt, dass eine vollständig pflanzliche Landwirtschaft die Weltbevölkerung ernähren könnte. Die verfügbaren Ackerflächen, Erntemengen und pflanzlichen Nährstoffquellen werden als unzureichend betrachtet, während Tiere auch für Menschen ungenießbare Pflanzen und nicht ackerfähige Flächen zur Lebensmittelproduktion nutzen können.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass pflanzliche Lebensmittel unwichtig sind oder dass die heutige Tierhaltung unverändert bleiben muss. Es argumentiert vielmehr, dass tierische Landwirtschaft für die globale Ernährungssicherheit notwendig ist und eine vollständig vegane Versorgung an begrenzten Flächen, Ressourcen oder Nährstoffquellen scheitern würde.",
     "commonFormulations": [
       "Wenn alle vegan wären, gäbe es nicht genug Essen.",
       "So viele Pflanzen kann man gar nicht anbauen.",
