@@ -538,7 +538,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-22",
     "title": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
     "argument": "Konsequente Veganer dürften ihr Haus nicht verlassen, da sonst Tiere sterben.",
-    "officialShortAnswer": "Es besteht ein moralischer Unterschied zwischen unvermeidbaren Nebenfolgen des Lebens und einem System, das Tiere gezielt hervorbringt, besitzt und tötet. Wildlebende Kleintiere sind unabhängig von uns einem ständigen Überlebenskampf und einer hohen natürlichen Sterblichkeit ausgesetzt; Todesfälle bleiben tragisch, nehmen ihnen aber nicht dasselbe geschützte Leben, das wir Kühen, Schweinen oder Hühnern absichtlich verwehren. Unbeabsichtigte Todesfälle rechtfertigen daher keine zusätzliche, institutionalisierte Tierausbeutung.",
+    "officialShortAnswer": "Gerade vegane Aktivistinnen und Aktivisten haben das Recht, ihr Haus zu verlassen: Sie setzen sich für Tiere ein, für die es keineswegs egal ist, ob Menschen handeln oder schweigen. Die angeblich konsequente Alternative wäre, zu Hause zu bleiben und schließlich zu verhungern, ohne dadurch einem konkreten Kleintier zuverlässig ein längeres Leben zu ermöglichen. Viele wildlebende Kleintiere sterben ohnehin früh durch Fressfeinde, Naturgewalten, Krankheiten oder Nahrungsknappheit. Sich deshalb selbst zur völligen Untätigkeit zu verurteilen, hilft ihnen kaum, verhindert aber den Einsatz gegen die gezielte Zucht, Ausbeutung und Tötung sogenannter Nutztiere.",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 57,
@@ -563,7 +563,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-23",
     "title": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
     "argument": "Wenn ich vegan werde, ende ich schwach, blass und untergewichtig.",
-    "officialShortAnswer": "Vegane Spitzensportler:innen liefern direkte Gegenbeispiele, eine simple Google Suche liefert zahlreiche davon. Diese Beispiele beweisen nicht, dass jede vegane Ernährung gesund ist, widerlegen aber die Behauptung, sie führe zwangsläufig zu Schwäche oder Untergewicht. Entscheidend sind eine ausreichende Energie-, Protein- und Nährstoffzufuhr sowie die Ergänzung von Vitamin B12.",
+    "officialShortAnswer": "Vegane Spitzensportlerinnen und Sportler liefern direkte Gegenbeispiele, eine simple Google Suche liefert zahlreiche davon. Diese Beispiele beweisen nicht, dass jede vegane Ernährung gesund ist, widerlegen aber die Behauptung, sie führe zwangsläufig zu Schwäche oder Untergewicht. Entscheidend sind eine ausreichende Energie-, Protein- und Nährstoffzufuhr sowie die Ergänzung von Vitamin B12.",
     "ratings": {
       "verbreitung": 52,
       "komplexitaet": 26,
