@@ -25,4 +25,192 @@ import AuthCta from "../components/account/AuthCta.tsx";
   <QRFeature />
 
   <PreorderSection />
+
+<section class="pro-vegan-pdf">
+  <div class="pro-vegan-pdf__inner">
+    <div class="pro-vegan-pdf__cover">
+      <img
+        src="/images/54-argumente-fuer-veganismus-cover.png"
+        alt="Cover der PDF 54 Argumente für Veganismus"
+        width="1200"
+        height="1697"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="pro-vegan-pdf__content">
+      <p class="pro-vegan-pdf__label">
+        Kostenlose Ergänzung
+      </p>
+
+      <h2>
+        54 Argumente
+        <span>für Veganismus</span>
+      </h2>
+
+      <p>
+        Das kostenlose Gegenstück zu den 54 Einwänden gegen Veganismus: 54 unterschiedliche Zugänge zu der Frage, warum Tiere nicht für menschliche Zwecke ausgebeutet werden sollten.
+      </p>
+
+      <div class="pro-vegan-pdf__actions">
+        <a
+          class="pro-vegan-pdf__button pro-vegan-pdf__button--primary"
+          href="/54-argumente-fuer-veganismus"
+        >
+          PDF entdecken
+        </a>
+
+        <a
+          class="pro-vegan-pdf__button pro-vegan-pdf__button--secondary"
+          href="/downloads/54-argumente-fuer-veganismus.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Direkt lesen
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pro-vegan-pdf {
+    padding: clamp(72px, 9vw, 125px) 20px;
+    background:
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(118, 173, 105, 0.15),
+        transparent 30%
+      ),
+      #edf2e9;
+  }
+
+  .pro-vegan-pdf__inner {
+    display: grid;
+    grid-template-columns: minmax(220px, 380px) minmax(0, 1fr);
+    gap: clamp(45px, 8vw, 105px);
+    align-items: center;
+    width: min(1120px, 100%);
+    margin-inline: auto;
+  }
+
+  .pro-vegan-pdf__cover {
+    width: min(100%, 350px);
+    margin-inline: auto;
+    transform: rotate(-2deg);
+  }
+
+  .pro-vegan-pdf__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 28px 65px rgba(34, 57, 36, 0.2);
+  }
+
+  .pro-vegan-pdf__label {
+    margin: 0 0 14px;
+    color: #315f2d;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .pro-vegan-pdf h2 {
+    margin: 0;
+    color: #172018;
+    font-size: clamp(2.5rem, 5.5vw, 5.1rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .pro-vegan-pdf h2 span {
+    display: block;
+    color: #497f42;
+  }
+
+  .pro-vegan-pdf__content > p:not(.pro-vegan-pdf__label) {
+    max-width: 700px;
+    margin: 28px 0 0;
+    color: #5e6b60;
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  .pro-vegan-pdf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .pro-vegan-pdf__button {
+    display: inline-flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 20px;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    font-weight: 750;
+    text-decoration: none;
+    transition:
+      transform 160ms ease,
+      background 160ms ease;
+  }
+
+  .pro-vegan-pdf__button:hover {
+    transform: translateY(-2px);
+  }
+
+  .pro-vegan-pdf__button--primary {
+    color: #ffffff;
+    background: #315f2d;
+  }
+
+  .pro-vegan-pdf__button--primary:hover {
+    background: #274e24;
+  }
+
+  .pro-vegan-pdf__button--secondary {
+    color: #172018;
+    border-color: rgba(23, 32, 24, 0.15);
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .pro-vegan-pdf__button--secondary:hover {
+    background: #ffffff;
+  }
+
+  @media (max-width: 760px) {
+    .pro-vegan-pdf__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .pro-vegan-pdf__cover {
+      width: min(68vw, 310px);
+    }
+
+    .pro-vegan-pdf__content {
+      text-align: center;
+    }
+
+    .pro-vegan-pdf__content > p:not(.pro-vegan-pdf__label) {
+      margin-inline: auto;
+    }
+
+    .pro-vegan-pdf__actions {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pro-vegan-pdf__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 </BaseLayout>

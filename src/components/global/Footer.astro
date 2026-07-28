@@ -1,96 +1,326 @@
-<footer class="site-footer-custom">
-  <div class="footer-inner-custom">
-    <div class="footer-brand-custom">
-      <h3>Das Vegane Quartett</h3>
-      <p>
-        Das Diskussionskartenspiel über Argumente gegen Veganismus,
-        kombiniert mit QR-Codes und Community-Diskussionen.
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-shell">
+    <section class="footer-main" aria-label="Fußbereich">
+      <div class="footer-brand">
+        <a class="footer-logo" href="/" aria-label="Zur Startseite">
+          <span class="footer-logo__mark" aria-hidden="true"></span>
+          <span>Das Vegane Quartett</span>
+        </a>
+
+        <p>
+          Das Diskussionskartenspiel über 54 Argumente gegen Veganismus,
+          ergänzt durch Quellen, ausführliche Antworten und Community-Diskussionen.
+        </p>
+
+        <a class="pdf-highlight" href="/54-argumente-fuer-veganismus">
+          <span class="pdf-highlight__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M5 2.75A1.75 1.75 0 0 1 6.75 1h7.6L20 6.65v14.6A1.75 1.75 0 0 1 18.25 23H6.75A1.75 1.75 0 0 1 5 21.25V2.75Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14 1.5V7h5.5M8.5 12h7M8.5 16h7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+
+          <span class="pdf-highlight__text">
+            <strong>54 Argumente für Veganismus</strong>
+            <small>Kostenlose PDF lesen und herunterladen</small>
+          </span>
+
+          <span class="pdf-highlight__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="footer-nav-groups">
+        <nav class="footer-nav" aria-labelledby="footer-content-heading">
+          <h2 id="footer-content-heading">Inhalte</h2>
+          <a href="/">Startseite</a>
+          <a href="/cards">Alle Argumente</a>
+          <a href="/rules">Spielanleitung</a>
+          <a href="/54-argumente-fuer-veganismus">54 Argumente für Veganismus</a>
+          <a href="/#faq">FAQ</a>
+        </nav>
+
+        <nav class="footer-nav" aria-labelledby="footer-community-heading">
+          <h2 id="footer-community-heading">Community</h2>
+          <a href="/forum">Forum</a>
+          <a href="/profile">Profil</a>
+          <a href="/#preorder">Vorbestellen</a>
+        </nav>
+
+        <nav class="footer-nav" aria-labelledby="footer-legal-heading">
+          <h2 id="footer-legal-heading">Rechtliches</h2>
+          <a href="/legal/impressum">Impressum</a>
+          <a href="/legal/datenschutz">Datenschutz</a>
+          <a href="/legal/agb">AGB</a>
+          <a href="/legal/widerruf">Widerruf</a>
+        </nav>
+      </div>
+    </section>
+
+    <div class="footer-bottom">
+      <p>© {currentYear} Das Vegane Quartett</p>
+      <p class="footer-bottom__note">
+        Für Tiere. Für gute Argumente. Für bessere Gespräche.
       </p>
     </div>
-
-    <nav class="footer-links-custom">
-      <a href="/legal/impressum">Impressum</a>
-      <a href="/legal/datenschutz">Datenschutz</a>
-      <a href="/legal/agb">AGB</a>
-      <a href="/legal/widerruf">Widerruf</a>
-      <a href="/#faq" class="primary">FAQ</a>
-    </nav>
   </div>
 </footer>
 
 <style>
-  .site-footer-custom {
+  .site-footer {
     margin-top: 6rem;
-    padding: 3rem 1.5rem;
     border-top: 1px solid var(--border);
-    background: rgba(7, 9, 10, 0.92);
+    background:
+      radial-gradient(
+        circle at 10% 0%,
+        rgba(126, 255, 203, 0.08),
+        transparent 30%
+      ),
+      rgba(7, 9, 10, 0.98);
+    color: var(--text);
   }
 
-  .footer-inner-custom {
+  .footer-shell {
     width: min(100% - 2rem, 1280px);
     margin-inline: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
+    padding: clamp(3rem, 6vw, 5rem) 0 1.5rem;
   }
 
-  .footer-brand-custom h3 {
-    margin: 0 0 0.7rem;
-    font-size: 1.35rem;
+  .footer-main {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.15fr) minmax(420px, 1fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
   }
 
-  .footer-brand-custom p {
-    margin: 0;
-    max-width: 620px;
-    color: var(--muted-text);
-    line-height: 1.6;
+  .footer-brand {
+    max-width: 610px;
   }
 
-  .footer-links-custom {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-  }
-
-  .footer-links-custom a {
+  .footer-logo {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: 0.85rem 1.25rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    gap: 0.8rem;
     color: var(--text);
+    font-size: clamp(1.2rem, 2vw, 1.45rem);
+    font-weight: 900;
     text-decoration: none;
-    font-weight: 850;
-    transition: transform 0.18s ease, border-color 0.18s ease;
   }
 
-  .footer-links-custom a:hover {
-    transform: translateY(-2px);
-    border-color: rgba(126, 255, 203, 0.4);
+  .footer-logo__mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), rgba(136, 215, 255, 0.95));
+    box-shadow: 0 10px 30px rgba(126, 255, 203, 0.18);
   }
 
-  .footer-links-custom a.primary {
-    background: var(--accent);
+  .footer-brand > p {
+    max-width: 570px;
+    margin: 1.25rem 0 0;
+    color: var(--muted-text);
+    line-height: 1.75;
+  }
+
+  .pdf-highlight {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(126, 255, 203, 0.22);
+    border-radius: 18px;
+    color: var(--text);
+    background: rgba(126, 255, 203, 0.07);
+    text-decoration: none;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease;
+  }
+
+  .pdf-highlight:hover {
+    transform: translateY(-3px);
+    border-color: rgba(126, 255, 203, 0.5);
+    background: rgba(126, 255, 203, 0.11);
+  }
+
+  .pdf-highlight:focus-visible,
+  .footer-logo:focus-visible,
+  .footer-nav a:focus-visible {
+    outline: 3px solid rgba(126, 255, 203, 0.35);
+    outline-offset: 3px;
+  }
+
+  .pdf-highlight__icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 13px;
     color: #07110d;
-    border-color: transparent;
+    background: var(--accent);
   }
 
-  @media (max-width: 720px) {
-    .footer-inner-custom {
+  .pdf-highlight__text {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .pdf-highlight__text strong {
+    line-height: 1.25;
+  }
+
+  .pdf-highlight__text small {
+    color: var(--muted-text);
+    line-height: 1.35;
+  }
+
+  .pdf-highlight__arrow {
+    color: var(--accent);
+    font-size: 1.35rem;
+    font-weight: 900;
+  }
+
+  .footer-nav-groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer-nav h2 {
+    margin: 0 0 0.45rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-nav a {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      color 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted-text);
+    font-size: 0.88rem;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  .footer-bottom__note {
+    text-align: right;
+  }
+
+  @media (max-width: 960px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+      max-width: none;
+    }
+
+    .footer-nav-groups {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 680px) {
+    .site-footer {
+      margin-top: 4rem;
+    }
+
+    .footer-shell {
+      width: min(100% - 1.5rem, 1280px);
+    }
+
+    .footer-nav-groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.25rem 1.5rem;
+    }
+
+    .footer-nav:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
       align-items: flex-start;
     }
 
-    .footer-links-custom {
-      width: 100%;
+    .footer-bottom__note {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .footer-nav-groups {
+      grid-template-columns: 1fr;
     }
 
-    .footer-links-custom a {
-      flex: 1;
+    .footer-nav:last-child {
+      grid-column: auto;
+    }
+
+    .pdf-highlight {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .pdf-highlight__arrow {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pdf-highlight,
+    .footer-nav a {
+      transition: none;
     }
   }
 </style>
