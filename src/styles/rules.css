@@ -674,6 +674,12 @@
     font-size: clamp(2.75rem, 11.5vw, 3.5rem);
   }
 
+  .rules-section-heading--ratings h2 {
+    min-width: 0;
+    font-size: clamp(1.75rem, 8vw, 2rem);
+    overflow-wrap: break-word;
+  }
+
   .rules-eyebrow {
     font-size: 0.7rem;
     line-height: 1.5;
@@ -784,5 +790,3 @@ body:has(.rules-page) .site-main {
 .rules-modes {
   width: 100%;
 }
-
-
