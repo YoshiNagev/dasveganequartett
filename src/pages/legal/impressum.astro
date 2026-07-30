@@ -1,0 +1,413 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Impressum | Das Vegane Quartett"
+  description="Impressum und Anbieterkennzeichnung von Das Vegane Quartett."
+>
+  <main class="legal-page">
+    <div class="legal-shell">
+      <a class="legal-back" href="/">
+        <span aria-hidden="true">←</span>
+        Zur Startseite
+      </a>
+
+      <header class="legal-header">
+        <p class="legal-kicker">Rechtliches</p>
+        <h1>Impressum</h1>
+        <p class="legal-intro">
+          Anbieterkennzeichnung und Kontaktinformationen für
+          dasveganequartett.de.
+        </p>
+      </header>
+
+      <div class="legal-content">
+        <section class="legal-section">
+          <h2>Angaben gemäß § 5 DDG</h2>
+
+          <address>
+            Josias Everett<br />
+            handelnd unter „Yoshi Vegan Games“<br />
+            Emil-Nolde-Straße 42<br />
+            61130 Nidderau<br />
+            Deutschland
+          </address>
+        </section>
+
+        <section class="legal-section">
+          <h2>Kontakt</h2>
+
+          <p>
+            E-Mail:
+            <a href="mailto:kontakt@dasveganequartett.de">
+              kontakt@dasveganequartett.de
+            </a>
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Redaktionell verantwortlich</h2>
+
+          <address>
+            Josias Everett<br />
+            Emil-Nolde-Straße 42<br />
+            61130 Nidderau<br />
+            Deutschland
+          </address>
+        </section>
+
+        <section class="legal-section">
+          <h2>Verbraucher<wbr />streitbeilegung</h2>
+
+          <p>
+            Ich bin weder bereit noch verpflichtet, an Streitbeilegungsverfahren
+            vor einer Verbraucherschlichtungsstelle teilzunehmen.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Haftung für Inhalte und Links</h2>
+
+          <p>
+            Die Inhalte dieser Website werden mit großer Sorgfalt erstellt.
+            Eine Gewähr für Richtigkeit, Vollständigkeit und Aktualität kann
+            dennoch nicht übernommen werden.
+          </p>
+
+          <p>
+            Diese Website enthält teilweise Links zu externen Websites Dritter.
+            Auf deren Inhalte besteht kein Einfluss. Für die Inhalte verlinkter
+            Seiten ist stets der jeweilige Anbieter verantwortlich.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>Urheberrecht</h2>
+
+          <p>
+            Die auf dieser Website erstellten Inhalte, Texte, Illustrationen,
+            Karten und sonstigen Werke unterliegen dem deutschen Urheberrecht,
+            soweit nicht ausdrücklich etwas anderes angegeben ist.
+          </p>
+
+          <p>
+            Für die kostenlose PDF „54 Argumente für Veganismus“ gelten die in
+            der PDF genannten besonderen Nutzungshinweise.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+
+<style>
+  .legal-page,
+  .legal-page *,
+  .legal-page *::before,
+  .legal-page *::after {
+    box-sizing: border-box;
+  }
+
+  .legal-page {
+    --legal-bg: #0b0f0c;
+    --legal-surface: #121814;
+    --legal-surface-soft: #172019;
+    --legal-text: #f3f7f2;
+    --legal-muted: #aeb9b0;
+    --legal-accent: var(--accent, #7effcb);
+    --legal-border: var(--border, rgba(255, 255, 255, 0.12));
+
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow-x: clip;
+    padding: clamp(88px, 9vw, 128px) 0 clamp(64px, 8vw, 112px);
+    color: var(--legal-text);
+    background:
+      radial-gradient(circle at 8% 0%, rgba(126, 255, 203, 0.08), transparent 27%),
+      var(--legal-bg);
+  }
+
+  .legal-shell {
+    width: calc(100% - 40px);
+    max-width: 860px;
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .legal-header,
+  .legal-content,
+  .legal-section,
+  .legal-note,
+  .legal-highlight {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .legal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+    color: var(--legal-muted);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .legal-back:hover,
+  .legal-back:focus-visible {
+    color: var(--legal-accent);
+  }
+
+  .legal-kicker {
+    margin: 0 0 0.8rem;
+    color: var(--legal-accent);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .legal-header h1 {
+    max-width: 100%;
+    margin: 0;
+    font-size: clamp(2.45rem, 7vw, 5.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .legal-intro {
+    max-width: 720px;
+    margin: 1.35rem 0 0;
+    color: var(--legal-muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .legal-meta {
+    margin-top: 1.3rem;
+    color: var(--legal-muted);
+    font-size: 0.9rem;
+  }
+
+  .legal-content {
+    display: grid;
+    gap: 1rem;
+    margin-top: clamp(2.8rem, 6vw, 5rem);
+  }
+
+  .legal-section {
+    padding: clamp(1.4rem, 3.5vw, 2.2rem);
+    border: 1px solid var(--legal-border);
+    border-radius: 20px;
+    background: rgba(18, 24, 20, 0.88);
+  }
+
+  .legal-section h2 {
+    max-width: 100%;
+    margin: 0 0 1rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.28;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .legal-section h3 {
+    max-width: 100%;
+    margin: 1.5rem 0 0.65rem;
+    font-size: 1.05rem;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .legal-section p,
+  .legal-section li,
+  .legal-section address,
+  .legal-note,
+  .legal-highlight {
+    color: var(--legal-muted);
+    line-height: 1.75;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .legal-section p {
+    margin: 0.75rem 0 0;
+  }
+
+  .legal-section p:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-section ul,
+  .legal-section ol {
+    max-width: 100%;
+    margin: 0.8rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .legal-section address {
+    max-width: 100%;
+    font-style: normal;
+  }
+
+  .legal-section a {
+    max-width: 100%;
+    color: var(--legal-accent);
+    text-underline-offset: 0.2em;
+  }
+
+  .legal-section a[href^="mailto:"] {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: none;
+  }
+
+  .legal-note {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(255, 202, 92, 0.32);
+    border-radius: 14px;
+    color: #f8df9f;
+    background: rgba(255, 202, 92, 0.07);
+  }
+
+  .legal-highlight {
+    padding: 1rem 1.1rem;
+    border-left: 3px solid var(--legal-accent);
+    border-radius: 0 12px 12px 0;
+    background: rgba(126, 255, 203, 0.06);
+  }
+
+  .legal-form {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .legal-form label {
+    display: grid;
+    min-width: 0;
+    gap: 0.45rem;
+    color: var(--legal-text);
+    font-weight: 750;
+  }
+
+  .legal-form input,
+  .legal-form textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0.85rem 0.95rem;
+    border: 1px solid var(--legal-border);
+    border-radius: 12px;
+    color: var(--legal-text);
+    background: var(--legal-surface-soft);
+    font: inherit;
+  }
+
+  .legal-form textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  .legal-button {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.15rem;
+    border: 0;
+    border-radius: 12px;
+    color: #07110d;
+    background: var(--legal-accent);
+    font: inherit;
+    font-weight: 900;
+    text-align: center;
+    white-space: normal;
+    cursor: pointer;
+  }
+
+  .legal-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  @media (max-width: 600px) {
+    .legal-page {
+      padding-top: 82px;
+    }
+
+    .legal-shell {
+      width: calc(100% - 32px);
+      max-width: 860px;
+    }
+
+    .legal-back {
+      margin-bottom: 1.6rem;
+    }
+
+    .legal-header h1 {
+      font-size: clamp(2.2rem, 12vw, 3.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .legal-intro {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .legal-content {
+      gap: 0.85rem;
+      margin-top: 2.5rem;
+    }
+
+    .legal-section,
+    .legal-note {
+      padding: 1.2rem;
+      border-radius: 16px;
+    }
+
+    .legal-highlight {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .legal-shell {
+      width: calc(100% - 24px);
+    }
+
+    .legal-section,
+    .legal-note {
+      padding: 1rem;
+    }
+
+    .legal-header h1 {
+      font-size: 2.15rem;
+    }
+
+    .legal-section h2 {
+      font-size: 1.08rem;
+      line-height: 1.3;
+    }
+  }
+</style>

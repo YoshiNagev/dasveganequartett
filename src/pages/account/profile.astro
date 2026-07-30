@@ -1,20 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProfileForm from "../../components/account/ProfileForm";
-import LogoutButton from "../../components/account/LogoutButton";
 import AuthCta from "../../components/account/AuthCta";
+import DeleteAccountPanel from "../../components/account/DeleteAccountPanel";
+import "../../styles/account-delete.css";
 ---
 
 <BaseLayout title="Profil">
   <section class="profile-page">
     <div class="profile-hero">
-      
       <div>
         <p class="eyebrow">Account</p>
         <h1>Dein Profil</h1>
         <p>
-          Hier kannst du deinen öffentlichen Nickname und deine Bio bearbeiten.
-          Deine E-Mail bleibt privat.
+          Hier kannst du deinen öffentlichen Nickname, deine Bio und deinen
+          Avatar bearbeiten. Deine E-Mail-Adresse bleibt privat.
         </p>
       </div>
     </div>
@@ -28,6 +28,7 @@ import AuthCta from "../../components/account/AuthCta";
         <ul>
           <li>Dein Nickname</li>
           <li>Deine Bio</li>
+          <li>Dein ausgewählter Avatar</li>
           <li>Deine Threads</li>
           <li>Deine Kommentare</li>
         </ul>
@@ -39,5 +40,7 @@ import AuthCta from "../../components/account/AuthCta";
         <AuthCta client:load variant="profile" />
       </aside>
     </div>
+
+    <DeleteAccountPanel client:load />
   </section>
 </BaseLayout>

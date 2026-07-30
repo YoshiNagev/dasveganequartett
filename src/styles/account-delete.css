@@ -1,0 +1,168 @@
+.delete-account-card,
+.delete-account-card *,
+.delete-account-card *::before,
+.delete-account-card *::after {
+  box-sizing: border-box;
+}
+
+.delete-account-card {
+  width: 100%;
+  max-width: 100%;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.35rem, 3.5vw, 2.25rem);
+  border: 1px solid rgba(255, 103, 103, 0.32);
+  border-radius: 22px;
+  background:
+    linear-gradient(rgba(255, 82, 82, 0.045), rgba(255, 82, 82, 0.045)),
+    var(--surface, #121814);
+}
+
+.delete-account-copy {
+  max-width: 720px;
+}
+
+.danger-eyebrow {
+  color: #ff8e8e;
+}
+
+.delete-account-card h2 {
+  margin: 0.35rem 0 0.9rem;
+  color: var(--text, #f3f7f2);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.delete-account-card p {
+  color: var(--muted, #aeb9b0);
+  line-height: 1.7;
+}
+
+.delete-account-open,
+.delete-account-final,
+.delete-account-cancel {
+  min-height: 46px;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.delete-account-open {
+  margin-top: 1.2rem;
+  border: 1px solid rgba(255, 103, 103, 0.55);
+  color: #ffd7d7;
+  background: rgba(255, 82, 82, 0.11);
+}
+
+.delete-account-open:hover,
+.delete-account-open:focus-visible {
+  background: rgba(255, 82, 82, 0.18);
+}
+
+.delete-account-confirmation {
+  display: grid;
+  width: 100%;
+  max-width: 620px;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(255, 103, 103, 0.28);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.delete-account-warning {
+  margin: 0;
+  color: #ffb0b0 !important;
+  font-weight: 800;
+}
+
+.delete-account-confirmation label {
+  color: var(--text, #f3f7f2);
+  line-height: 1.55;
+}
+
+.delete-account-confirmation input {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 11px;
+  padding: 0.72rem 0.85rem;
+  color: var(--text, #f3f7f2);
+  background: rgba(255, 255, 255, 0.055);
+  font: inherit;
+}
+
+.delete-account-confirmation input:focus {
+  outline: 2px solid rgba(255, 103, 103, 0.52);
+  outline-offset: 2px;
+}
+
+.delete-account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.delete-account-final {
+  border: 0;
+  color: #fff;
+  background: #b92f3c;
+}
+
+.delete-account-final:hover:not(:disabled),
+.delete-account-final:focus-visible:not(:disabled) {
+  background: #ce3947;
+}
+
+.delete-account-final:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.delete-account-cancel {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text, #f3f7f2);
+  background: transparent;
+}
+
+.delete-account-message {
+  max-width: 620px;
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+}
+
+.delete-account-message.is-error {
+  border: 1px solid rgba(255, 103, 103, 0.35);
+  color: #ffc0c0;
+  background: rgba(255, 82, 82, 0.09);
+}
+
+.delete-account-message.is-success {
+  border: 1px solid rgba(126, 255, 203, 0.3);
+  color: #baffdf;
+  background: rgba(126, 255, 203, 0.07);
+}
+
+@media (max-width: 600px) {
+  .delete-account-card {
+    padding: 1.2rem;
+    border-radius: 17px;
+  }
+
+  .delete-account-confirmation {
+    padding: 1rem;
+  }
+
+  .delete-account-actions {
+    display: grid;
+  }
+
+  .delete-account-actions button {
+    width: 100%;
+  }
+}
