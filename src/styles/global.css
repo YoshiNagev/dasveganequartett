@@ -3570,3 +3570,98 @@ main {
   font-weight: 650;
   line-height: 1.55;
 }
+/* =========================================================
+   MOBILE FIXES — THREAD CONTEXTS & NOTIFICATIONS
+   ========================================================= */
+
+.thread-preview,
+.thread-preview-main,
+.thread-sort-browser,
+.thread-list,
+.notifications-panel,
+.notifications-toolbar,
+.notification-list,
+.notification-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.thread-context-label {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 0.65rem;
+  padding: 0.38rem 0.65rem;
+  border: 1px solid rgba(126, 255, 203, 0.22);
+  border-radius: 0.85rem;
+  color: var(--accent);
+  background: rgba(126, 255, 203, 0.07);
+  font-size: 0.75rem;
+  font-weight: 850;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.notification-card,
+.notification-card span,
+.notification-card strong,
+.notification-card small,
+.notifications-toolbar strong {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 600px) {
+  .thread-context-label {
+    display: block;
+    width: 100%;
+    border-radius: 0.75rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .notifications-panel {
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  .notifications-toolbar {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .notifications-toolbar button {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    border-radius: 0.85rem;
+  }
+
+  .notification-card {
+    width: 100%;
+    min-width: 0;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .notification-card small {
+    font-size: 0.78rem;
+  }
+
+  .profile-page > .page-header {
+    min-width: 0;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
+  .profile-page > .page-header h1 {
+    max-width: 100%;
+    font-size: clamp(2rem, 11vw, 3rem);
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+}

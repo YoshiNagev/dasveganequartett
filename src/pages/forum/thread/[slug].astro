@@ -2,6 +2,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import RealtimeComments from "../../../components/forum/RealtimeComments";
 import MarkdownText from "../../../components/forum/MarkdownText";
+import { cards } from "../../../data/cards";
 import { supabase } from "../../../lib/supabaseClient";
 
 export const prerender = false;
@@ -21,6 +22,9 @@ const { data: thread, error: threadError } = await supabase
     created_at,
     profiles (
       nickname
+    ),
+    suggested_arguments (
+      title
     )
   `)
   .eq("slug", slug)
@@ -76,6 +80,24 @@ const flatComments =
         : false,
   })) ?? [];
 
+const card = thread.card_id
+  ? cards.find((item) => item.id === thread.card_id)
+  : null;
+
+const contextHref = card
+  ? `/cards/${card.id}`
+  : thread.suggested_argument_id
+    ? `/forum/suggest/${thread.suggested_argument_id}`
+    : "/forum";
+
+const contextLabel = card
+  ? `Argumentkarte #${String(card.id).padStart(2, "0")} · ${card.title}`
+  : thread.suggested_argument_id
+    ? `Vorgeschlagenes Argument · ${
+        thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+      }`
+    : "Allgemeine Diskussion";
+
 const backHref = thread.card_id
   ? `/forum/card/${thread.card_id}`
   : thread.suggested_argument_id
@@ -84,7 +106,9 @@ const backHref = thread.card_id
 
 const backLabel = thread.card_id
   ? `← Zurück zur Karte #${String(thread.card_id).padStart(2, "0")}`
-  : "← Zurück zum vorgeschlagenen Argument";
+  : thread.suggested_argument_id
+    ? "← Zurück zum vorgeschlagenen Argument"
+    : "← Zurück zum Forum";
 ---
 
 <BaseLayout title={`${thread.title} · Das Vegane Quartett`}>
@@ -100,6 +124,10 @@ const backLabel = thread.card_id
     >
       <div class="thread-hero-main">
         <p class="eyebrow">Diskussion</p>
+
+        <a class="thread-context-link" href={contextHref}>
+          {contextLabel}
+        </a>
 
         <h1 data-thread-title-display>{thread.title}</h1>
 
@@ -143,11 +171,7 @@ const backLabel = thread.card_id
         </form>
 
         <div class="comment-actions thread-owner-actions">
-          <button
-            type="button"
-            data-edit-thread-button
-            hidden
-          >
+          <button type="button" data-edit-thread-button hidden>
             Thread bearbeiten
           </button>
 
@@ -348,3 +372,39 @@ const backLabel = thread.card_id
     }
   </script>
 </BaseLayout>
+
+<style>
+  .thread-context-link {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0.15rem 0 1rem;
+    padding: 0.48rem 0.75rem;
+    border: 1px solid rgba(126, 255, 203, 0.25);
+    border-radius: 1rem;
+    color: var(--accent, #7effcb);
+    background: rgba(126, 255, 203, 0.07);
+    font-size: 0.82rem;
+    font-weight: 850;
+    line-height: 1.45;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .thread-context-link:hover,
+  .thread-context-link:focus-visible {
+    background: rgba(126, 255, 203, 0.13);
+  }
+
+  @media (max-width: 480px) {
+    .thread-context-link {
+      display: block;
+      width: 100%;
+      padding: 0.72rem 0.8rem;
+      border-radius: 0.8rem;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+  }
+</style>

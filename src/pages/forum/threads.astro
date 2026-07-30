@@ -1,17 +1,59 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadSortBrowser from "../../components/forum/ThreadSortBrowser";
-import { getAllThreads } from "../../lib/threadQueries";
+import { cards } from "../../data/cards";
+import { supabase } from "../../lib/supabaseClient";
 
 export const prerender = false;
 
-let threads = [];
+const { data: rawThreads, error } = await supabase
+  .from("threads")
+  .select(`
+    id,
+    card_id,
+    suggested_argument_id,
+    title,
+    body,
+    slug,
+    created_at,
+    updated_at,
+    profiles (
+      nickname
+    ),
+    comments (
+      id,
+      created_at
+    ),
+    suggested_arguments (
+      title
+    )
+  `)
+  .eq("is_hidden", false)
+  .order("created_at", { ascending: false });
 
-try {
-  threads = await getAllThreads();
-} catch (error) {
+if (error) {
   console.error(error);
 }
+
+const threads =
+  rawThreads?.map((thread) => {
+    const card = thread.card_id
+      ? cards.find((item) => item.id === thread.card_id)
+      : null;
+
+    const contextLabel = card
+      ? `Karte #${String(card.id).padStart(2, "0")} · ${card.title}`
+      : thread.suggested_argument_id
+        ? `Vorgeschlagenes Argument · ${
+            thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+          }`
+        : "Allgemeine Diskussion";
+
+    return {
+      ...thread,
+      contextLabel,
+    };
+  }) ?? [];
 ---
 
 <BaseLayout title="Alle Threads">

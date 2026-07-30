@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProfileForm from "../../components/account/ProfileForm";
 import AuthCta from "../../components/account/AuthCta";
+import AccountSecurityPanel from "../../components/account/AccountSecurityPanel";
 import DeleteAccountPanel from "../../components/account/DeleteAccountPanel";
 import "../../styles/account-delete.css";
 ---
@@ -14,7 +15,7 @@ import "../../styles/account-delete.css";
         <h1>Dein Profil</h1>
         <p>
           Hier kannst du deinen öffentlichen Nickname, deine Bio und deinen
-          Avatar bearbeiten. Deine E-Mail-Adresse bleibt privat.
+          Avatar bearbeiten. Deine E-Mail-Adresse bleibt im Forum privat.
         </p>
       </div>
     </div>
@@ -34,13 +35,192 @@ import "../../styles/account-delete.css";
         </ul>
 
         <p>
-          Deine E-Mail-Adresse wird im Forum nicht angezeigt.
+          Deine E-Mail-Adresse und deine Anmeldedaten werden im Forum nicht angezeigt.
         </p>
 
         <AuthCta client:load variant="profile" />
       </aside>
     </div>
 
+    <AccountSecurityPanel client:load />
+
     <DeleteAccountPanel client:load />
   </section>
 </BaseLayout>
+
+<style is:global>
+  .account-security-panel,
+  .account-security-panel *,
+  .account-security-panel *::before,
+  .account-security-panel *::after {
+    box-sizing: border-box;
+  }
+
+  .account-security-panel {
+    width: 100%;
+    max-width: 100%;
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .account-security-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .account-security-header h2,
+  .account-security-card h3,
+  .account-session-card h3 {
+    margin: 0.35rem 0 0;
+  }
+
+  .account-security-header > p {
+    max-width: 470px;
+    margin: 0;
+    color: var(--muted, #aeb9b0);
+    line-height: 1.65;
+  }
+
+  .account-security-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .account-security-card,
+  .account-session-card {
+    min-width: 0;
+    padding: clamp(1.3rem, 3vw, 2rem);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+    border-radius: 20px;
+    background: var(--surface, #121814);
+  }
+
+  .account-security-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .account-security-card p,
+  .account-session-card p {
+    color: var(--muted, #aeb9b0);
+    line-height: 1.65;
+  }
+
+  .current-account-email {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--text, #f3f7f2);
+    overflow-wrap: anywhere;
+  }
+
+  .account-security-card label {
+    display: grid;
+    gap: 0.45rem;
+    color: var(--text, #f3f7f2);
+    font-weight: 750;
+  }
+
+  .account-security-card input {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.13));
+    border-radius: 11px;
+    color: var(--text, #f3f7f2);
+    background: rgba(255, 255, 255, 0.055);
+    font: inherit;
+  }
+
+  .account-security-card input:focus {
+    outline: 2px solid var(--accent, #7effcb);
+    outline-offset: 2px;
+  }
+
+  .account-security-card button,
+  .account-session-card button {
+    width: fit-content;
+    max-width: 100%;
+    min-height: 46px;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 11px;
+    color: #07110d;
+    background: var(--accent, #7effcb);
+    font: inherit;
+    font-weight: 850;
+    cursor: pointer;
+  }
+
+  .account-security-card button:disabled,
+  .account-session-card button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .account-session-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    margin-top: 1rem;
+  }
+
+  .account-session-card .account-security-message {
+    grid-column: 1 / -1;
+  }
+
+  .account-security-message {
+    margin: 0;
+    padding: 0.8rem 0.9rem;
+    border-radius: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .account-security-message.is-error {
+    border: 1px solid rgba(255, 103, 103, 0.34);
+    color: #ffc0c0;
+    background: rgba(255, 82, 82, 0.09);
+  }
+
+  .account-security-message.is-success {
+    border: 1px solid rgba(126, 255, 203, 0.3);
+    color: #baffdf;
+    background: rgba(126, 255, 203, 0.07);
+  }
+
+  @media (max-width: 760px) {
+    .account-security-header {
+      display: block;
+    }
+
+    .account-security-header > p {
+      margin-top: 0.9rem;
+    }
+
+    .account-security-grid,
+    .account-session-card {
+      grid-template-columns: 1fr;
+    }
+
+    .account-session-card button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .account-security-card,
+    .account-session-card {
+      padding: 1.15rem;
+      border-radius: 16px;
+    }
+
+    .account-security-card button {
+      width: 100%;
+    }
+  }
+</style>

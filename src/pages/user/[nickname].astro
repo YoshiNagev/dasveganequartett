@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../components/forum/ThreadPreview.astro";
 import MarkdownText from "../../components/forum/MarkdownText";
+import { cards } from "../../data/cards";
 import { supabase } from "../../lib/supabaseClient";
 
 export const prerender = false;
@@ -30,6 +31,9 @@ const { data: threads } = await supabase
     created_at,
     comments (
       id
+    ),
+    suggested_arguments (
+      title
     )
   `)
   .eq("user_id", profile.id)
@@ -54,15 +58,30 @@ const { data: comments } = await supabase
   .limit(10);
 
 const displayThreads =
-  threads?.map((thread) => ({
-    id: thread.slug,
-    cardId: thread.card_id,
-    title: thread.title,
-    excerpt: thread.body,
-    author: profile.nickname,
-    replies: thread.comments?.length ?? 0,
-    createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
-  })) ?? [];
+  threads?.map((thread) => {
+    const card = thread.card_id
+      ? cards.find((item) => item.id === thread.card_id)
+      : null;
+
+    const contextLabel = card
+      ? `Karte #${String(card.id).padStart(2, "0")} · ${card.title}`
+      : thread.suggested_argument_id
+        ? `Vorgeschlagenes Argument · ${
+            thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+          }`
+        : "Allgemeine Diskussion";
+
+    return {
+      id: thread.slug,
+      cardId: thread.card_id,
+      title: thread.title,
+      excerpt: thread.body,
+      author: profile.nickname,
+      replies: thread.comments?.length ?? 0,
+      createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
+      contextLabel,
+    };
+  }) ?? [];
 
 const displayComments = comments ?? [];
 ---

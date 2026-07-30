@@ -9,6 +9,7 @@ type Thread = {
   slug: string;
   created_at: string;
   updated_at: string;
+  contextLabel: string;
   profiles?: {
     nickname?: string;
   } | null;
@@ -33,7 +34,8 @@ export default function ThreadSortBrowser({ threads }: Props) {
     if (sortMode === "newest") {
       return copy.sort(
         (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          new Date(b.created_at).getTime() -
+          new Date(a.created_at).getTime()
       );
     }
 
@@ -46,12 +48,20 @@ export default function ThreadSortBrowser({ threads }: Props) {
     return copy.sort((a, b) => {
       const latestA =
         a.comments && a.comments.length > 0
-          ? Math.max(...a.comments.map((comment) => new Date(comment.created_at).getTime()))
+          ? Math.max(
+              ...a.comments.map((comment) =>
+                new Date(comment.created_at).getTime()
+              )
+            )
           : new Date(a.created_at).getTime();
 
       const latestB =
         b.comments && b.comments.length > 0
-          ? Math.max(...b.comments.map((comment) => new Date(comment.created_at).getTime()))
+          ? Math.max(
+              ...b.comments.map((comment) =>
+                new Date(comment.created_at).getTime()
+              )
+            )
           : new Date(b.created_at).getTime();
 
       return latestB - latestA;
@@ -63,7 +73,9 @@ export default function ThreadSortBrowser({ threads }: Props) {
       <div className="thread-sort-toolbar">
         <button
           type="button"
-          className={sortMode === "newest" ? "category-chip active" : "category-chip"}
+          className={
+            sortMode === "newest" ? "category-chip active" : "category-chip"
+          }
           onClick={() => setSortMode("newest")}
         >
           Neueste
@@ -71,7 +83,9 @@ export default function ThreadSortBrowser({ threads }: Props) {
 
         <button
           type="button"
-          className={sortMode === "active" ? "category-chip active" : "category-chip"}
+          className={
+            sortMode === "active" ? "category-chip active" : "category-chip"
+          }
           onClick={() => setSortMode("active")}
         >
           Aktuell aktiv
@@ -79,7 +93,11 @@ export default function ThreadSortBrowser({ threads }: Props) {
 
         <button
           type="button"
-          className={sortMode === "commented" ? "category-chip active" : "category-chip"}
+          className={
+            sortMode === "commented"
+              ? "category-chip active"
+              : "category-chip"
+          }
           onClick={() => setSortMode("commented")}
         >
           Meist kommentiert
@@ -88,8 +106,16 @@ export default function ThreadSortBrowser({ threads }: Props) {
 
       <div className="thread-list">
         {sortedThreads.map((thread) => (
-          <a className="thread-preview" href={`/forum/thread/${thread.slug}`} key={thread.id}>
-            <div>
+          <a
+            className="thread-preview"
+            href={`/forum/thread/${thread.slug}`}
+            key={thread.id}
+          >
+            <div className="thread-preview-main">
+              <span className="thread-context-label">
+                {thread.contextLabel}
+              </span>
+
               <h3>{thread.title}</h3>
               <p>{thread.body}</p>
             </div>
@@ -101,7 +127,9 @@ export default function ThreadSortBrowser({ threads }: Props) {
                   ? "1 Antwort"
                   : `${thread.comments?.length ?? 0} Antworten`}
               </span>
-              <span>{new Date(thread.created_at).toLocaleDateString("de-DE")}</span>
+              <span>
+                {new Date(thread.created_at).toLocaleDateString("de-DE")}
+              </span>
             </div>
           </a>
         ))}

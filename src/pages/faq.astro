@@ -1,0 +1,472 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqGroups = [
+  {
+    title: "Das Spiel",
+    questions: [
+      {
+        question: "Was ist Das Vegane Quartett?",
+        answer:
+          "Das Vegane Quartett ist ein Diskussionskartenspiel über 54 häufige Argumente gegen Veganismus. Die Karten verbinden spielerische Elemente mit kurzen Einordnungen, ausführlichen Antworten, Quellen und Community-Diskussionen auf der Website.",
+      },
+      {
+        question: "Wie viele Karten enthält das Spiel?",
+        answer:
+          "Das Spiel besteht aus 54 Argumentkarten und einer zusätzlichen Deckkarte. Die Argumentkarten sind in sechs thematische Kategorien mit jeweils neun Karten unterteilt.",
+      },
+      {
+        question: "Für wie viele Personen ist das Spiel gedacht?",
+        answer:
+          "Das Vegane Quartett ist für zwei bis sechs Personen gedacht. Je nach Spielmodus kann es als klassisches Trumpfspiel, als Diskussionsübung oder als lockerer Gesprächseinstieg gespielt werden.",
+      },
+      {
+        question: "Wie lange dauert eine Spielrunde?",
+        answer:
+          "Eine vollständige Runde dauert ungefähr 15 Minuten. Kürzere oder längere Runden sind ebenfalls möglich, etwa wenn nur ein Teil der Karten verwendet oder über jede Spielrunde diskutiert wird.",
+      },
+      {
+        question: "Ab welchem Alter ist das Spiel geeignet?",
+        answer:
+          "Das Spiel ist für Personen ab sechs Jahren vorgesehen. Einige Diskussionen und Hintergründe richten sich jedoch eher an ältere Kinder, Jugendliche und Erwachsene.",
+      },
+    ],
+  },
+  {
+    title: "Spielmodi und Inhalte",
+    questions: [
+      {
+        question: "Welche Spielmodi gibt es?",
+        answer:
+          "Die Spielanleitung enthält derzeit drei Spielmodi: Trumpfen beziehungsweise Quartett, Bootcamp und Ice Breaker. Die Modi setzen unterschiedliche Schwerpunkte zwischen Wettbewerb, Argumentationstraining und Gesprächseinstieg.",
+      },
+      {
+        question: "Was bedeuten die sechs Bewertungen auf den Karten?",
+        answer:
+          "Die Karten bewerten die Verbreitung, Komplexität, Emotionalität, den Delulu-Faktor, den Ragebait-Faktor und den Ablenkungsfaktor eines Arguments. Wonach diese Kategorien bewerten, wird auf der Spieleanleitung der Webseite erklärt. Die Werte beruhen auf über 2.400 Umfrageergebnissen spielerischer Einschätzungen, sind aber keine wissenschaftlichen Messwerte.",
+      },
+      {
+        question: "Wo finde ich ausführliche Antworten auf die Argumente?",
+        answer:
+          "Jede Karte verweist auf ihrer Rückseite mit einem QR-Code auf eine eigene Argumentseite. Dort findest du eine offizielle Kurzantwort, eine Einordnung des Arguments, typische Formulierungen und Diskussionen aus der Community.",
+      },
+      {
+        question: "Kann ich selbst an Diskussionen teilnehmen?",
+        answer:
+          "Ja. Mit einem kostenlosen Benutzerkonto kannst du Threads erstellen, Kommentare schreiben, Beiträge bewerten und Inhalte melden. Lesen kannst du die Diskussionen auch ohne Konto.",
+      },
+      {
+        question: "Kann ich ein zusätzliches Argument vorschlagen?",
+        answer:
+          "Ja. Im Forum gibt es einen Bereich für zusätzliche Argumentvorschläge. Dort können Nutzerinnen und Nutzer neue Einwände einreichen und gemeinsam diskutieren.",
+      },
+    ],
+  },
+  {
+    title: "Produktion und Vorbestellung",
+    questions: [
+      {
+        question: "Ist das Spiel bereits erhältlich?",
+        answer:
+          "Der reguläre Verkauf ist noch nicht gestartet. Auf der Vorbestellungsseite findest du den aktuellen Stand und später die Möglichkeit, das Spiel verbindlich vorzubestellen.",
+      },
+      {
+        question: "Wie viel wird das Spiel kosten?",
+        answer:
+          "Der aktuell vorgesehene Preis wird auf der Vorbestellungsseite angezeigt. Bis zur endgültigen Freischaltung des Shops können sich Preis, Versandkosten und Lieferbedingungen noch ändern.",
+      },
+      {
+        question: "Wird das Spiel vegan produziert?",
+        answer:
+          "Die Produktion wird gezielt so geplant, dass Papier, Farben, Lacke, Klebstoffe und Verpackung ohne tierische Bestandteile hergestellt werden. Die endgültigen Produktionsangaben werden vor dem Verkaufsstart veröffentlicht.",
+      },
+      {
+        question: "Wann wird das Spiel verschickt?",
+        answer:
+          "Ein verbindlicher Lieferzeitraum wird vor der Freischaltung der bezahlten Vorbestellung angegeben. Solange der Shop noch vorbereitet wird, gilt die Seite lediglich als Vorschau.",
+      },
+      {
+        question: "In welche Länder wird geliefert?",
+        answer:
+          "Der Schwerpunkt liegt zunächst auf Deutschland. Weitere Lieferländer und die jeweiligen Versandkosten werden vor dem Shopstart auf der Vorbestellungsseite veröffentlicht.",
+      },
+    ],
+  },
+  {
+    title: "Website, Konto und Datenschutz",
+    questions: [
+      {
+        question: "Brauche ich ein Konto, um die Website zu nutzen?",
+        answer:
+          "Nein. Argumentseiten, Spielanleitung, PDF und öffentliche Diskussionen sind ohne Konto zugänglich. Ein Konto wird nur für aktive Community-Funktionen benötigt.",
+      },
+      {
+        question: "Welche Profildaten sind öffentlich sichtbar?",
+        answer:
+          "Öffentlich sichtbar sind dein Nickname, deine Bio, dein Avatar sowie deine öffentlichen Threads und Kommentare. Deine E-Mail-Adresse und deine Anmeldedaten werden nicht angezeigt.",
+      },
+      {
+        question: "Kann ich mein Konto wieder löschen?",
+        answer:
+          "Ja. In deinem Profil findest du einen Bereich zum dauerhaften Löschen des Kontos. Deine persönlichen Daten und Anmeldedaten werden entfernt. Öffentliche Diskussionen bleiben anonymisiert unter „Gelöschter Account“ erhalten.",
+      },
+      {
+        question: "Verwendet die Website Cookies oder Tracking?",
+        answer:
+          "Derzeit werden keine Analyse-, Werbe- oder Trackingdienste eingesetzt. Für eingeloggte Nutzer speichert Supabase lediglich ein technisch erforderliches Authentifizierungs-Token im Local Storage des Browsers.",
+      },
+      {
+        question: "Wie kann ich Kontakt aufnehmen?",
+        answer:
+          "Du erreichst Das Vegane Quartett per E-Mail unter kontakt@dasveganequartett.de.",
+      },
+    ],
+  },
+  {
+    title: "Kostenlose PDF",
+    questions: [
+      {
+        question: "Was ist „54 Argumente für Veganismus“?",
+        answer:
+          "„54 Argumente für Veganismus“ ist eine kostenlose ergänzende PDF. Sie behandelt positive Argumente für Veganismus und ergänzt damit das Kartenspiel, das sich auf Einwände gegen Veganismus konzentriert.",
+      },
+      {
+        question: "Kann ich die PDF kostenlos herunterladen?",
+        answer:
+          "Ja. Die PDF kann kostenlos auf der Website gelesen, in einem neuen Tab geöffnet und heruntergeladen werden.",
+      },
+      {
+        question: "Darf ich die PDF weitergeben?",
+        answer:
+          "Du kannst den Link zur PDF gerne teilen. Für Vervielfältigung, Bearbeitung oder kommerzielle Nutzung gelten die Hinweise in der PDF beziehungsweise auf der zugehörigen Seite.",
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ · Das Vegane Quartett"
+  description="Häufig gestellte Fragen zu Das Vegane Quartett, Spielregeln, Vorbestellung, Produktion, Benutzerkonten und der kostenlosen PDF."
+>
+  <section class="faq-page">
+    <header class="faq-hero">
+      <p class="eyebrow">Häufig gestellte Fragen</p>
+      <h1>FAQ</h1>
+      <p>
+        Antworten auf die wichtigsten Fragen zum Spiel, zur Website, zur
+        Vorbestellung und zur kostenlosen PDF.
+      </p>
+    </header>
+
+    <nav class="faq-jump-nav" aria-label="FAQ-Kategorien">
+      {faqGroups.map((group, index) => (
+        <a href={`#faq-${index + 1}`}>{group.title}</a>
+      ))}
+    </nav>
+
+    <div class="faq-groups">
+      {faqGroups.map((group, groupIndex) => (
+        <section
+          class="faq-group"
+          id={`faq-${groupIndex + 1}`}
+          aria-labelledby={`faq-heading-${groupIndex + 1}`}
+        >
+          <div class="faq-group-heading">
+            <p class="eyebrow">Kategorie {groupIndex + 1}</p>
+            <h2 id={`faq-heading-${groupIndex + 1}`}>{group.title}</h2>
+          </div>
+
+          <div class="faq-list">
+            {group.questions.map((item) => (
+              <details class="faq-item">
+                <summary>
+                  <span>{item.question}</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+
+                <div class="faq-answer">
+                  <p>{item.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <section class="faq-contact">
+      <div>
+        <p class="eyebrow">Noch eine Frage?</p>
+        <h2>Schreib uns gerne</h2>
+        <p>
+          Falls deine Frage hier nicht beantwortet wurde, erreichst du uns per
+          E-Mail.
+        </p>
+      </div>
+
+      <a href="mailto:kontakt@dasveganequartett.de">
+        kontakt@dasveganequartett.de
+      </a>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-page,
+  .faq-page *,
+  .faq-page *::before,
+  .faq-page *::after {
+    box-sizing: border-box;
+  }
+
+  .faq-page {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    padding: clamp(3.5rem, 8vw, 7rem) 0;
+  }
+
+  .faq-hero {
+    max-width: 820px;
+  }
+
+  .faq-hero h1 {
+    margin: 0;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  .faq-hero > p:last-child {
+    max-width: 760px;
+    margin: 1.4rem 0 0;
+    color: var(--muted-text);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.7;
+  }
+
+  .faq-jump-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 2.5rem 0 clamp(4rem, 8vw, 7rem);
+  }
+
+  .faq-jump-nav a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted-text);
+    background: var(--surface);
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .faq-jump-nav a:hover,
+  .faq-jump-nav a:focus-visible {
+    color: var(--text);
+    border-color: rgba(126, 255, 203, 0.4);
+  }
+
+  .faq-groups {
+    display: grid;
+    gap: clamp(4rem, 8vw, 7rem);
+  }
+
+  .faq-group {
+    scroll-margin-top: 110px;
+  }
+
+  .faq-group-heading {
+    margin-bottom: 1.3rem;
+  }
+
+  .faq-group-heading h2 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .faq-item {
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .faq-item[open] {
+    border-color: rgba(126, 255, 203, 0.3);
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(126, 255, 203, 0.08),
+        transparent 38%
+      ),
+      var(--surface);
+  }
+
+  .faq-item summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    min-height: 70px;
+    padding: 1.15rem 1.3rem;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 900;
+    line-height: 1.4;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .faq-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--accent);
+    background: var(--background);
+    font-size: 1.25rem;
+    transition: transform 0.18s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.3rem 1.3rem;
+  }
+
+  .faq-answer p {
+    max-width: 850px;
+    margin: 0;
+    color: var(--muted-text);
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .faq-contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    margin-top: clamp(4rem, 9vw, 8rem);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid rgba(126, 255, 203, 0.25);
+    border-radius: 24px;
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(126, 255, 203, 0.1),
+        transparent 38%
+      ),
+      var(--surface);
+  }
+
+  .faq-contact h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+  }
+
+  .faq-contact p:last-child {
+    margin: 0.8rem 0 0;
+    color: var(--muted-text);
+    line-height: 1.6;
+  }
+
+  .faq-contact > a {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.1rem;
+    border-radius: 12px;
+    color: #07110d;
+    background: var(--accent);
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 700px) {
+    .faq-jump-nav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 0.35rem;
+    }
+
+    .faq-jump-nav a {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .faq-contact {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-contact > a {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .faq-page {
+      padding-top: 3rem;
+    }
+
+    .faq-hero h1 {
+      font-size: 3.3rem;
+    }
+
+    .faq-item {
+      border-radius: 14px;
+    }
+
+    .faq-item summary {
+      min-height: 62px;
+      padding: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .faq-answer {
+      padding: 0 1rem 1rem;
+    }
+
+    .faq-contact {
+      padding: 1.2rem;
+      border-radius: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon {
+      transition: none;
+    }
+  }
+</style>
