@@ -35,16 +35,17 @@ import "../../styles/account-delete.css";
         </ul>
 
         <p>
-          Deine E-Mail-Adresse und deine Anmeldedaten werden im Forum nicht angezeigt.
+          Deine E-Mail-Adresse und deine Anmeldedaten werden im Forum nicht
+          angezeigt.
         </p>
 
-        <AuthCta client:load variant="profile" />
+        <AuthCta client:idle variant="profile" />
       </aside>
     </div>
 
-    <AccountSecurityPanel client:load />
+    <AccountSecurityPanel client:visible />
 
-    <DeleteAccountPanel client:load />
+    <DeleteAccountPanel client:visible />
   </section>
 </BaseLayout>
 
