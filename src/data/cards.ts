@@ -661,7 +661,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-27",
     "title": "Als nächstes schreibst du mir vor, was ich denken oder wen ich lieben soll!",
     "argument": "Als nächstes schreibst du mir vor, was ich denken oder wen ich lieben soll!",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Veganismus ist das ethische Prinzip, dass Menschen ohne Ausbeutung nicht-menschlicher Tiere leben sollten. Das hat nichts mit Gedankenpolizei oder Autoritarismus zu tun. Gefordert werden lediglich Grundlegende Rechte für alle Tiere.",
     "ratings": {
       "verbreitung": 27,
       "komplexitaet": 10,
@@ -672,13 +672,12 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument deutet Veganismus als Beginn einer autoritären Kontrolle. Befürworter fühlen sich in ihrer Freiheit bedroht und stellen vegane Kritik als Bevormundung dar. Es macht aus einer ethischen Forderung schnell eine Angst vor umfassender Fremdbestimmung.",
-    "notMeaning": "Das Argument zeigt nicht, dass jede moralische Kritik automatisch autoritär ist. Gesellschaften diskutieren ständig Grenzen persönlicher Freiheit, wenn andere darunter leiden. Es beantwortet nicht die konkrete Frage, ob Tierprodukte eine private Entscheidung bleiben können, wenn Tiere betroffen sind.",
+    "meaning": "Dieses Argument deutet Forderungen nach veganem Verhalten als möglichen Beginn immer weiter reichender Bevormundung. Wenn die Gesellschaft Menschen vorschreiben darf, was sie essen, könnten später auch Gedanken, Beziehungen und andere höchstpersönliche Entscheidungen kontrolliert werden. Der Schutz individueller Freiheit soll deshalb bereits beim ersten Eingriff verteidigt werden.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass vegane Menschen bereits sämtliche Lebensbereiche kontrollieren wollen. Es argumentiert vielmehr, dass die gesellschaftliche Akzeptanz von Vorschriften über persönliche Konsumentscheidungen einen gefährlichen Präzedenzfall schaffen und langfristig weitere Eingriffe in die individuelle Freiheit erleichtern könnte.",
     "commonFormulations": [
       "Als Nächstes willst du mir vorschreiben, was ich denken soll.",
       "Das ist Bevormundung.",
-      "Heute Fleisch, morgen alles andere.",
-      "Lass Menschen doch frei entscheiden."
+      "Heute nimmst du mir Fleisch, morgen alles andere."
     ]
   },
   {
@@ -686,7 +685,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-28",
     "title": "Viele Anbauflächen sind nur für Tierhaltung nutzbar.",
     "argument": "Viele Anbauflächen sind nur für Tierhaltung nutzbar.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Dass eine Fläche nicht für den Ackerbau geeignet ist, bedeutet nicht, dass sie zur Tierhaltung genutzt werden muss. Menschen können durch den direkten Verzehr pflanzlicher Nahrung mit deutlich weniger Fläche ernährt werden. Nicht benötigte Weideflächen könnten der Natur zurückgegeben werden und wieder Lebensraum für wildlebende Tiere sowie natürliche Kohlenstoffspeicher bilden.",
     "ratings": {
       "verbreitung": 37,
       "komplexitaet": 58,
@@ -697,8 +696,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument verweist auf Flächen, die angeblich nur für Weide oder Tierhaltung geeignet sind. Befürworter sehen Tiere als Möglichkeit, für Menschen sonst unbrauchbare Landschaften in Nahrung zu verwandeln. Es betont geographische und agrarische Grenzen pflanzlicher Produktion.",
-    "notMeaning": "Das Argument zeigt nicht, dass die heutige Menge an Tierhaltung notwendig ist. Selbst wenn manche Flächen nicht direkt für Ackerbau taugen, folgt daraus nicht, dass Massentierhaltung, Futtermittelanbau oder hoher Fleischkonsum gerechtfertigt sind. Auch alternative Nutzungen wie Renaturierung bleiben möglich.",
+    "meaning": "Dieses Argument verweist auf Grünland, Gebirgsregionen und andere Flächen, auf denen sich kaum Lebensmittel für Menschen anbauen lassen. Wiederkäuer können das dort wachsende Gras verwerten und daraus Fleisch oder Milch erzeugen. Tierhaltung erscheint deshalb als sinnvolle oder notwendige Nutzung von Flächen, die andernfalls keinen Beitrag zur menschlichen Ernährung leisten würden.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass auf allen landwirtschaftlichen Flächen Tiere gehalten werden sollten oder Tierhaltung generell besonders effizient sei. Es argumentiert vielmehr, dass zumindest auf nicht ackerfähigem Grünland Tiere zur Lebensmittelproduktion eingesetzt werden sollten, weil diese Flächen nicht unmittelbar für den Anbau menschlicher Nahrung genutzt werden können.",
     "commonFormulations": [
       "Viele Flächen sind nur als Weide nutzbar.",
       "Da kann man kein Gemüse anbauen.",
@@ -711,7 +710,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-29",
     "title": "Wir brauchen Tiere für Dünger.",
     "argument": "Wir brauchen Tiere für Dünger.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Mit sinkenden Tierbeständen gäbe es deshalb zwar weniger tierischen Dünger, aber auch erheblich weniger Futtermittelanbau und damit weniger Düngerbedarf. Die verbleibenden Pflanzen könnten durch Leguminosen, pflanzliche Reststoffe, zurückgewonnene Nährstoffe sowie mineralische und synthetische Dünger versorgt werden.",
     "ratings": {
       "verbreitung": 22,
       "komplexitaet": 49,
@@ -722,8 +721,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument stellt tierischen Dünger als unverzichtbar dar. Befürworter sehen Mist und Gülle als natürliche Kreisläufe, ohne die pflanzliche Landwirtschaft nicht funktionieren könne. Es betont Bodenfruchtbarkeit und Nährstoffrückführung.",
-    "notMeaning": "Das Argument zeigt nicht, dass Tiere gehalten und getötet werden müssen, damit Landwirtschaft funktioniert. Es gibt pflanzliche, mineralische und kreislauforientierte Alternativen sowie Forschung zu veganer Landwirtschaft. Außerdem rechtfertigt Düngerbedarf nicht automatisch Tierausbeutung.",
+    "meaning": "Dieses Argument betrachtet Mist und Gülle als unverzichtbare Grundlage der Pflanzenproduktion. Tiere würden Pflanzen und für Menschen ungeeignete Biomasse verwerten und die darin enthaltenen Nährstoffe anschließend als Dünger auf die Felder zurückbringen. Ohne Tierhaltung gäbe es demnach nicht genügend Dünger, um dauerhaft ausreichende Ernten und fruchtbare Böden zu erhalten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass ausschließlich tierischer Dünger verwendet werden kann oder jede heutige Form der Tierhaltung allein wegen ihrer Ausscheidungen gerechtfertigt ist. Es argumentiert vielmehr, dass der Wegfall großer Tierbestände eine so erhebliche Lücke in der Nährstoffversorgung verursachen würde, dass pflanzliche Landwirtschaft nicht mehr ausreichend produktiv oder nachhaltig betrieben werden könnte.",
     "commonFormulations": [
       "Wir brauchen Tiere für Dünger.",
       "Ohne Mist wächst nichts.",
@@ -736,7 +735,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-30",
     "title": "Fleischkonsum ist legal, daher kann es nicht so schlimm sein.",
     "argument": "Fleischkonsum ist legal, daher kann es nicht so schlimm sein.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Gesetze beschreiben, was eine Gesellschaft zu einem bestimmten Zeitpunkt erlaubt, nicht, was moralisch richtig ist. Viele heute anerkannte Ungerechtigkeiten waren früher legal, bevor gesellschaftlicher Widerstand zu neuen Rechten führte. Gesetze ändern sich, Moral nicht.",
     "ratings": {
       "verbreitung": 54,
       "komplexitaet": 11,
@@ -747,13 +746,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument verwechselt Legalität mit moralischer Unbedenklichkeit. Befürworter schließen daraus, dass eine erlaubte Praxis nicht gravierend falsch sein könne. Rechtliche Normalität wird dabei als moralischer Maßstab verwendet.",
-    "notMeaning": "Das Argument zeigt nicht, dass Gesetze immer gerecht sind. Viele heute kritisierte Praktiken waren oder sind legal. Die Frage nach Tierausbeutung ist eine moralische Frage, die nicht allein durch den aktuellen Gesetzesstand beantwortet wird.",
+    "meaning": "Dieses Argument leitet aus der rechtlichen Zulässigkeit des Fleischkonsums eine moralische Entlastung ab. Da der Staat Tierhaltung, Schlachtung und den Verkauf von Fleisch unter bestimmten Vorschriften erlaubt, erscheint der Konsum als gesellschaftlich akzeptierte und grundsätzlich legitime Handlung. Eine wirklich schwerwiegende Ungerechtigkeit wäre demnach bereits verboten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass alles Legale automatisch moralisch vorbildlich ist. Es argumentiert vielmehr, dass die gesetzliche Regulierung und breite gesellschaftliche Akzeptanz des Fleischkonsums starke Gründe dafür liefern, ihn nicht mit eindeutigem Unrecht gleichzusetzen.",
     "commonFormulations": [
       "Fleisch essen ist legal.",
-      "Wenn es schlimm wäre, wäre es verboten.",
-      "Der Staat erlaubt es doch.",
-      "Ich mache nichts Illegales."
+      "Wenn es schlimm wäre, wäre es verboten."
     ]
   },
   {
@@ -761,7 +758,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-31",
     "title": "Vegane Alternativen sind viel teurer als Tierprodukte.",
     "argument": "Vegane Alternativen sind viel teurer als Tierprodukte.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Die pauschale Behauptung, vegane Alternativen seien viel teurer als Tierprodukte, ist empirisch nicht haltbar: Preisvergleiche ergeben je nach Produkt, Händler und Zeitpunkt unterschiedliche Ergebnisse, und pflanzliche Alternativen sind teilweise bereits günstiger. Doch selbst wenn ein bestimmtes Ersatzprodukt etwas mehr kostet, entsteht daraus kein Recht, Tiere zu züchten, auszubeuten und zu töten. Hinzu kommt, dass Tierprodukte nicht von Natur aus billig sind, sondern durch die starke Subventionierung der Tierhaltung und des Futtermittelanbaus künstlich begünstigt werden. Ein politisch erzeugter Preisvorteil ist keine moralische Rechtfertigung für Tierausbeutung.",
     "ratings": {
       "verbreitung": 76,
       "komplexitaet": 25,
@@ -772,8 +769,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument verweist auf Kosten und soziale Zugänglichkeit. Befürworter meinen, vegane Ernährung oder Alternativprodukte seien teurer und deshalb unrealistisch. Oft werden vor allem Ersatzprodukte mit günstigen Tierprodukten verglichen.",
-    "notMeaning": "Das Argument zeigt nicht, dass Veganismus grundsätzlich teuer sein muss. Grundnahrungsmittel wie Hülsenfrüchte, Getreide, Kartoffeln und Gemüse können günstig sein. Es weist aber berechtigt darauf hin, dass soziale Bedingungen und Preise in der Praxis eine Rolle spielen.",
+    "meaning": "Dieses Argument verweist darauf, dass Fleisch-, Käse- und Milchersatz, angereicherte Produkte sowie andere vegane Alternativen tierischer Lebensmittel mehr kosten können als ihre gewohnten Gegenstücke. Für Menschen mit geringem Einkommen könnten zusätzliche Kosten selbst dann entscheidend sein, wenn sie moralische Einwände gegen Tierprodukte teilen. Veganismus erscheint dadurch als privilegierte Lebensweise, die nicht von allen Menschen gleichermaßen verlangt werden kann.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jedes pflanzliche Lebensmittel teuer ist oder wohlhabende Menschen keinerlei vegane Möglichkeiten haben. Es argumentiert vielmehr, dass eine vollständig vegane Versorgung für manche Menschen höhere Kosten verursacht und deshalb nicht als allgemeine moralische Verpflichtung vorausgesetzt werden sollte.",
     "commonFormulations": [
       "Vegane Alternativen sind viel zu teuer.",
       "Nicht jeder kann sich Veganismus leisten.",
