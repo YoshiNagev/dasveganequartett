@@ -4,7 +4,7 @@ export const preorderConfig = {
   shippingCost: 3,
   allowedQuantities: [1, 2, 3, 4],
   estimatedShippingDate: "Dezember 2026",
-  preorderOpen: true,
+  preorderOpen: false,
   contactEmail: "kontakt@dasveganequartett.de",
 } as const;
 
