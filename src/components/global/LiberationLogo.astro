@@ -1,0 +1,32 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<span
+  class:list={["liberation-logo", className]}
+  aria-hidden="true"
+>
+  <img
+    class="liberation-logo__image liberation-logo__image--base"
+    src="/images/brand/animal-liberation-logo.png"
+    alt=""
+    width="512"
+    height="512"
+    loading="eager"
+    decoding="async"
+  />
+
+  <img
+    class="liberation-logo__image liberation-logo__image--hover"
+    src="/images/brand/animal-liberation-logo-hover.png"
+    alt=""
+    width="512"
+    height="512"
+    loading="eager"
+    decoding="async"
+  />
+</span>

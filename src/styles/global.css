@@ -144,13 +144,109 @@ main {
   font-weight: 950;
 }
 
-.logo-mark {
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 0.7rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 38px rgba(126, 255, 203, 0.22);
+.logo-link > span:last-child {
+  transition: color 260ms ease;
 }
+
+.logo-link:focus-visible {
+  border-radius: 0.75rem;
+  outline: 3px solid rgba(126, 255, 203, 0.35);
+  outline-offset: 5px;
+}
+
+.liberation-logo {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  overflow: visible;
+  transform: translateZ(0);
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 320ms ease;
+}
+
+.liberation-logo__image {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  transition:
+    opacity 300ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.liberation-logo__image--base {
+  opacity: 1;
+}
+
+.liberation-logo__image--hover {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+.liberation-logo--footer {
+  width: 3.55rem;
+  height: 3.55rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo-link:hover > span:last-child,
+  .footer-logo:hover > span:last-child {
+    color: var(--accent);
+  }
+
+  .logo-link:hover .liberation-logo,
+  .footer-logo:hover .liberation-logo {
+    transform: translateY(-2px) rotate(-1.5deg);
+    filter: drop-shadow(0 7px 18px rgba(126, 255, 203, 0.17));
+  }
+
+  .logo-link:hover .liberation-logo__image--base,
+  .footer-logo:hover .liberation-logo__image--base {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  .logo-link:hover .liberation-logo__image--hover,
+  .footer-logo:hover .liberation-logo__image--hover {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+}
+
+@media (max-width: 520px) {
+  .liberation-logo {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
+  .liberation-logo--footer {
+    width: 3.15rem;
+    height: 3.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liberation-logo,
+  .liberation-logo__image,
+  .logo-link > span:last-child {
+    transition: none;
+  }
+
+  .logo-link:hover .liberation-logo,
+  .footer-logo:hover .liberation-logo,
+  .logo-link:hover .liberation-logo__image,
+  .footer-logo:hover .liberation-logo__image {
+    transform: none;
+  }
+}
+
+
 
 .header-nav {
   display: flex;

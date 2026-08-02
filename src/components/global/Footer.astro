@@ -1,4 +1,6 @@
 ---
+import LiberationLogo from "./LiberationLogo.astro";
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,7 +9,7 @@ const currentYear = new Date().getFullYear();
     <section class="footer-main" aria-label="Fußbereich">
       <div class="footer-brand">
         <a class="footer-logo" href="/" aria-label="Zur Startseite">
-          <span class="footer-logo__mark" aria-hidden="true"></span>
+          <LiberationLogo class="liberation-logo--footer" />
           <span>Das Vegane Quartett</span>
         </a>
 
@@ -123,14 +125,6 @@ const currentYear = new Date().getFullYear();
     text-decoration: none;
   }
 
-  .footer-logo__mark {
-    width: 38px;
-    height: 38px;
-    flex: 0 0 auto;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--accent), rgba(136, 215, 255, 0.95));
-    box-shadow: 0 10px 30px rgba(126, 255, 203, 0.18);
-  }
 
   .footer-brand > p {
     max-width: 570px;
