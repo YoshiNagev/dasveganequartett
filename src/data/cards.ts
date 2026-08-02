@@ -783,7 +783,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-32",
     "title": "Wir sollten erst menschliches Leid lösen.",
     "argument": "Wir sollten erst menschliches Leid lösen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Menschliches und tierliches können parallel angegangen werden. Wir können mehrere Formen von Unrecht gleichzeitig bekämpfen, zumal Tierausbeutung auch Menschen schadet. Würden Tiere erst berücksichtigt, nachdem jedes menschliche Problem gelöst wurde, könnte ihre Ausbeutung unbegrenzt fortgesetzt werden.",
     "ratings": {
       "verbreitung": 60,
       "komplexitaet": 28,
@@ -794,11 +794,10 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument setzt menschliches Leid gegen Tierleid. Befürworter meinen, moralische Energie solle zuerst Armut, Krieg, Krankheit oder Ausbeutung von Menschen gelten. Tierethik erscheint dadurch nachrangig oder ablenkend.",
-    "notMeaning": "Das Argument zeigt nicht, dass man nur ein Problem gleichzeitig beachten kann. Menschliches und nichtmenschliches Leid schließen sich nicht gegenseitig aus. Außerdem kann Tierhaltung selbst mit menschlichen Problemen wie Umweltbelastung, Arbeitsbedingungen und Ernährungsgerechtigkeit verknüpft sein.",
+    "meaning": "Dieses Argument räumt menschlichen Problemen moralische und politische Priorität ein. Armut, Krieg, Diskriminierung, Obdachlosigkeit und fehlende Gesundheitsversorgung verursachen enormes Leid, während gesellschaftliche Aufmerksamkeit und finanzielle Mittel begrenzt sind. Der Einsatz für Tiere erscheint deshalb als nachrangig oder als Ablenkung von dringlicheren Verpflichtungen gegenüber Menschen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Tiere keinerlei moralischen Wert besitzen oder absichtlich gequält werden dürfen. Es argumentiert vielmehr, dass menschliches Leid schwerer wiegt und begrenzte gesellschaftliche Ressourcen deshalb zunächst zur Lösung menschlicher Probleme eingesetzt werden sollten, bevor umfassende Veränderungen zugunsten von Tieren verlangt werden.",
     "commonFormulations": [
       "Wir sollten erst menschliches Leid lösen.",
-      "Kümmere dich lieber um Menschen.",
       "Es gibt wichtigere Probleme.",
       "Tiere sind nicht unsere größte Sorge."
     ]

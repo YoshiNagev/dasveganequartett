@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { stripe } from "../../lib/server/stripe";
+
+export const prerender = false;
+
+const sessionId = Astro.url.searchParams.get("session_id");
+let session = null;
+let errorMessage = "";
+
+if (!sessionId || !sessionId.startsWith("cs_")) {
+  errorMessage = "Die Checkout-Sitzung fehlt oder ist ungültig.";
+} else {
+  try {
+    session = await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (error) {
+    console.error("Stripe success page error:", error);
+    errorMessage = "Die Checkout-Sitzung konnte nicht geladen werden.";
+  }
+}
+
+const paid = session?.payment_status === "paid";
+const amountTotal =
+  typeof session?.amount_total === "number"
+    ? new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      }).format(session.amount_total / 100)
+    : null;
+---
+
+<BaseLayout title="Testzahlung abgeschlossen">
+  <section class="checkout-result-page">
+    <div class="checkout-result-card">
+      <p class="eyebrow">{paid ? "Zahlung erfolgreich" : "Checkout abgeschlossen"}</p>
+      <h1>{paid ? "Vielen Dank!" : "Die Zahlung wird noch geprüft"}</h1>
+
+      {errorMessage ? (
+        <p class="result-message is-error">{errorMessage}</p>
+      ) : (
+        <>
+          <p class="result-message">
+            {paid
+              ? "Stripe hat die Testzahlung erfolgreich bestätigt."
+              : "Stripe hat den Checkout zurückgegeben, aber noch keinen bezahlten Status bestätigt."}
+          </p>
+
+          <dl class="checkout-details">
+            <div><dt>Checkout-ID</dt><dd>{session?.id}</dd></div>
+            {amountTotal && <div><dt>Gesamtbetrag</dt><dd>{amountTotal}</dd></div>}
+            <div><dt>Zahlungsstatus</dt><dd>{session?.payment_status ?? "unbekannt"}</dd></div>
+            {session?.customer_details?.email && (
+              <div><dt>E-Mail</dt><dd>{session.customer_details.email}</dd></div>
+            )}
+          </dl>
+        </>
+      )}
+
+      <div class="result-actions">
+        <a class="primary-result-link" href="/preorder">Zurück zur Vorbestellung</a>
+        <a href="/">Zur Startseite</a>
+      </div>
+
+      <p class="webhook-note">
+        Diese Seite zeigt nur den von Stripe abgerufenen Sitzungsstatus. Eine
+        Bestellung gilt später erst nach Bestätigung durch den signierten
+        Stripe-Webhook als bezahlt.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .checkout-result-page { min-height: 70vh; display: grid; place-items: center; padding: 4rem 0; }
+  .checkout-result-card { width: min(100%, 760px); padding: clamp(1.5rem, 5vw, 3rem); border: 1px solid var(--border); border-radius: 24px; background: radial-gradient(circle at top left, rgba(126,255,203,.12), transparent 38%), var(--surface); box-shadow: var(--shadow-strong); }
+  .checkout-result-card h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 5rem); line-height: .95; letter-spacing: -.06em; }
+  .result-message { color: var(--muted-text); line-height: 1.7; }
+  .result-message.is-error { color: #ffc0c0; }
+  .checkout-details { display: grid; gap: .75rem; margin: 2rem 0; }
+  .checkout-details > div { display: grid; grid-template-columns: minmax(120px,.4fr) minmax(0,1fr); gap: 1rem; padding: .9rem 1rem; border: 1px solid var(--border); border-radius: 13px; background: var(--background); }
+  .checkout-details dt { color: var(--muted-text); }
+  .checkout-details dd { min-width: 0; margin: 0; overflow-wrap: anywhere; font-weight: 850; }
+  .result-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .result-actions a { min-height: 46px; display: inline-flex; align-items: center; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 900; }
+  .result-actions .primary-result-link { border-color: transparent; color: #07110d; background: var(--accent); }
+  .webhook-note { margin: 1.5rem 0 0; color: var(--faint-text); font-size: .82rem; line-height: 1.55; }
+  @media (max-width: 520px) { .checkout-details > div { grid-template-columns: 1fr; gap: .3rem; } .result-actions { display: grid; } .result-actions a { justify-content: center; } }
+</style>

@@ -1,38 +1,391 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PreorderConfigurator from "../components/preorder/PreorderConfigurator";
 import { product } from "../data/product";
+import { preorderConfig } from "../data/preorderConfig";
 ---
 
-<BaseLayout title="Vorbestellen">
+<BaseLayout
+  title="Das Vegane Quartett vorbestellen"
+  description="Das Vegane Quartett im Presale für 12 Euro pro Deck vorbestellen. Pauschal 3 Euro Versand, voraussichtlicher Versand im Dezember 2026."
+>
   <section class="preorder-page">
-    <div>
-      <p class="eyebrow">Preorder</p>
+    <div class="preorder-copy">
+      <p class="eyebrow">Vorbestellung</p>
       <h1>{product.name}</h1>
 
       <p class="preorder-lead">
-        Das Quartett der Argumente gegen Veganismus erscheint nach aktuellem
-        Plan mit Produktionsstart im März 2027.
+        Sichere dir das Quartett während des Presales für
+        <strong> 12 € pro Deck</strong>. Nach Ende des Presales steigt der
+        reguläre Preis auf 14 € pro Deck.
       </p>
+
+      <div class="delivery-highlight">
+        <span>Voraussichtlicher Versand</span>
+        <strong>{preorderConfig.estimatedShippingDate}</strong>
+      </div>
 
       <ul class="preorder-list">
         {product.contents.map((item) => (
           <li>{item}</li>
         ))}
       </ul>
+
+      <div class="preorder-info">
+        <h2>So funktioniert die Vorbestellung</h2>
+        <p>
+          Du kannst regulär ein bis vier Decks bestellen. Die Versandkosten
+          betragen pauschal 3 € pro Bestellung und erhöhen sich nicht mit der
+          gewählten Stückzahl.
+        </p>
+        <p>
+          Die Vorbestellung ist aktuell noch nicht geöffnet. Vor dem
+          verbindlichen Kauf werden Preis, Versand, Lieferzeitraum und alle
+          Bestelldaten noch einmal vollständig angezeigt.
+        </p>
+      </div>
     </div>
 
     <aside class="preorder-checkout-card">
-      <span class="preorder-price">{product.price}</span>
-      <p>{product.delivery}</p>
-
-      <button>
-        Stripe Checkout folgt
-      </button>
-
-      <small>
-        Diese Seite ist aktuell noch ein Mockup. Die echte Zahlung wird später
-        über Stripe Checkout angebunden.
-      </small>
+      <PreorderConfigurator client:load />
     </aside>
   </section>
 </BaseLayout>
+
+<style>
+  .preorder-page {
+    align-items: start;
+  }
+
+  .preorder-copy {
+    min-width: 0;
+  }
+
+  .preorder-lead strong {
+    color: var(--text);
+  }
+
+  .delivery-highlight {
+    display: inline-grid;
+    gap: 0.25rem;
+    margin: 1.3rem 0 0.5rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid rgba(126, 255, 203, 0.25);
+    border-radius: 14px;
+    background: rgba(126, 255, 203, 0.07);
+  }
+
+  .delivery-highlight span {
+    color: var(--muted-text);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .delivery-highlight strong {
+    color: var(--accent);
+    font-size: 1.15rem;
+  }
+
+  .preorder-info {
+    margin-top: 2rem;
+    padding: 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+  }
+
+  .preorder-info h2 {
+    margin: 0 0 0.8rem;
+    font-size: 1.4rem;
+  }
+
+  .preorder-info p {
+    margin: 0.65rem 0 0;
+    color: var(--muted-text);
+    line-height: 1.65;
+  }
+
+  .preorder-checkout-card {
+    position: sticky;
+    top: 7rem;
+  }
+
+  @media (max-width: 900px) {
+    .preorder-checkout-card {
+      position: static;
+    }
+  }
+</style>
+
+<style is:global>
+  .preorder-configurator,
+  .preorder-configurator *,
+  .preorder-configurator *::before,
+  .preorder-configurator *::after {
+    box-sizing: border-box;
+  }
+
+  .preorder-configurator {
+    display: grid;
+    gap: 1.2rem;
+    min-width: 0;
+  }
+
+  .presale-badge {
+    width: fit-content;
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    color: #07110d;
+    background: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 950;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .price-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .price-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--muted-text);
+    font-size: 0.88rem;
+  }
+
+  .current-price {
+    display: block;
+    font-size: clamp(2.8rem, 6vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .regular-price-box {
+    display: grid;
+    gap: 0.1rem;
+    min-width: 94px;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--background);
+    text-align: right;
+  }
+
+  .regular-price-box span,
+  .regular-price-box small {
+    color: var(--muted-text);
+    font-size: 0.75rem;
+  }
+
+  .order-summary {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--background);
+  }
+
+  .order-summary > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .order-summary span {
+    color: var(--muted-text);
+  }
+
+  .order-total {
+    margin-top: 0.1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    font-size: 1.15rem;
+  }
+
+  .order-total span,
+  .order-total strong {
+    color: var(--text);
+  }
+
+  .shipping-note,
+  .checkout-hint {
+    margin: 0;
+    color: var(--muted-text);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .checkout-button {
+    width: 100%;
+    min-height: 52px;
+    border: 0;
+    border-radius: 999px;
+    color: #07110d;
+    background: var(--accent);
+    font: inherit;
+    font-weight: 950;
+    cursor: pointer;
+  }
+
+  .checkout-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .bulk-order-note {
+    display: grid;
+    gap: 0.55rem;
+    padding: 1rem;
+    border: 1px solid rgba(159, 209, 255, 0.22);
+    border-radius: 14px;
+    background: rgba(159, 209, 255, 0.06);
+  }
+
+  .bulk-order-note p {
+    margin: 0;
+    color: var(--muted-text);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .bulk-order-note a {
+    width: fit-content;
+    color: var(--accent);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  @media (max-width: 420px) {
+    .price-row {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .regular-price-box {
+      width: 100%;
+      text-align: left;
+    }
+
+    .preorder-checkout-card {
+      padding: 1.25rem;
+      border-radius: 1.4rem;
+    }
+  }
+
+
+
+  .quantity-field {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .quantity-field legend {
+    margin-bottom: 0.65rem;
+    padding: 0;
+    color: var(--text);
+    font-weight: 900;
+  }
+
+  .quantity-options {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .quantity-option {
+    min-width: 0;
+    min-height: 104px;
+    padding: 0.85rem 0.6rem;
+
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 0.15rem;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    background: var(--background);
+    color: var(--text);
+
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .quantity-option:hover {
+    transform: translateY(-2px);
+    border-color: rgba(126, 255, 203, 0.42);
+    background: rgba(126, 255, 203, 0.055);
+  }
+
+  .quantity-option:focus-visible {
+    outline: 3px solid rgba(126, 255, 203, 0.3);
+    outline-offset: 3px;
+  }
+
+  .quantity-option.is-selected {
+    border-color: var(--accent);
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(126, 255, 203, 0.2),
+        transparent 75%
+      ),
+      rgba(126, 255, 203, 0.09);
+    box-shadow:
+      inset 0 0 0 1px rgba(126, 255, 203, 0.16),
+      0 10px 28px rgba(0, 0, 0, 0.16);
+  }
+
+  .quantity-option-number {
+    color: var(--accent);
+    font-size: 1.45rem;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .quantity-option-label {
+    font-size: 0.88rem;
+    font-weight: 900;
+  }
+
+  .quantity-option small {
+    margin-top: 0.2rem;
+    color: var(--muted-text);
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .quantity-option.is-selected small {
+    color: var(--text);
+  }
+
+  @media (max-width: 520px) {
+    .quantity-options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quantity-option {
+      min-height: 92px;
+    }
+  }
+
+
+
+</style>

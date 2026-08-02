@@ -1,0 +1,457 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import OrdersAdmin from "../../components/admin/OrdersAdmin";
+
+export const prerender = false;
+---
+
+<BaseLayout title="Bestellungen verwalten">
+  <section class="admin-orders-page">
+    <header class="page-header">
+      <p class="eyebrow">Administration</p>
+
+      <h1>Bestellungen</h1>
+
+      <p>
+        Bezahlte Bestellungen prüfen, Lieferadressen einsehen und
+        Versandstatus verwalten.
+      </p>
+    </header>
+
+    <nav class="admin-tabs" aria-label="Admin-Bereiche">
+      <a href="/admin/orders" aria-current="page">
+        Bestellungen
+      </a>
+
+      <a href="/admin/reports">
+        Meldungen
+      </a>
+    </nav>
+
+    <OrdersAdmin client:load />
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .admin-orders-page {
+    padding-bottom: 5rem;
+  }
+
+  .admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .admin-tabs a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.7rem 1rem;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    color: var(--muted-text);
+    background: var(--surface);
+
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .admin-tabs a[aria-current="page"] {
+    border-color: transparent;
+    color: #07110d;
+    background: var(--accent);
+  }
+
+  .orders-admin {
+    display: grid;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .orders-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .orders-summary-grid article {
+    display: grid;
+    gap: 0.55rem;
+
+    min-width: 0;
+    padding: 1.25rem;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--surface);
+  }
+
+  .orders-summary-grid span {
+    color: var(--muted-text);
+    font-size: 0.85rem;
+    line-height: 1.25;
+  }
+
+  .orders-summary-grid strong {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .orders-toolbar {
+    display: grid;
+    gap: 1rem;
+
+    padding: 1.2rem;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--surface);
+  }
+
+  .orders-toolbar form {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .orders-toolbar form > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
+  }
+
+  .orders-toolbar input {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+
+    padding: 0.8rem 0.95rem;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--text);
+    background: var(--background);
+
+    font: inherit;
+  }
+
+  .orders-toolbar button,
+  .order-actions button {
+    min-height: 44px;
+
+    padding: 0.7rem 1rem;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    color: var(--text);
+    background: var(--background);
+
+    font: inherit;
+    font-weight: 900;
+
+    cursor: pointer;
+  }
+
+  .orders-toolbar form button,
+  .order-actions button:not(.secondary) {
+    border-color: transparent;
+    color: #07110d;
+    background: var(--accent);
+  }
+
+  .orders-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .orders-filter .is-active {
+    color: var(--accent);
+    border-color: rgba(126, 255, 203, 0.55);
+    background: rgba(126, 255, 203, 0.08);
+  }
+
+  .admin-orders-message,
+  .admin-orders-loading {
+    margin: 0;
+    padding: 1rem;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--surface);
+  }
+
+  .orders-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .admin-order-card {
+    display: grid;
+    gap: 1.5rem;
+
+    min-width: 0;
+    padding: clamp(1.15rem, 3vw, 1.75rem);
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    background: var(--surface);
+  }
+
+  .admin-order-card > header,
+  .admin-order-card > footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .admin-order-card h2 {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .order-status {
+    flex: 0 0 auto;
+
+    padding: 0.5rem 0.75rem;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    background: var(--background);
+
+    font-size: 0.82rem;
+    font-weight: 950;
+  }
+
+  .order-status.paid {
+    color: var(--accent);
+  }
+
+  .order-status.shipped {
+    color: #b9dcff;
+  }
+
+  .order-key-data {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .order-key-data > div {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+
+    min-width: 0;
+    min-height: 94px;
+
+    padding: 1rem 1.1rem;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: var(--background);
+  }
+
+  .order-key-data span {
+    display: block;
+
+    color: var(--muted-text);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+    line-height: 1.25;
+  }
+
+  .order-key-data strong {
+    display: block;
+
+    color: var(--text);
+
+    font-size: 1rem;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+  }
+
+  .order-detail-grid {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 0.8fr)
+      minmax(0, 1fr)
+      minmax(0, 1.2fr);
+    gap: 0.85rem;
+  }
+
+  .order-detail-grid section {
+    min-width: 0;
+    padding: 1rem;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: var(--background);
+  }
+
+  .order-detail-grid h3 {
+    margin: 0 0 0.9rem;
+  }
+
+  .order-detail-grid p {
+    margin: 0.4rem 0;
+
+    color: var(--muted-text);
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+  }
+
+  .order-detail-grid a {
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+
+  .order-detail-grid address {
+    display: grid;
+    gap: 0.3rem;
+
+    color: var(--muted-text);
+
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .order-detail-grid dl {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+  }
+
+  .order-detail-grid dl > div {
+    min-width: 0;
+  }
+
+  .order-detail-grid dt {
+    color: var(--muted-text);
+    font-size: 0.78rem;
+  }
+
+  .order-detail-grid dd {
+    margin: 0.25rem 0 0;
+
+    color: var(--text);
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+  }
+
+  .admin-order-card > footer {
+    align-items: center;
+
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .order-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .order-actions button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+  }
+
+  .admin-access-card {
+    max-width: 680px;
+
+    padding: 2rem;
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    background: var(--surface);
+  }
+
+  .admin-access-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+
+    border-radius: 999px;
+
+    background: var(--accent);
+    color: #07110d;
+
+    text-decoration: none;
+    font-weight: 900;
+  }
+
+  @media (max-width: 950px) {
+    .orders-summary-grid,
+    .order-key-data {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .order-detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .order-detail-grid section:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .orders-summary-grid,
+    .order-key-data,
+    .order-detail-grid,
+    .orders-toolbar form > div {
+      grid-template-columns: 1fr;
+    }
+
+    .order-detail-grid section:last-child {
+      grid-column: auto;
+    }
+
+    .admin-order-card > header,
+    .admin-order-card > footer {
+      display: grid;
+    }
+
+    .order-status {
+      width: fit-content;
+    }
+
+    .order-key-data > div {
+      min-height: 0;
+    }
+
+    .order-actions {
+      display: grid;
+      width: 100%;
+    }
+
+    .order-actions button {
+      width: 100%;
+    }
+  }
+</style>

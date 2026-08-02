@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Zahlung abgebrochen">
+  <section class="checkout-cancelled-page">
+    <div class="checkout-cancelled-card">
+      <p class="eyebrow">Checkout abgebrochen</p>
+      <h1>Es wurde nichts berechnet</h1>
+      <p>
+        Du hast den Stripe-Checkout verlassen. Es wurde keine Zahlung
+        abgeschlossen und keine Bestellung als bezahlt gespeichert.
+      </p>
+      <div class="cancelled-actions">
+        <a class="primary-link" href="/preorder">Zurück zur Vorbestellung</a>
+        <a href="/">Zur Startseite</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .checkout-cancelled-page { min-height: 70vh; display: grid; place-items: center; padding: 4rem 0; }
+  .checkout-cancelled-card { width: min(100%,720px); padding: clamp(1.5rem,5vw,3rem); border: 1px solid var(--border); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .checkout-cancelled-card h1 { margin: 0; font-size: clamp(2.5rem,7vw,5rem); line-height: .95; letter-spacing: -.06em; }
+  .checkout-cancelled-card > p:last-of-type { color: var(--muted-text); line-height: 1.7; }
+  .cancelled-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
+  .cancelled-actions a { min-height: 46px; display: inline-flex; align-items: center; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 900; }
+  .cancelled-actions .primary-link { border-color: transparent; color: #07110d; background: var(--accent); }
+  @media (max-width: 520px) { .cancelled-actions { display: grid; } .cancelled-actions a { justify-content: center; } }
+</style>

@@ -1,16 +1,15 @@
 ---
 import { product } from "../../data/product";
+import { preorderConfig } from "../../data/preorderConfig";
 import Button from "../global/Button.astro";
 ---
 
 <section class="preorder-section">
   <div>
-    <p class="eyebrow">Preorder</p>
+    <p class="eyebrow">Presale</p>
     <h2>{product.name}</h2>
 
-    <p>
-      {product.description}
-    </p>
+    <p>{product.description}</p>
 
     <ul class="product-list">
       {product.contents.map((item) => (
@@ -20,8 +19,12 @@ import Button from "../global/Button.astro";
   </div>
 
   <div class="price-card">
-    <span class="price">{product.price}</span>
-    <p>{product.delivery}</p>
+    <span class="price">{preorderConfig.presalePrice} €</span>
+    <p>Presale-Preis pro Deck · später {preorderConfig.regularPrice} €</p>
+    <p>
+      Pauschal {preorderConfig.shippingCost} € Versand · voraussichtlicher
+      Versand im {preorderConfig.estimatedShippingDate}
+    </p>
 
     <Button href="/preorder">Vorbestellung ansehen</Button>
   </div>

@@ -1739,7 +1739,7 @@ main {
 .profile-avatar.preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .avatar-upload-label {
@@ -1800,7 +1800,7 @@ main {
 .profile-avatar.preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .avatar-picker {
@@ -2440,7 +2440,7 @@ main {
 .profile-avatar.public img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .profile-stat-row {
@@ -3841,5 +3841,339 @@ main {
   .thread-edit-form .comment-actions button,
   .comment-edit-form .comment-actions button {
     width: 100%;
+  }
+}
+
+/* =========================================================
+   PROFILE AVATARS — RESPONSIVE POLISH
+   ========================================================= */
+
+.avatar-profile-preview,
+.avatar-profile-preview.compact {
+  min-width: 0;
+}
+
+.profile-avatar,
+.profile-avatar.preview,
+.profile-avatar.public {
+  width: 120px;
+  height: 120px;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 120px;
+  padding: 0;
+  background: transparent;
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-avatar.preview img,
+.profile-avatar.public img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-picker {
+  min-width: 0;
+  gap: 0.9rem;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(72px, 1fr));
+  gap: clamp(0.7rem, 1.6vw, 1rem);
+  align-items: start;
+}
+
+/* The image itself is the visual avatar. Unselected options have no extra ring. */
+.avatar-option {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.avatar-option img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.16);
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .avatar-option:not(.active):hover {
+    transform: translateY(-4px);
+  }
+
+  .avatar-option:not(.active):hover img {
+    transform: scale(1.045);
+    filter: brightness(1.04) saturate(1.04);
+    box-shadow: 0 13px 28px rgba(0, 0, 0, 0.24);
+  }
+}
+
+.avatar-option:focus-visible {
+  outline: 3px solid var(--accent-2);
+  outline-offset: 4px;
+}
+
+/* Keep the selected state clearly visible without affecting the other avatars. */
+.avatar-option.active {
+  padding: 0.35rem;
+  background: rgba(20, 29, 35, 0.96);
+  box-shadow:
+    0 0 0 2px rgba(159, 209, 255, 0.42),
+    0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+.avatar-option.active img {
+  box-shadow: none;
+}
+
+.avatar-option.active::before {
+  content: "✓";
+  position: absolute;
+  top: -0.1rem;
+  right: -0.1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent-2);
+  color: #07110d;
+  font-size: 0.75rem;
+  font-weight: 950;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 850px) {
+  .avatar-profile-preview.compact {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .avatar-grid {
+    grid-template-columns: repeat(5, minmax(64px, 1fr));
+  }
+
+  .profile-avatar,
+  .profile-avatar.preview,
+  .profile-avatar.public {
+    width: 104px;
+    height: 104px;
+    min-width: 104px;
+    min-height: 104px;
+    max-width: 104px;
+    max-height: 104px;
+    flex-basis: 104px;
+  }
+}
+
+@media (max-width: 650px) {
+  .avatar-profile-preview,
+  .avatar-profile-preview.compact {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .profile-avatar,
+  .profile-avatar.preview,
+  .profile-avatar.public {
+    width: 96px;
+    height: 96px;
+    min-width: 96px;
+    min-height: 96px;
+    max-width: 96px;
+    max-height: 96px;
+    flex-basis: 96px;
+  }
+
+  .avatar-grid {
+    grid-template-columns: repeat(3, minmax(0, 88px));
+    justify-content: space-between;
+    gap: 0.9rem 0.7rem;
+  }
+
+  .avatar-option {
+    width: min(100%, 88px);
+    justify-self: center;
+  }
+
+  .avatar-option.active {
+    padding: 0.3rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .avatar-grid {
+    grid-template-columns: repeat(3, minmax(0, 78px));
+    gap: 0.8rem 0.45rem;
+  }
+
+  .avatar-option {
+    width: min(100%, 78px);
+  }
+
+  .avatar-option.active::before {
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-option,
+  .avatar-option img {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   PROFILE AVATARS — FINAL CROPPED IMAGE FIX
+   Removes the mint outer area contained inside the avatar PNGs.
+   The selected avatar keeps its existing highlighted design.
+   ========================================================= */
+
+/* Unselected avatars: the button is only a circular crop window. */
+.avatar-option:not(.active) {
+  overflow: hidden;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Crop away the mint-colored outer canvas of the source image. */
+.avatar-option:not(.active) img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: scale(1.34);
+  transform-origin: center;
+  box-shadow: none;
+}
+
+/* Keep the selected avatar exactly in the established highlighted style. */
+.avatar-option.active {
+  overflow: visible;
+}
+
+.avatar-option.active img {
+  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .avatar-option:not(.active):hover {
+    transform: translateY(-3px);
+  }
+
+  .avatar-option:not(.active):hover img {
+    transform: scale(1.4);
+    filter: brightness(1.045) saturate(1.035);
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-option:not(.active):hover,
+  .avatar-option:not(.active):hover img {
+    transform: none;
+  }
+
+  .avatar-option:not(.active) img {
+    transform: scale(1.34);
+  }
+}
+
+/* =========================================================
+   PROFILE AVATARS — TRUE CIRCULAR UNSELECTED OPTIONS
+   Final override: neutral circular crop without green ring.
+   ========================================================= */
+
+.avatar-option:not(.active) {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50% at 50% 50%);
+  background: var(--background);
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.avatar-option:not(.active) img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.06);
+  transform-origin: center;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .avatar-option:not(.active):hover {
+    transform: translateY(-3px) scale(1.025);
+  }
+
+  .avatar-option:not(.active):hover img {
+    transform: scale(1.10);
+    filter: brightness(1.045) saturate(1.035);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-option:not(.active):hover {
+    transform: none;
+  }
+
+  .avatar-option:not(.active) img,
+  .avatar-option:not(.active):hover img {
+    transform: scale(1.06);
   }
 }
