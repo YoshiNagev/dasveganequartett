@@ -636,7 +636,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-26",
     "title": "Wir müssen Jagen, um Ökosysteme im Gleichgewicht zu halten.",
     "argument": "Wir müssen Jagen, um Ökosysteme im Gleichgewicht zu halten.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Ginge es tatsächlich um das ökologische Gleichgewicht, wäre die Rückkehr natürlicher Beutegreifer eine naheliegende Lösung. Wird dagegen behauptet, die Jagd erspare den Beutetieren einen qualvollen Tod, geht es nicht mehr um das Ökosystem, sondern um Leidvermeidung. Dann wären nichttödliche Maßnahmen wie Fruchtbarkeitskontrolle konsequenter als das Erschießen der Tiere. Wäre die Tötung tatsächlich für das Ökosystem notwendig, läge es zudem nahe, die Körper Aasfressern, Beutegreifern und dem Nährstoffkreislauf zu überlassen, statt sie als Fleisch oder Trophäen mitzunehmen.",
     "ratings": {
       "verbreitung": 42,
       "komplexitaet": 65,
@@ -647,8 +647,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "dammbruchargumente",
     "categoryLabel": "Dammbruchargumente",
-    "meaning": "Dieses Argument stellt Jagd als ökologische Notwendigkeit dar. Befürworter verweisen auf Wildbestände, fehlende Raubtiere oder Schäden an Wäldern und Feldern. Dadurch wird das Töten von Tieren als Naturschutzmaßnahme verstanden.",
-    "notMeaning": "Das Argument zeigt nicht, dass Jagd als Freizeit, Tradition oder Fleischquelle moralisch unproblematisch ist. Selbst wenn bestimmte Eingriffe nötig wären, folgt daraus nicht, dass jede Form von Jagd gerechtfertigt ist. Es beantwortet auch nicht, welche Alternativen zur Bestandsregulation bestehen.",
+    "meaning": "Dieses Argument betrachtet Jagd als notwendiges Instrument des Wildtiermanagements. In Landschaften ohne ausreichende Beutegreifer könnten sich insbesondere Rehe, Hirsche oder Wildschweine so stark vermehren, dass sie Wälder schädigen, andere Arten verdrängen, Krankheiten verbreiten, aufgrund von Nahrungsknappheit leiden oder ein schmerzhaftes Ende durch Raubtiere finden. Jägerinnen und Jäger sollen die fehlende natürliche Prädation mit humanem Wildtiermanagement ersetzen und die Bestände auf einem ökologisch tragfähigen Niveau halten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede Tierart überall bejagt werden muss, jede Jagdmethode ökologisch sinnvoll ist oder das Töten von Tieren als Freizeitbeschäftigung gerechtfertigt wäre. Es argumentiert vielmehr, dass die gezielte Tötung bestimmter Tiere in konkreten, vom Menschen veränderten Ökosystemen notwendig sein kann, wenn ihre Population sonst erhebliche ökologische Schäden verursacht und keine ausreichend wirksame Alternative verfügbar ist.",
     "commonFormulations": [
       "Jagd hält Ökosysteme im Gleichgewicht.",
       "Ohne Jäger gäbe es zu viele Rehe.",
@@ -807,7 +807,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-33",
     "title": "Der Anbau von Soja zerstört den Regenwald.",
     "argument": "Der Anbau von Soja zerstört den Regenwald.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Sojaanbau zerstört tatsächlich Regenwälder und andere wertvolle Ökosysteme. Mehr als drei Viertel des weltweit verwendeten Sojas dienen jedoch der Tierfütterung, während nur ein kleiner Teil direkt als Tofu, Sojamilch oder anderes Sojaprodukt gegessen wird. Da beim Umweg über Tiere ein großer Teil der aufgenommenen Energie verloren geht, benötigt die Erzeugung tierischer Lebensmittel mehr Soja und Fläche als der direkte Verzehr pflanzlicher Nahrung. Die Kritik am Sojaanbau spricht daher gegen Tierhaltung, nicht gegen Veganismus.",
     "ratings": {
       "verbreitung": 66,
       "komplexitaet": 36,
@@ -818,13 +818,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument verbindet Soja mit Regenwaldzerstörung und richtet diese Kritik gegen Veganismus. Befürworter stellen pflanzliche Ernährung als ökologisch problematisch dar, weil Soja mit Entwaldung assoziiert ist. Es nutzt ein reales Umweltproblem als Einwand gegen vegane Konsumentscheidungen.",
-    "notMeaning": "Das Argument zeigt nicht automatisch, dass vegane Ernährung Regenwaldzerstörung antreibt. Ein großer Teil des weltweit angebauten Sojas wird als Tierfutter genutzt. Entscheidend ist also, wofür Soja angebaut wird und welche Produkte Nachfrage erzeugen.",
+    "meaning": "Dieses Argument verweist auf die Entwaldung und Umwandlung natürlicher Lebensräume für den Sojaanbau, insbesondere in Südamerika. Weil Tofu, Sojamilch und Fleischalternativen stark mit veganer Ernährung verbunden werden, entsteht der Eindruck, dass eine wachsende vegane Nachfrage den Regenwald zerstört und Veganismus deshalb ökologisch nicht besser als der Konsum von Tierprodukten ist.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass ausschließlich Veganerinnen und Veganer Soja konsumieren, jede Sojabohne auf ehemaliger Regenwaldfläche wächst oder Tierhaltung keine anderen Umweltfolgen verursacht. Es argumentiert vielmehr, dass auch pflanzliche Lebensmittel schwerwiegende ökologische Schäden verursachen können und die Umweltbilanz veganer Ernährung deshalb weniger eindeutig sei, als häufig dargestellt wird.",
     "commonFormulations": [
       "Für euer Soja wird der Regenwald zerstört.",
-      "Tofu ist schlecht fürs Klima.",
-      "Veganer essen Soja und zerstören den Amazonas.",
-      "Fleisch ist nicht das einzige Umweltproblem."
+      "Tofu ist schlecht fürs Klima."
     ]
   },
   {
@@ -832,7 +830,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-34",
     "title": "Es ist eine persönliche Entscheidung, ob jemand Tierprodukte unterstützt.",
     "argument": "Es ist eine persönliche Entscheidung, ob jemand Tierprodukte unterstützt.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine Entscheidung ist nicht rein persönlich, wenn ihre Folgen von anderen getragen werden. Wer Tierprodukte kauft, unterstützt ein System, in dem empfindungsfähige Tiere gezüchtet, benutzt und getötet werden.",
     "ratings": {
       "verbreitung": 79,
       "komplexitaet": 26,
@@ -843,12 +841,12 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument beschreibt Tierproduktkonsum als reine Privatsache. Befürworter stellen Essen als persönlichen Geschmack, Lebensstil oder individuelle Freiheit dar. Moralische Kritik wird dadurch als Einmischung in private Entscheidungen wahrgenommen.",
-    "notMeaning": "Das Argument zeigt nicht, dass eine Entscheidung nur deshalb privat ist, weil sie am eigenen Teller endet. Wenn andere fühlende Wesen betroffen sind, hat die Entscheidung eine Außenwirkung. Persönliche Freiheit erklärt nicht automatisch, warum die Interessen der Tiere weniger zählen sollen.",
+    "meaning": "Dieses Argument betrachtet den Konsum von Tierprodukten als Teil der privaten Lebensführung. Menschen sollen selbst bestimmen dürfen, was sie essen und welche Produkte sie kaufen, ohne dafür moralisch verurteilt oder gesellschaftlich bevormundet zu werden. Veganismus kann demnach eine persönliche Überzeugung sein, darf aber nicht als Verpflichtung auf andere übertragen werden.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Tierproduktion keinerlei Folgen oder moralische Probleme verursacht. Es argumentiert vielmehr, dass diese Folgen nicht schwer genug wiegen, um die individuelle Entscheidung über den eigenen Konsum einzuschränken oder anderen Menschen eine vegane Lebensweise abzuverlangen.",
     "commonFormulations": [
       "Das ist meine persönliche Entscheidung.",
       "Jeder soll essen, was er will.",
-      "Misch dich nicht in mein Essen ein.",
+      "Ich respektiere Veganer, also sollen sie mich respektieren.",
       "Leben und leben lassen."
     ]
   },
@@ -857,7 +855,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-35",
     "title": "Vegane Alternativen schmecken mir einfach nicht.",
     "argument": "Vegane Alternativen schmecken mir einfach nicht.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Wer so argumentiert, behauptet, dass ein 20 minütiger Geschmack, den man auch pflanzlich genießen kann, mehr wert sei als das ganze Leben eines fühlenden Individuums.",
     "ratings": {
       "verbreitung": 82,
       "komplexitaet": 21,
@@ -868,8 +866,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument beruft sich auf Geschmack und Genuss. Befürworter sehen vegane Alternativen als unbefriedigend und halten den Verzicht deshalb für unzumutbar. Es betont subjektive Vorlieben stärker als ethische Abwägung.",
-    "notMeaning": "Das Argument zeigt nicht, dass Geschmack moralisch schwerer wiegt als Leid und Tötung. Es kann erklären, warum Umstellung schwerfällt, aber nicht automatisch, warum Tierausbeutung gerechtfertigt ist. Geschmack ist außerdem veränderbar und Alternativen entwickeln sich weiter.",
+    "meaning": "Dieses Argument beruft sich auf den persönlichen Genuss tierischer Lebensmittel. Pflanzliche Alternativen erreichen für manche Menschen nicht denselben Geschmack oder dieselbe Konsistenz wie Fleisch, Käse, Eier und andere Tierprodukte. Der vegane Verzicht erscheint deshalb als dauerhafte Einschränkung der eigenen Lebensqualität, die nicht von jedem Menschen verlangt werden könne.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Geschmack wichtiger als jedes denkbare Tierleid ist oder Tiere allein zum Vergnügen gequält werden dürfen. Es argumentiert vielmehr, dass Genuss ein bedeutender Bestandteil menschlichen Wohlbefindens ist und die Interessen der Tiere nicht schwer genug wiegen, um den Verzicht auf geschätzte Lebensmittel zu verlangen.",
     "commonFormulations": [
       "Vegane Alternativen schmecken mir nicht.",
       "Ohne Käse könnte ich nie leben.",
@@ -882,7 +880,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-36",
     "title": "Die Politik trägt die Verantwortung.",
     "argument": "Die Politik trägt die Verantwortung.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Politikerinnen und Politiker sollen die Gesellschaft vertreten. Solange wir Tierausbeutung selbst unterstützen und keinen politischen Wandel einfordern, haben sie wenig Anreiz, dieses System infrage zu stellen. Individuelles veganes Handeln genügt daher nicht, ist aber gemeinsam mit Aktivismus notwendig, um gesellschaftlichen Druck für neue Gesetze, andere Subventionen und Rechte für Tiere aufzubauen.",
     "ratings": {
       "verbreitung": 60,
       "komplexitaet": 30,
@@ -893,12 +891,10 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "praktikabilitaet-gesellschaft-politik",
     "categoryLabel": "Praktikabilität, Gesellschaft & Politik",
-    "meaning": "Dieses Argument verlagert Verantwortung von Einzelpersonen auf Politik und Institutionen. Befürworter meinen, nur Gesetze, Subventionen oder strukturelle Veränderungen könnten wirklich etwas bewirken. Individueller Konsum erscheint dagegen machtlos.",
-    "notMeaning": "Das Argument zeigt nicht, dass individuelles Handeln bedeutungslos ist. Politische und persönliche Verantwortung können nebeneinander bestehen. Wer Strukturwandel fordert, kann trotzdem vermeiden, selbst Nachfrage nach Tierausbeutung zu erzeugen.",
+    "meaning": "Dieses Argument betrachtet Tierausbeutung als strukturelles Problem, das durch Gesetze, Subventionen, wirtschaftliche Interessen und das verfügbare Lebensmittelangebot geprägt wird. Einzelne Konsumentinnen und Konsumenten hätten darauf nur begrenzten Einfluss. Wenn Tierprodukte moralisch problematisch sind, müsse deshalb vor allem die Politik ihre Produktion regulieren oder beenden, anstatt die Verantwortung auf private Kaufentscheidungen abzuwälzen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass individuelle Entscheidungen vollkommen wirkungslos sind oder Menschen Tierausbeutung bewusst unterstützen sollten. Es argumentiert vielmehr, dass persönliche Konsumentscheidungen allein das bestehende System nicht überwinden können und die entscheidenden Veränderungen deshalb auf politischer und wirtschaftlicher Ebene stattfinden müssen.",
     "commonFormulations": [
       "Die Politik muss das regeln.",
-      "Einzelne können nichts ändern.",
-      "Solange es erlaubt ist, bringt Verzicht nichts.",
       "Erst müssen die Rahmenbedingungen stimmen."
     ]
   },
