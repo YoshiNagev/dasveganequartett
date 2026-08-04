@@ -47,13 +47,15 @@ const { data: comments } = await supabase
     thread_id,
     body,
     created_at,
-    threads (
+    threads!inner (
       slug,
-      title
+      title,
+      is_hidden
     )
   `)
   .eq("user_id", profile.id)
   .eq("is_hidden", false)
+  .eq("threads.is_hidden", false)
   .order("created_at", { ascending: false })
   .limit(10);
 
