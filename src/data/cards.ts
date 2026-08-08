@@ -903,7 +903,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-37",
     "title": "Veganern mangelt es oft an Proteinen, Vitamin B12, Kalzium und so weiter.",
     "argument": "Veganern mangelt es oft an Proteinen, Vitamin B12, Kalzium und so weiter.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine vegane Ernährung ist nicht automatisch mangelhaft. Protein, Kalzium, Eisen, Zink, Selen und Omega‑3 sind aus pflanzlichen oder angereicherten Quellen verfügbar; Vitamin D betrifft bei geringer Sonneneinstrahlung auch nichtvegane Menschen. Vitamin B12 muss zuverlässig ergänzt werden, und auch Jod sowie gegebenenfalls EPA und DHA sollten gezielt abgesichert werden. Dass eine Ernährung Wissen oder Supplemente erfordert, rechtfertigt nicht, Tiere auszubeuten, wenn dieselben Nährstoffe tierfrei verfügbar sind.",
     "ratings": {
       "verbreitung": 80,
       "komplexitaet": 36,
@@ -914,8 +914,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument stellt vegane Ernährung als mangelanfällig dar. Befürworter verweisen auf Protein, Vitamin B12, Kalzium, Eisen oder Omega-3 und befürchten, dass Tierprodukte für eine sichere Versorgung nötig seien. Es ist oft ein Gesundheits- und Sicherheitsargument.",
-    "notMeaning": "Das Argument zeigt nicht, dass vegane Ernährung zwangsläufig mangelhaft ist. Einige Nährstoffe müssen bewusst geplant werden, insbesondere Vitamin B12. Planungspflicht bedeutet aber nicht Unmöglichkeit und gilt in unterschiedlicher Form für viele Ernährungsweisen.",
+    "meaning": "Dieses Argument verweist darauf, dass Veganerinnen und Veganer einige Nährstoffe durchschnittlich in geringeren Mengen aufnehmen. Besonders Vitamin B12, Protein, Kalzium, Eisen, Zink, Jod, Selen, Vitamin D sowie die langkettigen Omega‑3-Fettsäuren EPA und DHA gelten als potenziell kritisch. Daraus wird geschlossen, dass Tierprodukte für eine zuverlässige Nährstoffversorgung notwendig seien und vegane Ernährung ein erhöhtes Mangelrisiko darstelle.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede vegan lebende Person mangelernährt ist oder pflanzliche Lebensmittel keinerlei wertvolle Nährstoffe liefern. Es argumentiert vielmehr, dass eine vegane Ernährung mehr Planung, angereicherte Lebensmittel oder Supplemente erfordert und deshalb weniger sicher oder weniger natürlich sei als eine Ernährung mit Tierprodukten.",
     "commonFormulations": [
       "Veganern fehlen Proteine.",
       "Was ist mit Vitamin B12?",
@@ -928,7 +928,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-38",
     "title": "Unsere Körper können pflanzliche Nährstoffe oft schlechter aufnehmen.",
     "argument": "Unsere Körper können pflanzliche Nährstoffe oft schlechter aufnehmen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Das stimmt bei einzelnen Nährstoffen: Phytate können die Aufnahme von Eisen und Zink, Oxalate die Aufnahme von Kalzium vermindern. Wie stark dieser Effekt ausfällt, hängt jedoch vom Lebensmittel, seiner Zubereitung, der gesamten Mahlzeit und dem Versorgungszustand des Körpers ab; bei Eisen wurden zudem langfristige Anpassungen beobachtet. Eine geringere Bioverfügbarkeit muss bei der Ernährung berücksichtigt werden, macht Tierprodukte aber nicht notwendig.",
     "ratings": {
       "verbreitung": 32,
       "komplexitaet": 57,
@@ -939,8 +939,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument verweist auf Bioverfügbarkeit. Befürworter meinen, dass Nährstoffe aus pflanzlichen Quellen schlechter aufgenommen werden und tierische Produkte deshalb überlegen seien. Es betrachtet nicht nur Nährstoffmengen, sondern deren Nutzbarkeit im Körper.",
-    "notMeaning": "Das Argument zeigt nicht, dass pflanzliche Ernährung unzureichend ist. Geringere Bioverfügbarkeit kann durch Auswahl, Zubereitung, Kombination und Menge berücksichtigt werden. Es verlangt eine differenzierte Planung, widerlegt Veganismus aber nicht pauschal.",
+    "meaning": "Dieses Argument verweist darauf, dass der Nährstoffgehalt eines Lebensmittels nicht mit der tatsächlich vom Körper aufgenommenen Menge identisch ist. Pflanzen enthalten unter anderem Phytate, Oxalate, Polyphenole und andere Substanzen, welche die Aufnahme bestimmter Mineralstoffe oder die Verdauung von Proteinen beeinträchtigen können. Daraus wird geschlossen, dass pflanzliche Nährstoffquellen minderwertig seien und Tierprodukte für eine zuverlässige Versorgung benötigt würden.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Pflanzen überhaupt keine verwertbaren Nährstoffe liefern oder jede vegan lebende Person einen Mangel entwickelt. Es argumentiert vielmehr, dass wegen der teilweise geringeren Bioverfügbarkeit größere Mengen, eine gezielte Lebensmittelkombination oder Supplemente erforderlich seien und eine vegane Ernährung deshalb weniger zuverlässig als eine Ernährung mit Tierprodukten sei.",
     "commonFormulations": [
       "Pflanzliches Eisen wird schlechter aufgenommen.",
       "Proteine aus Pflanzen sind minderwertig.",
@@ -953,7 +953,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-39",
     "title": "Warum supplementieren, wenn es auch mit Tierprodukten geht?",
     "argument": "Warum supplementieren, wenn es auch mit Tierprodukten geht?",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Weil ein Supplement denselben benötigten Nährstoff liefern kann, ohne dafür ein empfindungsfähiges Tier zu züchten, zu benutzen und zu töten. Wenn der direkte tierfreie Weg funktioniert, ist der Umweg über Tierausbeutung nicht notwendig.",
     "ratings": {
       "verbreitung": 53,
       "komplexitaet": 30,
@@ -964,8 +964,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument betrachtet Supplementierung als Zeichen einer unnatürlichen oder mangelhaften Ernährung. Befürworter fragen, warum man Tabletten nehmen sollte, wenn Tierprodukte bestimmte Nährstoffe liefern können. Besonders Vitamin B12 steht im Mittelpunkt.",
-    "notMeaning": "Das Argument zeigt nicht, dass Supplementierung schlecht oder unvernünftig ist. Viele Nährstoffe werden auch in nichtveganen Systemen indirekt ergänzt, etwa über Tierfutter oder angereicherte Produkte. Entscheidend ist Versorgungssicherheit, nicht ob ein Nährstoff aus einer Tablette oder aus einem Tierprodukt kommt.",
+    "meaning": "Dieses Argument stellt den Sinn einer veganen Supplementierung infrage. Tierprodukte liefern Vitamin B12 und weitere potenziell kritische Nährstoffe bereits als Bestandteil gewöhnlicher Lebensmittel. Sie zu essen erscheint deshalb natürlicher, einfacher und zuverlässiger, als dauerhaft Tabletten einzunehmen oder auf angereicherte Ersatzprodukte angewiesen zu sein.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Supplemente wirkungslos oder gesundheitsschädlich sind. Es argumentiert vielmehr, dass sie eine unnötige künstliche Ersatzlösung darstellen, solange sich dieselben Nährstoffe einfacher durch Fleisch, Milch, Eier oder Fisch aufnehmen lassen.",
     "commonFormulations": [
       "Warum supplementieren, wenn man Fleisch essen kann?",
       "Eine natürliche Ernährung braucht keine Tabletten.",
@@ -978,7 +978,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-40",
     "title": "Gerade Kinder, Schwangere, Stillende und Ältere sollten Tierprodukte essen.",
     "argument": "Gerade Kinder, Schwangere, Stillende und Ältere sollten Tierprodukte essen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Ein höherer Nährstoffbedarf bedeutet, dass die Ernährung sorgfältiger geplant werden muss, nicht, dass die Nährstoffe aus ausgebeuteten Tieren stammen müssen. Die DGE empfiehlt diesen Gruppen nicht ausdrücklich Tierprodukte, sondern spricht wegen begrenzter Daten weder für noch gegen vegane Ernährung und warnt vor einer unzureichenden Durchführung. Mit zuverlässig ergänztem Vitamin B12, weiteren bedarfsgerechten Supplementen, ausgewogener Ernährung und fachlicher Begleitung kann die Versorgung tierfrei abgesichert werden.",
     "ratings": {
       "verbreitung": 43,
       "komplexitaet": 61,
@@ -989,8 +989,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument verweist auf besonders vulnerable Gruppen. Befürworter sorgen sich, dass Kinder, Schwangere, Stillende oder ältere Menschen durch vegane Ernährung stärker gefährdet sein könnten. Es betont Verantwortung und Sicherheitsmargen.",
-    "notMeaning": "Das Argument zeigt nicht, dass vegane Ernährung für diese Gruppen grundsätzlich unmöglich ist. Es zeigt aber, dass Planung, Fachwissen und Kontrolle wichtiger sind. Die moralische Frage wird dadurch nicht aufgehoben, sondern mit gesundheitlicher Sorgfalt verbunden.",
+    "meaning": "Dieses Argument verweist auf Lebensphasen, in denen der Nährstoffbedarf erhöht, die verfügbaren körpereigenen Speicher geringer oder die Folgen eines Mangels besonders schwerwiegend sein können. Kinder benötigen Nährstoffe für Wachstum und Entwicklung, Schwangere und Stillende versorgen zusätzlich das Kind und ältere Menschen können weniger essen oder bestimmte Nährstoffe schlechter aufnehmen. Tierprodukte gelten deshalb als besonders sichere und konzentrierte Quellen, auf die diese Gruppen nicht verzichten sollten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede vegane Ernährung in diesen Lebensphasen zwangsläufig zu Schäden führt. Es argumentiert vielmehr, dass das Risiko einer fehlerhaften Durchführung und möglicher irreversibler Folgen so hoch sei, dass der Verzicht auf Tierprodukte bei diesen Gruppen nicht verantwortet werden könne.",
     "commonFormulations": [
       "Kinder sollten nicht vegan ernährt werden.",
       "Schwangere brauchen Tierprodukte.",
@@ -1003,7 +1003,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-41",
     "title": "Manche Menschen haben besondere Krankheiten, die Veganismus erschweren.",
     "argument": "Manche Menschen haben besondere Krankheiten, die Veganismus erschweren.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine Erkrankung kann vegane Ernährung erschweren, ohne sie unmöglich zu machen. Viele Menschen, die zunächst glauben, auf Tierprodukte angewiesen zu sein, können mit fachlicher Beratung, geeigneten Ersatzprodukten und Supplementen eine sichere vegane Lösung finden. Nur bei äußerst seltenen und schweren Kombinationen medizinischer Einschränkungen stehen möglicherweise noch keine ausreichenden tierfreien Alternativen zur Verfügung. Solche Ausnahmefälle rechtfertigen jedoch nicht den vermeidbaren Tierproduktkonsum aller anderen.",
     "ratings": {
       "verbreitung": 29,
       "komplexitaet": 75,
@@ -1014,13 +1014,12 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument verweist auf Krankheiten, Allergien, Essstörungen oder andere Einschränkungen, die eine vegane Ernährung erschweren können. Befürworter nutzen reale Sonderfälle, um die allgemeine Forderung nach Veganismus zu relativieren.",
-    "notMeaning": "Das Argument zeigt nicht, dass alle Menschen mit normalen Möglichkeiten Tierprodukte brauchen. Veganismus wird meist als Vermeidung von Tierausbeutung verstanden, soweit es praktikabel und möglich ist. Schwierige Sonderfälle können Ausnahmen erklären, aber nicht jede vermeidbare Nutzung rechtfertigen.",
+    "meaning": "Dieses Argument verweist auf Menschen, deren Lebensmittelauswahl durch Erkrankungen, Allergien oder Verdauungsstörungen bereits stark eingeschränkt ist. Wenn zusätzlich sämtliche Tierprodukte ausgeschlossen werden, könnten zu wenige verträgliche Protein-, Energie- oder Nährstoffquellen verbleiben. Daraus wird geschlossen, dass Veganismus nicht für alle Menschen gesundheitlich durchführbar und deshalb keine allgemeine moralische Verpflichtung sein könne.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede chronisch kranke Person Tierprodukte benötigt oder pflanzliche Ernährung Krankheiten grundsätzlich verschlechtert. Es argumentiert vielmehr, dass es einzelne medizinische Situationen gibt, in denen eine vollständig vegane Ernährung unverhältnismäßig schwierig, riskant oder mit den momentan verfügbaren Lebensmitteln und medizinischen Produkten nicht sicher umsetzbar sein kann.",
     "commonFormulations": [
       "Manche Menschen können aus gesundheitlichen Gründen nicht vegan leben.",
-      "Was ist mit Allergien?",
-      "Bei bestimmten Krankheiten geht das nicht.",
-      "Nicht jeder Körper verträgt Veganismus."
+      "Was ist mit Allergien und Unverträglichkeiten?",
+      "Nicht jeder Körper verträgt Tofu."
     ]
   },
   {
@@ -1028,7 +1027,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-42",
     "title": "Vegane Ersatzprodukte sind oft hochverarbeitet.",
     "argument": "Vegane Ersatzprodukte sind oft hochverarbeitet.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Manche veganen Ersatzprodukte sind tatsächlich hochverarbeitet, ebenso wie Wurst, Nuggets, Käses und viele andere Tierprodukte. Der Verarbeitungsgrad allein entscheidet jedoch nicht, ob ein Produkt gesund ist; dafür müssen unter anderem Salz, gesättigte Fettsäuren, Ballaststoffe, Protein und Nährstoffanreicherung betrachtet werden. Außerdem benötigt vegane Ernährung keine Fleischimitate und viele vegane Produkte sind kaum weiterverarbeitet.",
     "ratings": {
       "verbreitung": 63,
       "komplexitaet": 25,
@@ -1039,12 +1038,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument kritisiert vegane Ersatzprodukte als industriell und ungesund. Befürworter stellen Burger, Würstchen oder Käsealternativen als hochverarbeitete Produkte dar und schließen daraus, dass vegan nicht automatisch besser sei.",
-    "notMeaning": "Das Argument zeigt nicht, dass vegane Ernährung insgesamt aus Ersatzprodukten bestehen muss. Es betrifft vor allem bestimmte Produktgruppen und nicht Hülsenfrüchte, Getreide, Gemüse, Obst oder Nüsse. Außerdem ist Gesundheit nicht die einzige Frage, wenn es um Tierausbeutung geht.",
+    "meaning": "Dieses Argument kritisiert industriell hergestellte Fleisch-, Milch-, Käse- und Eialternativen wegen ihrer langen Zutatenlisten, Zusatzstoffe und aufwendigen Herstellungsverfahren. Hochverarbeitete Lebensmittel werden mit gesundheitlichen Risiken verbunden, woraus geschlossen wird, dass vegane Ernährung gesundheitlich nicht überlegen oder sogar besonders künstlich sei.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass alle pflanzlichen Lebensmittel hochverarbeitet oder sämtliche Zusatzstoffe schädlich sind. Es argumentiert vielmehr, dass viele Produkte, mit denen Tierprodukte ersetzt werden, ernährungsphysiologisch fragwürdig seien und deshalb keine überzeugende Alternative zu weniger stark verarbeiteten tierischen Lebensmitteln darstellten.",
     "commonFormulations": [
       "Vegane Ersatzprodukte sind total verarbeitet.",
       "Da ist nur Chemie drin.",
-      "Vegan heißt nicht gesund.",
       "Lieber echtes Fleisch als Laborpampe."
     ]
   },
@@ -1053,7 +1051,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-43",
     "title": "Avokados und Mandeln sind schlimmer für die Umwelt als Fleisch.",
     "argument": "Avokados und Mandeln sind schlimmer für die Umwelt als Fleisch.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Besonders Rind- und Lammfleisch verursachen wesentlich höhere Treibhausgasemissionen und benötigen weitaus mehr Land. Außerdem sind weder Avocados noch Mandeln notwendige Bestandteile veganer Ernährung.",
     "ratings": {
       "verbreitung": 32,
       "komplexitaet": 27,
@@ -1064,8 +1062,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument verweist auf problematische pflanzliche Produkte wie Avocados oder Mandeln. Befürworter wollen zeigen, dass auch vegane Lebensmittel ökologische Kosten haben. Es richtet sich gegen die Vorstellung, vegan sei automatisch umweltperfekt.",
-    "notMeaning": "Das Argument zeigt nicht, dass Fleisch deshalb ökologisch besser ist. Einzelne problematische Pflanzenprodukte definieren nicht die gesamte vegane Ernährung. Außerdem kann man vegan leben, ohne besonders viele Avocados oder Mandeln zu konsumieren.",
+    "meaning": "Dieses Argument verweist auf den hohen Wasserbedarf des Avocado- und Mandelanbaus, lange Transportwege, Monokulturen und ökologische Schäden in den Anbauregionen. Weil beide Lebensmittel stark mit moderner veganer Ernährung verbunden werden, sollen sie zeigen, dass pflanzliche Lebensmittel keineswegs automatisch umweltfreundlich sind und einzelne Tierprodukte möglicherweise eine bessere Umweltbilanz besitzen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jedes Fleisch umweltfreundlich oder jede Avocado und Mandel gleichermaßen schädlich ist. Es argumentiert vielmehr, dass beliebte vegane Lebensmittel in einzelnen Umweltkategorien sehr schlecht abschneiden können und die ökologische Überlegenheit veganer Ernährung deshalb übertrieben oder widersprüchlich sei.",
     "commonFormulations": [
       "Avocados sind schlimmer als Fleisch.",
       "Mandeln verbrauchen viel Wasser.",
@@ -1078,7 +1076,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-44",
     "title": "Regionale Bio-Fleischproduktion ist nachhaltig.",
     "argument": "Regionale Bio-Fleischproduktion ist nachhaltig.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Regionales Biofleisch kann einzelne Umweltprobleme gegenüber konventionellem Fleisch verringern, wird dadurch aber nicht automatisch nachhaltig. Kurze Transportwege ändern wenig an Methanemissionen, Flächenbedarf, Futtermittelverlusten und den Ausscheidungen der Tiere. Außerdem kann man auch vegan-regional leben.",
     "ratings": {
       "verbreitung": 79,
       "komplexitaet": 28,
@@ -1089,13 +1087,11 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument stellt regionale Bio-Tierhaltung als nachhaltige Alternative zur industriellen Produktion dar. Befürworter betonen kurze Wege, bessere Haltung und vermeintlich natürliche Kreisläufe. Dadurch wirkt Fleischkonsum verantwortungsvoller und weniger problematisch.",
-    "notMeaning": "Das Argument zeigt nicht, dass regionale oder biologische Produktion das Töten und Ausnutzen von Tieren moralisch aufhebt. Auch bessere Bedingungen ändern nichts daran, dass Tiere für menschliche Zwecke gezüchtet, genutzt und getötet werden. Zudem müssen Umweltbehauptungen konkret geprüft werden.",
+    "meaning": "Dieses Argument stellt regionale ökologische Tierhaltung als umweltverträgliche Alternative zur industriellen Massentierhaltung dar. Kurze Transportwege, der Verzicht auf synthetisches Düngemittel sowie eine stärkere Kreislaufwirtschaft sollen die ökologischen Probleme der Fleischproduktion erheblich reduzieren. Tierhaltung müsse deshalb nicht abgeschafft, sondern lediglich regionaler, extensiver und ökologischer gestaltet werden.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass beliebig große Mengen Biofleisch produziert werden können oder jede ökologische Tierhaltung vollständig klimaneutral ist. Es argumentiert vielmehr, dass eine begrenzte, regional angepasste Tierhaltung ökologisch vertretbar sein könne und vollständiger Veganismus deshalb für eine nachhaltige Landwirtschaft nicht erforderlich sei.",
     "commonFormulations": [
       "Ich kaufe nur regionales Bio-Fleisch.",
-      "Bei meinem Bauern geht es den Tieren gut.",
-      "Nachhaltige Weidehaltung ist okay.",
-      "Nicht alles ist Massentierhaltung."
+      "Nachhaltige Weidehaltung ist okay."
     ]
   },
   {
