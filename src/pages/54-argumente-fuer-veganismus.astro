@@ -1061,7 +1061,18 @@ const categories = [
     }
 
     .introduction h2 {
-      font-size: clamp(2.25rem, 11vw, 3.45rem);
+      font-size: clamp(2.15rem, 10vw, 3.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .introduction h2 span {
+      display: block;
+      max-width: 100%;
+      font-size: inherit;
+      letter-spacing: inherit;
+      white-space: normal;
     }
 
     .introduction__text {
@@ -1125,6 +1136,35 @@ const categories = [
     .final-cta__actions {
       display: grid;
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .page-shell {
+      width: min(100% - 16px, 1120px);
+    }
+
+    .introduction__card {
+      padding-inline: 14px;
+    }
+
+    .introduction h2 {
+      font-size: clamp(1.9rem, 8.8vw, 2.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .introduction h2 span {
+      font-size: inherit;
+      letter-spacing: inherit;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .introduction h2 {
+      font-size: clamp(1.78rem, 8.4vw, 2rem);
     }
   }
 
