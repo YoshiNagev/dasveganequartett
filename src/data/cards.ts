@@ -294,7 +294,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-12",
     "title": "Fleischkonsum ist natürlich.",
     "argument": "Fleischkonsum ist natürlich.",
-    "officialShortAnswer": "Nur weil etwas natürlich ist, ist es nicht gleich erstrebenswewrt. Ebenso ist etwas nicht automatisch schlecht, wenn es unnatürlich ist. Außerdem hat moderne Tierhaltung nichts mehr mit Natur zu tun.",
+    "officialShortAnswer": "Nur weil etwas natürlich ist, ist es nicht gleich erstrebenswert. Ebenso ist etwas nicht automatisch schlecht, wenn es unnatürlich ist. Außerdem hat moderne Tierhaltung nichts mehr mit Natur zu tun.",
     "ratings": {
       "verbreitung": 86,
       "komplexitaet": 31,
