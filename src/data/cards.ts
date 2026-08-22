@@ -1099,7 +1099,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-45",
     "title": "Pestizide zerstören die Umwelt.",
     "argument": "Pestizide zerstören die Umwelt.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Pestizide können Böden, Gewässer und die Artenvielfalt schwer schädigen. Tierhaltung löst dieses Problem jedoch nicht: Für die gezüchteten Tiere werden zusätzlich große Mengen an Futterpflanzen angebaut, die ebenfalls mit Pestiziden behandelt werden. Eine pflanzliche Ernährung benötigt insgesamt weniger Ackerfläche und ermöglicht dadurch, Pestizideinsatz und Umweltbelastung zu verringern.",
     "ratings": {
       "verbreitung": 30,
       "komplexitaet": 41,
@@ -1110,11 +1110,10 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "gesundheit-umwelt-nachhaltigkeit",
     "categoryLabel": "Gesundheit, Umwelt & Nachhaltigkeit",
-    "meaning": "Dieses Argument verweist auf Schäden durch Pestizide im Pflanzenbau. Befürworter betonen, dass auch pflanzliche Landwirtschaft Tiere und Umwelt beeinträchtigen kann. Es kritisiert Veganismus als nicht schadensfrei.",
-    "notMeaning": "Das Argument zeigt nicht, dass Tierhaltung deshalb weniger schädlich ist. Tiere müssen häufig mit angebauten Pflanzen gefüttert werden, wodurch zusätzlicher Pflanzenbau entsteht. Es zeigt eher, dass Landwirtschaft verbessert werden sollte, nicht dass Tierausbeutung gerechtfertigt ist.",
+    "meaning": "Dieses Argument verweist auf die ökologischen Schäden des Pflanzenanbaus. Herbizide, Insektizide und Fungizide können Nichtzielorganismen schädigen, Böden und Gewässer belasten sowie zum Rückgang von Insekten und anderen Arten beitragen. Weil eine vegane Ernährung vollständig auf pflanzlichen Lebensmitteln beruht, wird daraus geschlossen, dass sie diese Form der Umweltzerstörung verstärke oder zumindest nicht umweltfreundlicher als Tierhaltung sei.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass ausschließlich für Veganerinnen und Veganer angebaute Pflanzen mit Pestiziden behandelt werden oder sämtliche Pestizide gleich gefährlich sind. Es argumentiert vielmehr, dass auch pflanzliche Landwirtschaft erhebliche Umweltschäden verursacht und der Verzicht auf Tierprodukte diese Probleme nicht beseitigt.",
     "commonFormulations": [
       "Für Pflanzen sterben durch Pestizide auch Tiere.",
-      "Ackerbau zerstört Lebensräume.",
       "Dein Gemüse ist auch nicht unschuldig.",
       "Vegan ist nicht automatisch umweltfreundlich."
     ]
@@ -1124,7 +1123,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-46",
     "title": "Veganer sind militant und missionieren ein extremes, absolutistisches Weltbild.",
     "argument": "Veganer sind militant und missionieren ein extremes, absolutistisches Weltbild.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Extrem ist nicht die Forderung, Tiere nicht auszubeuten, sondern dass wir sie milliardenfach züchten, ausnutzen und töten, obwohl wir darauf verzichten können. Auch bei Sklaverei, Kinderarbeit oder Gewalt gegen Frauen würden wir die kompromisslose Ablehnung nicht als problematische Militanz bezeichnen.",
     "ratings": {
       "verbreitung": 67,
       "komplexitaet": 10,
@@ -1135,13 +1134,13 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument richtet sich gegen Auftreten und Rhetorik von Veganer:innen. Befürworter empfinden vegane Kritik als aggressiv, dogmatisch oder missionarisch. Die Debatte verschiebt sich dadurch von Tierausbeutung zu Stil, Ton und Gruppenimage.",
-    "notMeaning": "Das Argument zeigt nicht, dass die vegane Position falsch ist. Selbst wenn einzelne Menschen unangenehm auftreten, beantwortet das nicht die moralische Frage nach Tieren. Kritik am Verhalten von Aktivist:innen kann berechtigt sein, ersetzt aber keine Auseinandersetzung mit dem Inhalt.",
+    "meaning": "Dieses Argument kritisiert das Auftreten und die moralischen Forderungen veganer Aktivistinnen und Aktivisten. Ihre Sprache sei aggressiv, kompromisslos oder verurteilend, während die vollständige Ablehnung sämtlicher Tiernutzung als radikales Weltbild erscheint. Weil Veganerinnen und Veganer andere Menschen von dieser Position überzeugen möchten, wird ihr Aktivismus als Missionierung verstanden, die persönliche Entscheidungen und abweichende Lebensweisen nicht respektiert.",
+    "notMeaning": "Das Argument behauptet nicht, dass alle Veganerinnen und Veganer gewalttätig seien oder jede Form der Aufklärung unzulässig sei. Es argumentiert vielmehr, dass ein sichtbarer Teil der Bewegung seine Überzeugungen mit unangemessener Härte vertritt, Kompromisse ablehnt und dadurch eine komplexe gesellschaftliche Frage auf ein absolutes Gut-Böse-Schema reduziert.",
     "commonFormulations": [
       "Veganer sind militant.",
       "Ihr missioniert die ganze Zeit.",
       "Veganismus ist extrem.",
-      "Ihr seid wie eine Religion."
+      "Veganer denken nur in schwarz-weiß."
     ]
   },
   {
@@ -1149,7 +1148,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-47",
     "title": "Veganer lügen und zeigen immer nur die schlimmsten Zustände der Industrie.",
     "argument": "Veganer lügen und zeigen immer nur die schlimmsten Zustände der Industrie.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Ein einzelnes Video beweist nicht, wie häufig die gezeigten Zustände vorkommen, und manche Aufnahmen sind veraltet oder bewusst aus besonders schlimmen Betrieben ausgewählt. Die große und ständig wachsende Zahl neuer Recherchen aus unterschiedlichen Ländern, Tierindustrien und Haltungssystemen lässt sich jedoch nicht pauschal als Täuschung abtun. Außerdem beruht Veganismus nicht nur auf illegaler Tierquälerei, auch ein vorschriftsmäßig geführter Betrieb betrachtet Tiere als Eigentum, kontrolliert ihre Körper und nutzt oder tötet sie für menschliche Zwecke. Solange Verbraucher schwere Missstände bei einem Produkt nicht zuverlässig ausschließen können, spricht zudem schon die Vorsicht dafür, diese Ausbeutung nicht zu finanzieren.",
     "ratings": {
       "verbreitung": 49,
       "komplexitaet": 31,
@@ -1160,8 +1159,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument unterstellt veganer Aufklärung Manipulation. Befürworter meinen, Aktivist:innen zeigten nur Extremfälle, lügen oder verzerren die Realität. Dadurch wird das Vertrauen in Bilder, Berichte und Kritik an der Industrie geschwächt.",
-    "notMeaning": "Das Argument zeigt nicht, dass die gezeigten Zustände falsch oder irrelevant sind. Selbst wenn Beispiele ausgewählt sind, muss geprüft werden, ob sie systematisch auftreten oder gesetzlich erlaubt sind. Der Vorwurf der Übertreibung ersetzt keine konkrete Widerlegung.",
+    "meaning": "Dieses Argument bezweifelt die Repräsentativität veganer Undercover-Aufnahmen. Aktivistinnen und Aktivisten würden gezielt besonders schlimme, teilweise veraltete oder ausländische Fälle zeigen und dadurch den falschen Eindruck erzeugen, solche Zustände seien in der gesamten Tierindustrie üblich.",
+    "notMeaning": "Das Argument bestreitet nicht unbedingt, dass Missstände vorkommen. Es behauptet vielmehr, dass außergewöhnliche Verstöße als Normalzustand dargestellt werden und deshalb keine Ablehnung der gesamten Tierhaltung rechtfertigen.",
     "commonFormulations": [
       "Veganer zeigen nur die schlimmsten Fälle.",
       "Das ist alles Propaganda.",
@@ -1174,7 +1173,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-48",
     "title": "Veganer hassen Bauern und lieben Tiere mehr als Menschen.",
     "argument": "Veganer hassen Bauern und lieben Tiere mehr als Menschen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Die meisten Veganerinnen und Veganer hassen Landwirtinnen und Landwirte nicht. Sie können verstehen, dass Menschen einen Hof übernehmen, in bestehenden wirtschaftlichen Strukturen handeln oder ihren Beruf als selbstverständlich kennengelernt haben, ohne die Ausbeutung und Tötung von Tieren deshalb moralisch zu rechtfertigen. Außerdem muss man Tiere nicht lieben oder Menschen gleichstellen, um sie nicht als Waren zu behandeln. Es genügt, sie als empfindungsfähige Lebewesen zu respektieren und ihnen nicht für vermeidbare menschliche Zwecke zu schaden.",
     "ratings": {
       "verbreitung": 44,
       "komplexitaet": 21,
@@ -1185,8 +1184,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument wirft Veganer:innen Menschenfeindlichkeit oder Bauernhass vor. Befürworter erleben Tierethik als Abwertung menschlicher Interessen, besonders derjenigen, die in Tierhaltung arbeiten. Es emotionalisiert die Debatte über Loyalität zu Menschen.",
-    "notMeaning": "Das Argument zeigt nicht, dass Sorge um Tiere Sorge um Menschen ausschließt. Man kann Arbeitsbedingungen, Bauern und ländliche Regionen ernst nehmen und trotzdem Tierausbeutung kritisieren. Die moralische Frage wird durch den Vorwurf der Menschenfeindlichkeit nicht beantwortet.",
+    "meaning": "Dieses Argument unterstellt Veganerinnen und Veganern Menschenfeindlichkeit. Ihre Kritik an der Tierhaltung richte sich gegen Landwirtinnen und Landwirte persönlich, während sie das Wohlergehen von Tieren über menschliche Existenzen und Bedürfnisse stellten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass jede vegane Person Bauern offen hasst. Es besagt vielmehr, dass vegane Kritik zu wenig Verständnis für die betroffenen Menschen und ihre wirtschaftliche Situation zeige.",
     "commonFormulations": [
       "Veganer hassen Bauern.",
       "Ihr liebt Tiere mehr als Menschen.",
