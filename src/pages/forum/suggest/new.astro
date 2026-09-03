@@ -1,9 +1,16 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SuggestArgumentForm from "../../../components/forum/SuggestArgumentForm";
+import AccessGate from "../../../components/access/AccessGate.astro";
+import { getAccessState } from "../../../lib/server/access";
+
+export const prerender = false;
+const access = await getAccessState(Astro.cookies, Astro.request);
 ---
 
 <BaseLayout title="Argument vorschlagen">
+  {access.hasFullAccess ? (
+    <>
   <section class="create-thread-page">
     <a class="back-link" href="/forum/suggest">
       ← Zurück zu vorgeschlagenen Argumenten
@@ -22,4 +29,8 @@ import SuggestArgumentForm from "../../../components/forum/SuggestArgumentForm";
       <SuggestArgumentForm client:load />
     </div>
   </section>
+    </>
+  ) : (
+    <AccessGate returnTo="/forum/suggest/new" eyebrow="Käuferforum" />
+  )}
 </BaseLayout>

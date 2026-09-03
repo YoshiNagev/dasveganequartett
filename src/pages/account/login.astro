@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LoginForm from "../../components/account/LoginForm";
+import { safeReturnPath } from "../../lib/access";
+
+const returnTo = safeReturnPath(Astro.url.searchParams.get("returnTo"));
 ---
 
 <BaseLayout title="Einloggen">
@@ -9,11 +12,11 @@ import LoginForm from "../../components/account/LoginForm";
       <p class="eyebrow">Login</p>
       <h1>Willkommen zurück.</h1>
       <p>
-        Logge dich später ein, um Threads zu erstellen, zu antworten und
-        Diskussionen zu folgen.
+        Logge dich ein, um deine Käufe, digitalen Zugänge und Diskussionen zu
+        verwalten.
       </p>
     </div>
 
-    <LoginForm client:load />
+    <LoginForm client:load returnTo={returnTo} />
   </section>
 </BaseLayout>

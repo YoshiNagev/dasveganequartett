@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 
-export default function RegisterForm() {
+type Props = {
+  returnTo?: string;
+};
+
+export default function RegisterForm({ returnTo = "/account/profile" }: Props) {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +25,7 @@ const { error } = await supabase.auth.signUp({
   email,
   password,
   options: {
-    emailRedirectTo: `${window.location.origin}/account/login`,
+    emailRedirectTo: `${window.location.origin}/account/login?returnTo=${encodeURIComponent(returnTo)}`,
     data: {
       nickname,
     },

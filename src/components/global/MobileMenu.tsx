@@ -77,6 +77,7 @@ export default function MobileMenu() {
               <a href="/account/notifications" onClick={closeMenu}>
                 Hinweise
               </a>
+              <a href="/account/access" onClick={closeMenu}>Meine Zugänge</a>
               <a href="/account/profile" onClick={closeMenu}>Profil</a>
               <button type="button" onClick={logout}>
                 Abmelden

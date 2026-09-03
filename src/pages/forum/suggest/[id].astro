@@ -2,13 +2,17 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
 import CreateSuggestedThreadForm from "../../../components/forum/CreateSuggestedThreadForm";
-import { supabase } from "../../../lib/supabaseClient";
+import AccessGate from "../../../components/access/AccessGate.astro";
+import { getAccessState } from "../../../lib/server/access";
+import { createSupabaseServerClient } from "../../../lib/supabaseServer";
 
 export const prerender = false;
 
 const { id } = Astro.params;
+const access = await getAccessState(Astro.cookies, Astro.request);
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
 
-const { data: argument, error } = await supabase
+const { data: argument, error } = access.hasFullAccess ? await supabase
   .from("suggested_arguments")
   .select(`
     id,
@@ -35,25 +39,30 @@ const { data: argument, error } = await supabase
   `)
   .eq("id", id)
   .eq("is_hidden", false)
-  .maybeSingle();
+  .maybeSingle() : { data: null, error: null };
 
-if (error || !argument) {
+if (access.hasFullAccess && (error || !argument)) {
   return Astro.redirect("/forum/suggest");
 }
 
 const displayThreads =
-  argument.threads?.map((thread) => ({
+  argument?.threads?.map((thread) => ({
     id: thread.slug,
     cardId: null,
     title: thread.title,
     excerpt: thread.body,
-    author: thread.profiles?.nickname ?? "Unbekannt",
+    author: (Array.isArray(thread.profiles) ? thread.profiles[0] : thread.profiles)?.nickname ?? "Unbekannt",
     replies: thread.comments?.length ?? 0,
     createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
   })) ?? [];
+const argumentProfile = Array.isArray(argument?.profiles)
+  ? argument?.profiles[0]
+  : argument?.profiles;
 ---
 
-<BaseLayout title={`${argument.title} · Vorgeschlagenes Argument`}>
+<BaseLayout title={argument ? `${argument.title} · Vorgeschlagenes Argument` : "Vorgeschlagenes Argument · Käuferforum"}>
+  {access.hasFullAccess && argument ? (
+    <>
   <section class="thread-page">
     <a class="back-link" href="/forum/suggest">
       ← Zurück zu vorgeschlagenen Argumenten
@@ -68,7 +77,7 @@ const displayThreads =
 
       <div class="thread-hero-meta">
         <span>{argument.status}</span>
-        <span>{argument.profiles?.nickname ?? "Unbekannt"}</span>
+        <span>{argumentProfile?.nickname ?? "Unbekannt"}</span>
         <span>
           {new Date(argument.created_at).toLocaleDateString("de-DE")}
         </span>
@@ -108,4 +117,8 @@ const displayThreads =
       </div>
     </section>
   </section>
+    </>
+  ) : (
+    <AccessGate returnTo={`/forum/suggest/${id}`} eyebrow="Käuferforum" />
+  )}
 </BaseLayout>

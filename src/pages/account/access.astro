@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AccessManager from "../../components/access/AccessManager";
+---
+
+<BaseLayout title="Digitale Zugänge verwalten">
+  <section class="page-header">
+    <p class="eyebrow">Account · Käuferbereich</p>
+    <h1>Deine digitalen Zugänge</h1>
+    <p>
+      Aktiviere den Zugang für dich oder gib einzelne Deck-Zugänge als Geschenk
+      weiter. Pro gekauftem Deck entsteht eine Berechtigung.
+    </p>
+  </section>
+
+  <AccessManager client:load />
+</BaseLayout>
+
+<style is:global>
+  .access-dashboard { display: grid; gap: 2rem; padding-bottom: 3rem; }
+  .access-panel, .access-status, .gift-result, .license-card {
+    border: 1px solid var(--border); border-radius: 20px; background: var(--surface);
+  }
+  .access-panel { padding: clamp(1.25rem, 4vw, 2rem); }
+  .access-status { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(1.3rem, 4vw, 2.2rem); }
+  .access-status.active { border-color: rgba(126,255,203,.35); background: radial-gradient(circle at top left, rgba(126,255,203,.12), transparent 48%), var(--surface); }
+  .access-status h2, .gift-result h2, .access-section-heading h2, .license-card h3 { margin: 0; }
+  .access-status p:not(.eyebrow), .gift-result p:not(.eyebrow), .license-card p { color: var(--muted-text); line-height: 1.6; }
+  .access-status > a, .access-section-heading > a, .access-panel-actions a, .gift-result button, .license-actions button, .market-toolbar button, .market-code-form button {
+    min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text); background: var(--background); text-decoration: none; font: inherit; font-weight: 900; cursor: pointer;
+  }
+  .access-status > a, .access-panel-actions .primary, .gift-result button, .license-actions button:first-child, .market-code-form button { border-color: transparent; color: #07110d; background: var(--accent); }
+  .access-panel-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .gift-result { padding: clamp(1.25rem, 4vw, 2rem); border-color: rgba(126,255,203,.3); }
+  .gift-result code { display: block; padding: .9rem; border-radius: 10px; background: var(--background); overflow-wrap: anywhere; }
+  .gift-result > strong { display: block; margin: .8rem 0; color: var(--accent); font-size: 1.25rem; letter-spacing: .08em; }
+  .access-message { padding: .9rem 1rem; border: 1px solid rgba(126,255,203,.25); border-radius: 12px; color: var(--text); background: rgba(126,255,203,.07); }
+  .access-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .access-section-heading > a { min-height: 40px; padding: .55rem .8rem; }
+  .license-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+  .license-card { padding: 1.25rem; }
+  .license-card > span { color: var(--accent); font-size: .76rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .license-card h3 { margin-top: .45rem; }
+  .license-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
+  .license-actions button.secondary, .market-toolbar button.secondary { color: var(--text); background: var(--background); border-color: var(--border); }
+  .license-actions button:disabled { opacity: .55; cursor: wait; }
+  @media (max-width: 720px) { .access-status, .access-section-heading { display: grid; align-items: start; } .license-grid { grid-template-columns: 1fr; } .access-status > a { width: 100%; } }
+</style>

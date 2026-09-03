@@ -1,0 +1,122 @@
+---
+import AccessGateActions from "./AccessGateActions";
+
+type Props = {
+  returnTo: string;
+  eyebrow?: string;
+  title?: string;
+  message?: string;
+};
+
+const {
+  returnTo,
+  eyebrow = "Digitaler Begleitbereich",
+  title = "Dieser Inhalt gehört zum vollständigen Deck.",
+  message = "Käufer:innen erhalten Zugriff auf alle 54 Argumente, Quellen und die vollständigen Diskussionen.",
+} = Astro.props;
+---
+
+<section class="access-gate" aria-labelledby="access-gate-title">
+  <div class="access-gate-icon" aria-hidden="true">54</div>
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 id="access-gate-title">{title}</h1>
+    <p class="access-gate-copy">{message}</p>
+    <AccessGateActions client:load returnTo={returnTo} />
+  </div>
+</section>
+
+<style is:global>
+  .access-gate {
+    width: min(100%, 880px);
+    min-height: 56vh;
+    margin: clamp(2rem, 7vw, 6rem) auto;
+    padding: clamp(1.4rem, 5vw, 3rem);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.2rem, 4vw, 2.5rem);
+    border: 1px solid rgba(126, 255, 203, 0.24);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top left, rgba(126, 255, 203, 0.12), transparent 45%),
+      var(--surface);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .access-gate-icon {
+    width: clamp(5.5rem, 15vw, 8.5rem);
+    aspect-ratio: 0.72;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(126, 255, 203, 0.48);
+    border-radius: 14px;
+    color: var(--accent);
+    background: rgba(7, 18, 15, 0.78);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 950;
+    transform: rotate(-3deg);
+  }
+
+  .access-gate h1 {
+    max-width: 680px;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .access-gate-copy {
+    max-width: 650px;
+    color: var(--muted-text);
+    font-size: 1.06rem;
+    line-height: 1.7;
+  }
+
+  .access-gate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+  }
+
+  .access-gate-actions a {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--background);
+    text-decoration: none;
+    font-weight: 900;
+  }
+
+  .access-gate-actions .access-primary {
+    border-color: transparent;
+    color: #07110d;
+    background: var(--accent);
+  }
+
+  .access-gate-status {
+    color: var(--muted-text);
+  }
+
+  @media (max-width: 620px) {
+    .access-gate {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      border-radius: 20px;
+    }
+
+    .access-gate-icon {
+      width: 4.8rem;
+    }
+
+    .access-gate-actions {
+      display: grid;
+    }
+  }
+</style>

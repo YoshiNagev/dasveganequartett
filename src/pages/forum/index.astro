@@ -1,9 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { cards } from "../../data/cards";
-import { supabase } from "../../lib/supabaseClient";
+import AccessGate from "../../components/access/AccessGate.astro";
+import { PUBLIC_CARD_IDS } from "../../lib/access";
+import { getAccessState } from "../../lib/server/access";
+import { createSupabaseServerClient } from "../../lib/supabaseServer";
 
 export const prerender = false;
+
+const access = await getAccessState(Astro.cookies, Astro.request);
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
+const visibleCards = access.hasFullAccess
+  ? cards
+  : cards.filter((card) =>
+      PUBLIC_CARD_IDS.includes(card.id as (typeof PUBLIC_CARD_IDS)[number])
+    );
 
 const { data: threads, error } = await supabase
   .from("threads")
@@ -14,7 +25,7 @@ if (error) {
   console.error(error);
 }
 
-const cardsWithThreads = cards.map((card) => ({
+const cardsWithThreads = visibleCards.map((card) => ({
   ...card,
   threadCount:
     threads?.filter((thread) => thread.card_id === card.id).length ?? 0,
@@ -25,11 +36,12 @@ const cardsWithThreads = cards.map((card) => ({
   <section class="page-header">
     <p class="eyebrow">Forum</p>
 
-    <h1>Diskussionen zu allen Karten</h1>
+    <h1>{access.hasFullAccess ? "Diskussionen zu allen Karten" : "Offene Beispieldiskussionen"}</h1>
 
     <p>
-      Finde schnell das Argument, über das du diskutieren möchtest.
-      Angemeldete Nutzer:innen können Threads erstellen.
+      {access.hasFullAccess
+        ? "Finde schnell das Argument, über das du diskutieren möchtest."
+        : "Zu den sechs Beispielkarten kannst du bereits öffentlich mitdiskutieren. Der vollständige Bereich wird mit einem Deck freigeschaltet."}
     </p>
   </section>
 
@@ -40,7 +52,7 @@ const cardsWithThreads = cards.map((card) => ({
 
         <h2>{card.title}</h2>
 
-        <p>{card.category}</p>
+        <p>{card.categoryLabel}</p>
 
         <strong>
           {card.threadCount === 1
@@ -51,7 +63,7 @@ const cardsWithThreads = cards.map((card) => ({
     ))}
   </section>
 
-  <div class="forum-action-grid">
+  {access.hasFullAccess && <div class="forum-action-grid">
     <a
       class="create-thread-link full-width"
       href="/forum/threads"
@@ -65,5 +77,14 @@ const cardsWithThreads = cards.map((card) => ({
     >
       Zusätzliche Argumente ansehen
     </a>
-  </div>
+  </div>}
+
+  {!access.hasFullAccess && (
+    <AccessGate
+      returnTo="/forum"
+      eyebrow="Käuferforum"
+      title="48 weitere Argumentforen warten auf dich."
+      message="Aktiviere den digitalen Zugang eines Decks, um sämtliche Diskussionen und Community-Vorschläge zu öffnen."
+    />
+  )}
 </BaseLayout>

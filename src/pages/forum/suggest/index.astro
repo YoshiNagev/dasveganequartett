@@ -1,19 +1,38 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { getSuggestedArguments } from "../../../lib/suggestedArguments";
+import AccessGate from "../../../components/access/AccessGate.astro";
+import { getAccessState } from "../../../lib/server/access";
+import { createSupabaseServerClient } from "../../../lib/supabaseServer";
 
 export const prerender = false;
 
-let suggestedArguments = [];
+const access = await getAccessState(Astro.cookies, Astro.request);
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
+let suggestedArguments: any[] = [];
 
-try {
-  suggestedArguments = await getSuggestedArguments();
-} catch (error) {
-  console.error(error);
+if (access.hasFullAccess) {
+  const { data, error } = await supabase
+    .from("suggested_arguments")
+    .select(`
+      id,
+      title,
+      description,
+      status,
+      created_at,
+      profiles (nickname),
+      threads (id)
+    `)
+    .eq("is_hidden", false)
+    .order("created_at", { ascending: false });
+
+  if (error) console.error(error);
+  suggestedArguments = data ?? [];
 }
 ---
 
 <BaseLayout title="Vorgeschlagene Argumente">
+  {access.hasFullAccess ? (
+    <>
   <section class="page-header">
     <p class="eyebrow">Forum · Community</p>
     <h1>Vorgeschlagene Argumente</h1>
@@ -67,4 +86,12 @@ try {
       )
     }
   </section>
+    </>
+  ) : (
+    <AccessGate
+      returnTo="/forum/suggest"
+      eyebrow="Käuferforum"
+      title="Community-Vorschläge sind Teil des vollständigen Forums."
+    />
+  )}
 </BaseLayout>

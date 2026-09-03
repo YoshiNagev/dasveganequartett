@@ -3,6 +3,7 @@ import {
   preorderConfig,
   type AllowedPreorderQuantity,
 } from "../../data/preorderConfig";
+import { supabase } from "../../lib/supabaseClient";
 
 type Quote = {
   quantity: AllowedPreorderQuantity;
@@ -12,6 +13,12 @@ type Quote = {
   totalCents: number;
   currency: "eur";
   estimatedShippingDate: string;
+};
+
+type ConnectedAccount = {
+  email: string;
+  nickname: string;
+  accessToken: string;
 };
 
 function formatCents(value: number) {
@@ -27,8 +34,54 @@ export default function PreorderConfigurator() {
   const [loadingQuote, setLoadingQuote] = useState(true);
   const [startingCheckout, setStartingCheckout] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [account, setAccount] = useState<ConnectedAccount | null>(null);
+  const [loadingAccount, setLoadingAccount] = useState(true);
 
   const checkoutEnabled = preorderConfig.preorderOpen || import.meta.env.DEV;
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadAccount() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!active) return;
+
+      if (!session) {
+        setAccount(null);
+        setLoadingAccount(false);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("nickname")
+        .eq("id", session.user.id)
+        .maybeSingle();
+
+      if (!active) return;
+
+      setAccount({
+        email: session.user.email ?? "Angemeldetes Profil",
+        nickname: profile?.nickname ?? "Profil",
+        accessToken: session.access_token,
+      });
+      setLoadingAccount(false);
+    }
+
+    loadAccount();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => loadAccount());
+
+    return () => {
+      active = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -75,7 +128,7 @@ export default function PreorderConfigurator() {
   }, [quantity]);
 
   async function startCheckout() {
-    if (!quote || startingCheckout || !checkoutEnabled) return;
+    if (!quote || !account || startingCheckout || !checkoutEnabled) return;
 
     setStartingCheckout(true);
     setErrorMessage("");
@@ -83,7 +136,10 @@ export default function PreorderConfigurator() {
     try {
       const response = await fetch("/api/preorder/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${account.accessToken}`,
+        },
         body: JSON.stringify({ quantity }),
       });
 
@@ -180,6 +236,30 @@ export default function PreorderConfigurator() {
         ) : null}
       </div>
 
+      <section className="checkout-account" aria-live="polite">
+        <span>Digitaler Zugang für</span>
+        {loadingAccount ? (
+          <p>Profil wird geprüft …</p>
+        ) : account ? (
+          <div>
+            <strong>{account.nickname}</strong>
+            <small>{account.email}</small>
+            <a href="/account/login?returnTo=%2Fpreorder">Anderes Profil verwenden</a>
+          </div>
+        ) : (
+          <div>
+            <strong>Bitte zuerst einloggen</strong>
+            <small>
+              Dein Kauf schaltet alle 54 Argumente und den Käuferbereich frei.
+            </small>
+            <div className="checkout-account-actions">
+              <a href="/account/login?returnTo=%2Fpreorder">Einloggen</a>
+              <a href="/account/register?returnTo=%2Fpreorder">Profil erstellen</a>
+            </div>
+          </div>
+        )}
+      </section>
+
       {errorMessage && (
         <p className="checkout-error" role="alert">{errorMessage}</p>
       )}
@@ -193,15 +273,15 @@ export default function PreorderConfigurator() {
       <button
         className="checkout-button"
         type="button"
-        disabled={!checkoutEnabled || loadingQuote || startingCheckout || !quote}
+        disabled={!checkoutEnabled || loadingQuote || loadingAccount || startingCheckout || !quote || !account}
         onClick={startCheckout}
       >
         {startingCheckout
           ? "Stripe wird geöffnet …"
           : import.meta.env.DEV
-            ? "Testzahlung mit Stripe"
+            ? account ? "Testzahlung mit Stripe" : "Zum Bezahlen einloggen"
             : preorderConfig.preorderOpen
-              ? "Jetzt vorbestellen"
+              ? account ? "Jetzt vorbestellen" : "Zum Bezahlen einloggen"
               : "Vorbestellung öffnet bald"}
       </button>
 

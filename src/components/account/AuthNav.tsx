@@ -33,6 +33,10 @@ export default function AuthNav() {
   if (isLoggedIn) {
     return (
       <div className="auth-nav-group">
+        <a href="/account/access" className="header-auth-link">
+          Zugänge
+        </a>
+
         <a href="/account/profile" className="header-auth-link">
           Profil
         </a>

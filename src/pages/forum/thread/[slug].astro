@@ -3,9 +3,11 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import RealtimeComments from "../../../components/forum/RealtimeComments";
 import MarkdownText from "../../../components/forum/MarkdownText";
 import { cards } from "../../../data/cards";
-import { supabase } from "../../../lib/supabaseClient";
+import { createSupabaseServerClient } from "../../../lib/supabaseServer";
 
 export const prerender = false;
+
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
 
 const { slug } = Astro.params;
 
@@ -70,7 +72,7 @@ const flatComments =
     threadId: comment.thread_id,
     parentId: comment.parent_id,
     userId: comment.user_id,
-    author: comment.profiles?.nickname ?? "Unbekannt",
+    author: (Array.isArray(comment.profiles) ? comment.profiles[0] : comment.profiles)?.nickname ?? "Unbekannt",
     createdAt: new Date(comment.created_at).toLocaleDateString("de-DE"),
     body: comment.body,
     votes: comment.comment_votes?.length ?? 0,
@@ -83,6 +85,12 @@ const flatComments =
 const card = thread.card_id
   ? cards.find((item) => item.id === thread.card_id)
   : null;
+const threadProfile = Array.isArray(thread.profiles)
+  ? thread.profiles[0]
+  : thread.profiles;
+const suggestedArgument = Array.isArray(thread.suggested_arguments)
+  ? thread.suggested_arguments[0]
+  : thread.suggested_arguments;
 
 const contextHref = card
   ? `/cards/${card.id}`
@@ -94,7 +102,7 @@ const contextLabel = card
   ? `Argumentkarte #${String(card.id).padStart(2, "0")} · ${card.title}`
   : thread.suggested_argument_id
     ? `Vorgeschlagenes Argument · ${
-        thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+        suggestedArgument?.title ?? "Unbekanntes Argument"
       }`
     : "Allgemeine Diskussion";
 
@@ -142,8 +150,8 @@ const backLabel = thread.card_id
             <input
               data-thread-title-input
               value={thread.title}
-              minLength="5"
-              maxLength="160"
+              minlength="5"
+              maxlength="160"
               required
             />
           </label>
@@ -153,8 +161,8 @@ const backLabel = thread.card_id
             <textarea
               data-thread-body-input
               rows="7"
-              minLength="10"
-              maxLength="3000"
+              minlength="10"
+              maxlength="3000"
               required
             >{thread.body}</textarea>
           </label>
@@ -198,9 +206,9 @@ const backLabel = thread.card_id
       <div class="thread-hero-meta">
         <a
           class="profile-pill"
-          href={`/user/${thread.profiles?.nickname ?? ""}`}
+          href={`/user/${threadProfile?.nickname ?? ""}`}
         >
-          {thread.profiles?.nickname ?? "Unbekannt"}
+          {threadProfile?.nickname ?? "Unbekannt"}
         </a>
 
         <span>

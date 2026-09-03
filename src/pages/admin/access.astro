@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarketCodesAdmin from "../../components/admin/MarketCodesAdmin";
+---
+
+<BaseLayout title="Zugangscodes verwalten">
+  <section class="page-header no-print">
+    <p class="eyebrow">Admin · Direktverkauf</p>
+    <h1>Zugangskarten erstellen</h1>
+    <p>
+      Erzeuge einmalige Codes für Weihnachtsmärkte und andere Direktverkäufe.
+      Gib pro verkauftem Deck genau eine Zugangskarte aus.
+    </p>
+  </section>
+  <MarketCodesAdmin client:load />
+</BaseLayout>
+
+<style is:global>
+  .market-admin { display: grid; gap: 1.5rem; padding-bottom: 3rem; }
+  .market-summary { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+  .market-summary > div { display: grid; gap: .35rem; padding: 1.1rem; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+  .market-summary span { color: var(--muted-text); }
+  .market-summary strong { color: var(--accent); font-size: 2rem; }
+  .market-code-form { display: grid; grid-template-columns: 140px minmax(240px,1fr) auto; gap: 1rem; align-items: end; padding: 1.2rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+  .market-code-form label { display: grid; gap: .45rem; font-weight: 850; }
+  .market-code-form input { min-width: 0; min-height: 46px; padding: .7rem .8rem; border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: var(--background); }
+  .market-code-form button, .market-toolbar button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1rem; border: 0; border-radius: 999px; color: #07110d; background: var(--accent); font: inherit; font-weight: 900; cursor: pointer; }
+  .market-code-form button:disabled { opacity: .55; cursor: not-allowed; }
+  .market-toolbar { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .market-toolbar button.secondary { border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+  .access-message { padding: .9rem 1rem; border: 1px solid rgba(126,255,203,.25); border-radius: 12px; color: var(--text); background: rgba(126,255,203,.07); }
+  .print-code-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+  .print-code-card { break-inside: avoid; display: grid; justify-items: center; gap: .7rem; padding: 1.25rem; border: 1px dashed rgba(126,255,203,.45); border-radius: 16px; color: var(--text); background: #fff; text-align: center; }
+  .print-code-card > p:first-child { margin: 0; color: #24604a; font-weight: 950; text-transform: uppercase; letter-spacing: .08em; }
+  .print-code-card h2 { margin: 0; color: #07110d; font-size: 1.15rem; }
+  .print-code-card img { width: 150px; height: 150px; }
+  .print-code-card strong { color: #07110d; font-size: 1.05rem; letter-spacing: .08em; }
+  .print-code-card small, .print-code-card > p:last-child { margin: 0; color: #425049; }
+  @media (max-width: 760px) { .market-summary, .market-code-form, .print-code-grid { grid-template-columns: 1fr; } }
+  @media print {
+    .site-header, .site-footer-custom, .no-print { display: none !important; }
+    body, main, .site-main { width: 100% !important; margin: 0 !important; background: #fff !important; }
+    .market-admin { padding: 0; }
+    .print-code-grid { grid-template-columns: repeat(2,1fr); gap: 8mm; }
+    .print-code-card { min-height: 82mm; border: 1px dashed #777; }
+  }
+</style>

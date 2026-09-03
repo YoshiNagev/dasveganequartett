@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 
-export default function LoginForm() {
+type Props = {
+  returnTo?: string;
+};
+
+export default function LoginForm({ returnTo = "/account/profile" }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,7 +34,7 @@ export default function LoginForm() {
 
     setMessage("Login erfolgreich.");
 
-    window.location.href = "/account/profile";
+    window.location.href = returnTo;
   }
 
   return (

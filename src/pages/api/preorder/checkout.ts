@@ -5,6 +5,10 @@ import {
   PreorderValidationError,
 } from "../../../lib/server/preorder";
 import { stripe } from "../../../lib/server/stripe";
+import {
+  AccessAuthError,
+  requireApiUser,
+} from "../../../lib/server/access";
 
 export const prerender = false;
 
@@ -42,6 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
+    const user = await requireApiUser(request);
     const quantity =
       typeof body === "object" && body !== null && "quantity" in body
         ? (body as { quantity?: unknown }).quantity
@@ -57,6 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
         `${siteUrl}/preorder/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/preorder/cancelled`,
       customer_creation: "always",
+      customer_email: user.email,
+      client_reference_id: user.id,
       billing_address_collection: "required",
       shipping_address_collection: {
         allowed_countries: ["DE"],
@@ -89,6 +96,7 @@ export const POST: APIRoute = async ({ request }) => {
       ],
       metadata: {
         product: "das-vegane-quartett",
+        user_id: user.id,
         quantity: String(quote.quantity),
         unit_price_cents: String(quote.unitPriceCents),
         shipping_cost_cents: String(quote.shippingCostCents),
@@ -106,6 +114,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     return json({ checkoutUrl: session.url, sessionId: session.id });
   } catch (error) {
+    if (error instanceof AccessAuthError) {
+      return json({ error: error.message }, error.status);
+    }
+
     if (error instanceof PreorderValidationError) {
       return json({ error: error.message }, error.status);
     }

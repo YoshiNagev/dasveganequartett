@@ -36,6 +36,19 @@ function parseIntegerMetadata(
   return Number(value);
 }
 
+function parseUserId(value: string | null | undefined): string {
+  if (
+    !value ||
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      value
+    )
+  ) {
+    throw new Error("Ungültige Stripe-Metadaten: user_id.");
+  }
+
+  return value;
+}
+
 function getPaymentIntentId(
   paymentIntent: string | Stripe.PaymentIntent | null
 ): string | null {
@@ -89,6 +102,7 @@ function statusFromSession(
 }
 
 type StoredOrder = ConfirmationOrder & {
+  user_id: string;
   status: "pending" | "paid" | "cancelled" | "refunded" | "shipped";
   confirmation_email_sent_at: string | null;
 };
@@ -104,6 +118,7 @@ async function saveCheckoutSession(
   }
 
   const quantity = parseIntegerMetadata(metadata.quantity, "quantity");
+  const userId = parseUserId(metadata.user_id);
   const expectedQuote = createServerPreorderQuote(quantity);
 
   const metadataUnitPrice = parseIntegerMetadata(
@@ -146,7 +161,7 @@ async function saveCheckoutSession(
     .from("orders")
     .upsert(
       {
-        user_id: null,
+        user_id: userId,
         quantity: expectedQuote.quantity,
         unit_price_cents: expectedQuote.unitPriceCents,
         shipping_cost_cents: expectedQuote.shippingCostCents,
@@ -168,6 +183,7 @@ async function saveCheckoutSession(
     )
     .select(`
       id,
+      user_id,
       order_number,
       quantity,
       unit_price_cents,
@@ -275,7 +291,61 @@ async function processCheckoutSession(
   eventType: string
 ): Promise<void> {
   const order = await saveCheckoutSession(session, eventType);
+
+  if (["paid", "shipped"].includes(order.status)) {
+    const { error } = await supabaseAdmin.rpc(
+      "provision_order_access_licenses",
+      { target_order_id: order.id }
+    );
+
+    if (error) {
+      throw new Error(
+        `Digitale Zugänge konnten nicht angelegt werden: ${error.message}`
+      );
+    }
+  }
+
   await sendConfirmationIfNeeded(order);
+}
+
+async function processFullRefund(charge: Stripe.Charge): Promise<void> {
+  if (!charge.refunded || !charge.payment_intent) return;
+
+  const paymentIntentId =
+    typeof charge.payment_intent === "string"
+      ? charge.payment_intent
+      : charge.payment_intent.id;
+
+  const { data: order, error: orderError } = await supabaseAdmin
+    .from("orders")
+    .update({ status: "refunded" })
+    .eq("stripe_payment_intent_id", paymentIntentId)
+    .select("id")
+    .maybeSingle();
+
+  if (orderError) {
+    throw new Error(
+      `Erstattung konnte nicht gespeichert werden: ${orderError.message}`
+    );
+  }
+
+  if (!order) return;
+
+  const { error: licenseError } = await supabaseAdmin
+    .from("access_licenses")
+    .update({
+      status: "revoked",
+      revoked_at: new Date().toISOString(),
+      claim_token_hash: null,
+    })
+    .eq("order_id", order.id)
+    .neq("status", "revoked");
+
+  if (licenseError) {
+    throw new Error(
+      `Zugänge der erstatteten Bestellung konnten nicht gesperrt werden: ${licenseError.message}`
+    );
+  }
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -316,6 +386,10 @@ export const POST: APIRoute = async ({ request }) => {
         await processCheckoutSession(session, event.type);
         break;
       }
+
+      case "charge.refunded":
+        await processFullRefund(event.data.object as Stripe.Charge);
+        break;
 
       default:
         break;

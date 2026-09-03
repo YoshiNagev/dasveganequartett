@@ -2,8 +2,11 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
 import CreateThreadBox from "../../../components/forum/CreateThreadBox";
+import AccessGate from "../../../components/access/AccessGate.astro";
 import { cards } from "../../../data/cards";
-import { supabase } from "../../../lib/supabaseClient";
+import { isPublicCardId } from "../../../lib/access";
+import { getAccessState } from "../../../lib/server/access";
+import { createSupabaseServerClient } from "../../../lib/supabaseServer";
 
 export const prerender = false;
 
@@ -14,9 +17,11 @@ if (!card) {
   return Astro.redirect("/forum");
 }
 
-const { data: threads, error } = await supabase
-  .from("threads")
-  .select(`
+const access = await getAccessState(Astro.cookies, Astro.request);
+const canViewCard = isPublicCardId(card.id) || access.hasFullAccess;
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
+const { data: threads, error } = canViewCard
+  ? await supabase.from("threads").select(`
     id,
     card_id,
     title,
@@ -29,10 +34,11 @@ const { data: threads, error } = await supabase
     comments (
       id
     )
-  `)
-  .eq("card_id", card.id)
-  .eq("is_hidden", false)
-  .order("created_at", { ascending: false });
+    `)
+      .eq("card_id", card.id)
+      .eq("is_hidden", false)
+      .order("created_at", { ascending: false })
+  : { data: null, error: null };
 
 if (error) {
   console.error(error);
@@ -44,13 +50,15 @@ const displayThreads =
     cardId: thread.card_id,
     title: thread.title,
     excerpt: thread.body,
-    author: thread.profiles?.nickname ?? "Unbekannt",
+    author: (Array.isArray(thread.profiles) ? thread.profiles[0] : thread.profiles)?.nickname ?? "Unbekannt",
     replies: thread.comments?.length ?? 0,
     createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
   })) ?? [];
 ---
 
 <BaseLayout title={`Forum zu Karte ${card.id}`}>
+  {canViewCard ? (
+    <>
   <section class="page-header">
     <p class="eyebrow">Forum · Karte #{String(card.id).padStart(2, "0")}</p>
     <h1>{card.title}</h1>
@@ -78,4 +86,12 @@ const displayThreads =
   <CreateThreadBox client:load cardId={card.id} />
 </div>
 </div>
+    </>
+  ) : (
+    <AccessGate
+      returnTo={`/forum/card/${card.id}`}
+      eyebrow={`Forum · Argument #${String(card.id).padStart(2, "0")}`}
+      title="Dieses Argumentforum gehört zum Käuferbereich."
+    />
+  )}
 </BaseLayout>

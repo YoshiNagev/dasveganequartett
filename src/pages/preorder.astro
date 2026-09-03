@@ -107,6 +107,46 @@ import { preorderConfig } from "../data/preorderConfig";
     line-height: 1.65;
   }
 
+  :global(.checkout-account) {
+    display: grid;
+    gap: 0.55rem;
+    padding: 1rem;
+    border: 1px solid rgba(126, 255, 203, 0.24);
+    border-radius: 14px;
+    background: rgba(126, 255, 203, 0.065);
+  }
+
+  :global(.checkout-account > span) {
+    color: var(--muted-text);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  :global(.checkout-account > div) {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  :global(.checkout-account small) {
+    color: var(--muted-text);
+    line-height: 1.5;
+  }
+
+  :global(.checkout-account a) {
+    width: fit-content;
+    margin-top: 0.35rem;
+    color: var(--accent);
+    font-weight: 850;
+  }
+
+  :global(.checkout-account-actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
   .preorder-checkout-card {
     position: sticky;
     top: 7rem;

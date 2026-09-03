@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CreateThreadForm from "../../../components/forum/CreateThreadForm";
+import AccessGate from "../../../components/access/AccessGate.astro";
 import { cards } from "../../../data/cards";
+import { isPublicCardId } from "../../../lib/access";
+import { getAccessState } from "../../../lib/server/access";
 
 export const prerender = false;
 
@@ -11,9 +14,14 @@ const card = cards.find((item) => item.id === cardId);
 if (!card) {
   return Astro.redirect("/forum");
 }
+
+const access = await getAccessState(Astro.cookies, Astro.request);
+const canUseForum = isPublicCardId(card.id) || access.hasFullAccess;
 ---
 
 <BaseLayout title={`Thread erstellen · ${card.title}`}>
+  {canUseForum ? (
+    <>
   <section class="create-thread-page">
     <a href={`/cards/${card.id}`} class="back-link">
       ← Zurück zur Karte
@@ -34,4 +42,8 @@ if (!card) {
       cardTitle={card.title}
     />
   </section>
+    </>
+  ) : (
+    <AccessGate returnTo={`/forum/new/${card.id}`} eyebrow="Käuferforum" />
+  )}
 </BaseLayout>

@@ -3,8 +3,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardHero from "../../components/cards/CardHero.astro";
 import ThreadPreview from "../../components/forum/ThreadPreview.astro";
 import CreateThreadBox from "../../components/forum/CreateThreadBox";
+import AccessGate from "../../components/access/AccessGate.astro";
 import { cards } from "../../data/cards";
-import { supabase } from "../../lib/supabaseClient";
+import { isPublicCardId } from "../../lib/access";
+import { getAccessState } from "../../lib/server/access";
+import { createSupabaseServerClient } from "../../lib/supabaseServer";
 
 export const prerender = false;
 
@@ -15,9 +18,12 @@ if (!card) {
   return Astro.redirect("/cards");
 }
 
-const { data: threads, error } = await supabase
-  .from("threads")
-  .select(`
+const access = await getAccessState(Astro.cookies, Astro.request);
+const canViewCard = isPublicCardId(card.id) || access.hasFullAccess;
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
+
+const { data: threads, error } = canViewCard
+  ? await supabase.from("threads").select(`
     id,
     card_id,
     title,
@@ -30,10 +36,11 @@ const { data: threads, error } = await supabase
     comments (
       id
     )
-  `)
-  .eq("card_id", card.id)
-  .eq("is_hidden", false)
-  .order("created_at", { ascending: false });
+    `)
+      .eq("card_id", card.id)
+      .eq("is_hidden", false)
+      .order("created_at", { ascending: false })
+  : { data: null, error: null };
 
 if (error) {
   console.error(error);
@@ -45,16 +52,18 @@ const displayThreads =
     cardId: thread.card_id,
     title: thread.title,
     excerpt: thread.body,
-    author: thread.profiles?.nickname ?? "Unbekannt",
+    author: (Array.isArray(thread.profiles) ? thread.profiles[0] : thread.profiles)?.nickname ?? "Unbekannt",
     replies: thread.comments?.length ?? 0,
     createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
   })) ?? [];
 ---
 
 <BaseLayout
-  title={`${card.title} | Argumentkarte`}
-  description={`Argumentkarte #${card.id}: ${card.title}`}
+  title={canViewCard ? `${card.title} | Argumentkarte` : `Argumentkarte #${card.id} | Käuferbereich`}
+  description={canViewCard ? `Argumentkarte #${card.id}: ${card.title}` : "Diese Argumentkarte gehört zum digitalen Käuferbereich."}
 >
+  {canViewCard ? (
+    <>
   <CardHero card={card} />
 
 {
@@ -136,4 +145,13 @@ const displayThreads =
 
     <CreateThreadBox client:load cardId={card.id} />
   </section>
+    </>
+  ) : (
+    <AccessGate
+      returnTo={`/cards/${card.id}`}
+      eyebrow={`Argument #${String(card.id).padStart(2, "0")}`}
+      title="Diese Karte gehört zu den 48 geschützten Argumenten."
+      message="Melde dich mit einem freigeschalteten Käuferprofil an oder bestelle ein Deck, um die Karte, ihre Einordnung und das Forum zu öffnen."
+    />
+  )}
 </BaseLayout>

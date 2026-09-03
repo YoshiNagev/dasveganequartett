@@ -84,6 +84,10 @@ Gesamt: ${euro(order.total_cents)}
 
 Voraussichtlicher Versand: Dezember 2026
 
+Dein digitaler Zugang:
+Der erste Deck-Zugang wurde automatisch für dein beim Kauf verwendetes Profil aktiviert. Weitere Deck-Zugänge kannst du als Geschenk weitergeben:
+https://dasveganequartett.de/account/access
+
 Lieferadresse:
 ${lines(order).join("\n")}
 
@@ -136,12 +140,18 @@ function htmlVersion(order: ConfirmationOrder) {
                 <div style="margin-top:6px;color:#7effcb;font-size:19px;font-weight:900;">Dezember 2026</div>
               </div>
 
+              <div style="margin-top:18px;padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;">
+                <div style="color:#7effcb;font-size:13px;font-weight:800;text-transform:uppercase;">Digitaler Käuferzugang</div>
+                <p style="margin:8px 0 0;color:#c8c7c1;line-height:1.6;">Der erste Deck-Zugang wurde für dein beim Kauf verwendetes Profil aktiviert. Weitere Zugänge kannst du als Geschenk weitergeben.</p>
+                <a href="https://dasveganequartett.de/account/access" style="display:inline-block;margin-top:14px;color:#7effcb;font-weight:800;">Zugänge verwalten</a>
+              </div>
+
               <h2 style="margin:26px 0 10px;font-size:19px;">Lieferadresse</h2>
               <p style="margin:0;color:#c8c7c1;line-height:1.65;">${address || "Keine Lieferadresse gespeichert."}</p>
 
               <p style="margin:26px 0 0;color:#c8c7c1;line-height:1.65;">Sobald deine Bestellung versendet wurde, erhältst du eine weitere Nachricht. Bei Fragen kannst du einfach auf diese E-Mail antworten.</p>
 
-              <a href="https://dasveganequartett.de" style="display:inline-block;margin-top:26px;padding:13px 18px;border-radius:999px;background:#7effcb;color:#07110d;font-weight:900;text-decoration:none;">Zur Website</a>
+              <a href="https://dasveganequartett.de/cards" style="display:inline-block;margin-top:26px;padding:13px 18px;border-radius:999px;background:#7effcb;color:#07110d;font-weight:900;text-decoration:none;">Alle Argumente öffnen</a>
             </td>
           </tr>
           <tr>

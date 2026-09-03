@@ -1,10 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadSortBrowser from "../../components/forum/ThreadSortBrowser";
+import AccessGate from "../../components/access/AccessGate.astro";
 import { cards } from "../../data/cards";
-import { supabase } from "../../lib/supabaseClient";
+import { isPublicCardId } from "../../lib/access";
+import { getAccessState } from "../../lib/server/access";
+import { createSupabaseServerClient } from "../../lib/supabaseServer";
 
 export const prerender = false;
+
+const access = await getAccessState(Astro.cookies, Astro.request);
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
 
 const { data: rawThreads, error } = await supabase
   .from("threads")
@@ -35,22 +41,37 @@ if (error) {
   console.error(error);
 }
 
+const accessibleThreads = access.hasFullAccess
+  ? rawThreads
+  : rawThreads?.filter(
+      (thread) => Boolean(thread.card_id) && isPublicCardId(thread.card_id)
+    );
+
 const threads =
-  rawThreads?.map((thread) => {
+  accessibleThreads?.map((thread) => {
     const card = thread.card_id
       ? cards.find((item) => item.id === thread.card_id)
       : null;
+
+    const suggestedArgument = Array.isArray(thread.suggested_arguments)
+      ? thread.suggested_arguments[0]
+      : thread.suggested_arguments;
+    const profile = Array.isArray(thread.profiles)
+      ? thread.profiles[0]
+      : thread.profiles;
 
     const contextLabel = card
       ? `Karte #${String(card.id).padStart(2, "0")} · ${card.title}`
       : thread.suggested_argument_id
         ? `Vorgeschlagenes Argument · ${
-            thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+            suggestedArgument?.title ?? "Unbekanntes Argument"
           }`
         : "Allgemeine Diskussion";
 
     return {
       ...thread,
+      profiles: profile,
+      suggested_arguments: suggestedArgument,
       contextLabel,
     };
   }) ?? [];
@@ -67,4 +88,13 @@ const threads =
   </section>
 
   <ThreadSortBrowser client:load threads={threads} />
+
+  {!access.hasFullAccess && (
+    <AccessGate
+      returnTo="/forum/threads"
+      eyebrow="Weitere Diskussionen"
+      title="Die vollständige Threadübersicht gehört zum Käuferbereich."
+      message="Ohne Freischaltung werden hier ausschließlich Threads zu den sechs öffentlichen Beispielkarten angezeigt."
+    />
+  )}
 </BaseLayout>

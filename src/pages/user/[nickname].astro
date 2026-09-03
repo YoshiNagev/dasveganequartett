@@ -3,9 +3,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../components/forum/ThreadPreview.astro";
 import MarkdownText from "../../components/forum/MarkdownText";
 import { cards } from "../../data/cards";
-import { supabase } from "../../lib/supabaseClient";
+import { isPublicCardId } from "../../lib/access";
+import { getAccessState } from "../../lib/server/access";
+import { createSupabaseServerClient } from "../../lib/supabaseServer";
 
 export const prerender = false;
+
+const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
+const access = await getAccessState(Astro.cookies, Astro.request);
 
 const nickname = Astro.params.nickname;
 
@@ -50,7 +55,9 @@ const { data: comments } = await supabase
     threads!inner (
       slug,
       title,
-      is_hidden
+      is_hidden,
+      card_id,
+      suggested_argument_id
     )
   `)
   .eq("user_id", profile.id)
@@ -59,17 +66,27 @@ const { data: comments } = await supabase
   .order("created_at", { ascending: false })
   .limit(10);
 
+const accessibleThreads = access.hasFullAccess
+  ? threads
+  : threads?.filter(
+      (thread) => Boolean(thread.card_id) && isPublicCardId(thread.card_id)
+    );
+
 const displayThreads =
-  threads?.map((thread) => {
+  accessibleThreads?.map((thread) => {
     const card = thread.card_id
       ? cards.find((item) => item.id === thread.card_id)
       : null;
+
+    const suggestedArgument = Array.isArray(thread.suggested_arguments)
+      ? thread.suggested_arguments[0]
+      : thread.suggested_arguments;
 
     const contextLabel = card
       ? `Karte #${String(card.id).padStart(2, "0")} · ${card.title}`
       : thread.suggested_argument_id
         ? `Vorgeschlagenes Argument · ${
-            thread.suggested_arguments?.title ?? "Unbekanntes Argument"
+            suggestedArgument?.title ?? "Unbekanntes Argument"
           }`
         : "Allgemeine Diskussion";
 
@@ -85,7 +102,14 @@ const displayThreads =
     };
   }) ?? [];
 
-const displayComments = comments ?? [];
+const displayComments = (comments ?? []).flatMap((comment) => {
+  const thread = Array.isArray(comment.threads)
+    ? comment.threads[0]
+    : comment.threads;
+  if (!thread) return [];
+  if (!access.hasFullAccess && !isPublicCardId(thread.card_id)) return [];
+  return [{ ...comment, thread }];
+});
 ---
 
 <BaseLayout title={`${profile.nickname} · Profil`}>
@@ -148,15 +172,15 @@ const displayComments = comments ?? [];
               {displayComments.map((comment) => (
                 <a
                   class="latest-comment-item"
-                  href={`/forum/thread/${comment.threads?.slug ?? ""}`}
+                  href={`/forum/thread/${comment.thread.slug}`}
                 >
-                  <strong>{comment.threads?.title ?? "Unbekannter Thread"}</strong>
+                  <strong>{comment.thread.title}</strong>
 
-                  <MarkdownText>
-                    {comment.body.length > 180
+                  <MarkdownText content={
+                    comment.body.length > 180
                       ? `${comment.body.slice(0, 180)}...`
-                      : comment.body}
-                  </MarkdownText>
+                      : comment.body
+                  } />
 
                   <small>
                     {new Date(comment.created_at).toLocaleDateString("de-DE")}

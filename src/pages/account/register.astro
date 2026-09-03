@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RegisterForm from "../../components/account/RegisterForm";
+import { safeReturnPath } from "../../lib/access";
+
+const returnTo = safeReturnPath(Astro.url.searchParams.get("returnTo"));
 ---
 
 <BaseLayout title="Registrieren">
@@ -13,6 +16,6 @@ import RegisterForm from "../../components/account/RegisterForm";
       </p>
     </div>
 
-    <RegisterForm client:load />
+    <RegisterForm client:load returnTo={returnTo} />
   </section>
 </BaseLayout>
