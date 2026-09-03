@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ReportsPanel from "../../components/admin/ReportsPanel.tsx";
+import AdminTabs from "../../components/admin/AdminTabs.astro";
 
 export const prerender = false;
 ---
@@ -18,15 +19,7 @@ export const prerender = false;
       </p>
     </header>
 
-    <nav class="admin-tabs" aria-label="Admin-Bereiche">
-      <a href="/admin/orders">
-        Bestellungen
-      </a>
-
-      <a href="/admin/reports" aria-current="page">
-        Meldungen
-      </a>
-    </nav>
+    <AdminTabs current="reports" />
 
     <ReportsPanel client:load />
   </section>

@@ -1,0 +1,74 @@
+---
+interface Props {
+  current: "orders" | "reports" | "access";
+}
+
+const { current } = Astro.props;
+
+const tabs = [
+  { id: "orders", href: "/admin/orders", label: "Bestellungen" },
+  { id: "reports", href: "/admin/reports", label: "Meldungen" },
+  { id: "access", href: "/admin/access", label: "Zugangscodes" },
+] as const;
+---
+
+<nav class="admin-area-tabs no-print" aria-label="Admin-Bereiche">
+  {tabs.map((tab) => (
+    <a href={tab.href} aria-current={current === tab.id ? "page" : undefined}>
+      {tab.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .admin-area-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .admin-area-tabs a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted-text);
+    background: var(--surface);
+    font-weight: 900;
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease,
+      background 0.18s ease, transform 0.18s ease;
+  }
+
+  .admin-area-tabs a:hover {
+    color: var(--text);
+    border-color: rgba(126, 255, 203, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .admin-area-tabs a[aria-current="page"] {
+    border-color: transparent;
+    color: #07110d;
+    background: var(--accent);
+  }
+
+  .admin-area-tabs a:focus-visible {
+    outline: 3px solid rgba(126, 255, 203, 0.3);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 460px) {
+    .admin-area-tabs {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .admin-area-tabs a {
+      width: 100%;
+    }
+  }
+</style>
