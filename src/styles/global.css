@@ -1246,6 +1246,72 @@ main {
   border: 1px solid var(--border);
 }
 
+.password-field {
+  position: relative;
+}
+
+.auth-form .password-field input {
+  padding-right: 7.5rem;
+}
+
+.auth-form .password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.65rem;
+  min-height: 38px;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 0.82rem;
+  transform: translateY(-50%);
+}
+
+.auth-form .password-toggle:hover {
+  transform: translateY(-50%);
+  border-color: rgba(126, 255, 203, 0.45);
+}
+
+.forgot-password-link,
+.auth-text-link {
+  width: fit-content;
+  color: var(--accent);
+  font-weight: 850;
+}
+
+.forgot-password-link {
+  justify-self: end;
+  margin-top: -0.35rem;
+}
+
+.auth-success-panel h2,
+.auth-success-panel p {
+  margin: 0;
+}
+
+.auth-success-panel p:not(.eyebrow) {
+  color: var(--muted-text);
+  line-height: 1.6;
+}
+
+.auth-primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #07110d;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+.form-message.is-error {
+  color: #ffc0c0;
+}
+
 .create-thread-form button:disabled {
   opacity: 0.6;
   cursor: wait;

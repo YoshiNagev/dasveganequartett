@@ -306,7 +306,7 @@ export default function PreorderConfigurator() {
       <p className="shipping-note">
         Die Versandkosten betragen pauschal <strong>
           {preorderConfig.shippingCost.toFixed(2).replace(".", ",")} €
-        </strong> pro Bestellung – unabhängig von der Stückzahl.
+        </strong> pro Bestellung, unabhängig von der Stückzahl.
       </p>
 
       <button

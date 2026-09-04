@@ -8,6 +8,7 @@ type Props = {
 export default function LoginForm({ returnTo = "/account/profile" }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -39,27 +40,46 @@ export default function LoginForm({ returnTo = "/account/profile" }: Props) {
 
   return (
     <form className="auth-form" onSubmit={handleLogin}>
-      <label>
+      <label htmlFor="login-email">
         E-Mail
         <input
+          id="login-email"
           type="email"
           placeholder="deine@email.de"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           required
         />
       </label>
 
-      <label>
+      <label htmlFor="login-password">
         Passwort
-        <input
-          type="password"
-          placeholder="••••••••"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="password-field">
+          <input
+            id="login-password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+          />
+          <button
+            className="password-toggle"
+            type="button"
+            aria-controls="login-password"
+            aria-pressed={showPassword}
+            onClick={() => setShowPassword((visible) => !visible)}
+          >
+            {showPassword ? "Verbergen" : "Anzeigen"}
+          </button>
+        </div>
       </label>
+
+      <a className="forgot-password-link" href="/account/forgot-password">
+        Passwort vergessen?
+      </a>
 
       <button type="submit" disabled={loading}>
         {loading ? "Einloggen..." : "Einloggen"}
