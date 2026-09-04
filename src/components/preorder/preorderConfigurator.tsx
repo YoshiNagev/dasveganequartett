@@ -19,6 +19,7 @@ type ConnectedAccount = {
   email: string;
   nickname: string;
   accessToken: string;
+  hasFullAccess: boolean;
 };
 
 function formatCents(value: number) {
@@ -55,11 +56,14 @@ export default function PreorderConfigurator() {
         return;
       }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("nickname")
-        .eq("id", session.user.id)
-        .maybeSingle();
+      const [{ data: profile }, { data: hasFullAccess }] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("nickname")
+          .eq("id", session.user.id)
+          .maybeSingle(),
+        supabase.rpc("has_dvq_access"),
+      ]);
 
       if (!active) return;
 
@@ -67,6 +71,7 @@ export default function PreorderConfigurator() {
         email: session.user.email ?? "Angemeldetes Profil",
         nickname: profile?.nickname ?? "Profil",
         accessToken: session.access_token,
+        hasFullAccess: hasFullAccess === true,
       });
       setLoadingAccount(false);
     }
@@ -257,6 +262,40 @@ export default function PreorderConfigurator() {
               <a href="/account/register?returnTo=%2Fpreorder">Profil erstellen</a>
             </div>
           </div>
+        )}
+      </section>
+
+      <section className="digital-access-info">
+        <strong>
+          {account?.hasFullAccess
+            ? "Du hast bereits einen eigenen Zugang"
+            : "Der erste digitale Zugang gehört zunächst dir"}
+        </strong>
+        {account?.hasFullAccess ? (
+          <p>
+            Der erste Zugang aus dieser neuen Bestellung wird zusätzlich für
+            dein Profil aktiviert. Du kannst ihn danach unter <a href="/account/access">Zugänge</a>
+            {" "}verschenken; dein bisheriger Zugang bleibt dabei aktiv.
+          </p>
+        ) : (
+          <p>
+            Nach erfolgreicher Zahlung wird der erste Zugang automatisch für
+            das oben angezeigte Profil aktiviert. Kaufst du das Deck als
+            Geschenk, kannst du auch diesen eigenen Zugang anschließend unter{" "}
+            <a href="/account/access">Zugänge</a> per Geschenklink weitergeben.
+            Bis du den Geschenklink erzeugst, hast du selbst den vollständigen
+            Zugriff. Beim Erzeugen wird der Zugang von deinem Profil gelöst;
+            beim Einlösen wechselt er zur beschenkten Person.
+          </p>
+        )}
+        {quantity > 1 && (
+          <p>
+            {quantity === 2
+              ? "Für das zweite Deck entsteht ein weiterer freier Zugang."
+              : `Für die übrigen ${quantity - 1} Decks entstehen ${quantity - 1} weitere freie Zugänge.`}{" "}
+            {quantity === 2 ? "Diesen" : "Diese"} kannst du verschenken, ohne
+            deinen eigenen Zugang abzugeben.
+          </p>
         )}
       </section>
 

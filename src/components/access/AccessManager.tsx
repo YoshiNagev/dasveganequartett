@@ -82,13 +82,15 @@ export default function AccessManager() {
   }
 
   async function createGift(license: License) {
-    if (
-      license.status === "mine" &&
-      !window.confirm(
-        "Wenn du diesen Zugang verschenkst, verliert dein Profil diesen Zugang. Fortfahren?"
-      )
-    ) {
-      return;
+    if (license.status === "mine") {
+      const activeLicenseCount =
+        status?.licenses.filter((item) => item.status === "mine").length ?? 0;
+      const confirmationText =
+        activeLicenseCount === 1
+          ? "Das ist dein einziger aktiver Zugang. Sobald du den Geschenklink erzeugst, verliert dein Profil den vollständigen Zugriff. Fortfahren?"
+          : "Dieser Zugang wird von deinem Profil gelöst und als Geschenklink bereitgestellt. Dein anderer aktiver Zugang bleibt erhalten. Fortfahren?";
+
+      if (!window.confirm(confirmationText)) return;
     }
 
     setWorkingId(license.id);
@@ -126,6 +128,89 @@ export default function AccessManager() {
     );
   }
 
+  const activeLicenses =
+    status?.licenses.filter((license) => license.status === "mine") ?? [];
+  const ownLicense = activeLicenses[0] ?? null;
+  const additionalLicenses =
+    status?.licenses.filter((license) => license.id !== ownLicense?.id) ?? [];
+
+  function renderLicenseCard(
+    license: License,
+    label: string,
+    isOwnLicense = false
+  ) {
+    const canManageOrderLicense =
+      Boolean(license.orderNumber) &&
+      (license.status === "mine" || license.status === "available");
+
+    return (
+      <article
+        className={isOwnLicense ? "license-card is-own-license" : "license-card"}
+        key={license.id}
+      >
+        <span>{label}</span>
+        <h3>
+          {license.status === "mine" &&
+            (isOwnLicense
+              ? "Für dein Profil aktiviert"
+              : "Zusätzlich für dein Profil aktiviert")}
+          {license.status === "available" &&
+            (license.codeHint
+              ? `Geschenklink erstellt · …${license.codeHint}`
+              : "Bereit zum Verschenken")}
+          {license.status === "claimed" && "Von einer anderen Person aktiviert"}
+          {license.status === "revoked" && "Gesperrt"}
+        </h3>
+        <p>
+          {license.orderNumber
+            ? `Bestellung ${license.orderNumber}${license.itemNumber ? ` · Deck ${license.itemNumber}` : ""}`
+            : license.note ?? "Eingelöster Direkt- oder Geschenkzugang"}
+        </p>
+
+        {isOwnLicense && license.status === "mine" && (
+          <p className="license-explanation">
+            Dieser Zugang gibt deinem Profil den vollständigen Zugriff. Einen
+            über die Website gekauften Zugang kannst du als Geschenk
+            weitergeben.
+          </p>
+        )}
+
+        {canManageOrderLicense && (
+          <div className="license-actions">
+            {license.status === "available" && (
+              <button
+                type="button"
+                disabled={workingId === license.id}
+                onClick={() => claimForMe(license.id)}
+              >
+                Für mich aktivieren
+              </button>
+            )}
+            <button
+              type="button"
+              className="secondary"
+              disabled={workingId === license.id}
+              onClick={() => createGift(license)}
+            >
+              {license.status === "available" && license.codeHint
+                ? "Neuen Geschenklink erstellen"
+                : isOwnLicense
+                  ? "Eigenen Zugang verschenken"
+                  : "Als Geschenk weitergeben"}
+            </button>
+          </div>
+        )}
+
+        {isOwnLicense && license.status === "mine" && !license.orderNumber && (
+          <p className="license-restriction">
+            Dieser Zugang wurde über einen Code aktiviert und kann nicht erneut
+            weitergegeben werden.
+          </p>
+        )}
+      </article>
+    );
+  }
+
   return (
     <div className="access-dashboard">
       <section className={status?.hasFullAccess ? "access-status active" : "access-status"}>
@@ -145,7 +230,11 @@ export default function AccessManager() {
         <section className="gift-result" aria-live="polite">
           <p className="eyebrow">Einmaliger Geschenklink</p>
           <h2>Jetzt weitergeben</h2>
-          <p>Dieser Link wird aus Sicherheitsgründen nur jetzt vollständig angezeigt.</p>
+          <p>
+            Teile diesen Link mit der beschenkten Person. Sobald sie ihn
+            einlöst, wird der Zugang fest mit ihrem Profil verbunden. Der
+            vollständige Link wird aus Sicherheitsgründen nur jetzt angezeigt.
+          </p>
           <code>{gift.giftUrl}</code>
           <strong>{gift.code}</strong>
           <button type="button" onClick={copyGiftLink}>Link kopieren</button>
@@ -154,62 +243,55 @@ export default function AccessManager() {
 
       {message && <p className="access-message" role="status">{message}</p>}
 
-      <section>
+      <section className="own-access-section">
         <div className="access-section-heading">
           <div>
-            <p className="eyebrow">Deine Decks</p>
-            <h2>Zugänge verwalten</h2>
+            <p className="eyebrow">Dein Profil</p>
+            <h2>Dein eigener Zugang</h2>
           </div>
           <a href="/freischalten">Code einlösen</a>
         </div>
 
-        {status && status.licenses.length > 0 ? (
-          <div className="license-grid">
-            {status.licenses.map((license, index) => (
-              <article className="license-card" key={license.id}>
-                <span>Zugang {index + 1}</span>
-                <h3>
-                  {license.status === "mine" && "Für dein Profil aktiviert"}
-                  {license.status === "available" && (license.codeHint ? `Geschenklink erstellt · …${license.codeHint}` : "Noch frei verfügbar")}
-                  {license.status === "claimed" && "Bereits weitergegeben"}
-                  {license.status === "revoked" && "Gesperrt"}
-                </h3>
-                <p>
-                  {license.orderNumber
-                    ? `Bestellung ${license.orderNumber}${license.itemNumber ? ` · Deck ${license.itemNumber}` : ""}`
-                    : license.note ?? "Direkt- oder Geschenkzugang"}
-                </p>
-                {license.orderNumber &&
-                  (license.status === "mine" || license.status === "available") && (
-                  <div className="license-actions">
-                    {license.status === "available" && (
-                      <button
-                        type="button"
-                        disabled={workingId === license.id}
-                        onClick={() => claimForMe(license.id)}
-                      >
-                        Für mich aktivieren
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      className="secondary"
-                      disabled={workingId === license.id}
-                      onClick={() => createGift(license)}
-                    >
-                      {license.status === "available" && license.codeHint
-                        ? "Neuen Geschenklink erstellen"
-                        : "Als Geschenk weitergeben"}
-                    </button>
-                  </div>
-                )}
-              </article>
-            ))}
+        {ownLicense ? (
+          <div className="license-grid single-license">
+            {renderLicenseCard(ownLicense, "Eigener Zugang", true)}
           </div>
         ) : (
           <div className="empty-state">
-            <h3>Noch keine Zugänge</h3>
-            <p>Nach einer bezahlten Bestellung erscheinen deine Deck-Zugänge hier automatisch.</p>
+            <h3>Noch kein eigener Zugang aktiviert</h3>
+            <p>
+              Nach deiner ersten bezahlten Bestellung wird der erste
+              Deck-Zugang automatisch für dein Profil aktiviert.
+            </p>
+          </div>
+        )}
+      </section>
+
+      <section className="additional-access-section">
+        <div className="access-section-heading">
+          <div>
+            <p className="eyebrow">Geschenke</p>
+            <h2>Weitere Zugänge</h2>
+            <p className="access-section-copy">
+              Jeder weitere Deck-Zugang ist separat. Freie Zugänge kannst du
+              verschenken, ohne deinen eigenen Zugang abzugeben.
+            </p>
+          </div>
+        </div>
+
+        {additionalLicenses.length > 0 ? (
+          <div className="license-grid">
+            {additionalLicenses.map((license, index) =>
+              renderLicenseCard(license, `Weiterer Zugang ${index + 1}`)
+            )}
+          </div>
+        ) : (
+          <div className="empty-state">
+            <h3>Keine weiteren Zugänge vorhanden</h3>
+            <p>
+              Kaufst du mehrere Decks, erscheint jeder zusätzliche Zugang hier
+              und kann mit einem eigenen Geschenklink weitergegeben werden.
+            </p>
           </div>
         )}
       </section>
