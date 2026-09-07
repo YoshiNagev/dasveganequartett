@@ -1198,7 +1198,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-49",
     "title": "Veganer halten sich für was besseres und für moralisch überlegen.",
     "argument": "Veganer halten sich für was besseres und für moralisch überlegen.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Viele Veganerinnen und Veganer fühlen sich Nichtveganerinnen und Nichtveganern tatsächlich moralisch überlegen. Dieses Gefühl ist jedoch kein Grund, vegan zu sein, sondern eine Konsequenz daraus, wenn das Handeln mit den eigenen Werten übereinstimmt.",
     "ratings": {
       "verbreitung": 53,
       "komplexitaet": 14,
@@ -1209,11 +1209,10 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument kritisiert den sozialen Eindruck moralischer Überlegenheit. Befürworter fühlen sich durch Veganismus verurteilt oder herabgesetzt. Die Abwehr richtet sich oft gegen Scham, Schuld und den Verdacht, als schlechter Mensch zu gelten.",
-    "notMeaning": "Das Argument zeigt nicht, dass die Kritik an Tierausbeutung falsch ist. Dass eine Position moralisch herausfordernd wirkt, macht sie nicht automatisch arrogant. Es unterscheidet auch nicht immer zwischen persönlicher Abwertung und Kritik an einer Handlung.",
+    "meaning": "Dieses Argument wirft Veganerinnen und Veganern vor, sich aufgrund ihrer Lebensweise als bessere Menschen zu betrachten, Nichtveganerinnen und Nichtveganer abzuwerten und die eigene moralische Fehlbarkeit zu übersehen.",
+    "notMeaning": "Das Argument bestreitet nicht unbedingt die ethischen Gründe für Veganismus. Es kritisiert vor allem das Gefühl moralischer Überlegenheit, das manche Veganerinnen und Veganer offen oder unterschwellig vermitteln.",
     "commonFormulations": [
       "Veganer halten sich für etwas Besseres.",
-      "Ihr seid moralisch überlegen.",
       "Ihr schaut auf andere herab.",
       "Mit euch kann man nicht normal reden."
     ]
@@ -1223,7 +1222,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-50",
     "title": "Veganer sind Heuchler, da sie SUVs fahren und jedes Jahr ein neues Handy haben.",
     "argument": "Veganer sind Heuchler, da sie SUVs fahren und jedes Jahr ein neues Handy haben.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Veganismus ist das ethische Prinzip, dass Menschen ohne Ausbeutung von Tieren leben sollten. Es ist keine Klimabewegung oder so. Daher wäre es an sich nicht heucherisch, als Veganerin oder Veganer einen SUV zu fahren. Aber selbst wenn es heuchlerisch wäre; sind schlechte Botschafter Anzeichen darauf, dass die Botschaft selbst schlecht ist?",
     "ratings": {
       "verbreitung": 45,
       "komplexitaet": 43,
@@ -1234,8 +1233,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument wirft Veganer:innen Inkonsistenz vor. Befürworter verweisen auf SUVs, Smartphones, Reisen oder andere Konsumprobleme, um vegane Kritik als heuchlerisch darzustellen. Es nutzt echte oder vermeintliche Widersprüche der Person gegen die Position.",
-    "notMeaning": "Das Argument zeigt nicht, dass Tierausbeutung gerechtfertigt ist. Eine unperfekte Person kann trotzdem bei einem bestimmten Thema recht haben. Moralische Inkonsistenz kann kritisiert werden, widerlegt aber nicht automatisch die konkrete Forderung, vermeidbares Tierleid zu reduzieren.",
+    "meaning": "Dieses Argument wirft Veganerinnen und Veganern vor, Tier- und Umweltschutz zu fordern, während sie durch SUVs, Flugreisen, Smartphones oder anderen Konsum selbst erhebliche Schäden verursachen.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Tierprodukte unproblematisch sind. Es soll zeigen, dass Veganerinnen und Veganer ihre eigenen moralischen Ansprüche nicht konsequent erfüllen.",
     "commonFormulations": [
       "Veganer sind Heuchler.",
       "Du hast doch auch ein Handy.",
@@ -1248,7 +1247,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-51",
     "title": "Veganer sind privilegiert und realitätsfern.",
     "argument": "Veganer sind privilegiert und realitätsfern.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Für manche Menschen ist es schwieriger, vegan zu werden als für andere. Doch wer hat es schwerer: wir, wenn wir unsere Gewohnheiten ändern, oder die Tiere, wenn wir es nicht tun? Vegane Lebensmittel sind außerdem keine Luxusprodukte, Brot, Nudeln, Reis, Kartoffeln, Hülsenfrüchte, Gemüse und Obst gehören zu den alltäglichsten Lebensmitteln überhaupt.",
     "ratings": {
       "verbreitung": 44,
       "komplexitaet": 21,
@@ -1259,8 +1258,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument beschreibt Veganismus als privilegierten Lebensstil. Befürworter betonen Einkommen, Bildung, Wohnort, Zeit und Zugang zu Lebensmitteln. Veganismus erscheint dadurch als Forderung, die nicht zu den Lebensrealitäten vieler Menschen passt.",
-    "notMeaning": "Das Argument zeigt nicht, dass Veganismus nur für Privilegierte möglich ist. Es weist aber darauf hin, dass soziale Bedingungen ernst genommen werden müssen. Schwierige Umstände erklären Grenzen der Umsetzbarkeit, rechtfertigen aber nicht jede vermeidbare Tierausbeutung in privilegierten Kontexten.",
+    "meaning": "Dieses Argument stellt Veganismus als teure und lebensfremde Bewegung privilegierter Menschen dar, die alltägliche finanzielle, gesundheitliche oder soziale Schwierigkeiten nicht verstehen würden.",
+    "notMeaning": "Das Argument behauptet nicht nur, dass die Umstellung unterschiedlich schwierig sein kann. Es leitet daraus ab, dass die vegane Forderung selbst realitätsfern oder ungerecht sei.",
     "commonFormulations": [
       "Veganismus ist privilegiert.",
       "Das können sich nur Großstadtmenschen leisten.",
@@ -1273,7 +1272,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-52",
     "title": "Hitler war Vegetarier.",
     "argument": "Hitler war Vegetarier.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Hitler ernährte sich zumindest in seinen letzten Lebensjahren aus Gesundheitsgründen wahrscheinlich vegetarisch, nicht vegan. Aber selbst wenn er vegan gewesen wäre: Eine Handlung wird nicht unmoralisch, nur weil auch ein unmoralischer Mensch sie ausführt. Hitler trank auch Wasser, ist Wasser deshalb schlecht?",
     "ratings": {
       "verbreitung": 38,
       "komplexitaet": 11,
@@ -1285,10 +1284,10 @@ export const cards: ArgumentCard[] = [
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
     "meaning": "Dieses Argument versucht, vegetarische oder vegane Ideale durch eine negative historische Assoziation zu diskreditieren. Befürworter verweisen auf Hitler, um zu zeigen, dass Tierfreundlichkeit oder Fleischverzicht moralisch nichts bedeute.",
-    "notMeaning": "Das Argument zeigt nicht, dass Veganismus falsch ist. Die moralische Bewertung einer Handlung hängt nicht davon ab, ob eine schlechte Person etwas Ähnliches getan haben soll. Es ist in der Regel eine Schuld-durch-Assoziation und keine sachliche Auseinandersetzung mit Tierethik.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass Hitlers Ernährung seine Verbrechen verursachte. Es wird jedoch oft behauptet, Veganerinnen und Veganer seien ebenso fanatisch wie Hitler.",
     "commonFormulations": [
       "Hitler war Vegetarier.",
-      "Auch schlechte Menschen können tierlieb sein.",
+      "Ihr Veganer seid so fanatisch wir Hitler.",
       "Vegetarisch macht niemanden moralisch.",
       "Das sagt doch nichts über gute Werte aus."
     ]
@@ -1298,7 +1297,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-53",
     "title": "Warum lassen Veganer ihr Essen aussehen und schmecken wie Tierprodukte?",
     "argument": "Warum lassen Veganer ihr Essen aussehen und schmecken wie Tierprodukte?",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Veganerinnen und Veganer lehnen nicht den Geschmack oder die Gestalt von Tierprodukten ab, sondern die Ausbeutung und Tötung der Tiere. Wenn sich ein ähnliches Produkt ohne Opfer herstellen lässt, gibt es keinen Widerspruch. Wer Krimis mag, möchte schließlich auch keinen echten Mord.",
     "ratings": {
       "verbreitung": 56,
       "komplexitaet": 5,
@@ -1309,8 +1308,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument wundert sich darüber, dass vegane Produkte Fleisch, Käse oder Milch imitieren. Befürworter sehen darin einen Widerspruch: Wenn Tierprodukte abgelehnt werden, warum sollen Alternativen ähnlich aussehen oder schmecken?",
-    "notMeaning": "Das Argument zeigt nicht, dass Veganer:innen Tierausbeutung heimlich gutheißen. Viele Menschen mögen Geschmack, Textur oder Essgewohnheiten, lehnen aber die Produktion über Tiere ab. Eine pflanzliche Alternative kann vertraute Gerichte ermöglichen, ohne Tiere zu nutzen.",
+    "meaning": "Dieses Argument sieht einen Widerspruch darin, Tierprodukte abzulehnen, aber ihren Geschmack, ihre Bezeichnung oder ihr Aussehen mit pflanzlichen Alternativen nachzuahmen.",
+    "notMeaning": "Das Argument bestreitet nicht unbedingt, dass pflanzliche Alternativen ohne Tierausbeutung hergestellt werden. Es hinterfragt, weshalb Veganerinnen und Veganer etwas imitieren, das sie moralisch ablehnen.",
     "commonFormulations": [
       "Warum imitiert ihr Fleisch?",
       "Wenn du Fleisch vermisst, iss doch echtes.",
@@ -1323,7 +1322,7 @@ export const cards: ArgumentCard[] = [
     "slug": "argument-54",
     "title": "Vegane Landwirtschaft tötet auch Tiere, zum Beispiel bei der Ernte.",
     "argument": "Vegane Landwirtschaft tötet auch Tiere, zum Beispiel bei der Ernte.",
-    "officialShortAnswer": "",
+    "officialShortAnswer": "Eine vegane Ernährung benötigt insgesamt weniger Ackerfläche und verursacht daher tendenziell weniger Erntetode. Außerdem besteht ein moralischer Unterschied zwischen unbeabsichtigten beziehungsweise abwehrenden Schäden beim Nahrungserwerb und der gezielten Zucht, Ausbeutung und Tötung von Tieren.",
     "ratings": {
       "verbreitung": 40,
       "komplexitaet": 51,
@@ -1334,8 +1333,8 @@ export const cards: ArgumentCard[] = [
     },
     "categorySlug": "veganer-innen",
     "categoryLabel": "Veganerinnen & Veganer",
-    "meaning": "Dieses Argument verweist auf Tiere, die im Pflanzenbau sterben, etwa bei Ernte, Bodenbearbeitung oder Schädlingsbekämpfung. Befürworter wollen zeigen, dass vegane Landwirtschaft ebenfalls nicht frei von Tierleid ist.",
-    "notMeaning": "Das Argument zeigt nicht, dass absichtliche Tierhaltung und Tötung gleichzusetzen ist mit unbeabsichtigten Nebenfolgen der Nahrungsproduktion. Da Tierhaltung zusätzlich Futterpflanzen benötigt, kann sie insgesamt sogar mehr solcher Schäden verursachen. Es zeigt vor allem, dass auch pflanzliche Landwirtschaft verbessert werden sollte.",
+    "meaning": "Dieses Argument verweist auf Tiere, die durch Erntemaschinen, Pestizide und die Veränderung ihrer Lebensräume beim Pflanzenanbau sterben. Weil auch vegane Ernährung Tierleid verursacht, sei sie inkonsequent oder nicht besser als der Konsum von Tierprodukten.",
+    "notMeaning": "Das Argument behauptet nicht unbedingt, dass gleich viele Tiere sterben. Bereits die Existenz von Erntetoten soll zeigen, dass eine vollständig tierleidfreie Ernährung unmöglich sei.",
     "commonFormulations": [
       "Bei der Ernte sterben auch Tiere.",
       "Für dein Gemüse werden Mäuse getötet.",
