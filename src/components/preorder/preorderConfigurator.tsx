@@ -38,7 +38,7 @@ export default function PreorderConfigurator() {
   const [account, setAccount] = useState<ConnectedAccount | null>(null);
   const [loadingAccount, setLoadingAccount] = useState(true);
 
-  const checkoutEnabled = preorderConfig.preorderOpen || import.meta.env.DEV;
+  const checkoutEnabled = preorderConfig.preorderOpen;
 
   useEffect(() => {
     let active = true;
@@ -317,17 +317,13 @@ export default function PreorderConfigurator() {
       >
         {startingCheckout
           ? "Stripe wird geöffnet …"
-          : import.meta.env.DEV
-            ? account ? "Testzahlung mit Stripe" : "Zum Bezahlen einloggen"
-            : preorderConfig.preorderOpen
-              ? account ? "Jetzt vorbestellen" : "Zum Bezahlen einloggen"
-              : "Vorbestellung öffnet bald"}
+          : preorderConfig.preorderOpen
+            ? account ? "Jetzt vorbestellen" : "Zum Bezahlen einloggen"
+            : "Vorbestellung öffnet bald"}
       </button>
 
       <p className="checkout-hint">
-        {import.meta.env.DEV
-          ? "Lokaler Testmodus: Es wird kein echtes Geld abgebucht."
-          : "Die Zahlung wird sicher über Stripe Checkout verarbeitet."}
+        Die Zahlung wird sicher über Stripe Checkout verarbeitet.
       </p>
 
       <div className="bulk-order-note">
