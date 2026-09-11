@@ -36,6 +36,7 @@ export default defineConfig({
           "/preorder/cancelled/",
           "/forum/suggest/",
           "/forum/suggest/new/",
+          "/shop/",
         ];
 
         return (
