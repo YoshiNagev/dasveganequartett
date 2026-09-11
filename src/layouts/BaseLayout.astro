@@ -7,15 +7,32 @@ import { product } from "../data/product";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  canonical?: string;
+  image?: string;
+  ogType?: "website" | "article";
 }
 
 const {
   title = product.siteName,
   description = "Das Quartett der Argumente gegen Veganismus: Kartenspiel, QR-Code-Wissensseiten und Diskussionen pro Karte.",
+  noindex = false,
+  canonical,
+  image,
+  ogType = "website",
 } = Astro.props;
 
 const pageTitle =
-  title === product.siteName ? title : `${title} · ${product.siteName}`;
+  title === product.siteName || title.includes(product.siteName)
+    ? title
+    : `${title} · ${product.siteName}`;
+
+const siteBase = Astro.site ?? Astro.url.origin;
+const canonicalURL = canonical
+  ? new URL(canonical, siteBase)
+  : new URL(Astro.url.pathname, siteBase);
+
+const socialImageURL = image ? new URL(image, siteBase) : undefined;
 ---
 
 <!doctype html>
@@ -23,13 +40,42 @@ const pageTitle =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+
     <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content={noindex ? "noindex, follow" : "index, follow"}
+    />
+
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={product.siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+
+    {socialImageURL && (
+      <>
+        <meta property="og:image" content={socialImageURL.href} />
+        <meta name="twitter:image" content={socialImageURL.href} />
+      </>
+    )}
+
+    <meta
+      name="twitter:card"
+      content={socialImageURL ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
     <link
-  rel="icon"
-  type="image/svg+xml"
-  href="/favicon.svg"
-/>
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
   </head>
 
   <body>
