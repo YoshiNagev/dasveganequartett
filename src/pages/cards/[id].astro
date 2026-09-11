@@ -19,7 +19,8 @@ if (!card) {
 }
 
 const access = await getAccessState(Astro.cookies, Astro.request);
-const canViewCard = isPublicCardId(card.id) || access.hasFullAccess;
+const isPublicCard = isPublicCardId(card.id);
+const canViewCard = isPublicCard || access.hasFullAccess;
 const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
 
 const { data: threads, error } = canViewCard
@@ -61,6 +62,7 @@ const displayThreads =
 <BaseLayout
   title={canViewCard ? `${card.title} | Argumentkarte` : `Argumentkarte #${card.id} | Käuferbereich`}
   description={canViewCard ? `Argumentkarte #${card.id}: ${card.title}` : "Diese Argumentkarte gehört zum digitalen Käuferbereich."}
+  noindex={!isPublicCard}
 >
   {canViewCard ? (
     <>
