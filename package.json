@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^5.0.0",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "latest",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.106.2",
