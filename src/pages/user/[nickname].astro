@@ -112,7 +112,7 @@ const displayComments = (comments ?? []).flatMap((comment) => {
 });
 ---
 
-<BaseLayout title={`${profile.nickname} · Profil`}>
+<BaseLayout title={`${profile.nickname} · Profil`} noindex={true}>
   <section class="public-profile-page">
     <div class="public-profile-hero upgraded">
       <div class="profile-avatar public">

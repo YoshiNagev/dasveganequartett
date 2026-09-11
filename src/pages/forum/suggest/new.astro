@@ -8,7 +8,7 @@ export const prerender = false;
 const access = await getAccessState(Astro.cookies, Astro.request);
 ---
 
-<BaseLayout title="Argument vorschlagen">
+<BaseLayout title="Argument vorschlagen" noindex={true}>
   {access.hasFullAccess ? (
     <>
   <section class="create-thread-page">

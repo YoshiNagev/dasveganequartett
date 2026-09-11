@@ -5,7 +5,7 @@ import RedeemAccess from "../components/access/RedeemAccess";
 const initialCode = Astro.url.searchParams.get("code") ?? "";
 ---
 
-<BaseLayout title="Digitalen Zugang freischalten">
+<BaseLayout title="Digitalen Zugang freischalten" noindex={true}>
   <section class="redeem-page">
     <div>
       <p class="eyebrow">Markt- oder Geschenkzugang</p>

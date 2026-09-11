@@ -3,6 +3,8 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import RealtimeComments from "../../../components/forum/RealtimeComments";
 import MarkdownText from "../../../components/forum/MarkdownText";
 import { cards } from "../../../data/cards";
+import { isPublicCardId } from "../../../lib/access";
+import { getAccessState } from "../../../lib/server/access";
 import { createSupabaseServerClient } from "../../../lib/supabaseServer";
 
 export const prerender = false;
@@ -34,6 +36,15 @@ const { data: thread, error: threadError } = await supabase
   .single();
 
 if (threadError || !thread) {
+  return Astro.redirect("/forum");
+}
+
+const access = await getAccessState(Astro.cookies, Astro.request);
+const canViewThread =
+  access.hasFullAccess ||
+  (Boolean(thread.card_id) && isPublicCardId(thread.card_id));
+
+if (!canViewThread) {
   return Astro.redirect("/forum");
 }
 

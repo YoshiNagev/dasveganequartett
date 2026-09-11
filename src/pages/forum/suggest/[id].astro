@@ -60,7 +60,7 @@ const argumentProfile = Array.isArray(argument?.profiles)
   : argument?.profiles;
 ---
 
-<BaseLayout title={argument ? `${argument.title} · Vorgeschlagenes Argument` : "Vorgeschlagenes Argument · Käuferforum"}>
+<BaseLayout title={argument ? `${argument.title} · Vorgeschlagenes Argument` : "Vorgeschlagenes Argument · Käuferforum"} noindex={true}>
   {access.hasFullAccess && argument ? (
     <>
   <section class="thread-page">

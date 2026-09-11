@@ -19,7 +19,7 @@ const access = await getAccessState(Astro.cookies, Astro.request);
 const canUseForum = isPublicCardId(card.id) || access.hasFullAccess;
 ---
 
-<BaseLayout title={`Thread erstellen · ${card.title}`}>
+<BaseLayout title={`Thread erstellen · ${card.title}`} noindex={true}>
   {canUseForum ? (
     <>
   <section class="create-thread-page">

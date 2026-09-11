@@ -5,9 +5,14 @@ import sitemap from "@astrojs/sitemap";
 
 const site = "https://dasveganequartett.de";
 
-const cardPages = Array.from(
-  { length: 54 },
-  (_, index) => `${site}/cards/${index + 1}/`
+const publicCardIds = [1, 16, 24, 29, 37, 48];
+
+const cardPages = publicCardIds.map(
+  (id) => `${site}/cards/${id}/`
+);
+
+const publicCardPaths = new Set(
+  publicCardIds.map((id) => `/cards/${id}/`)
 );
 
 export default defineConfig({
@@ -38,6 +43,16 @@ export default defineConfig({
           "/forum/suggest/new/",
           "/shop/",
         ];
+
+        if (
+          /^\/cards\/\d+\/?$/.test(pathname)
+        ) {
+          const normalizedPath = pathname.endsWith("/")
+            ? pathname
+            : `${pathname}/`;
+
+          return publicCardPaths.has(normalizedPath);
+        }
 
         return (
           !excludedPrefixes.some((prefix) =>
