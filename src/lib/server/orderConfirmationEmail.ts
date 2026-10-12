@@ -82,7 +82,7 @@ ${order.quantity} × Das Vegane Quartett: ${euro(
 Versand: ${euro(order.shipping_cost_cents)}
 Gesamt: ${euro(order.total_cents)}
 
-Voraussichtlicher Versand: Dezember 2026
+Voraussichtlicher Versand: 20. November 2026
 
 Dein digitaler Zugang:
 Der erste Deck-Zugang wurde automatisch für dein beim Kauf verwendetes Profil aktiviert. Weitere Deck-Zugänge kannst du als Geschenk weitergeben:
@@ -137,7 +137,7 @@ function htmlVersion(order: ConfirmationOrder) {
 
               <div style="padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;">
                 <div style="color:#a8aaa7;font-size:12px;font-weight:800;text-transform:uppercase;">Voraussichtlicher Versand</div>
-                <div style="margin-top:6px;color:#7effcb;font-size:19px;font-weight:900;">Dezember 2026</div>
+                <div style="margin-top:6px;color:#7effcb;font-size:19px;font-weight:900;">20. November 2026</div>
               </div>
 
               <div style="margin-top:18px;padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;">
