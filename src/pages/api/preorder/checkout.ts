@@ -77,7 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
             product_data: {
               name: "Das Vegane Quartett",
               description:
-                "Presale · voraussichtlicher Versand ab dem 20. November 2026",
+                `Presale · Versandstart ${quote.estimatedShippingDate}`,
             },
           },
         },

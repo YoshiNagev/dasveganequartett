@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { preorderConfig } from "../../data/preorderConfig";
 
 const apiKey = import.meta.env.RESEND_API_KEY;
 const fromAddress =
@@ -82,7 +83,7 @@ ${order.quantity} × Das Vegane Quartett: ${euro(
 Versand: ${euro(order.shipping_cost_cents)}
 Gesamt: ${euro(order.total_cents)}
 
-Voraussichtlicher Versand: 20. November 2026
+Versandstart: ${preorderConfig.estimatedShippingDate}
 
 Dein digitaler Zugang:
 Der erste Deck-Zugang wurde automatisch für dein beim Kauf verwendetes Profil aktiviert. Weitere Deck-Zugänge kannst du als Geschenk weitergeben:
@@ -104,58 +105,69 @@ function htmlVersion(order: ConfirmationOrder) {
 
   return `<!doctype html>
 <html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deine Vorbestellung</title>
+  <style>
+    @media screen and (max-width: 480px) {
+      .email-content { padding:24px 18px !important; }
+      .email-title { font-size:28px !important; }
+    }
+  </style>
+</head>
 <body style="margin:0;background:#07090a;color:#fffdf4;font-family:Arial,sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#07090a;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#07090a;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;" bgcolor="#07090a">
     <tr>
-      <td align="center" style="padding:32px 16px;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#181b1d;border:1px solid #2b3033;border-radius:22px;overflow:hidden;">
+      <td align="center" style="padding:32px 16px;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#181b1d;border:1px solid #2b3033;border-radius:22px;overflow:hidden;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;" bgcolor="#181b1d">
           <tr>
-            <td style="padding:32px;">
-              <div style="color:#7effcb;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;">Vorbestellung bestätigt</div>
-              <h1 style="margin:14px 0 0;font-size:36px;line-height:1.05;color:#fffdf4;">Vielen Dank${order.shipping_name ? ` ${esc(order.shipping_name)}` : ""}!</h1>
-              <p style="color:#c8c7c1;font-size:17px;line-height:1.65;">Deine Zahlung wurde bestätigt und deine Vorbestellung ist eingegangen.</p>
+            <td class="email-content" style="padding:32px;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+              <div style="color:#7effcb;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Vorbestellung bestätigt</div>
+              <h1 class="email-title" style="margin:14px 0 0;font-size:36px;line-height:1.25;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;">Vielen Dank${order.shipping_name ? ` ${esc(order.shipping_name)}` : ""}!</h1>
+              <p style="color:#c8c7c1;font-size:17px;line-height:1.65;font-family:Arial,Helvetica,sans-serif;">Deine Zahlung wurde bestätigt und deine Vorbestellung ist eingegangen.</p>
 
-              <div style="margin-top:22px;padding:18px 20px;background:#07090a;border-radius:15px;">
-                <div style="color:#a8aaa7;font-size:13px;">Bestellnummer</div>
-                <div style="margin-top:5px;font-weight:800;">${esc(order.order_number)}</div>
+              <div style="margin-top:22px;padding:18px 20px;background:#07090a;border-radius:15px;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+                <div style="color:#a8aaa7;font-size:13px;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Bestellnummer</div>
+                <div style="margin-top:5px;font-weight:800;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">${esc(order.order_number)}</div>
               </div>
 
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:18px;border-collapse:collapse;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:18px;border-collapse:collapse;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
                 <tr>
-                  <td style="padding:14px 0;border-bottom:1px solid #2b3033;">${order.quantity} × Das Vegane Quartett</td>
-                  <td align="right" style="padding:14px 0;border-bottom:1px solid #2b3033;font-weight:800;">${euro(order.quantity * order.unit_price_cents)}</td>
+                  <td style="padding:14px 0;border-bottom:1px solid #2b3033;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">${order.quantity} × Das Vegane Quartett</td>
+                  <td align="right" style="padding:14px 0;border-bottom:1px solid #2b3033;font-weight:800;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">${euro(order.quantity * order.unit_price_cents)}</td>
                 </tr>
                 <tr>
-                  <td style="padding:14px 0;border-bottom:1px solid #2b3033;color:#c8c7c1;">Versand</td>
-                  <td align="right" style="padding:14px 0;border-bottom:1px solid #2b3033;font-weight:800;">${euro(order.shipping_cost_cents)}</td>
+                  <td style="padding:14px 0;border-bottom:1px solid #2b3033;color:#c8c7c1;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">Versand</td>
+                  <td align="right" style="padding:14px 0;border-bottom:1px solid #2b3033;font-weight:800;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">${euro(order.shipping_cost_cents)}</td>
                 </tr>
                 <tr>
-                  <td style="padding:18px 0;font-size:19px;font-weight:800;">Gesamt</td>
-                  <td align="right" style="padding:18px 0;color:#7effcb;font-size:22px;font-weight:900;">${euro(order.total_cents)}</td>
+                  <td style="padding:18px 0;font-size:19px;font-weight:800;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Gesamt</td>
+                  <td align="right" style="padding:18px 0;color:#7effcb;font-size:22px;font-weight:900;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">${euro(order.total_cents)}</td>
                 </tr>
               </table>
 
-              <div style="padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;">
-                <div style="color:#a8aaa7;font-size:12px;font-weight:800;text-transform:uppercase;">Voraussichtlicher Versand</div>
-                <div style="margin-top:6px;color:#7effcb;font-size:19px;font-weight:900;">20. November 2026</div>
+              <div style="padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+                <div style="color:#a8aaa7;font-size:12px;font-weight:800;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Versandstart</div>
+                <div style="margin-top:6px;color:#7effcb;font-size:19px;font-weight:900;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">${esc(preorderConfig.estimatedShippingDate)}</div>
               </div>
 
-              <div style="margin-top:18px;padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;">
-                <div style="color:#7effcb;font-size:13px;font-weight:800;text-transform:uppercase;">Digitaler Käuferzugang</div>
-                <p style="margin:8px 0 0;color:#c8c7c1;line-height:1.6;">Der erste Deck-Zugang wurde für dein beim Kauf verwendetes Profil aktiviert. Weitere Zugänge kannst du als Geschenk weitergeben.</p>
-                <a href="https://dasveganequartett.de/account/access" style="display:inline-block;margin-top:14px;color:#7effcb;font-weight:800;">Zugänge verwalten</a>
+              <div style="margin-top:18px;padding:18px 20px;border:1px solid #315b49;border-radius:15px;background:#102019;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+                <div style="color:#7effcb;font-size:13px;font-weight:800;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Digitaler Käuferzugang</div>
+                <p style="margin:8px 0 0;color:#c8c7c1;line-height:1.6;font-family:Arial,Helvetica,sans-serif;font-size:16px;">Der erste Deck-Zugang wurde für dein beim Kauf verwendetes Profil aktiviert. Weitere Zugänge kannst du als Geschenk weitergeben.</p>
+                <a href="https://dasveganequartett.de/account/access" style="display:inline-block;margin-top:14px;color:#7effcb;font-weight:800;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">Zugänge verwalten</a>
               </div>
 
-              <h2 style="margin:26px 0 10px;font-size:19px;">Lieferadresse</h2>
-              <p style="margin:0;color:#c8c7c1;line-height:1.65;">${address || "Keine Lieferadresse gespeichert."}</p>
+              <h2 style="margin:26px 0 10px;font-size:19px;color:#fffdf4;font-family:Arial,Helvetica,sans-serif;line-height:1.6;">Lieferadresse</h2>
+              <p style="margin:0;color:#c8c7c1;line-height:1.65;font-family:Arial,Helvetica,sans-serif;font-size:16px;">${address || "Keine Lieferadresse gespeichert."}</p>
 
-              <p style="margin:26px 0 0;color:#c8c7c1;line-height:1.65;">Sobald deine Bestellung versendet wurde, erhältst du eine weitere Nachricht. Bei Fragen kannst du einfach auf diese E-Mail antworten.</p>
+              <p style="margin:26px 0 0;color:#c8c7c1;line-height:1.65;font-family:Arial,Helvetica,sans-serif;font-size:16px;">Sobald deine Bestellung versendet wurde, erhältst du eine weitere Nachricht. Bei Fragen kannst du einfach auf diese E-Mail antworten.</p>
 
-              <a href="https://dasveganequartett.de/cards" style="display:inline-block;margin-top:26px;padding:13px 18px;border-radius:999px;background:#7effcb;color:#07110d;font-weight:900;text-decoration:none;">Alle Argumente öffnen</a>
+              <a href="https://dasveganequartett.de/cards" style="display:inline-block;margin-top:26px;padding:13px 18px;border-radius:999px;background:#7effcb;color:#07110d;font-weight:900;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">Alle Argumente öffnen</a>
             </td>
           </tr>
           <tr>
-            <td style="padding:22px 32px;border-top:1px solid #2b3033;color:#8c8e8a;font-size:13px;line-height:1.6;">
+            <td style="padding:22px 32px;border-top:1px solid #2b3033;color:#c8c7c1;font-size:13px;line-height:1.6;font-family:Arial,Helvetica,sans-serif;">
               Das Vegane Quartett · kontakt@dasveganequartett.de<br>
               Für Tiere. Für gute Argumente. Für bessere Gespräche.
             </td>
