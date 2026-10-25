@@ -3,6 +3,7 @@ import AccessGateActions from "./AccessGateActions";
 
 type Props = {
   returnTo: string;
+  headingLevel?: "h1" | "h2";
   eyebrow?: string;
   title?: string;
   message?: string;
@@ -10,6 +11,7 @@ type Props = {
 
 const {
   returnTo,
+  headingLevel: Heading = "h1",
   eyebrow = "Digitaler Begleitbereich",
   title = "Dieser Inhalt gehört zum vollständigen Deck.",
   message = "Käufer:innen erhalten Zugriff auf alle 54 Argumente, Quellen und die vollständigen Diskussionen.",
@@ -20,7 +22,7 @@ const {
   <div class="access-gate-icon" aria-hidden="true">54</div>
   <div>
     <p class="eyebrow">{eyebrow}</p>
-    <h1 id="access-gate-title">{title}</h1>
+    <Heading id="access-gate-title">{title}</Heading>
     <p class="access-gate-copy">{message}</p>
     <AccessGateActions client:load returnTo={returnTo} />
   </div>
@@ -58,7 +60,7 @@ const {
     transform: rotate(-3deg);
   }
 
-  .access-gate h1 {
+  .access-gate :is(h1,h2) {
     max-width: 680px;
     margin: 0;
     font-size: clamp(2rem, 5vw, 4.2rem);

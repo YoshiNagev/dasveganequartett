@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import RealtimeComments from "../../../components/forum/RealtimeComments";
 import MarkdownText from "../../../components/forum/MarkdownText";
@@ -130,7 +132,9 @@ const backLabel = thread.card_id
     : "← Zurück zum Forum";
 ---
 
-<BaseLayout title={`${thread.title} · Das Vegane Quartett`}>
+<BaseLayout design="editorial" title={`${thread.title} · Das Vegane Quartett`}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   <section class="thread-page">
     <a class="back-link" href={backHref}>
       {backLabel}
@@ -390,6 +394,7 @@ const backLabel = thread.card_id
       }
     }
   </script>
+  </div>
 </BaseLayout>
 
 <style>

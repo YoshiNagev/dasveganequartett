@@ -14,7 +14,8 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     let active = true;
     const params = new URLSearchParams(window.location.search);
-    const urlError = params.get("error_description");
+    const hashParams = new URLSearchParams(window.location.hash.slice(1));
+    const urlError = params.get("error_description") || params.get("error") || hashParams.get("error_description") || hashParams.get("error");
 
     if (urlError) {
       setMessage("Der Link ist ungültig oder abgelaufen. Fordere bitte einen neuen an.");
@@ -28,6 +29,7 @@ export default function ResetPasswordForm() {
       if (!active) return;
       if (event === "PASSWORD_RECOVERY" || session) {
         setLinkIsValid(true);
+        setMessage("");
         setCheckingLink(false);
       }
     });
@@ -42,6 +44,10 @@ export default function ResetPasswordForm() {
         setMessage("Der Link ist ungültig oder abgelaufen. Fordere bitte einen neuen an.");
       }
       setCheckingLink(false);
+    }).catch(() => {
+      if (!active) return;
+      setMessage("Der Link konnte nicht geprüft werden. Bitte lade die Seite erneut.");
+      setCheckingLink(false);
     });
 
     return () => {
@@ -52,6 +58,7 @@ export default function ResetPasswordForm() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (saving || !linkIsValid) return;
     setMessage("");
 
     if (password.length < 8) {
@@ -65,18 +72,17 @@ export default function ResetPasswordForm() {
     }
 
     setSaving(true);
-    const { error } = await supabase.auth.updateUser({ password });
-
-    if (error) {
-      setMessage("Das Passwort konnte nicht geändert werden. Fordere bitte einen neuen Link an.");
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) throw error;
+      setComplete(true);
+      setPassword("");
+      setConfirmation("");
+    } catch {
+      setMessage("Das Passwort konnte nicht geändert werden. Bitte versuche es erneut oder fordere einen neuen Link an.");
+    } finally {
       setSaving(false);
-      return;
     }
-
-    setComplete(true);
-    setPassword("");
-    setConfirmation("");
-    setSaving(false);
   }
 
   if (checkingLink) {
@@ -115,12 +121,14 @@ export default function ResetPasswordForm() {
   }
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit} aria-busy={saving}>
+      <header className="ea-form-heading"><p className="ed-kicker">Schritt 2 · Neues Passwort</p><h2>Wieder startklar.</h2></header>
       <label htmlFor="new-password">
         Neues Passwort
         <div className="password-field">
           <input
             id="new-password"
+            aria-describedby="password-hint"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
@@ -132,7 +140,8 @@ export default function ResetPasswordForm() {
           <button
             className="password-toggle"
             type="button"
-            aria-controls="new-password"
+            aria-controls="new-password new-password-confirmation"
+            disabled={saving}
             aria-pressed={showPassword}
             onClick={() => setShowPassword((visible) => !visible)}
           >
@@ -141,6 +150,7 @@ export default function ResetPasswordForm() {
         </div>
       </label>
 
+      <p id="password-hint" className="er-hint">Mindestens 8 Zeichen. Wiederhole dasselbe Passwort im zweiten Feld.</p>
       <label htmlFor="new-password-confirmation">
         Neues Passwort wiederholen
         <input
@@ -160,7 +170,7 @@ export default function ResetPasswordForm() {
       </button>
 
       {message && (
-        <p className="form-message is-error" role="alert">{message}</p>
+        <p className="form-message is-error" role="alert">{message} <a href="/account/forgot-password">Neuen Link anfordern</a></p>
       )}
     </form>
   );

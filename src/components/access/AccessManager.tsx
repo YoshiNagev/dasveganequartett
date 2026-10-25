@@ -38,18 +38,20 @@ export default function AccessManager() {
   }
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data }) => {
-      const token = data.session?.access_token ?? "";
-      setAccessToken(token);
-      if (token) {
-        try {
-          await loadStatus(token);
-        } catch (error) {
-          setMessage(error instanceof Error ? error.message : "Zugänge konnten nicht geladen werden.");
-        }
+    async function initialize() {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        const token = data.session?.access_token ?? "";
+        setAccessToken(token);
+        if (token) await loadStatus(token);
+      } catch (error) {
+        setMessage(error instanceof Error ? error.message : "Zugänge konnten nicht geladen werden.");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    }
+    initialize();
   }, []);
 
   async function postAction(path: string, body: Record<string, string>) {
@@ -67,6 +69,7 @@ export default function AccessManager() {
   }
 
   async function claimForMe(licenseId: string) {
+    if (workingId) return;
     setWorkingId(licenseId);
     setMessage("");
     setGift(null);
@@ -82,6 +85,7 @@ export default function AccessManager() {
   }
 
   async function createGift(license: License) {
+    if (workingId) return;
     if (license.status === "mine") {
       const activeLicenseCount =
         status?.licenses.filter((item) => item.status === "mine").length ?? 0;
@@ -109,16 +113,21 @@ export default function AccessManager() {
 
   async function copyGiftLink() {
     if (!gift) return;
-    await navigator.clipboard.writeText(gift.giftUrl);
-    setMessage("Geschenklink kopiert.");
+    try {
+      await navigator.clipboard.writeText(gift.giftUrl);
+      setMessage("Geschenklink kopiert.");
+    } catch {
+      setMessage("Automatisches Kopieren ist nicht möglich. Markiere den oben angezeigten Link und kopiere ihn manuell.");
+    }
   }
 
-  if (loading) return <div className="access-panel"><p>Zugänge werden geladen …</p></div>;
+  if (loading) return <div className="access-panel"><p role="status">Zugänge werden geladen …</p></div>;
 
   if (!accessToken) {
     return (
       <div className="access-panel">
         <h2>Bitte zuerst einloggen</h2>
+        {message && <p role="alert">{message}</p>}
         <p>Deine Zugänge sind fest mit deinem Profil verbunden.</p>
         <div className="access-panel-actions">
           <a className="primary" href="/account/login?returnTo=%2Faccount%2Faccess">Einloggen</a>
@@ -127,6 +136,14 @@ export default function AccessManager() {
       </div>
     );
   }
+
+  if (!status) return (
+    <section className="access-panel">
+      <h2>Der Zugangsstatus ist gerade nicht verfügbar.</h2>
+      <p role="alert">{message || "Deine Zugänge konnten nicht geladen werden."}</p>
+      <div className="access-panel-actions"><a href="/account/access">Erneut laden</a></div>
+    </section>
+  );
 
   const activeLicenses =
     status?.licenses.filter((license) => license.status === "mine") ?? [];
@@ -180,19 +197,19 @@ export default function AccessManager() {
             {license.status === "available" && (
               <button
                 type="button"
-                disabled={workingId === license.id}
+                disabled={Boolean(workingId)}
                 onClick={() => claimForMe(license.id)}
               >
-                Für mich aktivieren
+                {workingId === license.id ? "Wird verarbeitet …" : "Für mich aktivieren"}
               </button>
             )}
             <button
               type="button"
               className="secondary"
-              disabled={workingId === license.id}
+              disabled={Boolean(workingId)}
               onClick={() => createGift(license)}
             >
-              {license.status === "available" && license.codeHint
+              {workingId === license.id ? "Wird verarbeitet …" : license.status === "available" && license.codeHint
                 ? "Neuen Geschenklink erstellen"
                 : isOwnLicense
                   ? "Eigenen Zugang verschenken"
@@ -223,7 +240,7 @@ export default function AccessManager() {
               : "Bestelle ein Deck oder löse einen Markt- beziehungsweise Geschenkcode ein."}
           </p>
         </div>
-        {status?.hasFullAccess && <a href="/cards">Alle Argumente öffnen</a>}
+        {status.hasFullAccess ? <a href="/cards">Alle Argumente öffnen</a> : <div className="access-panel-actions"><a className="primary" href="/freischalten">Code einlösen</a><a href="/preorder">Deck bestellen</a></div>}
       </section>
 
       {gift && (

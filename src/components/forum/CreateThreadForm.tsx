@@ -71,7 +71,7 @@ export default function CreateThreadForm({ cardId, cardTitle }: Props) {
         {loading ? "Thread wird erstellt..." : "Thread veröffentlichen"}
       </button>
 
-      {message && <p className="form-message">{message}</p>}
+      {message && <p className="form-message" role="alert">{message}</p>}
     </form>
   );
 }

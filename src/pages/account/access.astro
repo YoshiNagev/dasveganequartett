@@ -1,19 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AccessManager from "../../components/access/AccessManager";
+import "../../styles/account-editorial.css";
 ---
-
-<BaseLayout title="Digitale Zugänge verwalten" noindex={true}>
-  <section class="page-header">
-    <p class="eyebrow">Account · Käuferbereich</p>
-    <h1>Deine digitalen Zugänge</h1>
-    <p>
-      Dein eigener Zugang ist klar von weiteren Geschenkzugängen getrennt. Pro
-      gekauftem Deck entsteht genau eine Berechtigung.
-    </p>
-  </section>
-
-  <AccessManager client:load />
+<BaseLayout design="editorial" title="Digitale Zugänge verwalten" noindex={true}>
+  <div class="em-account">
+    <header class="em-heading"><p class="ed-kicker">Dein Konto · Käuferbereich</p><h1>Deine Zugänge.</h1><p>Dein eigener Zugang und Platz zum Verschenken. Pro gekauftem Deck erhältst du eine digitale Berechtigung.</p></header>
+    <nav class="em-nav" aria-label="Kontobereich"><a href="/account/profile">Profil</a><a href="/account/access" aria-current="page">Meine Zugänge</a><a href="/account/notifications">Benachrichtigungen</a></nav>
+    <AccessManager client:load />
+    <noscript><p>Bitte aktiviere JavaScript, um deine Zugänge zu laden und zu verwalten.</p></noscript>
+    <details class="em-disclosure em-access-help"><summary>Wie funktioniert das Verschenken?</summary><ol><li>Wähle bei einem verfügbaren Zugang „Als Geschenk weitergeben“.</li><li>Kopiere den erzeugten Link und gib ihn an die beschenkte Person weiter. Der vollständige Link wird nur direkt nach dem Erstellen angezeigt.</li><li>Die Person löst den Link mit ihrem eigenen Profil ein. Danach ist dieser Zugang mit ihrem Konto verbunden.</li></ol><p><strong>Deinen eigenen Zugang verschenken:</strong> Beim Erzeugen des Geschenklinks wird er von deinem Profil gelöst. Ist es dein einziger aktiver Zugang, verlierst du dadurch den vollständigen Zugriff. Die Website fragt vorher noch einmal nach.</p><p>Ein weiterer freier Zugang lässt sich verschenken, ohne deinen eigenen abzugeben. Bereits per Code eingelöste Zugänge können hier nicht erneut weitergegeben werden.</p></details>
+  </div>
 </BaseLayout>
 
 <style is:global>

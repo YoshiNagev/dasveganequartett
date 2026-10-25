@@ -133,7 +133,7 @@ export default function PreorderConfigurator() {
   }, [quantity]);
 
   async function startCheckout() {
-    if (!quote || !account || startingCheckout || !checkoutEnabled) return;
+    if (!quote || quote.quantity !== quantity || loadingQuote || !account || startingCheckout || !checkoutEnabled) return;
 
     setStartingCheckout(true);
     setErrorMessage("");
@@ -172,13 +172,13 @@ export default function PreorderConfigurator() {
 
   return (
     <div className="preorder-configurator">
-      <div className="presale-badge">Presale</div>
+      <div className="presale-badge">{checkoutEnabled ? "Dein Quartett vorbestellen" : "Vorverkauf aktuell geschlossen"}</div>
 
       <div className="price-row">
         <div>
           <span className="price-label">Presale-Preis pro Deck</span>
           <strong className="current-price">
-            {quote ? formatCents(quote.unitPriceCents) : "12,00 €"}
+            {quote ? formatCents(quote.unitPriceCents) : formatCents(preorderConfig.presalePrice * 100)}
           </strong>
         </div>
 
@@ -201,20 +201,13 @@ export default function PreorderConfigurator() {
               amount * preorderConfig.presalePrice + preorderConfig.shippingCost;
 
             return (
-              <button
-                key={amount}
-                type="button"
-                className={isSelected ? "quantity-option is-selected" : "quantity-option"}
-                role="radio"
-                aria-checked={isSelected}
-                onClick={() => setQuantity(amount)}
-              >
+              <label key={amount} className={isSelected ? "quantity-option is-selected" : "quantity-option"}>
+                <input type="radio" name="deck-quantity" value={amount} checked={isSelected}
+                  disabled={startingCheckout} onChange={() => setQuantity(amount)} />
                 <span className="quantity-option-number">{amount}</span>
-                <span className="quantity-option-label">
-                  {amount === 1 ? "Deck" : "Decks"}
-                </span>
+                <span className="quantity-option-label">{amount === 1 ? "Deck" : "Decks"}</span>
                 <small>{previewTotal.toFixed(2).replace(".", ",")} € gesamt</small>
-              </button>
+              </label>
             );
           })}
         </div>
@@ -265,7 +258,7 @@ export default function PreorderConfigurator() {
         )}
       </section>
 
-      <section className="digital-access-info">
+      <details className="digital-access-info"><summary>Digitaler Zugang &amp; Verschenken</summary>
         <strong>
           {account?.hasFullAccess
             ? "Du hast bereits einen eigenen Zugang"
@@ -297,7 +290,7 @@ export default function PreorderConfigurator() {
             deinen eigenen Zugang abzugeben.
           </p>
         )}
-      </section>
+      </details>
 
       {errorMessage && (
         <p className="checkout-error" role="alert">{errorMessage}</p>
@@ -312,7 +305,7 @@ export default function PreorderConfigurator() {
       <button
         className="checkout-button"
         type="button"
-        disabled={!checkoutEnabled || loadingQuote || loadingAccount || startingCheckout || !quote || !account}
+        disabled={!checkoutEnabled || loadingQuote || loadingAccount || startingCheckout || !quote || quote.quantity !== quantity || !account}
         onClick={startCheckout}
       >
         {startingCheckout

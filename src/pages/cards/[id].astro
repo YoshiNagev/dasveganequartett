@@ -1,6 +1,7 @@
 ---
+import CardImage from "../../components/cards/CardImage";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CardHero from "../../components/cards/CardHero.astro";
+import "../../styles/cards-editorial.css";
 import ThreadPreview from "../../components/forum/ThreadPreview.astro";
 import CreateThreadBox from "../../components/forum/CreateThreadBox";
 import AccessGate from "../../components/access/AccessGate.astro";
@@ -57,103 +58,38 @@ const displayThreads =
     replies: thread.comments?.length ?? 0,
     createdAt: new Date(thread.created_at).toLocaleDateString("de-DE"),
   })) ?? [];
----
 
-<BaseLayout
+const availableCards = cards.filter(c => access.hasFullAccess || isPublicCardId(c.id));
+const position = availableCards.findIndex(c => c.id === card.id);
+const previous = availableCards[position - 1];
+const next = availableCards[position + 1];
+---
+<BaseLayout design="editorial"
   title={canViewCard ? `${card.title} | Argumentkarte` : `Argumentkarte #${card.id} | Käuferbereich`}
   description={canViewCard ? `Argumentkarte #${card.id}: ${card.title}` : "Diese Argumentkarte gehört zum digitalen Käuferbereich."}
   noindex={!isPublicCard}
 >
-  {canViewCard ? (
-    <>
-  <CardHero card={card} />
-
-{
-  card.officialShortAnswer && (
-    <section
-      class="official-answer"
-      aria-labelledby="official-answer-heading"
-    >
-      <div class="official-answer-label">
-        Kurzantwort
+  <nav class="ec-breadcrumb" aria-label="Brotkrumennavigation"><a href="/cards">← Alle verfügbaren Karten</a><span>Argument {String(card.id).padStart(2,"0")}</span></nav>
+  {canViewCard ? <>
+    <section class="ec-detail-hero">
+      <div><p class="ed-kicker">{card.categoryLabel} · {isPublicCard ? "Frei zugänglich" : "Käuferbereich"}</p><h1>„{card.title}“</h1><p class="ec-hero-note">Ein bekanntes Argument. Zeit, genauer hinzusehen.</p>
+        <nav class="ec-jump" aria-label="Auf dieser Seite">{card.officialShortAnswer && <a href="#kurzantwort">Kurzantwort ↓</a>}<a href="#einordnung">Einordnung ↓</a><a href="#diskussion">Diskussion ↓</a></nav>
       </div>
-
-      <h2 id="official-answer-heading">
-        Einwände auf einen Blick
-      </h2>
-
-      <p>{card.officialShortAnswer}</p>
+      <figure class="ec-detail-image"><CardImage client:load id={card.id} title={card.title} category={card.categoryLabel} priority alt={`Originalkarte ${card.id}: ${card.title}`} /></figure>
     </section>
-  )
-}
-
-  <section class="argument-explainer compact">
-  <div class="argument-explainer-header">
-    <p class="eyebrow">Argument verstehen</p>
-    <h2>Einordnung des Arguments</h2>
-  </div>
-
-  <article class="argument-info-card">
-    <div>
-      <h3>Worum es bei diesem Argument geht</h3>
-      <p>{card.meaning}</p>
-    </div>
-
-    <div>
-      <h3>Wo die Grenzen dieses Arguments liegen</h3>
-      <p>{card.notMeaning}</p>
-    </div>
-
-    <div>
-      <h3>Typische Formulierungen</h3>
-      <ul>
-        {card.commonFormulations.map((formulation) => (
-          <li>„{formulation}“</li>
-        ))}
-      </ul>
-    </div>
-  </article>
-</section>
-
-  <section class="threads-section">
-    <div class="section-heading-row">
-      <div>
-        <p class="eyebrow">Forum</p>
-        <h2>Diskussionen zu dieser Karte</h2>
+    <div class="ec-reading-layout">
+      <aside class="ec-reading-aside"><p class="ed-kicker">Auf dieser Seite</p><nav aria-label="Lesenavigation">{card.officialShortAnswer && <a href="#kurzantwort">01 Kurzantwort</a>}<a href="#einordnung">02 Einordnung</a><a href="#formulierungen">03 Formulierungen</a><a href="#kartenwerte">04 Kartenwerte</a><a href="#diskussion">05 Diskussion</a></nav></aside>
+      <div class="ec-reading">
+        {card.officialShortAnswer && <section id="kurzantwort" class="ec-short"><p class="ed-kicker">01 · Kurzantwort</p><h2>Was du darauf antworten kannst.</h2><p>{card.officialShortAnswer}</p></section>}
+        <section id="einordnung" class="ec-prose"><p class="ed-kicker">02 · Einordnung</p><h2>Das Argument verstehen.</h2><h3>Worum es geht</h3><p>{card.meaning}</p><h3>Wo seine Grenzen liegen</h3><p>{card.notMeaning}</p></section>
+        <section id="formulierungen" class="ec-prose"><p class="ed-kicker">03 · Wiedererkennen</p><h2>Schon mal so gehört?</h2><ul class="ec-quotes">{card.commonFormulations.map(text => <li>„{text}“</li>)}</ul></section>
+        <section id="kartenwerte" class="ec-prose"><p class="ed-kicker">04 · Im Spiel</p><h2>Die Werte dieser Karte.</h2><p class="ec-values-note">Spielbewertungen des Quartetts – keine wissenschaftlichen Messwerte.</p><dl class="ec-values">{Object.entries({Verbreitung:card.ratings.verbreitung,Komplexität:card.ratings.komplexitaet,Emotionalität:card.ratings.emotionalitaet,"Delulu-Faktor":card.ratings.deluluFaktor,"Ragebait-Faktor":card.ratings.ragebaitFaktor,Ablenkungsfaktor:card.ratings.ablenkungsfaktor}).map(([label,value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section>
+        <section id="diskussion" class="ec-discussion ec-prose"><p class="ed-kicker">05 · Gemeinsam weiterdenken</p><h2>Was ist deine Perspektive?</h2><a class="ed-text-link" href={`/forum/card/${card.id}`}>Alle Threads zu dieser Karte ↗</a>
+          {error ? <div class="ec-empty"><p>Die Diskussionen konnten gerade nicht geladen werden. Bitte versuche es später erneut.</p></div> : displayThreads.length ? <div class="thread-list">{displayThreads.map(thread => <ThreadPreview thread={thread} />)}</div> : <div class="ec-empty"><h3>Hier beginnt das Gespräch.</h3><p>Noch keine Diskussion zu dieser Karte. Teile deinen Gedanken oder stelle eine Frage.</p></div>}
+          <CreateThreadBox client:load cardId={card.id} />
+        </section>
       </div>
-
-      <a class="subtle-link" href={`/forum/card/${card.id}`}>
-        Alle Threads ansehen →
-      </a>
     </div>
-
-    {
-      displayThreads.length > 0 ? (
-        <div class="thread-list">
-          {displayThreads.map((thread) => (
-            <ThreadPreview thread={thread} />
-          ))}
-        </div>
-      ) : (
-        <div class="empty-state">
-          <h3>Noch keine Diskussionen</h3>
-          <p>
-            Zu dieser Karte gibt es noch keine Threads. Starte die erste
-            Diskussion zu diesem Argument.
-          </p>
-        </div>
-      )
-    }
-
-    <CreateThreadBox client:load cardId={card.id} />
-  </section>
-    </>
-  ) : (
-    <AccessGate
-      returnTo={`/cards/${card.id}`}
-      eyebrow={`Argument #${String(card.id).padStart(2, "0")}`}
-      title="Diese Karte gehört zu den 48 geschützten Argumenten."
-      message="Melde dich mit einem freigeschalteten Käuferprofil an oder bestelle ein Deck, um die Karte, ihre Einordnung und das Forum zu öffnen."
-    />
-  )}
+    <nav class="ec-next" aria-label="Weitere verfügbare Argumente">{previous ? <a href={`/cards/${previous.id}`}><span>← Vorherige Karte</span><strong>{previous.title}</strong></a> : <a href="/cards">Zur Kartenübersicht</a>}{next && <a href={`/cards/${next.id}`}><span>Nächste Karte →</span><strong>{next.title}</strong></a>}</nav>
+  </> : <div class="ec-access"><AccessGate returnTo={`/cards/${card.id}`} eyebrow={`Argument #${String(card.id).padStart(2,"0")}`} title="Diese Karte gehört zum vollständigen Deck." message="Melde dich mit deinem freigeschalteten Käuferprofil an oder bestelle ein Deck, um diese Karte, ihre Einordnung und das Forum zu öffnen." /></div>}
 </BaseLayout>

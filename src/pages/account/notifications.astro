@@ -1,19 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NotificationsPanel from "../../components/account/NotificationsPanel";
+import "../../styles/account-editorial.css";
+import "../../styles/notifications-editorial.css";
 ---
-
-<BaseLayout title="Benachrichtigungen" noindex={true}>
-  <section class="profile-page">
-    <div class="page-header">
-      <p class="eyebrow">Account</p>
-      <h1>Benachrichtigungen</h1>
-      <p>
-        Hier siehst du Antworten auf deine Kommentare und später weitere
-        Aktivitäten im Forum.
-      </p>
-    </div>
-
+<BaseLayout design="editorial" title="Benachrichtigungen" noindex={true}>
+  <section class="em-account en-page" aria-labelledby="notifications-title">
+    <header class="em-heading"><p class="ed-kicker">Dein Konto · Im Gespräch</p><h1 id="notifications-title">Neu für dich.</h1><p>Hier findest du Antworten auf deine Kommentare. Öffne eine Benachrichtigung, um das Gespräch fortzusetzen.</p></header>
+    <nav class="em-nav" aria-label="Kontobereich"><a href="/account/profile">Profil</a><a href="/account/access">Meine Zugänge</a><a href="/account/notifications" aria-current="page">Benachrichtigungen</a></nav>
     <NotificationsPanel client:load />
+    <noscript><p>Bitte aktiviere JavaScript, um deine Benachrichtigungen zu laden.</p></noscript>
   </section>
 </BaseLayout>

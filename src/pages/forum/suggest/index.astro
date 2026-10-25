@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import AccessGate from "../../../components/access/AccessGate.astro";
 import { getAccessState } from "../../../lib/server/access";
@@ -9,6 +11,7 @@ export const prerender = false;
 const access = await getAccessState(Astro.cookies, Astro.request);
 const supabase = createSupabaseServerClient(Astro.cookies, Astro.request);
 let suggestedArguments: any[] = [];
+let loadFailed = false;
 
 if (access.hasFullAccess) {
   const { data, error } = await supabase
@@ -25,12 +28,14 @@ if (access.hasFullAccess) {
     .eq("is_hidden", false)
     .order("created_at", { ascending: false });
 
-  if (error) console.error(error);
+  if (error) { console.error(error); loadFailed = true; }
   suggestedArguments = data ?? [];
 }
 ---
 
-<BaseLayout title="Vorgeschlagene Argumente" noindex={true}>
+<BaseLayout design="editorial" title="Vorgeschlagene Argumente" noindex={true}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   {access.hasFullAccess ? (
     <>
   <section class="page-header">
@@ -50,7 +55,7 @@ if (access.hasFullAccess) {
 
   <section class="suggested-argument-grid">
     {
-      suggestedArguments.length > 0 ? (
+      loadFailed ? (<p class="ef-error" role="alert">Die Vorschläge konnten gerade nicht geladen werden. Bitte lade die Seite erneut.</p>) : suggestedArguments.length > 0 ? (
         suggestedArguments.map((argument) => (
           <a
             class="suggested-argument-card"
@@ -94,4 +99,5 @@ if (access.hasFullAccess) {
       title="Community-Vorschläge sind Teil des vollständigen Forums."
     />
   )}
+  </div>
 </BaseLayout>

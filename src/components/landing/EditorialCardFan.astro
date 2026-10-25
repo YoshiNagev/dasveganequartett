@@ -1,0 +1,75 @@
+---
+const cards = [
+  { id: 1, quote: "Pflanzen haben auch Gefühle.", category: "Philosophische Argumente" },
+  { id: 16, quote: "Löwen essen auch Fleisch. Sie sind sogar darauf angewiesen.", category: "Natur, Kultur & Religion" },
+  { id: 24, quote: "Ich kannte mal einen Veganer und der ist gestorben!", category: "Dammbruchargumente" },
+  { id: 29, quote: "Wir brauchen Tiere für Dünger.", category: "Praktikabilität, Gesellschaft & Politik" },
+  { id: 37, quote: "Veganern mangelt es oft an Proteinen, Vitamin B12, Kalzium und so weiter.", category: "Gesundheit, Umwelt & Nachhaltigkeit" },
+  { id: 48, quote: "Veganer hassen Bauern und lieben Tiere mehr als Menschen.", category: "Veganerinnen & Veganer" },
+];
+---
+<dvq-card-fan class="ed-fan" id="karten-preview" aria-label="Sechs Karten zum Kennenlernen">
+  <div class="ed-fan-stage">
+    {cards.map((card, i) => <a href={`/cards/${card.id}`} class="ed-fan-card"
+      data-card data-quote={card.quote} data-category={card.category}
+      data-position={i === 0 ? "center" : i === 1 ? "right" : i === cards.length - 1 ? "left" : "hidden"}
+      tabindex={i === 0 ? 0 : -1} aria-hidden={i !== 0 ? "true" : undefined}
+      aria-label={`Karte ${card.id}: ${card.quote}`}>
+      <img src={`/images/cards/card-${String(card.id).padStart(2, "0")}.png`}
+        alt={card.quote} width="635" height="889" loading={i === 0 || i === 1 || i === 5 ? "eager" : "lazy"}
+        fetchpriority={i === 0 ? "high" : "auto"} draggable="false" />
+    </a>)}
+  </div>
+  <div class="ed-fan-controls">
+    <button type="button" data-step="-1" aria-label="Vorherige Karte" hidden>←</button>
+    <p data-status aria-live="polite" aria-atomic="true">01 / 06 <span>Philosophische Argumente</span></p>
+    <button type="button" data-step="1" aria-label="Nächste Karte" hidden>→</button>
+  </div>
+  <a class="ed-text-link ed-fan-read" data-read href="/cards/1">Dieses Argument entdecken <span aria-hidden="true">↗</span></a>
+</dvq-card-fan>
+
+<script>
+  class CardFan extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      this.dataset.ready = "true";
+      const cards = Array.from(this.querySelectorAll<HTMLAnchorElement>("[data-card]"));
+      const status = this.querySelector<HTMLElement>("[data-status]")!;
+      const read = this.querySelector<HTMLAnchorElement>("[data-read]")!;
+      let selected = 0;
+      const show = (index: number) => {
+        selected = (index + cards.length) % cards.length;
+        cards.forEach((card, i) => {
+          const offset = (i - selected + cards.length) % cards.length;
+          card.dataset.position = offset === 0 ? "center" : offset === 1 ? "right" : offset === cards.length - 1 ? "left" : "hidden";
+          card.tabIndex = offset === 0 ? 0 : -1;
+          card.setAttribute("aria-hidden", String(offset !== 0));
+        });
+        status.replaceChildren(document.createTextNode(`${String(selected + 1).padStart(2, "0")} / 06 `));
+        const label = document.createElement("span");
+        label.textContent = cards[selected].dataset.category ?? "";
+        status.append(label);
+        read.href = cards[selected].href;
+        read.setAttribute("aria-label", `Einordnung lesen: ${cards[selected].dataset.quote}`);
+      };
+      this.querySelectorAll<HTMLButtonElement>("[data-step]").forEach(button => {
+        button.hidden = false;
+        button.addEventListener("click", () => show(selected + Number(button.dataset.step)));
+      });
+      cards.forEach((card, i) => card.addEventListener("click", event => {
+        if (i !== selected) { event.preventDefault(); show(i); }
+      }));
+      this.addEventListener("keydown", event => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        show(selected + (event.key === "ArrowRight" ? 1 : -1));
+        cards[selected].focus({ preventScroll: true });
+      });
+      document.querySelector<HTMLAnchorElement>("[data-draw-card]")?.addEventListener("click", () => {
+        show(selected + 1);
+        read.focus({ preventScroll: true });
+      });
+    }
+  }
+  if (!customElements.get("dvq-card-fan")) customElements.define("dvq-card-fan", CardFan);
+</script>

@@ -1,5 +1,7 @@
 ---
 import LiberationLogo from "./LiberationLogo.astro";
+import BrandLogo from "./BrandLogo.astro";
+const { editorial = false } = Astro.props;
 
 const currentYear = new Date().getFullYear();
 ---
@@ -9,8 +11,7 @@ const currentYear = new Date().getFullYear();
     <section class="footer-main" aria-label="Fußbereich">
       <div class="footer-brand">
         <a class="footer-logo" href="/" aria-label="Zur Startseite">
-          <LiberationLogo class="liberation-logo--footer" />
-          <span>Das Vegane Quartett</span>
+          {editorial ? <BrandLogo /> : <><LiberationLogo class="liberation-logo--footer" /><span>Das Vegane Quartett</span></>}
         </a>
 
         <p>
@@ -152,10 +153,11 @@ const currentYear = new Date().getFullYear();
   }
 
   .pdf-highlight:hover {
-    transform: translateY(-3px);
-    border-color: rgba(126, 255, 203, 0.5);
-    background: rgba(126, 255, 203, 0.11);
-  }
+  transform: none;
+  border-color: #a7977e;
+  background: #e8dfce;
+  box-shadow: none;
+}
 
   .pdf-highlight:focus-visible,
   .footer-logo:focus-visible,

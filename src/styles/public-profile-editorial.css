@@ -1,0 +1,68 @@
+/* Public profiles only; independent of personal forum overrides. */
+.ep-profile { max-width:1240px; margin:0 auto; padding:40px 0 80px; }
+.ep-profile :is(h1,h2,h3,p,a,span) { overflow-wrap:anywhere; }
+.ep-profile .ep-back { display:inline-block; margin-bottom:38px; font-size:14px; text-underline-offset:4px; }
+.ep-profile .ep-hero { display:grid; grid-template-columns:144px minmax(0,1fr); gap:40px; align-items:start; padding:16px 0 42px; }
+.ep-profile .ep-avatar { width:144px; height:144px; display:grid; place-items:center; overflow:hidden; border:1px solid var(--border); border-radius:50%; background:#e8dfce; color:#453d30; font:48px Georgia,serif; }
+.ep-profile .ep-avatar img { display:block; width:100%; height:100%; object-fit:cover; }
+.ep-profile .ep-kicker { margin:0 0 13px; color:var(--muted-text); text-transform:uppercase; letter-spacing:.13em; font-size:11px; font-weight:600; }
+.ep-profile h1 { margin:0; font-size:clamp(40px,5.5vw,72px); line-height:1.1; }
+.ep-profile .ep-bio { max-width:760px; margin:22px 0; font-size:18px; line-height:1.8; white-space:pre-line; color:var(--text); }
+.ep-profile .ep-details { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; font-size:13px; color:var(--muted-text); }
+.ep-profile .ep-role { border:1px solid var(--border); padding:6px 10px; border-radius:3px; color:#453d30; background:#e8dfce; }
+.ep-profile .ep-jump { display:flex; flex-wrap:wrap; gap:12px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:18px 0; }
+.ep-profile .ep-jump a { display:inline-flex; align-items:center; gap:10px; font-size:14px; text-decoration:none; }
+.ep-profile .ep-jump span { padding:2px 8px; background:#e8dfce; color:#453d30; border-radius:3px; }
+.ep-profile .ep-access-note { max-width:850px; margin:22px 0 0; font-size:14px; line-height:1.7; color:var(--muted-text); }
+.ep-profile .ep-activity { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(0,1fr); gap:44px; margin-top:45px; align-items:start; }
+.ep-profile .ep-activity > * { min-width:0; scroll-margin-top:130px; }
+.ep-profile .ep-activity > aside { padding-left:30px; border-left:1px solid var(--border); }
+.ep-profile h2 { margin:0 0 24px; font-size:clamp(27px,2.5vw,34px); line-height:1.2; }
+.ep-profile .ep-thread-list { display:grid; gap:16px; }
+.ep-profile .thread-preview { display:block; padding:24px; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; text-decoration:none; transform:none; transition:background-color 160ms ease,border-color 160ms ease; }
+.ep-profile .thread-preview:hover { background:#e8dfce; border-color:#a7977e; box-shadow:none; transform:none; }
+.ep-profile .thread-preview .thread-context-label { padding:0; border:0; border-radius:0; background:none; color:var(--muted-text); font-size:11px; font-weight:500; line-height:1.6; margin-bottom:14px; }
+.ep-profile .thread-preview h3 { font-size:25px; line-height:1.25; color:var(--text); margin:0 0 12px; }
+.ep-profile .thread-preview p { font-size:15px; line-height:1.75; color:var(--muted-text); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.ep-profile .thread-meta { display:flex; flex-wrap:wrap; gap:8px 18px; padding-top:16px; margin-top:18px; border-top:1px solid var(--border); color:var(--muted-text); font-size:12px; }
+.ep-profile .ep-comments-note { margin:-10px 0 22px; font-size:12px; line-height:1.6; color:var(--muted-text); }
+.ep-profile .ep-comment { padding:24px 0; border-top:1px solid var(--border); }
+.ep-profile .ep-comment time { color:var(--muted-text); font-size:12px; }
+.ep-profile .ep-comment h3 { font-size:22px; line-height:1.35; margin:10px 0 14px; }
+.ep-profile .ep-comment h3 a { color:var(--text); text-decoration:none; }
+.ep-profile .ep-comment h3 a:hover { text-decoration:underline; text-underline-offset:4px; }
+.ep-profile .ep-comment-body { font-size:14px; line-height:1.75; color:var(--muted-text); overflow-wrap:anywhere; }
+.ep-profile .ep-comment-body p { font-size:inherit; line-height:inherit; color:inherit; }
+.ep-profile .ep-comment-body pre { overflow:auto; max-width:100%; }
+.ep-profile .ep-comment-body img { max-width:100%; height:auto; }
+.ep-profile .ep-discussion-link { display:inline-block; margin-top:14px; font-size:13px; text-underline-offset:4px; }
+.ep-profile .ep-empty { padding:24px; border:1px solid var(--border); background:var(--surface); border-radius:4px; }
+.ep-profile .ep-empty h3 { font-size:23px; margin:0 0 14px; }
+.ep-profile .ep-empty p { color:var(--muted-text); font-size:14px; line-height:1.75; margin:0 0 16px; }
+.ep-profile .ep-empty p:last-child { margin-bottom:0; }
+.ep-profile .ep-empty a { font-size:14px; text-underline-offset:4px; }
+.ep-profile .ep-error { background:#f4e0d8; color:#76241f; border-left:3px solid #8b2823; padding:16px; font-size:14px; line-height:1.7; }
+.ep-profile a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+@media(max-width:850px) { .ep-profile .ep-activity { grid-template-columns:minmax(0,1fr); gap:42px; }.ep-profile .ep-activity > aside { border-left:0; padding-left:0; } }
+@media(max-width:520px) { .ep-profile { padding:26px 0 50px; }.ep-profile .ep-back { margin-bottom:22px; }.ep-profile .ep-hero { grid-template-columns:minmax(0,1fr); gap:24px; padding-bottom:30px; }.ep-profile .ep-avatar { width:96px; height:96px; font-size:34px; }.ep-profile .ep-bio { font-size:16px; }.ep-profile .thread-preview { padding:20px; }.ep-profile .ep-jump { gap:16px 24px; } }
+@media(prefers-reduced-motion:reduce) { .ep-profile .thread-preview { transition:none; } }
+
+
+
+
+
+
+
+
+
+
+/* Mehr Abstand unter „Neueste Antworten“ */
+.ep-profile #antworten > h2 {
+  margin-bottom: 16px;
+}
+
+.ep-profile #antworten > .ep-comments-note {
+  margin-top: 0;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}

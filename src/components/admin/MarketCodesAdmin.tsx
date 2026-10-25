@@ -44,7 +44,7 @@ function escapeCsv(value: string) {
 export default function MarketCodesAdmin() {
   const [accessToken, setAccessToken] = useState("");
   const [quantity, setQuantity] = useState(10);
-  const [note, setNote] = useState("Veganer Weihnachtsmarkt");
+  const [note, setNote] = useState("Aktiviert durch Zugangscode");
   const [codes, setCodes] = useState<MarketCode[]>([]);
   const [printCodes, setPrintCodes] = useState<PrintableCode[]>([]);
   const [summary, setSummary] = useState<Record<string, number>>({});

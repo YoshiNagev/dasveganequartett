@@ -1,0 +1,23 @@
+.ed-redeem .redeem-card { display:flex; flex-direction:column; gap:22px; padding:34px; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; min-width:0; }
+.ed-redeem .redeem-card h2 { margin:0; font-size:36px; line-height:1.15; }
+.ed-redeem .redeem-card p { margin:0; font-size:15px; line-height:1.8; color:var(--muted-text); overflow-wrap:anywhere; }
+.ed-redeem .redeem-card .ed-kicker { font-size:11px; letter-spacing:.13em; color:var(--accent); margin-bottom:12px; }
+.ed-redeem .redeem-card label { display:grid; gap:10px; font-size:14px; font-weight:600; }
+.ed-redeem .redeem-card input { width:100%; min-width:0; min-height:54px; padding:14px; border:1px solid #aaa18f; border-radius:3px; color:var(--text); background:#fcf8f0; font:inherit; font-size:16px; letter-spacing:.02em; }
+.ed-redeem .redeem-card input::placeholder { color:#777165; opacity:1; }
+.ed-redeem .redeem-card .ed-button { display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%; min-height:52px; border:1px solid var(--accent); border-radius:4px; padding:14px 18px; background:var(--accent); color:var(--accent-text); font:inherit; font-size:15px; font-weight:600; line-height:1.5; text-decoration:none; cursor:pointer; }
+.ed-redeem .redeem-card .ed-button:hover { background:#203824; }
+.ed-redeem .redeem-card :disabled { opacity:.6; cursor:wait; }
+.ed-redeem .redeem-actions { display:flex; flex-direction:column; gap:16px; }
+.ed-redeem .redeem-secondary { display:flex; justify-content:center; border:1px solid var(--accent); border-radius:4px; padding:13px 18px; color:var(--accent); font-size:15px; font-weight:600; text-decoration:none; }
+.ed-redeem .redeem-text-link { color:var(--accent); font-size:14px; text-underline-offset:4px; width:fit-content; }
+.ed-redeem .redeem-card .redeem-small { font-size:13px; line-height:1.7; }
+.ed-redeem .redeem-card .redeem-error { border-left:3px solid #8b2823; background:#f4e0d8; color:#76241f; padding:14px 16px; font-size:14px; }
+.ed-redeem .redeem-card .redeem-notice { padding:14px 16px; border-left:3px solid var(--accent); background:#e5e9da; color:var(--accent); font-size:14px; }
+.ed-redeem .redeem-card.success { background:#e9eddf; border-left:3px solid var(--accent); }
+.ed-redeem .redeem-help,.ed-redeem .ed-redeem-help { margin-top:24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:20px 0; font-size:14px; line-height:1.8; }
+.ed-redeem-help summary { cursor:pointer; font-weight:600; color:var(--accent); }
+.ed-redeem-help h3 { font-size:21px; margin:22px 0 8px; }.ed-redeem-help p { color:var(--muted-text); }.ed-redeem-help a { color:var(--accent); text-underline-offset:4px; }
+.ed-redeem :is(input,button,a,summary):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+@media(max-width:1100px) { .ed-redeem .redeem-card { padding:28px; } }
+@media(max-width:420px) { .ed-redeem .redeem-card { padding:24px 18px; gap:20px; }.ed-redeem .redeem-card h2 { font-size:29px; }.ed-redeem .redeem-card input { font-size:16px; padding:12px 10px; letter-spacing:0; } }

@@ -1,0 +1,14 @@
+---
+import "../../styles/admin-editorial.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminTabs from "../../components/admin/AdminTabs.astro";
+import WithdrawalsAdmin from "../../components/admin/WithdrawalsAdmin";
+export const prerender = false;
+---
+<BaseLayout design="editorial" title="Widerrufe verwalten" noindex={true}>
+<div class="ea-admin">
+ <section class="withdrawals-page"><header class="page-header"><p class="eyebrow">Administration</p><h1>Widerrufe</h1><p>Anfragen zuordnen, Bearbeitungsstände prüfen und Rückzahlungen verwalten.</p></header>
+ <AdminTabs current="withdrawals"/><WithdrawalsAdmin client:load/></section>
+</div>
+</BaseLayout>
+

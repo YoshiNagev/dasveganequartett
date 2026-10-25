@@ -233,7 +233,7 @@ export default function CommentForm({
             : "Antwort veröffentlichen"}
       </button>
 
-      {message && <p className="form-message">{message}</p>}
+      {message && <p className="form-message" role="alert">{message}</p>}
     </form>
   );
 }

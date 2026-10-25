@@ -1,0 +1,12 @@
+---
+const { currentPath } = Astro.props;
+const links = [
+  { href: '/legal/impressum', label: 'Impressum' },
+  { href: '/legal/datenschutz', label: 'Datenschutz' },
+  { href: '/legal/agb', label: 'AGB' },
+  { href: '/legal/widerruf', label: 'Widerruf' },
+];
+---
+<nav class="el-nav" aria-label="Rechtliche Seiten">
+  {links.map(({ href, label }) => <a href={href} aria-current={currentPath.replace(/\/$/, '') === href ? 'page' : undefined}>{label}</a>)}
+</nav>

@@ -1,4 +1,5 @@
 ---
+import "../styles/info-editorial.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const faqGroups = [
@@ -18,7 +19,7 @@ const faqGroups = [
       {
         question: "Für wie viele Personen ist das Spiel gedacht?",
         answer:
-          "Das Vegane Quartett ist für zwei bis sechs Personen gedacht. Je nach Spielmodus kann es als klassisches Trumpfspiel, als Diskussionsübung oder als lockerer Gesprächseinstieg gespielt werden.",
+          "Das Vegane Quartett ist für zwei bis sechs Personen gedacht. Je nach Spielmodus sogar noch mehr. Es kann als klassisches Trumpfspiel, als Diskussionsübung oder als lockerer Gesprächseinstieg gespielt werden.",
       },
       {
         question: "Wie lange dauert eine Spielrunde?",
@@ -53,7 +54,7 @@ const faqGroups = [
       {
         question: "Kann ich selbst an Diskussionen teilnehmen?",
         answer:
-          "Ja. Mit einem kostenlosen Benutzerkonto kannst du Threads erstellen, Kommentare schreiben, Beiträge bewerten und Inhalte melden. Für geschützte Argumentseiten benötigst du zusätzlich den entsprechenden digitalen Zugang.",
+          "Ja. Mit einem kostenlosen Benutzerkonto kannst du zu sechs Argumenten Threads erstellen, Kommentare schreiben, Beiträge bewerten und Inhalte melden. Für geschützte Argumentseiten benötigst du zusätzlich den entsprechenden digitalen Zugang.",
       },
       {
         question: "Kann ich ein zusätzliches Argument vorschlagen?",
@@ -88,7 +89,7 @@ const faqGroups = [
       {
         question: "In welche Länder wird geliefert?",
         answer:
-          "Der Versand erfolgt zunächst innerhalb Deutschlands. Ein Versand in weitere Länder ist künftig vorgesehen. Informationen zu verfügbaren Lieferländern und Versandkosten werden im Shop angezeigt.",
+          "Der Versand erfolgt zunächst innerhalb Deutschlands. Ein Versand in weitere Länder ist vorgesehen, jedoch aus bürokratischen Gründen schwer umsetzbar. Informationen zu verfügbaren Lieferländern und Versandkosten werden im Shop angezeigt.",
       },
     ],
   },
@@ -155,14 +156,14 @@ const faqGroups = [
 ];
 ---
 
-<BaseLayout
+<BaseLayout design="editorial"
   title="FAQ · Das Vegane Quartett"
   description="Häufig gestellte Fragen zu Das Vegane Quartett, Spielregeln, Bestellung, Versand, digitalen Zugängen, Benutzerkonten und der kostenlosen PDF."
 >
-  <section class="faq-page">
+  <section class="faq-page ei-info">
     <header class="faq-hero">
       <p class="eyebrow">Häufig gestellte Fragen</p>
-      <h1>FAQ</h1>
+      <h1>Gut zu wissen.</h1>
       <p>
         Antworten auf die wichtigsten Fragen zum Spiel, zur Bestellung, zur
         Website, zu digitalen Zugängen und zur kostenlosen PDF.
@@ -183,7 +184,7 @@ const faqGroups = [
           aria-labelledby={`faq-heading-${groupIndex + 1}`}
         >
           <div class="faq-group-heading">
-            <p class="eyebrow">Kategorie {groupIndex + 1}</p>
+            <p class="eyebrow">{String(groupIndex + 1).padStart(2, "0")} / FAQ</p>
             <h2 id={`faq-heading-${groupIndex + 1}`}>{group.title}</h2>
           </div>
 
@@ -221,262 +222,3 @@ const faqGroups = [
     </section>
   </section>
 </BaseLayout>
-
-<style>
-  .faq-page,
-  .faq-page *,
-  .faq-page *::before,
-  .faq-page *::after {
-    box-sizing: border-box;
-  }
-
-  .faq-page {
-    width: 100%;
-    max-width: 1100px;
-    margin-inline: auto;
-    padding: clamp(3.5rem, 8vw, 7rem) 0;
-  }
-
-  .faq-hero {
-    max-width: 820px;
-  }
-
-  .faq-hero h1 {
-    margin: 0;
-    font-size: clamp(3.5rem, 10vw, 7rem);
-    line-height: 0.9;
-    letter-spacing: -0.07em;
-  }
-
-  .faq-hero > p:last-child {
-    max-width: 760px;
-    margin: 1.4rem 0 0;
-    color: var(--muted-text);
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
-    line-height: 1.7;
-  }
-
-  .faq-jump-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin: 2.5rem 0 clamp(4rem, 8vw, 7rem);
-  }
-
-  .faq-jump-nav a {
-    display: inline-flex;
-    min-height: 44px;
-    align-items: center;
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--muted-text);
-    background: var(--surface);
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .faq-jump-nav a:hover,
-  .faq-jump-nav a:focus-visible {
-    color: var(--text);
-    border-color: rgba(126, 255, 203, 0.4);
-  }
-
-  .faq-groups {
-    display: grid;
-    gap: clamp(4rem, 8vw, 7rem);
-  }
-
-  .faq-group {
-    scroll-margin-top: 110px;
-  }
-
-  .faq-group-heading {
-    margin-bottom: 1.3rem;
-  }
-
-  .faq-group-heading h2 {
-    margin: 0;
-    font-size: clamp(2rem, 5vw, 3.6rem);
-    line-height: 1;
-    letter-spacing: -0.05em;
-  }
-
-  .faq-list {
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .faq-item {
-    min-width: 0;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    background: var(--surface);
-    overflow: hidden;
-  }
-
-  .faq-item[open] {
-    border-color: rgba(126, 255, 203, 0.3);
-    background:
-      radial-gradient(
-        circle at top left,
-        rgba(126, 255, 203, 0.08),
-        transparent 38%
-      ),
-      var(--surface);
-  }
-
-  .faq-item summary {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1rem;
-    align-items: center;
-    min-height: 70px;
-    padding: 1.15rem 1.3rem;
-    color: var(--text);
-    font-size: 1.05rem;
-    font-weight: 900;
-    line-height: 1.4;
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .faq-item summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-item summary span:first-child {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .faq-icon {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    place-items: center;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    color: var(--accent);
-    background: var(--background);
-    font-size: 1.25rem;
-    transition: transform 0.18s ease;
-  }
-
-  .faq-item[open] .faq-icon {
-    transform: rotate(45deg);
-  }
-
-  .faq-answer {
-    padding: 0 1.3rem 1.3rem;
-  }
-
-  .faq-answer p {
-    max-width: 850px;
-    margin: 0;
-    color: var(--muted-text);
-    line-height: 1.75;
-    overflow-wrap: anywhere;
-  }
-
-  .faq-contact {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2rem;
-    align-items: center;
-    margin-top: clamp(4rem, 9vw, 8rem);
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    border: 1px solid rgba(126, 255, 203, 0.25);
-    border-radius: 24px;
-    background:
-      radial-gradient(
-        circle at top left,
-        rgba(126, 255, 203, 0.1),
-        transparent 38%
-      ),
-      var(--surface);
-  }
-
-  .faq-contact h2 {
-    margin: 0;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    letter-spacing: -0.04em;
-  }
-
-  .faq-contact p:last-child {
-    margin: 0.8rem 0 0;
-    color: var(--muted-text);
-    line-height: 1.6;
-  }
-
-  .faq-contact > a {
-    display: inline-flex;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-    padding: 0.8rem 1.1rem;
-    border-radius: 12px;
-    color: #07110d;
-    background: var(--accent);
-    font-weight: 900;
-    text-align: center;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-  }
-
-  @media (max-width: 700px) {
-    .faq-jump-nav {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding-bottom: 0.35rem;
-    }
-
-    .faq-jump-nav a {
-      flex: 0 0 auto;
-      white-space: nowrap;
-    }
-
-    .faq-contact {
-      grid-template-columns: 1fr;
-    }
-
-    .faq-contact > a {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .faq-page {
-      padding-top: 3rem;
-    }
-
-    .faq-hero h1 {
-      font-size: 3.3rem;
-    }
-
-    .faq-item {
-      border-radius: 14px;
-    }
-
-    .faq-item summary {
-      min-height: 62px;
-      padding: 1rem;
-      font-size: 0.98rem;
-    }
-
-    .faq-answer {
-      padding: 0 1rem 1rem;
-    }
-
-    .faq-contact {
-      padding: 1.2rem;
-      border-radius: 18px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .faq-icon {
-      transition: none;
-    }
-  }
-</style>

@@ -1,4 +1,6 @@
 ---
+import "../../styles/forum-editorial.css";
+import ForumNav from "../../components/forum/ForumNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadSortBrowser from "../../components/forum/ThreadSortBrowser";
 import AccessGate from "../../components/access/AccessGate.astro";
@@ -77,7 +79,9 @@ const threads =
   }) ?? [];
 ---
 
-<BaseLayout title="Alle Threads">
+<BaseLayout design="editorial" title="Alle Threads">
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   <section class="page-header">
     <p class="eyebrow">Forum</p>
     <h1>Alle Diskussionen</h1>
@@ -87,14 +91,16 @@ const threads =
     </p>
   </section>
 
-  <ThreadSortBrowser client:load threads={threads} />
+  {error ? <p class="ef-error" role="alert">Die Diskussionen konnten gerade nicht geladen werden. Bitte lade die Seite erneut.</p> : <ThreadSortBrowser client:load threads={threads} />}
 
   {!access.hasFullAccess && (
     <AccessGate
+      headingLevel="h2"
       returnTo="/forum/threads"
       eyebrow="Weitere Diskussionen"
       title="Die vollständige Threadübersicht gehört zum Käuferbereich."
       message="Ohne Freischaltung werden hier ausschließlich Threads zu den sechs öffentlichen Beispielkarten angezeigt."
     />
   )}
+  </div>
 </BaseLayout>

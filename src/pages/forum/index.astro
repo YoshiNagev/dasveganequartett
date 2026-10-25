@@ -1,4 +1,6 @@
 ---
+import "../../styles/forum-editorial.css";
+import ForumNav from "../../components/forum/ForumNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { cards } from "../../data/cards";
 import AccessGate from "../../components/access/AccessGate.astro";
@@ -32,11 +34,13 @@ const cardsWithThreads = visibleCards.map((card) => ({
 }));
 ---
 
-<BaseLayout title="Forum">
+<BaseLayout design="editorial" title="Forum">
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   <section class="page-header">
     <p class="eyebrow">Forum</p>
 
-    <h1>{access.hasFullAccess ? "Diskussionen zu allen Karten" : "Offene Beispieldiskussionen"}</h1>
+    <h1>{access.hasFullAccess ? "Hier geht das Gespräch weiter." : "Sechs Karten. Viele Perspektiven."}</h1>
 
     <p>
       {access.hasFullAccess
@@ -45,9 +49,11 @@ const cardsWithThreads = visibleCards.map((card) => ({
     </p>
   </section>
 
+  <aside class="ef-guidance"><p>Stell Fragen, teile Erfahrungen und belege sachliche Aussagen nach Möglichkeit mit Quellen. Bleib beim Argument und respektvoll gegenüber anderen.</p></aside>
+  {error && <p class="ef-error" role="alert">Die Anzahl der Diskussionen konnte gerade nicht geladen werden. Die Kartenforen kannst du weiterhin öffnen.</p>}
   <section class="forum-card-grid">
     {cardsWithThreads.map((card) => (
-      <a href={`/forum/card/${card.id}`} class="forum-card-link">
+      <a href={`/forum/card/${card.id}`} class="forum-card-link" data-category={Math.floor((card.id - 1) / 9)}>
         <span>#{String(card.id).padStart(2, "0")}</span>
 
         <h2>{card.title}</h2>
@@ -55,9 +61,9 @@ const cardsWithThreads = visibleCards.map((card) => ({
         <p>{card.categoryLabel}</p>
 
         <strong>
-          {card.threadCount === 1
-            ? "1 Thread"
-            : `${card.threadCount} Threads`}
+          {error ? "Diskussionen öffnen" : card.threadCount === 1
+            ? "1 Diskussion"
+            : `${card.threadCount} Diskussionen`}
         </strong>
       </a>
     ))}
@@ -82,9 +88,11 @@ const cardsWithThreads = visibleCards.map((card) => ({
   {!access.hasFullAccess && (
     <AccessGate
       returnTo="/forum"
+      headingLevel="h2"
       eyebrow="Käuferforum"
       title="48 weitere Argumentforen warten auf dich."
       message="Aktiviere den digitalen Zugang eines Decks, um sämtliche Diskussionen und Community-Vorschläge zu öffnen."
     />
   )}
+  </div>
 </BaseLayout>

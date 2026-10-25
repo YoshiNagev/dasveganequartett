@@ -21,6 +21,7 @@ export default function AvatarPicker({ value, onChange }: Props) {
               className={isActive ? "avatar-option active" : "avatar-option"}
               onClick={() => onChange(avatar.src)}
               aria-label={avatar.label}
+              aria-pressed={isActive}
             >
               <img src={avatar.src} alt={avatar.label} />
             </button>

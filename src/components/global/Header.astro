@@ -4,19 +4,20 @@ import AuthNav from "../account/AuthNav";
 import NotificationBadge from "../account/NotificationBadge";
 import MobileMenu from "./MobileMenu";
 import LiberationLogo from "./LiberationLogo.astro";
+import BrandLogo from "./BrandLogo.astro";
+const { editorial = false } = Astro.props;
 ---
 
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="logo-link">
-      <LiberationLogo />
-      <span>Das Vegane Quartett</span>
+      {editorial ? <BrandLogo /> : <><LiberationLogo /><span>Das Vegane Quartett</span></>}
     </a>
 
-    <nav class="header-nav desktop-nav">
-      <a href="/">Home</a>
-      <a href="/cards">Argumente</a>
-      <a href="/rules">Anleitung</a>
+    <nav class="header-nav desktop-nav" aria-label="Hauptnavigation">
+      <a href={editorial ? "/#das-spiel" : "/"}>{editorial ? "Das Spiel" : "Home"}</a>
+      <a href="/cards">{editorial ? "Karten entdecken" : "Argumente"}</a>
+      <a href="/rules">{editorial ? "Spielregeln" : "Anleitung"}</a>
       <a href="/forum">Forum</a>
 
       <NotificationBadge client:load />

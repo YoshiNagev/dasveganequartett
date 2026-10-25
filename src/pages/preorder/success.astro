@@ -1,4 +1,5 @@
 ---
+import "../../styles/checkout-result-editorial.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { stripe } from "../../lib/server/stripe";
 
@@ -29,66 +30,31 @@ const amountTotal =
     : null;
 ---
 
-<BaseLayout title="Testzahlung abgeschlossen" noindex={true}>
-  <section class="checkout-result-page">
-    <div class="checkout-result-card">
-      <p class="eyebrow">{paid ? "Zahlung erfolgreich" : "Checkout abgeschlossen"}</p>
-      <h1>{paid ? "Vielen Dank!" : "Die Zahlung wird noch geprüft"}</h1>
-
-      {errorMessage ? (
-        <p class="result-message is-error">{errorMessage}</p>
-      ) : (
-        <>
-          <p class="result-message">
-            {paid
-              ? "Stripe hat die Testzahlung erfolgreich bestätigt."
-              : "Stripe hat den Checkout zurückgegeben, aber noch keinen bezahlten Status bestätigt."}
-          </p>
-
-          <dl class="checkout-details">
-            <div><dt>Checkout-ID</dt><dd>{session?.id}</dd></div>
-            {amountTotal && <div><dt>Gesamtbetrag</dt><dd>{amountTotal}</dd></div>}
-            <div><dt>Zahlungsstatus</dt><dd>{session?.payment_status ?? "unbekannt"}</dd></div>
-            {session?.customer_details?.email && (
-              <div><dt>E-Mail</dt><dd>{session.customer_details.email}</dd></div>
-            )}
-          </dl>
-        </>
-      )}
-
-      <div class="result-actions">
-        <a class="primary-result-link" href="/account/access">Digitale Zugänge öffnen</a>
-        <a href="/preorder">Zurück zur Vorbestellung</a>
-        <a href="/">Zur Startseite</a>
-      </div>
-
-      <p class="webhook-note">
-        Der erste Deck-Zugang wird automatisch für das beim Kauf verbundene
-        Profil aktiviert. Weitere Deck-Zugänge kannst du dort verschenken.
-      </p>
-
-      <p class="webhook-note">
-        Diese Seite zeigt nur den von Stripe abgerufenen Sitzungsstatus. Eine
-        Bestellung gilt später erst nach Bestätigung durch den signierten
-        Stripe-Webhook als bezahlt.
-      </p>
+<BaseLayout design="editorial" title={errorMessage ? "Zahlungsstatus nicht verfügbar" : paid ? "Vielen Dank für deine Bestellung" : "Zahlung wird geprüft"} noindex={true}>
+  <section class="ec-result">
+    <header>
+      <p class="ec-eyebrow">{errorMessage ? "Deine Bestellung" : paid ? "Zahlung erfolgreich" : "Einen Moment noch"}</p>
+      <h1>{errorMessage ? "Status gerade nicht verfügbar." : paid ? "Vielen Dank für deine Bestellung!" : "Deine Zahlung wird noch geprüft."}</h1>
+      <p class="ec-lead">{errorMessage
+        ? "Wir konnten den Zahlungsstatus gerade nicht abrufen. Das bedeutet nicht automatisch, dass deine Zahlung fehlgeschlagen ist."
+        : paid ? "Deine Zahlung wurde bestätigt. Schön, dass Das Vegane Quartett bald bei dir mit am Tisch sitzt."
+        : "Für diesen Bezahlvorgang liegt noch keine Zahlungsbestätigung vor. Bitte warte einen Moment und prüfe den Status erneut."}</p>
+    </header>
+    {errorMessage ? (
+      <div class="ec-note"><h2>Was du jetzt tun kannst</h2><p>Prüfe dein E-Mail-Postfach auf eine Bestellbestätigung. Starte bitte keine weitere Zahlung, solange unklar ist, ob die erste erfolgreich war.</p><p>Bei Fragen schreib an <a href="mailto:kontakt@dasveganequartett.de">kontakt@dasveganequartett.de</a>.</p></div>
+    ) : (
+      <dl class="ec-details">
+        <div><dt>Status</dt><dd>{paid ? "Bezahlt" : "Bestätigung ausstehend"}</dd></div>
+        {amountTotal && <div><dt>Gesamtbetrag</dt><dd>{amountTotal}</dd></div>}
+        {session?.customer_details?.email && <div><dt>E-Mail</dt><dd>{session.customer_details.email}</dd></div>}
+      </dl>
+    )}
+    {paid && <div class="ec-note"><h2>Dein Spiel beginnt schon online.</h2><p>Dein erster digitaler Zugang wird für das beim Kauf verwendete Profil freigeschaltet. Weitere Deck-Zugänge kannst du dort als Geschenk weitergeben.</p><p>Die Verarbeitung und die Bestätigungsmail können einen Moment dauern. Falls du die E-Mail nicht findest, schau auch im Spamordner nach.</p></div>}
+    <div class="ec-actions">
+      {paid ? <a class="ec-primary" href="/account/access">Digitale Zugänge öffnen <span aria-hidden="true">→</span></a> : !errorMessage && <a class="ec-primary" href={Astro.url.pathname + Astro.url.search}>Status erneut prüfen</a>}
+      <a href="/">Zur Startseite</a>
     </div>
+    {paid && <p class="ec-footnote">Du möchtest direkt loslegen? <a href="/rules">Hier findest du die Spielregeln.</a></p>}
+    {!paid && !errorMessage && <p class="ec-footnote">Bitte starte während der Prüfung keine zweite Zahlung. Bei Fragen: <a href="mailto:kontakt@dasveganequartett.de">kontakt@dasveganequartett.de</a>.</p>}
   </section>
 </BaseLayout>
-
-<style>
-  .checkout-result-page { min-height: 70vh; display: grid; place-items: center; padding: 4rem 0; }
-  .checkout-result-card { width: min(100%, 760px); padding: clamp(1.5rem, 5vw, 3rem); border: 1px solid var(--border); border-radius: 24px; background: radial-gradient(circle at top left, rgba(126,255,203,.12), transparent 38%), var(--surface); box-shadow: var(--shadow-strong); }
-  .checkout-result-card h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 5rem); line-height: .95; letter-spacing: -.06em; }
-  .result-message { color: var(--muted-text); line-height: 1.7; }
-  .result-message.is-error { color: #ffc0c0; }
-  .checkout-details { display: grid; gap: .75rem; margin: 2rem 0; }
-  .checkout-details > div { display: grid; grid-template-columns: minmax(120px,.4fr) minmax(0,1fr); gap: 1rem; padding: .9rem 1rem; border: 1px solid var(--border); border-radius: 13px; background: var(--background); }
-  .checkout-details dt { color: var(--muted-text); }
-  .checkout-details dd { min-width: 0; margin: 0; overflow-wrap: anywhere; font-weight: 850; }
-  .result-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
-  .result-actions a { min-height: 46px; display: inline-flex; align-items: center; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 900; }
-  .result-actions .primary-result-link { border-color: transparent; color: #07110d; background: var(--accent); }
-  .webhook-note { margin: 1.5rem 0 0; color: var(--faint-text); font-size: .82rem; line-height: 1.55; }
-  @media (max-width: 520px) { .checkout-details > div { grid-template-columns: 1fr; gap: .3rem; } .result-actions { display: grid; } .result-actions a { justify-content: center; } }
-</style>

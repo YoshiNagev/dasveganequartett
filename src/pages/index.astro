@@ -1,216 +1,92 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/landing/Hero.astro";
-import QRFeature from "../components/landing/QRFeature.astro";
-import PreorderSection from "../components/landing/PreorderSection.astro";
-import AuthCta from "../components/account/AuthCta.tsx";
+import EditorialCardFan from "../components/landing/EditorialCardFan.astro";
+import { preorderConfig } from "../data/preorderConfig";
+const price = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(preorderConfig.presalePrice);
+const modes = [
+  { title: "Trumpfen / Quartett", text: "Werte vergleichen, Karten gewinnen. Die sechs Bewertungen bringen bekannte Einwände spielerisch auf den Tisch.", number: "01" },
+  { title: "Bootcamp", text: "Argumente prüfen und Antworten üben. Nutzt die Karten, um euer Wissen gemeinsam zu testen und zu erweitern.", number: "02" },
+  { title: "Ice Breaker", text: "Eine Karte ziehen und ins Gespräch kommen. Welche Gedanken löst der Einwand aus? Welche Perspektiven fehlen?", number: "03" },
+];
 ---
-
-<BaseLayout title="Das Vegane Quartett">
-  <Hero />
-
-  <AuthCta client:load variant="landing" />
-
-  <section class="intro-section">
-    <p class="eyebrow">Idee</p>
-    <h2>Ein Kartenspiel, das Gespräche startet.</h2>
-    <p>
-      Das Vegane Quartett sammelt 54 typische Argumente gegen Veganismus
-      und macht daraus ein spielerisches Gesprächsformat. Die Website
-      ergänzt das physische Spiel durch Diskussionen, Quellen und ausführliche
-      Antworten zu jeder Karte.
-    </p>
-  </section>
-
-  <QRFeature />
-
-  <PreorderSection />
-
-<section class="pro-vegan-pdf">
-  <div class="pro-vegan-pdf__inner">
-    <div class="pro-vegan-pdf__cover">
-      <img
-        src="/images/54-argumente-fuer-veganismus-cover.png"
-        alt="Cover der PDF 54 Argumente für Veganismus"
-        width="1200"
-        height="1697"
-        loading="lazy"
-      />
-    </div>
-
-    <div class="pro-vegan-pdf__content">
-      <p class="pro-vegan-pdf__label">
-        Kostenlose Ergänzung
-      </p>
-
-      <h2>
-        54 Argumente
-        <span>für Veganismus</span>
-      </h2>
-
-      <p>
-        Das kostenlose Gegenstück zu den 54 Einwänden gegen Veganismus: 54 unterschiedliche Zugänge zu der Frage, warum Tiere nicht für menschliche Zwecke ausgebeutet werden sollten.
-      </p>
-
-      <div class="pro-vegan-pdf__actions">
-        <a
-          class="pro-vegan-pdf__button pro-vegan-pdf__button--primary"
-          href="/54-argumente-fuer-veganismus"
-        >
-          PDF entdecken
+<BaseLayout title="Das Vegane Quartett" design="editorial"
+  description="Diese Diskussion kennst du schon. Entdecke 54 typische Einwände gegen Veganismus als Kartenspiel – mit drei Spielmodi, Quellen und ausführlichen Einordnungen."
+  image="/images/preorder/product-01.jpeg">
+  <section class="ed-hero" aria-labelledby="hero-title">
+    <div class="ed-hero-copy">
+      <p class="ed-kicker">Das Kartenspiel von Yoshi</p>
+      <h1 id="hero-title">Diese Diskussion<br />kennst du schon.</h1>
+      <p class="ed-lead">54 typische Einwände gegen Veganismus.<br class="ed-desktop-break" /> Ein Kartenspiel zum Hinterfragen, Kontern und Diskutieren.</p>
+      <div class="ed-actions">
+        <a class="ed-button" href={preorderConfig.preorderOpen ? "/preorder" : `mailto:${preorderConfig.contactEmail}`}>
+          {preorderConfig.preorderOpen ? "Jetzt vorbestellen" : "Verfügbarkeit anfragen"} <span aria-hidden="true">↗</span>
         </a>
-
-        <a
-          class="pro-vegan-pdf__button pro-vegan-pdf__button--secondary"
-          href="/downloads/54-argumente-fuer-veganismus.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Direkt lesen
+        <a class="ed-text-link" href="#karten-preview" data-draw-card>
+         <span class="ed-link-label">Eine Karte ziehen</span>
+         <span aria-hidden="true">→</span>
         </a>
       </div>
+      {preorderConfig.preorderOpen && <p class="ed-small">{price} im Vorverkauf · zzgl. {preorderConfig.shippingCost} € Versand</p>}
     </div>
-  </div>
-</section>
+    <EditorialCardFan />
+  </section>
 
-<style>
-  .pro-vegan-pdf {
-    padding: clamp(72px, 9vw, 125px) 20px;
-    background:
-      radial-gradient(
-        circle at 10% 20%,
-        rgba(118, 173, 105, 0.15),
-        transparent 30%
-      ),
-      #edf2e9;
-  }
+  <section class="ed-game ed-section" id="das-spiel" aria-labelledby="game-title">
+    <div class="ed-game-intro">
+      <p class="ed-kicker">Das Spiel</p>
+      <h2 id="game-title">Auf den Tisch.<br />Ins Gespräch.</h2>
+      <p>Manche Einwände hört man immer wieder. Das Vegane Quartett macht daraus ein Spiel.</p>
+      <p>Für gemeinsame Spielabende, zum individuellen Lernen und als einfacher Diskussionsstarter.</p>
+      <a class="ed-text-link" href="/rules">So wird gespielt <span aria-hidden="true">↗</span></a>
+    </div>
+    <figure class="ed-product-photo">
+      <img src="/images/preorder/product-01.jpeg" alt="Das echte Kartendeck mit farbiger Titelkarte auf hellem Untergrund" width="1200" height="1600" loading="lazy" />
+      <figcaption>54 Argumentkarten + Deckkarte. Im transparenten Etui.</figcaption>
+    </figure>
+    <div class="ed-modes">
+      <h3>Drei Spielmodi.</h3>
+      {modes.map(mode => <details name="play-mode" open={mode.number === "01"}>
+        <summary><span class="ed-mode-number">{mode.number}</span><span>{mode.title}</span><span class="ed-toggle" aria-hidden="true">+</span></summary>
+        <p>{mode.text}</p>
+      </details>)}
+      <a class="ed-text-link" href="/rules">Zur vollständigen Anleitung <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-  .pro-vegan-pdf__inner {
-    display: grid;
-    grid-template-columns: minmax(220px, 380px) minmax(0, 1fr);
-    gap: clamp(45px, 8vw, 105px);
-    align-items: center;
-    width: min(1120px, 100%);
-    margin-inline: auto;
-  }
+  <section class="ed-knowledge ed-section" aria-labelledby="knowledge-title">
+    <div>
+      <p class="ed-kicker">Die Karte ist der Anfang</p>
+      <h2 id="knowledge-title">Und was antwortest du?</h2>
+      <p>Zu jedem Argument gibt es eine eigene Seite mit ausführlicher Einordnung, Quellen und Platz für Diskussionen. Der QR-Code auf der Rückseite führt direkt dorthin.</p>
+      <a class="ed-text-link" href="/cards">Sechs Argumente kennenlernen <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="ed-quote">
+      <span class="ed-quote-number">Karte 01 · Philosophische Argumente</span>
+      <blockquote>„Pflanzen haben<br />auch Gefühle.“</blockquote>
+      <a class="ed-text-link" href="/cards/1">Die Einordnung lesen <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-  .pro-vegan-pdf__cover {
-    width: min(100%, 350px);
-    margin-inline: auto;
-    transform: rotate(-2deg);
-  }
+  <section class="ed-buy ed-section" aria-labelledby="buy-title">
+    <div><p class="ed-kicker">Dein nächster Spieleabend</p><h2 id="buy-title">Ein Deck.<br />Viele Perspektiven.</h2></div>
+    <div class="ed-buy-copy">
+      <p>54 Argumentkarten, drei Spielmodi und digitaler Zugang zu allen Argumentseiten. Zum Selberspielen oder Verschenken.</p>
+      <p class="ed-small">{preorderConfig.preorderOpen ? `Versand ab ${preorderConfig.estimatedShippingDate}` : "Aktuelle Verfügbarkeit auf Anfrage"} · Lieferung innerhalb Deutschlands</p>
+    </div>
+    <div class="ed-buy-action">
+      {preorderConfig.preorderOpen && <><span class="ed-price">{price}</span><span class="ed-small">pro Deck · später {preorderConfig.regularPrice} €<br />zzgl. {preorderConfig.shippingCost} € Versand pro Bestellung</span></>}
+      <a class="ed-button" href={preorderConfig.preorderOpen ? "/preorder" : `mailto:${preorderConfig.contactEmail}`}>{preorderConfig.preorderOpen ? "Zum Vorverkauf" : "Kontakt aufnehmen"} <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-  .pro-vegan-pdf__cover img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 28px 65px rgba(34, 57, 36, 0.2);
-  }
-
-  .pro-vegan-pdf__label {
-    margin: 0 0 14px;
-    color: #315f2d;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .pro-vegan-pdf h2 {
-    margin: 0;
-    color: #172018;
-    font-size: clamp(2.5rem, 5.5vw, 5.1rem);
-    line-height: 0.98;
-    letter-spacing: -0.055em;
-  }
-
-  .pro-vegan-pdf h2 span {
-    display: block;
-    color: #497f42;
-  }
-
-  .pro-vegan-pdf__content > p:not(.pro-vegan-pdf__label) {
-    max-width: 700px;
-    margin: 28px 0 0;
-    color: #5e6b60;
-    font-size: 1.08rem;
-    line-height: 1.75;
-  }
-
-  .pro-vegan-pdf__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 34px;
-  }
-
-  .pro-vegan-pdf__button {
-    display: inline-flex;
-    min-height: 50px;
-    align-items: center;
-    justify-content: center;
-    padding: 13px 20px;
-    border: 1px solid transparent;
-    border-radius: 13px;
-    font-weight: 750;
-    text-decoration: none;
-    transition:
-      transform 160ms ease,
-      background 160ms ease;
-  }
-
-  .pro-vegan-pdf__button:hover {
-    transform: translateY(-2px);
-  }
-
-  .pro-vegan-pdf__button--primary {
-    color: #ffffff;
-    background: #315f2d;
-  }
-
-  .pro-vegan-pdf__button--primary:hover {
-    background: #274e24;
-  }
-
-  .pro-vegan-pdf__button--secondary {
-    color: #172018;
-    border-color: rgba(23, 32, 24, 0.15);
-    background: rgba(255, 255, 255, 0.65);
-  }
-
-  .pro-vegan-pdf__button--secondary:hover {
-    background: #ffffff;
-  }
-
-  @media (max-width: 760px) {
-    .pro-vegan-pdf__inner {
-      grid-template-columns: 1fr;
-    }
-
-    .pro-vegan-pdf__cover {
-      width: min(68vw, 310px);
-    }
-
-    .pro-vegan-pdf__content {
-      text-align: center;
-    }
-
-    .pro-vegan-pdf__content > p:not(.pro-vegan-pdf__label) {
-      margin-inline: auto;
-    }
-
-    .pro-vegan-pdf__actions {
-      justify-content: center;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .pro-vegan-pdf__actions {
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
-
+  <section class="ed-extra ed-section" aria-labelledby="extra-title">
+    <a class="ed-pdf-cover" href="/54-argumente-fuer-veganismus" tabindex="-1" aria-hidden="true"><img src="/images/54-argumente-fuer-veganismus-cover.png" width="1200" height="1697" loading="lazy" alt="" /></a>
+    <div>
+      <p class="ed-kicker">Kostenlos weiterlesen</p>
+      <h2 id="extra-title">54 Argumente<br /><em>für</em> Veganismus.</h2>
+      <p>Das Gegenstück zu den Einwänden im Spiel: 54 Zugänge zu der Frage, warum Tiere nicht für menschliche Zwecke ausgebeutet werden sollten.</p>
+      <a class="ed-text-link" href="/54-argumente-fuer-veganismus">Die kostenlose PDF entdecken <span aria-hidden="true">↗</span></a>
+    </div>
+    <aside class="ed-community"><p class="ed-kicker">Gemeinsam weiterdenken</p><h3>Deine Perspektive fehlt noch.</h3><p>Fragen, Einwände oder eine andere Sicht? Im Forum geht das Gespräch weiter.</p><a class="ed-text-link" href="/forum">Zum Forum <span aria-hidden="true">↗</span></a></aside>
+  </section>
 </BaseLayout>

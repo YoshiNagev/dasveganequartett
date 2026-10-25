@@ -70,12 +70,13 @@ export default function ThreadSortBrowser({ threads }: Props) {
 
   return (
     <section className="thread-sort-browser">
-      <div className="thread-sort-toolbar">
+      <div className="thread-sort-toolbar" role="group" aria-label="Diskussionen sortieren">
         <button
           type="button"
           className={
             sortMode === "newest" ? "category-chip active" : "category-chip"
           }
+          aria-pressed={sortMode === "newest"}
           onClick={() => setSortMode("newest")}
         >
           Neueste
@@ -86,6 +87,7 @@ export default function ThreadSortBrowser({ threads }: Props) {
           className={
             sortMode === "active" ? "category-chip active" : "category-chip"
           }
+          aria-pressed={sortMode === "active"}
           onClick={() => setSortMode("active")}
         >
           Aktuell aktiv
@@ -98,12 +100,14 @@ export default function ThreadSortBrowser({ threads }: Props) {
               ? "category-chip active"
               : "category-chip"
           }
+          aria-pressed={sortMode === "commented"}
           onClick={() => setSortMode("commented")}
         >
           Meist kommentiert
         </button>
       </div>
 
+      {threads.length === 0 && <div className="empty-state"><h2>Noch keine Diskussionen.</h2><p>Wähle eine Karte im Forum und starte das erste Gespräch.</p><a href="/forum">Zu den Kartenforen</a></div>}
       <div className="thread-list">
         {sortedThreads.map((thread) => (
           <a

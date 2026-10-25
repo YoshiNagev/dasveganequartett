@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SuggestArgumentForm from "../../../components/forum/SuggestArgumentForm";
 import AccessGate from "../../../components/access/AccessGate.astro";
@@ -8,7 +10,9 @@ export const prerender = false;
 const access = await getAccessState(Astro.cookies, Astro.request);
 ---
 
-<BaseLayout title="Argument vorschlagen" noindex={true}>
+<BaseLayout design="editorial" title="Argument vorschlagen" noindex={true}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   {access.hasFullAccess ? (
     <>
   <section class="create-thread-page">
@@ -33,4 +37,5 @@ const access = await getAccessState(Astro.cookies, Astro.request);
   ) : (
     <AccessGate returnTo="/forum/suggest/new" eyebrow="Käuferforum" />
   )}
+  </div>
 </BaseLayout>

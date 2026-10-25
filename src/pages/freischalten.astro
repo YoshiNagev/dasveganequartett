@@ -1,39 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import RedeemAccess from "../components/access/RedeemAccess";
-
+import "../styles/auth-editorial.css";
+import "../styles/redeem-editorial.css";
 const initialCode = Astro.url.searchParams.get("code") ?? "";
 ---
-
-<BaseLayout title="Digitalen Zugang freischalten" noindex={true}>
-  <section class="redeem-page">
-    <div>
-      <p class="eyebrow">Markt- oder Geschenkzugang</p>
-      <h1>Alle 54 Argumente freischalten.</h1>
-      <p>
-        Löse den einmaligen Code von deiner Zugangskarte oder deinem Geschenklink
-        ein. Der Zugang wird dauerhaft deinem Profil zugeordnet.
-      </p>
+<BaseLayout design="editorial" title="Digitalen Zugang freischalten" noindex={true}>
+  <section class="ea-page ed-redeem" aria-labelledby="redeem-title">
+    <div class="ea-copy">
+      <p class="ed-kicker">Dein Quartett · Digitaler Zugang</p>
+      <h1 id="redeem-title">Mehr Karten.<br />Mehr Gespräch.</h1>
+      <p class="ea-lead">Mit deinem Zugangscode öffnest du alle 54 Argumente und die vollständigen Diskussionen. Löse hier den Code von deiner Zugangskarte oder deinem Geschenklink ein.</p>
+      <aside class="ea-note"><h2>Ein Code. Dein Zugang.</h2><p>Der Code lässt sich einmal einlösen und wird dabei deinem angemeldeten Profil zugeordnet. Prüfe deshalb vor dem Freischalten, ob du das richtige Konto verwendest.</p></aside>
+      <a class="ea-explore" href="/cards">Erst einmal die Karten entdecken <span aria-hidden="true">↗</span></a>
     </div>
-    <RedeemAccess client:load initialCode={initialCode} />
+    <div class="ea-panel">
+      <RedeemAccess client:load initialCode={initialCode} />
+      <noscript><p class="ea-noscript">Bitte aktiviere JavaScript, um deinen Zugangscode einzulösen.</p></noscript>
+      <details class="ed-redeem-help"><summary>Fragen zum Freischalten</summary><h3>Du hast einen Geschenklink?</h3><p>Der Code wird aus dem Link übernommen. Nach dem Einloggen kannst du ihn hier selbst bestätigen.</p><h3>Der Code funktioniert nicht?</h3><p>Prüfe, ob du den vollständigen Code eingegeben hast. Bereits eingelöste Codes können nicht erneut verwendet werden. Unter „Meine Zugänge“ siehst du deinen aktuellen Zugang.</p><a href="/account/access">Meine Zugänge öffnen</a></details>
+    </div>
   </section>
 </BaseLayout>
-
-<style is:global>
-  .redeem-page { min-height: 68vh; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(320px,.9fr); gap: clamp(1.5rem,5vw,4rem); align-items: center; padding: clamp(2.5rem,7vw,6rem) 0; }
-  .redeem-page > div > h1 { margin: 0; font-size: clamp(2.6rem,6vw,5.4rem); line-height: .94; letter-spacing: -.06em; }
-  .redeem-page > div > p:not(.eyebrow) { max-width: 650px; color: var(--muted-text); font-size: 1.08rem; line-height: 1.7; }
-  .redeem-card { display: grid; gap: 1rem; padding: clamp(1.3rem,4vw,2rem); border: 1px solid var(--border); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-soft); }
-  .redeem-card.success { border-color: rgba(126,255,203,.36); }
-  .redeem-card h2 { margin: 0; }
-  .redeem-card p { margin: 0; color: var(--muted-text); line-height: 1.6; }
-  .redeem-card label { display: grid; gap: .55rem; font-weight: 850; }
-  .redeem-card input { width: 100%; min-width: 0; min-height: 52px; padding: .85rem 1rem; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: var(--background); font: inherit; letter-spacing: .06em; text-transform: uppercase; }
-  .redeem-card > button { min-height: 50px; border: 0; border-radius: 12px; color: #07110d; background: var(--accent); font: inherit; font-weight: 900; cursor: pointer; }
-  .redeem-card > button:disabled { opacity: .55; }
-  .access-panel-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-  .access-panel-actions a { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text); background: var(--background); text-decoration: none; font-weight: 900; }
-  .access-panel-actions a.primary { border-color: transparent; color: #07110d; background: var(--accent); }
-  .form-message { color: #ffc0c0 !important; }
-  @media (max-width: 760px) { .redeem-page { min-height: auto; grid-template-columns: 1fr; } }
-</style>

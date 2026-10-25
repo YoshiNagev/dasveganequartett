@@ -132,6 +132,8 @@ export default function CommentCard({ comment, depth = 0 }: Props) {
             <button
               type="button"
               className="collapse-comment-button"
+              aria-expanded={!collapsed}
+              aria-label={collapsed ? "Antworten anzeigen" : "Antworten einklappen"}
               onClick={() => setCollapsed((value) => !value)}
             >
               {collapsed ? `+ ${replyCount}` : "−"}
@@ -149,6 +151,7 @@ export default function CommentCard({ comment, depth = 0 }: Props) {
       {isEditing ? (
         <div className="comment-edit-form">
           <textarea
+            aria-label="Kommentar bearbeiten"
             value={draftBody}
             onChange={(event) => setDraftBody(event.target.value)}
             rows={5}

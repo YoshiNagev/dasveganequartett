@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
 import CreateSuggestedThreadForm from "../../../components/forum/CreateSuggestedThreadForm";
@@ -60,7 +62,9 @@ const argumentProfile = Array.isArray(argument?.profiles)
   : argument?.profiles;
 ---
 
-<BaseLayout title={argument ? `${argument.title} · Vorgeschlagenes Argument` : "Vorgeschlagenes Argument · Käuferforum"} noindex={true}>
+<BaseLayout design="editorial" title={argument ? `${argument.title} · Vorgeschlagenes Argument` : "Vorgeschlagenes Argument · Käuferforum"} noindex={true}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   {access.hasFullAccess && argument ? (
     <>
   <section class="thread-page">
@@ -121,4 +125,5 @@ const argumentProfile = Array.isArray(argument?.profiles)
   ) : (
     <AccessGate returnTo={`/forum/suggest/${id}`} eyebrow="Käuferforum" />
   )}
+  </div>
 </BaseLayout>

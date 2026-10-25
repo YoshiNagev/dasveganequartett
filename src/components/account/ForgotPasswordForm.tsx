@@ -9,32 +9,26 @@ export default function ForgotPasswordForm() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (loading) return;
     setLoading(true);
     setMessage("");
-
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      email.trim().toLowerCase(),
-      {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
         redirectTo: `${window.location.origin}/account/reset-password`,
-      }
-    );
-
-    if (error) {
-      setMessage(
-        "Die E-Mail konnte gerade nicht versendet werden. Bitte versuche es später erneut."
-      );
+      });
+      if (error) throw error;
+      setSent(true);
+    } catch {
+      setMessage("Die E-Mail konnte gerade nicht angefordert werden. Bitte versuche es später erneut.");
+    } finally {
       setLoading(false);
-      return;
     }
-
-    setSent(true);
-    setLoading(false);
   }
 
   if (sent) {
     return (
       <section className="auth-form auth-success-panel" aria-live="polite">
-        <p className="eyebrow">E-Mail versendet</p>
+        <p className="eyebrow">Anfrage abgeschlossen</p>
         <h2>Prüfe dein Postfach.</h2>
         <p>
           Wenn ein Konto für <strong>{email}</strong> existiert, erhältst du
@@ -52,7 +46,8 @@ export default function ForgotPasswordForm() {
   }
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit} aria-busy={loading}>
+      <header className="ea-form-heading"><p className="ed-kicker">Schritt 1 · Link anfordern</p><h2>Zurück in dein Konto.</h2></header>
       <label htmlFor="reset-email">
         E-Mail
         <input

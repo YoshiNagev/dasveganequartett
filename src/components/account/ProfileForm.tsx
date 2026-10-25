@@ -48,6 +48,7 @@ export default function ProfileForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (saving) return;
     setSaving(true);
     setMessage("");
 
@@ -80,7 +81,7 @@ export default function ProfileForm() {
   if (loading) {
     return (
       <div className="profile-form">
-        <p className="form-message">Profil wird geladen...</p>
+        <p className="form-message" role="status">Profil wird geladen …</p>
       </div>
     );
   }
@@ -88,7 +89,9 @@ export default function ProfileForm() {
   if (!profile) {
     return (
       <div className="profile-form">
-        <p className="form-message">{message}</p>
+        <h2>Dein Profil ist gerade nicht verfügbar.</h2>
+        <p className="form-message" role="alert">{message}</p>
+        <a href="/account/login?returnTo=%2Faccount%2Fprofile">Zum Login</a>
       </div>
     );
   }
@@ -108,6 +111,9 @@ export default function ProfileForm() {
           <button
             type="button"
             className="avatar-edit-button"
+            aria-expanded={avatarPickerOpen}
+            aria-controls="profile-avatar-selection"
+            disabled={saving}
             onClick={() => setAvatarPickerOpen((value) => !value)}
           >
             {avatarPickerOpen ? "Auswahl schließen" : "Avatar ändern"}
@@ -116,12 +122,14 @@ export default function ProfileForm() {
       </div>
 
       {avatarPickerOpen && (
-        <AvatarPicker value={avatarUrl} onChange={setAvatarUrl} />
+        <div id="profile-avatar-selection"><AvatarPicker value={avatarUrl} onChange={setAvatarUrl} /></div>
       )}
 
       <label>
         Nickname
         <input
+          autoComplete="nickname"
+          disabled={saving}
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
           minLength={3}
@@ -131,8 +139,10 @@ export default function ProfileForm() {
       </label>
 
       <label>
-        Bio
+        Bio (optional)
         <textarea
+          aria-describedby="profile-bio-count"
+          disabled={saving}
           value={bio}
           onChange={(event) => setBio(event.target.value)}
           rows={5}
@@ -141,11 +151,12 @@ export default function ProfileForm() {
         />
       </label>
 
+      <small id="profile-bio-count" className="em-field-hint">{bio.length} / 400 Zeichen · öffentlich sichtbar</small>
       <button type="submit" disabled={saving}>
         {saving ? "Speichert..." : "Profil speichern"}
       </button>
 
-      {message && <p className="form-message">{message}</p>}
+      {message && <p className="form-message" role="status">{message}</p>}
     </form>
   );
 }

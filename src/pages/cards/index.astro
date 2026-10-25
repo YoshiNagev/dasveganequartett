@@ -1,4 +1,5 @@
 ---
+import "../../styles/cards-editorial.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CardBrowser from "../../components/cards/CardBrowser";
 import { cards } from "../../data/cards";
@@ -17,9 +18,9 @@ const categories = Array.from(
 ).sort();
 ---
 
-<BaseLayout title="Argumentkarten | Das Vegane Quartett">
-  <section class="page-header">
-    <p class="eyebrow">{access.hasFullAccess ? "Alle Karten" : "6 von 54 Karten"}</p>
+<BaseLayout title="Argumentkarten | Das Vegane Quartett" design="editorial">
+  <section class="ec-intro">
+    <p class="ed-kicker">{access.hasFullAccess ? "Alle Karten" : "6 von 54 Karten"}</p>
     <h1>{access.hasFullAccess ? "Finde jedes Argument schnell wieder." : "Sechs Argumente zum Kennenlernen."}</h1>
     <p>
       {access.hasFullAccess
@@ -32,14 +33,18 @@ const categories = Array.from(
     client:load
     cards={visibleCards}
     categories={categories}
+    fullAccess={access.hasFullAccess}
   />
 
   {!access.hasFullAccess && (
+    <div class="ec-access">
     <AccessGate
+      headingLevel="h2"
       returnTo="/cards"
       eyebrow="48 weitere Argumente"
       title="Die vollständige Sammlung steckt im Deck."
       message="Mit einem gekauften Deck erhältst du Zugriff auf alle 54 Argumente, die ausführlichen Einordnungen und den vollständigen Diskussionsbereich."
     />
+    </div>
   )}
 </BaseLayout>

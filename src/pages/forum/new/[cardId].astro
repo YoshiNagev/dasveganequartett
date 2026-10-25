@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CreateThreadForm from "../../../components/forum/CreateThreadForm";
 import AccessGate from "../../../components/access/AccessGate.astro";
@@ -19,7 +21,9 @@ const access = await getAccessState(Astro.cookies, Astro.request);
 const canUseForum = isPublicCardId(card.id) || access.hasFullAccess;
 ---
 
-<BaseLayout title={`Thread erstellen · ${card.title}`} noindex={true}>
+<BaseLayout design="editorial" title={`Thread erstellen · ${card.title}`} noindex={true}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   {canUseForum ? (
     <>
   <section class="create-thread-page">
@@ -46,4 +50,5 @@ const canUseForum = isPublicCardId(card.id) || access.hasFullAccess;
   ) : (
     <AccessGate returnTo={`/forum/new/${card.id}`} eyebrow="Käuferforum" />
   )}
+  </div>
 </BaseLayout>

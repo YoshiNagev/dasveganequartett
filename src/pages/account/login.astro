@@ -2,21 +2,17 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LoginForm from "../../components/account/LoginForm";
 import { safeReturnPath } from "../../lib/access";
+import "../../styles/auth-editorial.css";
 
 const returnTo = safeReturnPath(Astro.url.searchParams.get("returnTo"));
 ---
-
-<BaseLayout title="Einloggen" noindex={true}>
-  <section class="auth-page">
-    <div class="auth-copy">
-      <p class="eyebrow">Login</p>
-      <h1>Willkommen zurück.</h1>
-      <p>
-        Logge dich ein, um deine Käufe, digitalen Zugänge und Diskussionen zu
-        verwalten.
-      </p>
+<BaseLayout design="editorial" title="Einloggen" noindex={true}>
+  <section class="ea-page" aria-labelledby="auth-title">
+    <div class="ea-copy"><p class="ed-kicker">Das Vegane Quartett · Dein Konto</p><h1 id="auth-title">Willkommen<br />zurück.</h1><p class="ea-lead">Deine Argumente, deine Gespräche, dein Quartett. Logge dich ein und mach dort weiter, wo du aufgehört hast.</p>
+      {returnTo === "/preorder" && <p class="ea-return">Nach dem Einloggen geht es zurück zu deiner Vorbestellung.</p>}
+      <aside class="ea-note"><h2>Deine digitalen Zugänge</h2><p>Nach dem Kauf findest du deine freigeschalteten Inhalte in deinem Konto. Dort kannst du auch Zugänge verwalten und verschenken.</p></aside>
+      <a class="ea-explore" href="/cards">Erst einmal die Karten entdecken <span aria-hidden="true">↗</span></a>
     </div>
-
-    <LoginForm client:load returnTo={returnTo} />
+    <div class="ea-panel"><LoginForm client:load returnTo={returnTo} /><noscript><p class="ea-noscript">Bitte aktiviere JavaScript, um dich einzuloggen oder ein Konto zu erstellen.</p></noscript></div>
   </section>
 </BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import "../../../styles/forum-editorial.css";
+import ForumNav from "../../../components/forum/ForumNav.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../../components/forum/ThreadPreview.astro";
 import CreateThreadBox from "../../../components/forum/CreateThreadBox";
@@ -56,7 +58,9 @@ const displayThreads =
   })) ?? [];
 ---
 
-<BaseLayout title={`Forum zu Karte ${card.id}`} noindex={!canViewCard}>
+<BaseLayout design="editorial" title={`Forum zu Karte ${card.id}`} noindex={!canViewCard}>
+  <div class="ef-forum">
+  <ForumNav currentPath={Astro.url.pathname} />
   {canViewCard ? (
     <>
   <section class="page-header">
@@ -70,7 +74,7 @@ const displayThreads =
 
   <section class="thread-list">
     {
-      displayThreads.length > 0 ? (
+      error ? (<p class="ef-error" role="alert">Die Diskussionen konnten gerade nicht geladen werden. Bitte lade die Seite erneut.</p>) : displayThreads.length > 0 ? (
         displayThreads.map((thread) => <ThreadPreview thread={thread} />)
       ) : (
         <div class="empty-state">
@@ -94,4 +98,5 @@ const displayThreads =
       title="Dieses Argumentforum gehört zum Käuferbereich."
     />
   )}
+  </div>
 </BaseLayout>

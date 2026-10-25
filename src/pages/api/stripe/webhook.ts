@@ -1,3 +1,4 @@
+import { syncRefunds } from "../../../lib/server/refunds";
 import type { APIRoute } from "astro";
 import type Stripe from "stripe";
 import {
@@ -308,45 +309,6 @@ async function processCheckoutSession(
   await sendConfirmationIfNeeded(order);
 }
 
-async function processFullRefund(charge: Stripe.Charge): Promise<void> {
-  if (!charge.refunded || !charge.payment_intent) return;
-
-  const paymentIntentId =
-    typeof charge.payment_intent === "string"
-      ? charge.payment_intent
-      : charge.payment_intent.id;
-
-  const { data: order, error: orderError } = await supabaseAdmin
-    .from("orders")
-    .update({ status: "refunded" })
-    .eq("stripe_payment_intent_id", paymentIntentId)
-    .select("id")
-    .maybeSingle();
-
-  if (orderError) {
-    throw new Error(
-      `Erstattung konnte nicht gespeichert werden: ${orderError.message}`
-    );
-  }
-
-  if (!order) return;
-
-  const { error: licenseError } = await supabaseAdmin
-    .from("access_licenses")
-    .update({
-      status: "revoked",
-      revoked_at: new Date().toISOString(),
-      claim_token_hash: null,
-    })
-    .eq("order_id", order.id)
-    .neq("status", "revoked");
-
-  if (licenseError) {
-    throw new Error(
-      `Zugänge der erstatteten Bestellung konnten nicht gesperrt werden: ${licenseError.message}`
-    );
-  }
-}
 
 export const POST: APIRoute = async ({ request }) => {
   if (!webhookSecret) {
@@ -387,9 +349,20 @@ export const POST: APIRoute = async ({ request }) => {
         break;
       }
 
-      case "charge.refunded":
-        await processFullRefund(event.data.object as Stripe.Charge);
+      case "charge.refunded": {
+        const charge = event.data.object as Stripe.Charge;
+        const id = typeof charge.payment_intent === "string" ? charge.payment_intent : charge.payment_intent?.id;
+        if (id) await syncRefunds(id);
         break;
+      }
+      case "refund.created":
+      case "refund.updated":
+      case "refund.failed": {
+        const refund = event.data.object as Stripe.Refund;
+        const id = typeof refund.payment_intent === "string" ? refund.payment_intent : refund.payment_intent?.id;
+        if (id) await syncRefunds(id);
+        break;
+      }
 
       default:
         break;

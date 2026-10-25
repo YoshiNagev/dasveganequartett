@@ -5,59 +5,23 @@ import AuthCta from "../../components/account/AuthCta";
 import AccountSecurityPanel from "../../components/account/AccountSecurityPanel";
 import DeleteAccountPanel from "../../components/account/DeleteAccountPanel";
 import "../../styles/account-delete.css";
+import "../../styles/account-editorial.css";
 ---
-
-<BaseLayout title="Profil" noindex={true}>
-  <section class="profile-page">
-    <div class="profile-hero">
-      <div>
-        <p class="eyebrow">Account</p>
-        <h1>Dein Profil</h1>
-        <p>
-          Hier kannst du deinen öffentlichen Nickname, deine Bio und deinen
-          Avatar bearbeiten. Deine E-Mail-Adresse bleibt im Forum privat.
-        </p>
-      </div>
-    </div>
-
-    <div class="profile-layout">
-      <ProfileForm client:load />
-
-      <aside class="profile-info-card">
-        <h2>Dein Käuferbereich</h2>
-
-        <p>
-          Verwalte hier deine digitalen Deck-Zugänge oder gib einen Zugang als
-          Geschenk weiter.
-        </p>
-
-        <a class="create-thread-link" href="/account/access">
-          Digitale Zugänge öffnen
-        </a>
-
-        <h2>Was öffentlich sichtbar ist</h2>
-
-        <ul>
-          <li>Dein Nickname</li>
-          <li>Deine Bio</li>
-          <li>Dein ausgewählter Avatar</li>
-          <li>Deine Threads</li>
-          <li>Deine Kommentare</li>
-        </ul>
-
-        <p>
-          Deine E-Mail-Adresse und deine Anmeldedaten werden im Forum nicht
-          angezeigt.
-        </p>
-
+<BaseLayout design="editorial" title="Profil" noindex={true}>
+  <div class="em-account">
+    <header class="em-heading"><p class="ed-kicker">Dein Konto</p><h1>Dein Profil.</h1><p>So zeigst du dich in der Community. Bearbeite deinen Nickname, deine Bio und deinen Avatar.</p></header>
+    <nav class="em-nav" aria-label="Kontobereich"><a href="/account/profile" aria-current="page">Profil</a><a href="/account/access">Meine Zugänge</a><a href="/account/notifications">Benachrichtigungen</a></nav>
+    <div class="em-profile-layout">
+      <div><ProfileForm client:load /><noscript><p>Bitte aktiviere JavaScript, um dein Profil zu laden und zu bearbeiten.</p></noscript></div>
+      <aside class="em-sidebar">
+        <section class="em-side-note"><p class="ed-kicker">Dein Quartett online</p><h2>Deine Zugänge.</h2><p>Sieh nach, welche Inhalte für dich freigeschaltet sind, oder verschenke einen weiteren Deck-Zugang.</p><a class="ed-button" href="/account/access">Zugänge verwalten <span aria-hidden="true">→</span></a></section>
+        <details class="em-disclosure"><summary>Was sehen andere von mir?</summary><p>Dein Nickname, deine Bio und dein ausgewählter Avatar sind öffentlich sichtbar. Das gilt auch für deine Threads und Kommentare.</p><p>Deine E-Mail-Adresse und Anmeldedaten werden im Forum nicht angezeigt.</p></details>
         <AuthCta client:idle variant="profile" />
       </aside>
     </div>
-
-    <AccountSecurityPanel client:visible />
-
+    <div class="em-security"><AccountSecurityPanel client:visible /></div>
     <DeleteAccountPanel client:visible />
-  </section>
+  </div>
 </BaseLayout>
 
 <style is:global>

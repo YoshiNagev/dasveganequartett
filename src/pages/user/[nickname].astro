@@ -1,4 +1,5 @@
 ---
+import "../../styles/public-profile-editorial.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ThreadPreview from "../../components/forum/ThreadPreview.astro";
 import MarkdownText from "../../components/forum/MarkdownText";
@@ -24,7 +25,7 @@ if (profileError || !profile) {
   return Astro.redirect("/forum");
 }
 
-const { data: threads } = await supabase
+const { data: threads, error: threadsError } = await supabase
   .from("threads")
   .select(`
     id,
@@ -45,7 +46,7 @@ const { data: threads } = await supabase
   .eq("is_hidden", false)
   .order("created_at", { ascending: false });
 
-const { data: comments } = await supabase
+const { data: comments, error: commentsError } = await supabase
   .from("comments")
   .select(`
     id,
@@ -112,87 +113,61 @@ const displayComments = (comments ?? []).flatMap((comment) => {
 });
 ---
 
-<BaseLayout title={`${profile.nickname} · Profil`} noindex={true}>
-  <section class="public-profile-page">
-    <div class="public-profile-hero upgraded">
-      <div class="profile-avatar public">
+<BaseLayout title={`${profile.nickname} · Profil`} noindex={true} design="editorial">
+  <div class="ep-profile">
+    <a class="ep-back" href="/forum">← Zum Forum</a>
+    <header class="ep-hero">
+      <div class="ep-avatar">
         {profile.avatar_url ? (
-          <img src={profile.avatar_url} alt={`Avatar von ${profile.nickname}`} />
-        ) : (
-          profile.nickname.slice(0, 2).toUpperCase()
-        )}
+          <img src={profile.avatar_url} alt={`Avatar von ${profile.nickname}`} width="144" height="144" />
+        ) : <span aria-hidden="true">{profile.nickname.slice(0, 2).toUpperCase()}</span>}
       </div>
-
-      <div>
-        <p class="eyebrow">Profil</p>
+      <div class="ep-intro">
+        <p class="ep-kicker">Aus der Community</p>
         <h1>{profile.nickname}</h1>
-        <p>{profile.bio || "Dieses Profil hat noch keine Bio."}</p>
-
-        <div class="profile-stat-row">
-          <span>{profile.role}</span>
-          <span>Seit {new Date(profile.created_at).toLocaleDateString("de-DE")}</span>
-          <span>{displayThreads.length} Threads</span>
-          <span>{displayComments.length} Kommentare</span>
+        <p class="ep-bio">{profile.bio || "Diese Person hat noch keine Profilbeschreibung ergänzt."}</p>
+        <div class="ep-details">
+          <span class="ep-role">{profile.role === "admin" ? "Administration" : profile.role === "moderator" ? "Moderation" : "Mitglied"}</span>
+          <span>Dabei seit <time datetime={profile.created_at}>{new Date(profile.created_at).toLocaleDateString("de-DE")}</time></span>
         </div>
       </div>
-    </div>
+    </header>
 
-    <section class="profile-activity-grid">
-      <div class="threads-section">
-        <div class="section-heading-row">
-          <div>
-            <p class="eyebrow">Aktivität</p>
-            <h2>Threads von {profile.nickname}</h2>
-          </div>
-        </div>
+    <nav class="ep-jump" aria-label="Profilbereiche">
+      <a href="#diskussionen">Diskussionen {!threadsError && <span>{displayThreads.length}</span>}</a>
+      <a href="#antworten">Neueste Antworten</a>
+    </nav>
+    {!access.hasFullAccess && <p class="ep-access-note">Hier siehst du Beiträge zu den sechs frei zugänglichen Karten. Mit einem vollständigen Zugang werden auch Beiträge zu den weiteren Karten und Community-Vorschlägen angezeigt.</p>}
 
-        {
-          displayThreads.length > 0 ? (
-            <div class="thread-list">
-              {displayThreads.map((thread) => (
-                <ThreadPreview thread={thread} />
-              ))}
-            </div>
-          ) : (
-            <div class="empty-state">
-              <h3>Noch keine Threads</h3>
-              <p>Diese Person hat noch keine Diskussionen gestartet.</p>
-            </div>
-          )
-        }
-      </div>
-
-      <aside class="latest-comments-card">
-        <p class="eyebrow">Kommentare</p>
-        <h2>Neueste Antworten</h2>
-
-        {
-          displayComments.length > 0 ? (
-            <div class="latest-comment-list">
-              {displayComments.map((comment) => (
-                <a
-                  class="latest-comment-item"
-                  href={`/forum/thread/${comment.thread.slug}`}
-                >
-                  <strong>{comment.thread.title}</strong>
-
-                  <MarkdownText content={
-                    comment.body.length > 180
-                      ? `${comment.body.slice(0, 180)}...`
-                      : comment.body
-                  } />
-
-                  <small>
-                    {new Date(comment.created_at).toLocaleDateString("de-DE")}
-                  </small>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p class="muted-text">Noch keine Kommentare.</p>
-          )
-        }
+    <div class="ep-activity">
+      <section id="diskussionen" aria-labelledby="ep-threads-title">
+        <p class="ep-kicker">Gespräche eröffnen</p>
+        <h2 id="ep-threads-title">Gestartete Diskussionen</h2>
+        {threadsError ? (
+          <p class="ep-error" role="alert">Die Diskussionen konnten gerade nicht geladen werden. Bitte lade die Seite erneut.</p>
+        ) : displayThreads.length > 0 ? (
+          <div class="ep-thread-list">{displayThreads.map((thread) => <ThreadPreview thread={thread} />)}</div>
+        ) : (
+          <div class="ep-empty"><h3>Noch keine sichtbaren Diskussionen</h3><p>Für deinen aktuellen Zugang sind hier noch keine gestarteten Diskussionen sichtbar.</p><a href="/forum">Kartenforen entdecken →</a></div>
+        )}
+      </section>
+      <aside id="antworten" aria-labelledby="ep-comments-title">
+        <p class="ep-kicker">Im Austausch</p>
+        <h2 id="ep-comments-title">Neueste Antworten</h2>
+        <p class="ep-comments-note">Sichtbare Beiträge aus den letzten zehn Kommentaren.</p>
+        {commentsError ? (
+          <p class="ep-error" role="alert">Die Antworten konnten gerade nicht geladen werden. Bitte lade die Seite erneut.</p>
+        ) : displayComments.length > 0 ? (
+          <div class="ep-comment-list">{displayComments.map((comment) => (
+            <article class="ep-comment">
+              <time datetime={comment.created_at}>{new Date(comment.created_at).toLocaleDateString("de-DE")}</time>
+              <h3><a href={`/forum/thread/${comment.thread.slug}`}>{comment.thread.title}</a></h3>
+              <div class="ep-comment-body"><MarkdownText content={comment.body.length > 180 ? `${comment.body.slice(0, 180)}…` : comment.body} /></div>
+              <a class="ep-discussion-link" href={`/forum/thread/${comment.thread.slug}`}>Zur Diskussion →</a>
+            </article>
+          ))}</div>
+        ) : <div class="ep-empty"><p>Unter den letzten zehn Kommentaren sind für deinen aktuellen Zugang keine Antworten sichtbar.</p></div>}
       </aside>
-    </section>
-  </section>
+    </div>
+  </div>
 </BaseLayout>

@@ -1,0 +1,11 @@
+---
+const { currentPath = "/forum" } = Astro.props;
+const items = [
+  { href: "/forum", label: "Kartenforen", active: currentPath === "/forum" || currentPath.startsWith("/forum/card/") || currentPath.startsWith("/forum/new/") },
+  { href: "/forum/threads", label: "Diskussionen", active: currentPath === "/forum/threads" || currentPath.startsWith("/forum/thread/") },
+  { href: "/forum/suggest", label: "Community-Vorschläge", active: currentPath.startsWith("/forum/suggest") },
+];
+---
+<nav class="ef-nav" aria-label="Forum">
+  {items.map(item => <a href={item.href} aria-current={item.active ? "page" : undefined}>{item.label}</a>)}
+</nav>

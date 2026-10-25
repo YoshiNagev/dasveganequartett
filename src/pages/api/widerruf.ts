@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
+import { supabaseAdmin } from "../../lib/server/supabaseAdmin";
 
 export const prerender = false;
 
@@ -83,7 +84,22 @@ export const POST: APIRoute = async ({ request }) => {
     dateStyle: "full",
     timeStyle: "medium",
   }).format(now);
-  const reference = `WID-${now.toISOString().slice(0, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  const reference = `WID-${new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Berlin" }).format(now).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+
+  // Unbekannte Referenzen bleiben zur manuellen Prüfung erhalten.
+  // Eine E-Mail-Adresse im öffentlichen Formular ist kein Identitätsnachweis.
+  const { data: candidate, error: lookupError } = await supabaseAdmin.from("orders")
+    .select("id,customer_email").eq("order_number", orderReference.toUpperCase()).maybeSingle();
+  if (lookupError) return json({ error: "Der Widerruf konnte nicht gespeichert werden. Bitte sende ihn per E-Mail an kontakt@dasveganequartett.de." }, 503);
+  const orderId = candidate?.customer_email?.trim().toLowerCase() === email.toLowerCase() ? candidate.id : null;
+  const { error: saveError } = await supabaseAdmin.from("withdrawals").insert({
+    reference, created_at: now.toISOString(), name, email,
+    order_reference: orderReference, scope, details, order_id: orderId,
+  });
+  if (saveError) {
+    console.error("Withdrawal persistence failed", saveError.code);
+    return json({ error: "Der Widerruf konnte nicht gespeichert werden. Bitte sende ihn per E-Mail an kontakt@dasveganequartett.de." }, 503);
+  }
 
   const text = [
     "Eingangsbestätigung deines Widerrufs",
@@ -148,13 +164,16 @@ export const POST: APIRoute = async ({ request }) => {
       },
     });
 
-    return json({ ok: true, reference, receivedAt });
+    const { error: mailStatusError } = await supabaseAdmin.from("withdrawals")
+      .update({ mail_status: "sent" }).eq("reference", reference);
+    if (mailStatusError) console.error("Withdrawal mail status update failed", mailStatusError.code);
+    return json({ ok: true, reference, receivedAt, emailSent: true });
   } catch (error) {
     console.error("Withdrawal email failed", error);
-    return json(
-      { error: "Der Widerruf konnte technisch nicht bestätigt werden. Bitte sende ihn ersatzweise per E-Mail an kontakt@dasveganequartett.de." },
-      500,
-    );
+    const { error: mailStatusError } = await supabaseAdmin.from("withdrawals")
+      .update({ mail_status: "failed" }).eq("reference", reference);
+    if (mailStatusError) console.error("Withdrawal mail status update failed", mailStatusError.code);
+    return json({ ok: true, reference, receivedAt, emailSent: false });
   }
 };
 

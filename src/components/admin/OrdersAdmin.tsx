@@ -3,10 +3,10 @@ import { supabase } from "../../lib/supabaseClient";
 
 type Status = "pending" | "paid" | "cancelled" | "refunded" | "shipped";
 type Address = { line1?: string|null; line2?: string|null; postal_code?: string|null; city?: string|null; state?: string|null; country?: string|null };
-type Order = { id:string; order_number:string; quantity:number; total_cents:number; status:Status; customer_email:string|null; shipping_name:string|null; shipping_address:Address|null; stripe_checkout_session_id:string|null; stripe_payment_intent_id:string|null; created_at:string; paid_at:string|null; shipped_at:string|null };
+type Order = { refund_status:string; refunded_amount_cents:number; refund_checked_at:string|null; id:string; order_number:string; quantity:number; total_cents:number; status:Status; customer_email:string|null; shipping_name:string|null; shipping_address:Address|null; stripe_checkout_session_id:string|null; stripe_payment_intent_id:string|null; created_at:string; paid_at:string|null; shipped_at:string|null };
 type Summary = { orderCount:number; deckCount:number; revenueCents:number; paidCount:number; shippedCount:number };
 
-const labels: Record<Status,string> = { pending:"Ausstehend", paid:"Bezahlt", cancelled:"Storniert", refunded:"Erstattet", shipped:"Versendet" };
+const labels: Record<Status,string> = { pending:"Ausstehend", paid:"Bezahlt", cancelled:"Zahlung abgebrochen", refunded:"Erstattet", shipped:"Versendet" };
 const money = (c:number) => new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR" }).format(c/100);
 const date = (v:string|null) => v ? new Intl.DateTimeFormat("de-DE", { dateStyle:"medium", timeStyle:"short" }).format(new Date(v)) : "–";
 
@@ -68,7 +68,7 @@ export default function OrdersAdmin() {
 
     <div className="orders-toolbar">
       <form onSubmit={e=>{e.preventDefault();load(status,search)}}><label htmlFor="order-search">Bestellung suchen</label><div><input id="order-search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Bestellnummer, Name oder E-Mail"/><button>Suchen</button></div></form>
-      <div className="orders-filter">{[["all","Alle"],["paid","Bezahlt"],["shipped","Versendet"],["pending","Ausstehend"],["cancelled","Storniert"],["refunded","Erstattet"]].map(([v,l])=><button key={v} type="button" className={status===v?"is-active":""} onClick={()=>{setStatus(v);load(v,search)}}>{l}</button>)}</div>
+      <div className="orders-filter">{[["all","Alle"],["paid","Bezahlt"],["shipped","Versendet"],["pending","Ausstehend"],["cancelled","Zahlung abgebrochen"],["refunded","Erstattet"]].map(([v,l])=><button key={v} type="button" className={status===v?"is-active":""} onClick={()=>{setStatus(v);load(v,search)}}>{l}</button>)}</div>
     </div>
 
     {message && <p className="admin-orders-message">{message}</p>}
@@ -80,7 +80,7 @@ export default function OrdersAdmin() {
         <div className="order-detail-grid">
           <section><h3>Kundendaten</h3><p><strong>{o.shipping_name ?? "Kein Name"}</strong></p><p>{o.customer_email ? <a href={`mailto:${o.customer_email}`}>{o.customer_email}</a> : "Keine E-Mail"}</p></section>
           <section><h3>Lieferadresse</h3>{lines.length ? <address>{lines.map(x=><span key={x}>{x}</span>)}</address> : <p>Keine Lieferadresse gespeichert.</p>}</section>
-          <section><h3>Stripe</h3><p>{o.stripe_checkout_session_id ?? "–"}</p><p>{o.stripe_payment_intent_id ?? "–"}</p></section>
+          <section><h3>Zahlung und Erstattung</h3><p>Bestätigt erstattet: {money(o.refunded_amount_cents ?? 0)}</p><p>{({none:"Keine Erstattung gespeichert",pending:"Erstattung in Bearbeitung / Aktion erforderlich",partial:"Teilweise erstattet",succeeded:"Vollständig erstattet",failed:"Erstattung fehlgeschlagen / abgebrochen"} as Record<string,string>)[o.refund_status] ?? "Unbekannt"}</p><p>{o.refund_checked_at ? `Zuletzt geprüft: ${date(o.refund_checked_at)}` : "Noch kein Stripe-Abgleich"}</p>{o.stripe_payment_intent_id && <p><a target="_blank" rel="noopener noreferrer" href={`https://dashboard.stripe.com/payments/${encodeURIComponent(o.stripe_payment_intent_id)}`}>Zahlung in Stripe prüfen</a></p>}<p>{o.stripe_checkout_session_id ?? "–"}</p><p>{o.stripe_payment_intent_id ?? "–"}</p></section>
         </div>
         <footer><span>{o.status==="shipped" ? `Versendet am ${date(o.shipped_at)}` : ""}</span><div className="order-actions">{o.status==="paid" && <button disabled={updating===o.id} onClick={()=>change(o,"mark_shipped")}>Als versendet markieren</button>}{o.status==="shipped" && <button className="secondary" disabled={updating===o.id} onClick={()=>change(o,"undo_shipped")}>Versandstatus zurücksetzen</button>}</div></footer>
       </article>})}</div>}

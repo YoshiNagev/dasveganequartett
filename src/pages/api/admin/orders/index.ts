@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ request, url }) => {
     const status = url.searchParams.get("status");
     const search = (url.searchParams.get("search") ?? "").trim().replace(/[,%_]/g, " ").trim();
 
-    let query = supabaseAdmin.from("orders").select("id,order_number,quantity,unit_price_cents,shipping_cost_cents,total_cents,currency,status,customer_email,shipping_name,shipping_address,stripe_checkout_session_id,stripe_payment_intent_id,created_at,updated_at,paid_at,shipped_at").order("created_at", { ascending: false }).limit(250);
+    let query = supabaseAdmin.from("orders").select("id,order_number,quantity,unit_price_cents,shipping_cost_cents,total_cents,currency,status,customer_email,shipping_name,shipping_address,stripe_checkout_session_id,stripe_payment_intent_id,created_at,updated_at,paid_at,shipped_at,refund_status,refunded_amount_cents,refund_checked_at").order("created_at", { ascending: false }).limit(250);
     if (status && ["pending","paid","cancelled","refunded","shipped"].includes(status)) query = query.eq("status", status);
     if (search) query = query.or(`order_number.ilike.%${search}%,customer_email.ilike.%${search}%,shipping_name.ilike.%${search}%`);
 
@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ request, url }) => {
     const summary = {
       orderCount: rows.length,
       deckCount: rows.reduce((sum, o) => sum + o.quantity, 0),
-      revenueCents: rows.filter(o => ["paid","shipped"].includes(o.status)).reduce((sum, o) => sum + o.total_cents, 0),
+      revenueCents: rows.filter(o => ["paid","shipped"].includes(o.status)).reduce((sum, o) => sum + Math.max(0, o.total_cents - (o.refunded_amount_cents ?? 0)), 0),
       paidCount: rows.filter(o => ["paid","shipped"].includes(o.status)).length,
       shippedCount: rows.filter(o => o.status === "shipped").length,
     };

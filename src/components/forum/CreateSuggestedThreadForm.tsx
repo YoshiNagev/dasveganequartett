@@ -116,7 +116,7 @@ export default function CreateSuggestedThreadForm({
         {submitting ? "Wird erstellt..." : "Thread erstellen"}
       </button>
 
-      {message && <p className="form-message">{message}</p>}
+      {message && <p className="form-message" role="alert">{message}</p>}
     </form>
   );
 }
