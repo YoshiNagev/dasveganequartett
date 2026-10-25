@@ -42,6 +42,10 @@ const socialImageURL = image ? new URL(image, siteBase) : undefined;
 <html lang="de" data-design={design}>
   <head>
     <meta charset="utf-8" />
+    <meta name="color-scheme" content="only light" />
+    <style is:global>
+      :root { color-scheme: only light; }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{pageTitle}</title>

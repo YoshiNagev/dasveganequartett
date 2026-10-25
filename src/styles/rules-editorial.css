@@ -56,3 +56,23 @@
 @media(max-width:850px) { .er-body { display:block; padding-top:40px; }.er-index { position:static; display:flex; flex-direction:row; flex-wrap:wrap; gap:8px 22px; margin-bottom:40px; padding-bottom:24px; border-bottom:1px solid var(--border); }.er-index .er-small { width:100%; margin:0 !important; }.er-index a { border:0; }.er-hero { grid-template-columns:1fr; gap:32px; }.er-invitation h2 { font-size:30px; }.er-invitation { max-width:620px; }.er-choices { grid-template-columns:1fr; }.er-choice + .er-choice { border-left:0; border-top:1px solid var(--border); }.er-choice-title { margin:10px 0; font-size:29px; }.er-choice-copy { max-width:600px; }.er-chapter { scroll-margin-top:10px; } }
 @media(max-width:540px) { .er-rules { padding-top:32px; }.er-hero h1 { font-size:clamp(36px,9vw,48px); }.er-hero .er-lead { font-size:17px; }.er-card-layout { grid-template-columns:1fr; gap:28px; }.er-card-layout figure { width:210px; max-width:100%; margin:auto !important; }.er-ratings { grid-template-columns:1fr; }.er-mode-heading { gap:14px; align-items:flex-start; }.er-mode-heading h2 { font-size:clamp(27px,7.8vw,40px); overflow-wrap:anywhere; }.er-mode-number { width:42px; height:58px; font-size:25px; }.er-mode-heading .ed-kicker { font-size:10px; letter-spacing:.08em; }.er-steps > li { padding-left:36px; }.er-steps h3 { font-size:23px; }.er-house { padding:24px 20px; }.er-example { padding:22px 20px; }.er-chapter { padding-bottom:38px; margin-bottom:38px; }.er-house { padding-bottom:24px; }.er-index { gap:2px 18px; }.er-choice-title { font-size:27px; } }
 @media(prefers-reduced-motion:reduce) { .er-choice { transition:none; } }
+
+/* A stable, full-width contents list on phones and tablets. */
+@media (max-width:850px) {
+  .er-rules .er-index {
+    display:flex; flex-direction:column; flex-wrap:nowrap;
+    align-items:stretch; gap:0; padding-bottom:0;
+    border-bottom:0;
+  }
+  .er-rules .er-index .er-small { margin:0 0 14px !important; }
+  .er-rules .er-index a {
+    display:block; width:100%; box-sizing:border-box;
+    min-height:48px; padding:13px 0; line-height:1.5;
+    border-bottom:1px solid var(--border);
+    overflow-wrap:break-word;
+  }
+  .er-rules .er-index a:focus-visible {
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+  .er-rules .er-chapter { scroll-margin-top:130px; }
+}
