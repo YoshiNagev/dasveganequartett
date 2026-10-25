@@ -34,3 +34,18 @@
 @media(max-width:760px) { .em-account { padding:32px 0 45px; }.em-heading > p:last-child { font-size:17px; }.em-profile-layout { grid-template-columns:1fr; }.em-account .profile-form { padding:24px; }.em-account .account-security-grid,.em-account .license-grid { grid-template-columns:1fr; }.em-account .access-status,.em-account .access-section-heading { display:flex; flex-direction:column; align-items:stretch; }.em-account .access-status > a { width:100%; }.em-nav { gap:4px 24px; margin-bottom:28px; }.em-nav a { font-size:14px; }.em-account h2 { font-size:29px; }.em-account .account-security-header { display:block; }.em-account .account-security-header > p { margin-top:15px; } }
 @media(max-width:420px) { .em-account :is(.profile-form,.account-security-card,.delete-account-card,.access-panel,.access-status,.gift-result,.license-card,.empty-state) { padding:22px 18px; }.em-account .avatar-grid { gap:8px; grid-template-columns:repeat(3,minmax(0,1fr)); }.em-account .license-actions { flex-direction:column; }.em-account .license-actions button { width:100%; }.em-account .access-section-heading > a { align-self:flex-start; }.em-account h1 { font-size:42px; }.em-account h2 { font-size:28px; }.em-account h3 { font-size:24px; } }
 .em-account .access-status.active,.em-account .license-card.is-own-license { border-color:var(--border); border-left-color:var(--accent); }
+
+/* Square grid items: intrinsic image height must not stretch Safari rows. */
+.em-account .avatar-grid { align-items:start; grid-auto-rows:auto; }
+.em-account .profile-form .avatar-option {
+  position:relative; display:block; box-sizing:border-box;
+  width:100%; height:auto; min-width:0; min-height:0;
+  aspect-ratio:1 / 1; padding:0; align-self:start;
+  border-radius:50%; overflow:hidden; appearance:none;
+}
+.em-account .profile-form .avatar-option img {
+  position:absolute; top:5px; left:5px; display:block;
+  width:calc(100% - 10px); height:calc(100% - 10px);
+  max-width:none; max-height:none; margin:0;
+  object-fit:cover; border-radius:50%;
+}

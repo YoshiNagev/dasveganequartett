@@ -194,3 +194,14 @@ html[data-design="editorial"] .footer-bottom { font-size: 11px; margin-top: 40px
   text-underline-offset: 7px;
   text-decoration-thickness: 1px;
 }
+/* Reserve space from the actual card width, including rotated corners. */
+.ed-fan-stage { height:auto; padding-block:16px 64px; box-sizing:content-box; }
+.ed-fan-stage::before { content:""; display:block; width:53%; max-width:295px; aspect-ratio:635 / 889; pointer-events:none; }
+.ed-fan-card img { display:block; }
+.ed-fan-controls { position:relative; z-index:1; }
+@media(max-width:900px) {
+  .ed-fan-stage::before { width:58%; }
+}
+@media(max-width:640px) {
+  .ed-fan-stage::before { max-width:260px; }
+}
