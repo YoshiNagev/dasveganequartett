@@ -1,18 +1,18 @@
-html[data-design="editorial"] .ea-admin { --text:#302c21; --muted-text:#645d51; --faint-text:#76684f; --accent:#2d4932; --border:#d4c7b2; --surface:#f5efe3; --background:#ece4d5; --shadow-soft:none; --shadow-strong:none; min-width:0; padding:50px 0 64px; color:var(--text); }
+html[data-design="editorial"] .ea-admin { --text:var(--dm-text, #302c21); --muted-text:var(--dm-muted, #645d51); --faint-text:var(--dm-faint, #76684f); --accent:var(--dm-accent, #2d4932); --border:var(--dm-border, #d4c7b2); --surface:var(--dm-surface, #f5efe3); --background:var(--dm-soft, #ece4d5); --shadow-soft:none; --shadow-strong:none; min-width:0; padding:50px 0 64px; color:var(--text); }
 html[data-design="editorial"] .ea-admin .page-header { margin:0 0 36px; padding:0; max-width:850px; }
-html[data-design="editorial"] .ea-admin .eyebrow { margin:0 0 12px; color:#76684f; font-size:12px; letter-spacing:.13em; text-transform:uppercase; }
+html[data-design="editorial"] .ea-admin .eyebrow { margin:0 0 12px; color:var(--dm-faint, #76684f); font-size:12px; letter-spacing:.13em; text-transform:uppercase; }
 html[data-design="editorial"] .ea-admin h1 { margin:0 0 22px; font:700 clamp(38px,5vw,64px)/1.1 Georgia,serif; letter-spacing:-.04em; overflow-wrap:anywhere; }
 html[data-design="editorial"] .ea-admin h2 { margin:0 0 14px; font:700 28px/1.2 Georgia,serif; overflow-wrap:anywhere; }
 html[data-design="editorial"] .ea-admin h3 { margin:0 0 12px; font:700 21px/1.3 Georgia,serif; }
 html[data-design="editorial"] .ea-admin p { margin:10px 0; line-height:1.7; overflow-wrap:anywhere; }
-html[data-design="editorial"] .ea-admin .page-header > p:last-child { font-size:18px; color:#645d51; }
-html[data-design="editorial"] .ea-admin button { min-height:44px; padding:10px 16px; border:1px solid #b9aa92; border-radius:4px; background:#2d4932; color:#fffaf0; font:inherit; font-weight:700; cursor:pointer; box-shadow:none; }
-html[data-design="editorial"] .ea-admin button:hover { background:#233b28; color:#fffaf0; box-shadow:none; transform:none; }
+html[data-design="editorial"] .ea-admin .page-header > p:last-child { font-size:18px; color:var(--dm-muted, #645d51); }
+html[data-design="editorial"] .ea-admin button { min-height:44px; padding:10px 16px; border:1px solid var(--dm-control-border, #b9aa92); border-radius:4px; background:var(--dm-accent, #2d4932); color:var(--dm-on-accent, #fffaf0); font:inherit; font-weight:700; cursor:pointer; box-shadow:none; }
+html[data-design="editorial"] .ea-admin button:hover { background:var(--dm-accent-hover, #233b28); color:var(--dm-on-accent, #fffaf0); box-shadow:none; transform:none; }
 html[data-design="editorial"] .ea-admin button:disabled { opacity:.5; cursor:not-allowed; }
-html[data-design="editorial"] .ea-admin input:not([type="checkbox"]), html[data-design="editorial"] .ea-admin select { min-width:0; width:100%; min-height:46px; padding:10px 12px; border:1px solid #b9aa92; border-radius:4px; background:#fffaf0; color:#302c21; font:inherit; }
-html[data-design="editorial"] .ea-admin input[type="checkbox"] { accent-color:#2d4932; }
-html[data-design="editorial"] .ea-admin :is(a,button,input,select):focus-visible { outline:2px solid #8a7353; outline-offset:4px; box-shadow:none; }
-html[data-design="editorial"] .ea-admin a { color:#453d30; text-underline-offset:4px; overflow-wrap:anywhere; }
+html[data-design="editorial"] .ea-admin input:not([type="checkbox"]), html[data-design="editorial"] .ea-admin select { min-width:0; width:100%; min-height:46px; padding:10px 12px; border:1px solid var(--dm-control-border, #b9aa92); border-radius:4px; background:var(--dm-field, #fffaf0); color:var(--dm-text, #302c21); font:inherit; }
+html[data-design="editorial"] .ea-admin input[type="checkbox"] { accent-color:var(--dm-accent, #2d4932); }
+html[data-design="editorial"] .ea-admin :is(a,button,input,select):focus-visible { outline:2px solid var(--dm-focus, #8a7353); outline-offset:4px; box-shadow:none; }
+html[data-design="editorial"] .ea-admin a { color:var(--dm-text, #453d30); text-underline-offset:4px; overflow-wrap:anywhere; }
 html[data-design="editorial"] .ea-admin .admin-orders-page{
     padding-bottom: 5rem;
   }
@@ -41,7 +41,7 @@ html[data-design="editorial"] .ea-admin .admin-tabs a{
   }
 html[data-design="editorial"] .ea-admin .admin-tabs a[aria-current="page"]{
     border-color: transparent;
-    color: #fffaf0;
+    color: var(--dm-on-accent, #fffaf0);
     background: var(--accent);
   }
 html[data-design="editorial"] .ea-admin .orders-admin{
@@ -131,7 +131,7 @@ html[data-design="editorial"] .ea-admin .order-actions button{
 html[data-design="editorial"] .ea-admin .orders-toolbar form button,
 html[data-design="editorial"] .ea-admin .order-actions button:not(.secondary){
     border-color: transparent;
-    color: #fffaf0;
+    color: var(--dm-on-accent, #fffaf0);
     background: var(--accent);
   }
 html[data-design="editorial"] .ea-admin .orders-filter{
@@ -141,8 +141,8 @@ html[data-design="editorial"] .ea-admin .orders-filter{
   }
 html[data-design="editorial"] .ea-admin .orders-filter .is-active{
     color: var(--accent);
-    border-color: #d4c7b2;
-    background: #d4c7b2;
+    border-color: var(--dm-border, #d4c7b2);
+    background: var(--dm-border, #d4c7b2);
   }
 html[data-design="editorial"] .ea-admin .admin-orders-message,
 html[data-design="editorial"] .ea-admin .admin-orders-loading{
@@ -198,7 +198,7 @@ html[data-design="editorial"] .ea-admin .order-status.paid{
     color: var(--accent);
   }
 html[data-design="editorial"] .ea-admin .order-status.shipped{
-    color: #375765;
+    color: var(--dm-info, #375765);
   }
 html[data-design="editorial"] .ea-admin .order-key-data{
     display: grid;
@@ -336,7 +336,7 @@ html[data-design="editorial"] .ea-admin .admin-access-card a{
     border-radius:4px;
 
     background: var(--accent);
-    color: #fffaf0;
+    color: var(--dm-on-accent, #fffaf0);
 
     text-decoration: none;
     font-weight: 900;
@@ -442,7 +442,7 @@ html[data-design="editorial"] .ea-admin .code-row-actions button{
     padding: 0.65rem 0.9rem;
     border: 0;
     border-radius:4px;
-    color: #fffaf0;
+    color: var(--dm-on-accent, #fffaf0);
     background: var(--accent);
     font: inherit;
     font-weight: 900;
@@ -468,10 +468,10 @@ html[data-design="editorial"] .ea-admin .code-row-actions button.secondary{
 html[data-design="editorial"] .ea-admin .access-message{
     margin: 0;
     padding: 0.9rem 1rem;
-    border: 1px solid #cbbda7;
+    border: 1px solid var(--dm-border, #cbbda7);
     border-radius:4px;
     color: var(--text);
-    background: #ece4d5;
+    background: var(--dm-soft, #ece4d5);
   }
 html[data-design="editorial"] .ea-admin .code-archive{
     display: grid;
@@ -536,13 +536,13 @@ html[data-design="editorial"] .ea-admin .code-status{
   }
 html[data-design="editorial"] .ea-admin .code-status.available{
     color: var(--accent);
-    border-color: #a7977e;
+    border-color: var(--dm-control-border, #a7977e);
   }
 html[data-design="editorial"] .ea-admin .code-status.claimed{
-    color: #375765;
+    color: var(--dm-info, #375765);
   }
 html[data-design="editorial"] .ea-admin .code-status.revoked{
-    color: #853e3a;
+    color: var(--dm-danger, #853e3a);
   }
 html[data-design="editorial"] .ea-admin .code-row-actions{
     display: flex;
@@ -571,7 +571,7 @@ html[data-design="editorial"] .ea-admin .withdrawal-order{ padding:1rem; border:
 html[data-design="editorial"] .ea-admin .withdrawal-details{ white-space:pre-wrap; }
 html[data-design="editorial"] .ea-admin .withdrawal-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; margin:1rem 0; }
 html[data-design="editorial"] .ea-admin .withdrawal-actions button{ min-height:44px; padding:.7rem 1rem; font:inherit; border:1px solid var(--border); border-radius:4px; color:var(--text); background:var(--surface); cursor:pointer; }
-html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary{ color:#fffaf0; background:var(--accent); }
+html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary{ color:var(--dm-on-accent, #fffaf0); background:var(--accent); }
 html[data-design="editorial"] .ea-admin .withdrawal-actions button:disabled{ opacity:.5; cursor:wait; }
 html[data-design="editorial"] .ea-admin .withdrawal-actions button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 @media(max-width:600px){html[data-design="editorial"] .ea-admin .withdrawal-actions button{ width:100%; }
@@ -599,16 +599,16 @@ html[data-design="editorial"] .ea-admin .admin-area-tabs a{
   }
 html[data-design="editorial"] .ea-admin .admin-area-tabs a:hover{
     color: var(--text);
-    border-color: #a7977e;
+    border-color: var(--dm-control-border, #a7977e);
     transform: none;
   }
 html[data-design="editorial"] .ea-admin .admin-area-tabs a[aria-current="page"]{
     border-color: transparent;
-    color: #fffaf0;
+    color: var(--dm-on-accent, #fffaf0);
     background: var(--accent);
   }
 html[data-design="editorial"] .ea-admin .admin-area-tabs a:focus-visible{
-    outline: 3px solid #8a7353;
+    outline: 3px solid var(--dm-focus, #8a7353);
     outline-offset: 3px;
   }
 @media (max-width: 460px){html[data-design="editorial"] .ea-admin .admin-area-tabs{
@@ -702,7 +702,7 @@ html[data-design="editorial"] .ea-admin .report-actions button{
 html[data-design="editorial"] .ea-admin .report-actions button:nth-child(2){
   border-color: rgba(255, 120, 120, 0.35);
   background: rgba(255, 120, 120, 0.08);
-  color: #853e3a;
+  color: var(--dm-danger, #853e3a);
 }
 @media (max-width: 760px){html[data-design="editorial"] .ea-admin .report-card{
     padding: 1.1rem;
@@ -719,29 +719,29 @@ html[data-design="editorial"] .ea-admin .report-actions button{
 
 }
 
-html[data-design="editorial"] .ea-admin .admin-area-tabs { gap:8px; padding-bottom:24px; border-bottom:1px solid #cbbda7; }
-html[data-design="editorial"] .ea-admin .admin-area-tabs a:hover { background:#e8dfce; border-color:#a7977e; }
-html[data-design="editorial"] .ea-admin .admin-area-tabs a[aria-current="page"] { background:#2d4932; color:#fffaf0; }
-html[data-design="editorial"] .ea-admin :is(.orders-filter button,.category-chip,.secondary) { background:#ece4d5; color:#453d30; border:1px solid #cbbda7; border-radius:4px; box-shadow:none; }
-html[data-design="editorial"] .ea-admin :is(.orders-filter button,.category-chip,.secondary):hover { background:#e8dfce; color:#453d30; }
-html[data-design="editorial"] .ea-admin :is(.orders-filter button.is-active,.category-chip.active) { background:#2d4932; color:#fffaf0; border-color:#2d4932; }
+html[data-design="editorial"] .ea-admin .admin-area-tabs { gap:8px; padding-bottom:24px; border-bottom:1px solid var(--dm-border, #cbbda7); }
+html[data-design="editorial"] .ea-admin .admin-area-tabs a:hover { background:var(--dm-soft, #e8dfce); border-color:var(--dm-control-border, #a7977e); }
+html[data-design="editorial"] .ea-admin .admin-area-tabs a[aria-current="page"] { background:var(--dm-accent, #2d4932); color:var(--dm-on-accent, #fffaf0); }
+html[data-design="editorial"] .ea-admin :is(.orders-filter button,.category-chip,.secondary) { background:var(--dm-soft, #ece4d5); color:var(--dm-text, #453d30); border:1px solid var(--dm-border, #cbbda7); border-radius:4px; box-shadow:none; }
+html[data-design="editorial"] .ea-admin :is(.orders-filter button,.category-chip,.secondary):hover { background:var(--dm-soft, #e8dfce); color:var(--dm-text, #453d30); }
+html[data-design="editorial"] .ea-admin :is(.orders-filter button.is-active,.category-chip.active) { background:var(--dm-accent, #2d4932); color:var(--dm-on-accent, #fffaf0); border-color:var(--dm-accent, #2d4932); }
 html[data-design="editorial"] .ea-admin .orders-filter { display:flex; flex-wrap:wrap; gap:8px; }
 html[data-design="editorial"] .ea-admin .reports-panel { margin:0; }
 html[data-design="editorial"] .ea-admin :is(.admin-order-card,.withdrawal-card,.report-card,.code-archive) { box-shadow:none; border-radius:4px; }
-html[data-design="editorial"] .ea-admin .order-status { color:#645d51; background:#ece4d5; border:1px solid #cbbda7; }
-html[data-design="editorial"] .ea-admin :is(.order-status.paid,.code-status.available) { color:#2d4932; background:#e5eadc; border-color:#b6c2aa; }
-html[data-design="editorial"] .ea-admin :is(.order-status.shipped,.code-status.claimed) { color:#375765; background:#e3ebeb; border-color:#b3c6c6; }
-html[data-design="editorial"] .ea-admin :is(.order-status.cancelled,.code-status.revoked) { color:#853e3a; background:#f1e0d9; border-color:#d2b2a6; }
-html[data-design="editorial"] .ea-admin .order-status.refunded { color:#655075; background:#ebe3ee; border-color:#c7b7cf; }
-html[data-design="editorial"] .ea-admin .report-actions button:nth-child(2) { background:#f1e0d9; color:#853e3a; border-color:#d2b2a6; }
-html[data-design="editorial"] .ea-admin .report-actions button:nth-child(2):hover { background:#e8cfc4; }
-html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary { background:#853e3a; color:#fffaf0; border-color:#853e3a; }
-html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary:hover { background:#6c302d; }
-html[data-design="editorial"] .ea-admin :is(.empty-state,.admin-access-card) { padding:28px; border:1px solid #d4c7b2; border-radius:4px; background:#ece4d5; box-shadow:none; }
-html[data-design="editorial"] .ea-admin :is(.form-message,.admin-orders-message,.access-message) { color:#453d30; background:#ece4d5; border:1px solid #cbbda7; border-radius:4px; padding:14px 18px; }
+html[data-design="editorial"] .ea-admin .order-status { color:var(--dm-muted, #645d51); background:var(--dm-soft, #ece4d5); border:1px solid var(--dm-border, #cbbda7); }
+html[data-design="editorial"] .ea-admin :is(.order-status.paid,.code-status.available) { color:var(--dm-accent, #2d4932); background:var(--dm-success-bg, #e5eadc); border-color:var(--dm-success-border, #b6c2aa); }
+html[data-design="editorial"] .ea-admin :is(.order-status.shipped,.code-status.claimed) { color:var(--dm-info, #375765); background:var(--dm-info-bg, #e3ebeb); border-color:var(--dm-info-border, #b3c6c6); }
+html[data-design="editorial"] .ea-admin :is(.order-status.cancelled,.code-status.revoked) { color:var(--dm-danger, #853e3a); background:var(--dm-danger-bg, #f1e0d9); border-color:var(--dm-danger-border, #d2b2a6); }
+html[data-design="editorial"] .ea-admin .order-status.refunded { color:var(--dm-purple, #655075); background:var(--dm-purple-bg, #ebe3ee); border-color:var(--dm-purple-border, #c7b7cf); }
+html[data-design="editorial"] .ea-admin .report-actions button:nth-child(2) { background:var(--dm-danger-bg, #f1e0d9); color:var(--dm-danger, #853e3a); border-color:var(--dm-danger-border, #d2b2a6); }
+html[data-design="editorial"] .ea-admin .report-actions button:nth-child(2):hover { background:var(--dm-danger-bg-hover, #e8cfc4); }
+html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary { background:var(--dm-danger, #853e3a); color:var(--dm-on-accent, #fffaf0); border-color:var(--dm-danger, #853e3a); }
+html[data-design="editorial"] .ea-admin .withdrawal-actions button.primary:hover { background:var(--dm-danger-hover, #6c302d); }
+html[data-design="editorial"] .ea-admin :is(.empty-state,.admin-access-card) { padding:28px; border:1px solid var(--dm-border, #d4c7b2); border-radius:4px; background:var(--dm-soft, #ece4d5); box-shadow:none; }
+html[data-design="editorial"] .ea-admin :is(.form-message,.admin-orders-message,.access-message) { color:var(--dm-text, #453d30); background:var(--dm-soft, #ece4d5); border:1px solid var(--dm-border, #cbbda7); border-radius:4px; padding:14px 18px; }
 html[data-design="editorial"] .ea-admin .order-detail-grid :is(p,a) { overflow-wrap:anywhere; }
-html[data-design="editorial"] .ea-admin .withdrawal-card > header > span { background:#ece4d5; color:#645d51; padding:6px 10px; border-radius:4px; }
-html[data-design="editorial"] .ea-admin .withdrawal-order { margin:20px 0; background:#ece4d5; }
+html[data-design="editorial"] .ea-admin .withdrawal-card > header > span { background:var(--dm-soft, #ece4d5); color:var(--dm-muted, #645d51); padding:6px 10px; border-radius:4px; }
+html[data-design="editorial"] .ea-admin .withdrawal-order { margin:20px 0; background:var(--dm-soft, #ece4d5); }
 @media(max-width:600px) { html[data-design="editorial"] .ea-admin { padding-top:32px; } html[data-design="editorial"] .ea-admin .admin-area-tabs { display:grid; grid-template-columns:1fr 1fr; } html[data-design="editorial"] .ea-admin .admin-area-tabs a { padding:10px 6px; font-size:14px; } html[data-design="editorial"] .ea-admin .market-code-form { grid-template-columns:1fr; } }
   @media print {
     @page {

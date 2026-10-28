@@ -24,7 +24,7 @@
 html[data-design="editorial"] .ec-card-caption h2 { font-size:26px; line-height:1.2; margin:12px 0; letter-spacing:-.025em; }
 .ec-card-caption p { font-size:12px; color:var(--muted-text); line-height:1.6; }
 .ec-open { display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding:18px 0 12px; font-size:13px; }
-.ec-type-card { aspect-ratio:635/889; width:100%; max-width:250px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; background:#d2c28f; border:1px solid var(--border); border-radius:8px; }
+.ec-type-card { aspect-ratio:635/889; width:100%; max-width:250px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; background:var(--dm-quote, #d2c28f); border:1px solid var(--border); border-radius:8px; }
 .ec-type-card span { font-size:11px; line-height:1.5; }
 .ec-type-card p { font:clamp(19px,2vw,28px)/1.25 Georgia,serif; overflow-wrap:anywhere; }
 .ec-empty { padding:30px 0; }
@@ -53,7 +53,7 @@ html[data-design="editorial"] .ec-card-caption h2 { font-size:26px; line-height:
 .ec-reading h3 { font-size:25px; line-height:1.3; margin:28px 0 12px !important; }
 .ec-reading p { font-size:17px; line-height:1.85; }
 .ec-reading .ed-kicker { font-size:11px; }
-.ec-short { padding:32px 36px; background:#e6ddbc; border-left:3px solid #a48a41; }
+.ec-short { padding:32px 36px; background:var(--dm-quote, #e6ddbc); border-left:3px solid var(--dm-quote-border, #a48a41); }
 .ec-short > p:last-child { margin-top:22px !important; }
 .ec-prose { padding:50px 0; border-bottom:1px solid var(--border); }
 .ec-quotes { list-style:none; padding:0; margin:25px 0 0; }
@@ -79,7 +79,7 @@ html[data-design="editorial"] .ec-discussion .create-thread-link { display:inlin
 .ec-next span { font-size:12px; color:var(--muted-text); }
 .ec-next strong { font:24px/1.3 Georgia,serif; }
 html[data-design="editorial"] .ec-access .access-gate { width:100%; min-height:0; margin:30px 0 65px; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; padding:40px; }
-html[data-design="editorial"] .ec-access .access-gate-icon { background:#d2c28f; color:var(--text); border:0; border-radius:4px; font-family:Georgia,serif; font-weight:400; }
+html[data-design="editorial"] .ec-access .access-gate-icon { background:var(--dm-quote, #d2c28f); color:var(--text); border:0; border-radius:4px; font-family:Georgia,serif; font-weight:400; }
 html[data-design="editorial"] .ec-access .access-gate :is(h1,h2) { font-size:clamp(32px,4vw,48px); line-height:1.1; }
 html[data-design="editorial"] .ec-access .eyebrow { color:var(--muted-text); font-size:11px; letter-spacing:.1em; margin-bottom:18px; }
 html[data-design="editorial"] .ec-access .access-gate-copy { margin-top:18px; }

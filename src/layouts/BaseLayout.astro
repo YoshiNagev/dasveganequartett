@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import "../styles/editorial.css";
+import "../styles/dark-mode.css";
+import ThemeScript from "../components/global/ThemeScript.astro";
 import Header from "../components/global/Header.astro";
 import Footer from "../components/global/Footer.astro";
 import { product } from "../data/product";
@@ -42,10 +44,9 @@ const socialImageURL = image ? new URL(image, siteBase) : undefined;
 <html lang="de" data-design={design}>
   <head>
     <meta charset="utf-8" />
-    <meta name="color-scheme" content="only light" />
-    <style is:global>
-      :root { color-scheme: only light; }
-    </style>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6efe4" />
+    <ThemeScript />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{pageTitle}</title>

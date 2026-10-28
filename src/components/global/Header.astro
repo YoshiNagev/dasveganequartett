@@ -5,6 +5,7 @@ import NotificationBadge from "../account/NotificationBadge";
 import MobileMenu from "./MobileMenu";
 import LiberationLogo from "./LiberationLogo.astro";
 import BrandLogo from "./BrandLogo.astro";
+import ThemePicker from "./ThemePicker.astro";
 const { editorial = false } = Astro.props;
 ---
 
@@ -28,6 +29,9 @@ const { editorial = false } = Astro.props;
       </Button>
     </nav>
 
-    <MobileMenu client:load />
+    <div class="header-display-controls">
+      <ThemePicker />
+      <MobileMenu client:load />
+    </div>
   </div>
 </header>

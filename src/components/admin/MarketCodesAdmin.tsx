@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import QRCode from "qrcode";
 import { supabase } from "../../lib/supabaseClient";
 
@@ -42,6 +43,10 @@ function escapeCsv(value: string) {
 }
 
 export default function MarketCodesAdmin() {
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [printing, setPrinting] = useState(false);
+  const [filter, setFilter] = useState("available");
+  const [search, setSearch] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [quantity, setQuantity] = useState(10);
   const [note, setNote] = useState("Aktiviert durch Zugangscode");
@@ -61,6 +66,44 @@ export default function MarketCodesAdmin() {
       ),
     [codes]
   );
+
+  const selectedCodes = printableAvailableCodes.filter((entry) => selectedIds.has(entry.id));
+  const visibleCodes = codes.filter((entry) =>
+    (filter === "all" || entry.status === filter) &&
+    `${entry.code ?? entry.maskedCode} ${entry.note ?? ""}`.toLocaleLowerCase("de").includes(search.toLocaleLowerCase("de"))
+  );
+  const selectableVisible = visibleCodes.filter((entry) =>
+    entry.status === "available" && Boolean(entry.code && entry.url)
+  );
+  const allVisibleSelected = selectableVisible.length > 0 && selectableVisible.every((entry) => selectedIds.has(entry.id));
+
+  function toggleSelection(id: string) {
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  }
+
+  // Render directly below body: the website's header, footer and wrappers
+  // can then be excluded from print without depending on their class names.
+  useEffect(() => {
+    if (!printing || printCodes.length === 0) return;
+    let cancelled = false;
+    async function printWhenReady() {
+      try {
+        await Promise.all(Array.from(document.querySelectorAll<HTMLImageElement>(".dvq-print-root img")).map((img) => img.decode()));
+        await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+        if (!cancelled) window.print();
+      } catch {
+        if (!cancelled) setMessage("Druckbilder konnten nicht geladen werden. Bitte erneut versuchen und den Logo-Pfad prüfen.");
+      } finally {
+        if (!cancelled) setPrinting(false);
+      }
+    }
+    void printWhenReady();
+    return () => { cancelled = true; };
+  }, [printCodes]);
 
   async function authFetch(path: string, init?: RequestInit) {
     const response = await fetch(path, {
@@ -120,6 +163,9 @@ export default function MarketCodesAdmin() {
       });
       const created = result.codes ?? [];
       setCodes((current) => [...created, ...current]);
+      setSelectedIds(new Set(created.filter((entry) => entry.status === "available" && entry.code && entry.url).map((entry) => entry.id)));
+      setFilter("available");
+      setSearch("");
       setSummary((current) => ({
         ...current,
         "market:available":
@@ -176,7 +222,10 @@ export default function MarketCodesAdmin() {
       return;
     }
 
+    if (printing) return;
+    setPrinting(true);
     setMessage("Druckansicht wird vorbereitet …");
+    try {
     const printable = await Promise.all(
       entries.map(async (entry) => ({
         ...entry,
@@ -184,16 +233,17 @@ export default function MarketCodesAdmin() {
         url: entry.url,
         qr: await QRCode.toDataURL(entry.url, {
           width: 600,
-          margin: 1,
+          margin: 4,
           color: { dark: "#000000", light: "#ffffff" },
         }),
       }))
     );
     setPrintCodes(printable);
     setMessage("");
-    window.requestAnimationFrame(() =>
-      window.requestAnimationFrame(() => window.print())
-    );
+    } catch {
+      setPrinting(false);
+      setMessage("QR-Codes konnten nicht erstellt werden. Bitte erneut versuchen.");
+    }
   }
 
   function downloadCsv() {
@@ -260,6 +310,8 @@ export default function MarketCodesAdmin() {
             type="number"
             min="1"
             max="50"
+            required
+            step="1"
             value={quantity}
             onChange={(event) => setQuantity(Number(event.target.value))}
           />
@@ -272,7 +324,7 @@ export default function MarketCodesAdmin() {
             onChange={(event) => setNote(event.target.value)}
           />
         </label>
-        <button type="submit" disabled={creating || !accessToken}>
+        <button type="submit" disabled={creating || printing || !accessToken}>
           {creating ? "Codes werden erstellt …" : "Codes erstellen"}
         </button>
       </form>
@@ -287,19 +339,19 @@ export default function MarketCodesAdmin() {
         <div className="code-archive-heading">
           <div>
             <p className="eyebrow">Archiv</p>
-            <h2>Erstellte Direktverkaufscodes</h2>
+            <h2>Zugangscodes</h2>
             <p>
-              Neue Codes bleiben verschlüsselt abrufbar. Vor diesem Update
-              erstellte Codes können nur maskiert angezeigt werden.
+              Wähle verfügbare Codes aus und drucke die passenden Zugangskarten.
+              Neu erstellte Codes werden automatisch ausgewählt.
             </p>
           </div>
           <div className="market-toolbar">
             <button
               type="button"
-              disabled={printableAvailableCodes.length === 0}
-              onClick={() => preparePrint(printableAvailableCodes)}
+              disabled={printing || selectedCodes.length === 0}
+              onClick={() => preparePrint(selectedCodes)}
             >
-              Alle verfügbaren drucken
+              {printing ? "Druck wird vorbereitet …" : `Auswahl drucken (${selectedCodes.length})`}
             </button>
             <button type="button" className="secondary" onClick={downloadCsv}>
               CSV speichern
@@ -307,16 +359,30 @@ export default function MarketCodesAdmin() {
           </div>
         </div>
 
+        <div className="market-filters">
+          <label>Status<select value={filter} onChange={(event) => setFilter(event.target.value)}>
+            <option value="available">Verfügbar</option><option value="claimed">Eingelöst</option>
+            <option value="revoked">Gesperrt</option><option value="all">Alle</option>
+          </select></label>
+          <label>Code oder Notiz suchen<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Suchen …" /></label>
+          <button type="button" className="secondary" onClick={() => setSelectedIds(new Set())} disabled={selectedIds.size === 0}>Auswahl aufheben</button>
+        </div>
+        <p className="selection-hint">{selectedCodes.length} ausgewählt · {visibleCodes.length} angezeigt. Die Auswahl bleibt beim Filtern erhalten. Nur verfügbare, vollständig abrufbare Codes sind druckbar.</p>
         {codes.length === 0 ? (
           <div className="empty-state">
             <h3>Noch keine Marktcodes</h3>
             <p>Erstelle oben den ersten Code für einen Direktverkauf.</p>
           </div>
-        ) : (
+        ) : visibleCodes.length === 0 ? <p>Keine passenden Codes gefunden.</p> : (
           <div className="code-table-wrap">
             <table className="code-table">
               <thead>
                 <tr>
+                  <th><input type="checkbox" aria-label="Alle angezeigten druckbaren Codes auswählen" checked={allVisibleSelected} disabled={printing || selectableVisible.length === 0} onChange={() => setSelectedIds((current) => {
+                    const next = new Set(current);
+                    selectableVisible.forEach((entry) => { if (allVisibleSelected) next.delete(entry.id); else next.add(entry.id); });
+                    return next;
+                  })} /></th>
                   <th>Code</th>
                   <th>Status</th>
                   <th>Notiz</th>
@@ -326,8 +392,9 @@ export default function MarketCodesAdmin() {
                 </tr>
               </thead>
               <tbody>
-                {codes.map((entry) => (
+                {visibleCodes.map((entry) => (
                   <tr key={entry.id}>
+                    <td><input type="checkbox" aria-label={`Code ${entry.code ?? entry.maskedCode} auswählen`} checked={selectedIds.has(entry.id)} disabled={printing || entry.status !== "available" || !entry.code || !entry.url} onChange={() => toggleSelection(entry.id)} /></td>
                     <td>
                       <code>{entry.code ?? entry.maskedCode}</code>
                       {!entry.code && (
@@ -351,6 +418,7 @@ export default function MarketCodesAdmin() {
                         {entry.status === "available" && entry.code && entry.url && (
                           <button
                             type="button"
+                            disabled={printing}
                             onClick={() =>
                               preparePrint([
                                 {
@@ -386,16 +454,39 @@ export default function MarketCodesAdmin() {
         )}
       </section>
 
-      <section className="print-only print-code-grid" aria-label="Zugangscodes zum Ausschneiden">
-        {printCodes.map((entry) => (
-          <article className="print-code-card" key={entry.id}>
-            <p>Das Vegane Quartett</p>
-            <img src={entry.qr} alt="QR-Code zur Freischaltung" />
-            <strong>{entry.code}</strong>
-            <small>Einmalig einlösbar</small>
-          </article>
-        ))}
-      </section>
+      {printCodes.length > 0 && typeof document !== "undefined" && createPortal(
+        <div className="dvq-print-root">
+          <style>{PRINT_STYLES}</style>
+          {printCodes.map((entry) => (
+            <article className="dvq-access-card" key={entry.id}>
+              <img className="dvq-card-logo" src="/images/dvq-logo-print.png" alt="Das Vegane Quartett" />
+              <h2>Dein Zugangscode</h2>
+              <p>Zum Freischalten aller<br />Funktionen der Website</p>
+              <img className="dvq-card-qr" src={entry.qr} alt="QR-Code zur Freischaltung" />
+              <strong>{entry.code}</strong>
+              <p>QR-Code scannen und Zugang aktivieren.</p>
+              <small>dasveganequartett.de · Einmalig einlösbar</small>
+            </article>
+          ))}
+        </div>, document.body
+      )}
     </div>
   );
 }
+
+const PRINT_STYLES = `
+.dvq-print-root { display:none; }
+@media print {
+  @page { size:A4 portrait; margin:10mm; }
+  html, body { margin:0!important; padding:0!important; width:auto!important; min-height:0!important; background:#fff!important; color:#000!important; color-scheme:light!important; }
+  body > :not(.dvq-print-root) { display:none!important; }
+  body > .dvq-print-root { display:grid!important; grid-template-columns:repeat(3,60mm); gap:4mm; align-content:start; justify-content:center; margin:0!important; padding:0!important; font-family:Arial,sans-serif; color:#000; }
+  .dvq-print-root .dvq-access-card { box-sizing:border-box; width:60mm; height:84mm; border:.2mm dashed #aaa; padding:3mm; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5mm; break-inside:avoid; page-break-inside:avoid; text-align:center; background:#fff; color:#000; box-shadow:none; }
+  .dvq-print-root .dvq-card-logo { display:block; width:39mm; height:16mm; object-fit:contain; }
+  .dvq-print-root .dvq-card-qr { display:block; width:28mm; height:28mm; object-fit:contain; }
+  .dvq-print-root h2 { margin:0; font:700 11pt Arial,sans-serif; color:#000; }
+  .dvq-print-root p { margin:0; font:8pt/1.25 Arial,sans-serif; color:#000; }
+  .dvq-print-root strong { max-width:100%; overflow-wrap:anywhere; font:700 10pt/1.2 monospace; letter-spacing:.3mm; color:#000; }
+  .dvq-print-root small { font:6.5pt/1.2 Arial,sans-serif; color:#000; }
+}
+`;

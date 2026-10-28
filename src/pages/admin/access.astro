@@ -22,3 +22,12 @@ import MarketCodesAdmin from "../../components/admin/MarketCodesAdmin";
 </BaseLayout>
 
 
+
+<style is:global>
+  html[data-design="editorial"] .ea-admin .market-filters { display:flex; flex-wrap:wrap; align-items:end; gap:1rem; margin:1.25rem 0 .5rem; }
+  html[data-design="editorial"] .ea-admin .market-filters label { display:grid; gap:.4rem; flex:1; min-width:150px; }
+  html[data-design="editorial"] .ea-admin .market-filters :is(input,select) { box-sizing:border-box; width:100%; min-height:44px; padding:.65rem; font:inherit; color:inherit; background:var(--surface,#fff); border:1px solid var(--border,#aaa); border-radius:4px; }
+  html[data-design="editorial"] .ea-admin .code-table input[type="checkbox"] { width:20px; height:20px; min-height:0; accent-color:var(--dm-accent, #2c4a32); cursor:pointer; }
+  html[data-design="editorial"] .ea-admin .code-table tr:has(input:checked) { background:var(--dm-success-bg, rgba(44,74,50,.07)); }
+  html[data-design="editorial"] .ea-admin .selection-hint { font-size:.875rem; line-height:1.5; }
+</style>

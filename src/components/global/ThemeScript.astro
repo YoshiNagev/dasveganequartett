@@ -1,0 +1,54 @@
+<!-- Inline in <head>: resolve the preference before the first paint. -->
+<script is:inline>
+  (() => {
+    const key = "dvq-color-theme";
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const valid = (value) => ["light", "dark", "system"].includes(value);
+    const read = () => {
+      try { const value = localStorage.getItem(key); return valid(value) ? value : "system"; }
+      catch { return "system"; }
+    };
+    let preference = read();
+    const resolved = () => preference === "system" ? (media.matches ? "dark" : "light") : preference;
+    function apply(doc = document) {
+      const theme = resolved();
+      doc.documentElement.dataset.theme = theme;
+      doc.documentElement.dataset.themePreference = preference;
+      const meta = doc.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "dark" ? "#151c18" : "#f6efe4");
+      doc.querySelectorAll('input[name="dvq-theme"]').forEach((input) => {
+        input.checked = input.value === preference;
+      });
+    }
+    apply();
+    document.addEventListener("DOMContentLoaded", () => apply(), { once: true });
+    document.addEventListener("astro:page-load", () => apply());
+    document.addEventListener("astro:before-swap", (event) => apply(event.newDocument));
+    window.addEventListener("pageshow", () => apply());
+    const followSystem = () => { if (preference === "system") apply(); };
+    if (media.addEventListener) media.addEventListener("change", followSystem);
+    else media.addListener(followSystem);
+    window.addEventListener("storage", (event) => {
+      if (event.key === key || event.key === null) { preference = read(); apply(); }
+    });
+    document.addEventListener("change", (event) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement) || input.name !== "dvq-theme" || !valid(input.value)) return;
+      preference = input.value;
+      try { localStorage.setItem(key, preference); } catch { /* Still works when storage is blocked. */ }
+      apply();
+    });
+    document.addEventListener("click", (event) => {
+      document.querySelectorAll("[data-theme-picker][open]").forEach((picker) => {
+        if (event.target instanceof Node && !picker.contains(event.target)) picker.removeAttribute("open");
+      });
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      document.querySelectorAll("[data-theme-picker][open]").forEach((picker) => {
+        picker.removeAttribute("open");
+        picker.querySelector("summary")?.focus();
+      });
+    });
+  })();
+</script>

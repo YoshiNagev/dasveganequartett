@@ -1,5 +1,5 @@
 /* Editorial forum. All overrides are scoped; access and moderation logic stay in their existing components. */
-.ef-forum { padding:32px 0 80px; --ef-soft:#e8ecdf; }
+.ef-forum { padding:32px 0 80px; --ef-soft:var(--dm-success-bg, #e8ecdf); }
 .ef-forum *, .ef-forum *::before,.ef-forum *::after { box-sizing:border-box; }
 .ef-forum [hidden] { display:none !important; }
 .ef-nav { display:flex; flex-wrap:wrap; gap:8px 30px; border-bottom:1px solid var(--border); margin-bottom:48px; }
@@ -15,7 +15,7 @@
 .ef-forum .forum-card-link { display:flex; flex-direction:column; align-items:flex-start; min-height:265px; padding:28px; border:1px solid var(--border); border-top:4px solid #a0ae8d; border-radius:4px; background:var(--surface); color:var(--text); text-decoration:none; box-shadow:none; transform:none; }
 
 .ef-forum .forum-card-link > span { color:var(--accent); font-size:12px; letter-spacing:.08em; }.ef-forum .forum-card-link h2 { font-size:27px; line-height:1.25; margin:18px 0 14px; }.ef-forum .forum-card-link p { color:var(--muted-text); font-size:13px; line-height:1.6; }.ef-forum .forum-card-link strong { margin-top:auto; padding-top:20px; color:var(--accent); font-size:13px; }
-.ef-forum .forum-card-link:hover,.ef-forum .thread-preview:hover,.ef-forum .suggested-argument-card:hover { border-color:var(--accent); background: #e8dfce; transform:none; box-shadow:none; }
+.ef-forum .forum-card-link:hover,.ef-forum .thread-preview:hover,.ef-forum .suggested-argument-card:hover { border-color:var(--accent); background: var(--dm-soft, #e8dfce); transform:none; box-shadow:none; }
 .ef-forum .forum-action-grid { display:flex; flex-wrap:wrap; gap:16px; margin-top:28px; }.ef-forum .forum-action-grid .full-width { width:auto; }
 .ef-forum .thread-list,.ef-forum .suggested-argument-grid { display:grid; grid-template-columns:1fr; gap:16px; }
 .ef-forum .thread-preview,.ef-forum .suggested-argument-card { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:28px; padding:28px; border:1px solid var(--border); border-radius:4px; background:var(--surface); color:var(--text); box-shadow:none; text-decoration:none; transform:none; }
@@ -34,17 +34,17 @@
 .ef-forum .comment-list { display:grid; gap:20px; }.ef-forum .comment-card { padding:26px; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; min-width:0; }
 .ef-forum .comment-header { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:20px; }.ef-forum .comment-header > div:first-child { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:baseline; }.ef-forum .comment-header strong { color:var(--accent); font-size:14px; }.ef-forum .comment-header span { color:var(--muted-text); font-size:12px; }
 .ef-forum .comment-replies { margin:22px 0 0; padding-left:18px; border-left:2px solid #a0ae8d; display:grid; gap:16px; }.ef-forum .comment-card.nested { margin:0; background:transparent; padding:18px; }.ef-forum .comment-card.nested .comment-replies { padding-left:10px; }.ef-forum .comment-card.nested .comment-card.nested { padding:16px 0; border:0; }
-.ef-forum .markdown-content { color:var(--text); font-size:16px; line-height:1.85; overflow-wrap:anywhere; }.ef-forum .markdown-content p { color:var(--text); font-size:inherit; line-height:inherit; }.ef-forum .markdown-content a { color:var(--accent); text-underline-offset:4px; }.ef-forum .markdown-content blockquote { margin:18px 0; padding:10px 20px; border-left:3px solid #a0ae8d; background:var(--ef-soft); border-radius:0; }.ef-forum .markdown-content pre { max-width:100%; overflow:auto; background:#e9e2d3; color:var(--text); padding:14px; }.ef-forum .markdown-content code { background:#e9e2d3; color:var(--text); }
+.ef-forum .markdown-content { color:var(--text); font-size:16px; line-height:1.85; overflow-wrap:anywhere; }.ef-forum .markdown-content p { color:var(--text); font-size:inherit; line-height:inherit; }.ef-forum .markdown-content a { color:var(--accent); text-underline-offset:4px; }.ef-forum .markdown-content blockquote { margin:18px 0; padding:10px 20px; border-left:3px solid #a0ae8d; background:var(--ef-soft); border-radius:0; }.ef-forum .markdown-content pre { max-width:100%; overflow:auto; background:var(--dm-soft, #e9e2d3); color:var(--text); padding:14px; }.ef-forum .markdown-content code { background:var(--dm-soft, #e9e2d3); color:var(--text); }
 .ef-forum :is(.create-thread-form,.comment-form,.thread-edit-form,.comment-edit-form) { display:grid; gap:20px; padding:28px; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; margin-top:24px; }
 .ef-forum .comment-edit-form { padding:0; border:0; }.ef-forum .comment-form.compact { padding:20px; }.ef-forum .form-context { background:var(--ef-soft); border:0; border-left:3px solid var(--accent); border-radius:0; padding:16px; color:var(--text); }.ef-forum .form-context span { color:var(--accent); }.ef-forum .form-context strong { font-size:22px; font-family:Georgia,serif; }
-.ef-forum label { display:grid; gap:10px; font-size:14px; font-weight:600; }.ef-forum input,.ef-forum textarea { width:100%; min-width:0; border:1px solid #aaa18f; border-radius:3px; padding:14px; background:#fcf8f0; color:var(--text); font:inherit; font-size:16px; line-height:1.7; }.ef-forum textarea { resize:vertical; }.ef-forum input::placeholder,.ef-forum textarea::placeholder { color:#777165; opacity:1; }
+.ef-forum label { display:grid; gap:10px; font-size:14px; font-weight:600; }.ef-forum input,.ef-forum textarea { width:100%; min-width:0; border:1px solid var(--dm-control-border, #aaa18f); border-radius:3px; padding:14px; background:var(--dm-field, #fcf8f0); color:var(--text); font:inherit; font-size:16px; line-height:1.7; }.ef-forum textarea { resize:vertical; }.ef-forum input::placeholder,.ef-forum textarea::placeholder { color:var(--dm-faint, #777165); opacity:1; }
 .ef-forum .create-thread-link,.ef-forum form > button[type=submit],.ef-forum .access-gate-actions .access-primary { display:inline-flex; justify-content:center; align-items:center; min-height:48px; padding:13px 20px; border:1px solid var(--accent); border-radius:4px; background:var(--accent); color:var(--accent-text); text-decoration:none; font:inherit; font-size:14px; font-weight:600; cursor:pointer; transform:none; }
 .ef-forum .create-thread-box { display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; border:1px solid var(--border); border-radius:4px; background:var(--ef-soft); padding:28px; box-shadow:none; }.ef-forum .create-thread-box h3 { font-size:28px; }.ef-forum .create-thread-box p { color:var(--muted-text); line-height:1.7; }
-.ef-forum .comment-actions,.ef-forum .markdown-toolbar { display:flex; flex-wrap:wrap; gap:8px; }.ef-forum .comment-actions { margin-top:20px; }.ef-forum .comment-actions button,.ef-forum .markdown-toolbar button,.ef-forum .comment-vote-button,.ef-forum .collapse-comment-button { padding:8px 12px; min-height:40px; border:1px solid var(--border); border-radius:3px; background:transparent; color:var(--accent); font:inherit; font-size:13px; cursor:pointer; transform:none; }.ef-forum .comment-vote-button.active { background:var(--ef-soft); border-color:var(--accent); }.ef-forum .comment-actions .danger-action { color:#8b2823; }
-.ef-forum .markdown-help { display:flex; flex-wrap:wrap; gap:6px; font-size:11px; color:var(--muted-text); }.ef-forum .markdown-help code { background:#e9e2d3; color:var(--text); padding:3px 5px; overflow-wrap:anywhere; }
+.ef-forum .comment-actions,.ef-forum .markdown-toolbar { display:flex; flex-wrap:wrap; gap:8px; }.ef-forum .comment-actions { margin-top:20px; }.ef-forum .comment-actions button,.ef-forum .markdown-toolbar button,.ef-forum .comment-vote-button,.ef-forum .collapse-comment-button { padding:8px 12px; min-height:40px; border:1px solid var(--border); border-radius:3px; background:transparent; color:var(--accent); font:inherit; font-size:13px; cursor:pointer; transform:none; }.ef-forum .comment-vote-button.active { background:var(--ef-soft); border-color:var(--accent); }.ef-forum .comment-actions .danger-action { color:var(--dm-danger, #8b2823); }
+.ef-forum .markdown-help { display:flex; flex-wrap:wrap; gap:6px; font-size:11px; color:var(--muted-text); }.ef-forum .markdown-help code { background:var(--dm-soft, #e9e2d3); color:var(--text); padding:3px 5px; overflow-wrap:anywhere; }
 .ef-forum .empty-state { border:1px dashed var(--border); border-radius:4px; background:var(--surface); padding:32px; }.ef-forum .empty-state :is(h2,h3) { font-size:28px; margin:0 0 12px; }.ef-forum .empty-state p { color:var(--muted-text); line-height:1.8; }.ef-forum .empty-state a { color:var(--accent); }
-.ef-forum .form-message,.ef-forum .ef-error { padding:14px 16px; background:#f4e0d8; color:#76241f; border-left:3px solid #8b2823; border-radius:0; line-height:1.7; font-size:14px; }.ef-forum .form-message:not([role=alert]) { background:var(--ef-soft); color:var(--accent); border-left-color:var(--accent); }
-.ef-forum .access-gate { min-height:0; width:100%; margin:48px 0 0; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; }.ef-forum .access-gate-icon { background:#d1c28e; color:#342e18; border:1px solid #b4a574; border-radius:4px; transform:rotate(-3deg); }.ef-forum .access-gate :is(h1,h2) { font-size:clamp(28px,3.5vw,44px); line-height:1.15; }.ef-forum .access-gate-actions a { border-radius:3px; font-size:14px; font-weight:600; }
+.ef-forum .form-message,.ef-forum .ef-error { padding:14px 16px; background:var(--dm-danger-bg, #f4e0d8); color:var(--dm-danger, #76241f); border-left:3px solid var(--dm-danger, #8b2823); border-radius:0; line-height:1.7; font-size:14px; }.ef-forum .form-message:not([role=alert]) { background:var(--ef-soft); color:var(--accent); border-left-color:var(--accent); }
+.ef-forum .access-gate { min-height:0; width:100%; margin:48px 0 0; border:1px solid var(--border); border-radius:4px; background:var(--surface); box-shadow:none; }.ef-forum .access-gate-icon { background:var(--dm-quote, #d1c28e); color:var(--dm-text, #342e18); border:1px solid var(--dm-quote-border, #b4a574); border-radius:4px; transform:rotate(-3deg); }.ef-forum .access-gate :is(h1,h2) { font-size:clamp(28px,3.5vw,44px); line-height:1.15; }.ef-forum .access-gate-actions a { border-radius:3px; font-size:14px; font-weight:600; }
 .ef-forum :is(h1,h2,h3,p,span,a,strong) { overflow-wrap:anywhere; }.ef-forum :is(a,button,input,textarea):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }.ef-forum button:disabled { opacity:.6; cursor:wait; }
 @media(max-width:950px) { .ef-forum .forum-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.ef-guidance { display:block; }.ef-guidance p { margin-top:10px; } }
 @media(max-width:650px) { .ef-forum { padding-top:18px; }.ef-nav { gap:4px 20px; margin-bottom:30px; }.ef-nav a { font-size:13px; }.ef-forum .forum-card-grid { grid-template-columns:1fr; }.ef-forum .forum-card-link { min-height:220px; padding:24px; }.ef-forum .thread-preview,.ef-forum .suggested-argument-card { grid-template-columns:1fr; gap:18px; padding:22px; }.ef-forum .thread-meta,.ef-forum .suggested-meta { flex-direction:row; flex-wrap:wrap; border-left:0; border-top:1px solid var(--border); padding:14px 0 0; gap:8px 16px; }.ef-forum .thread-preview h3 { font-size:25px; }.ef-forum :is(.create-thread-form,.comment-form,.thread-edit-form) { padding:22px 18px; }.ef-forum .comment-card { padding:20px 16px; }.ef-forum .comment-header { flex-wrap:wrap; }.ef-forum .comment-replies { padding-left:10px; }.ef-forum .comment-card.nested { padding:16px 0 16px 10px; border:0; }.ef-forum .comment-card.nested .comment-replies { padding-left:0; border-left:0; }.ef-forum .thread-description-card { padding-left:16px; }.ef-forum .markdown-content { font-size:15px; }.ef-forum .forum-action-grid { flex-direction:column; } }
@@ -57,7 +57,7 @@
 .ef-forum .forum-card-link[data-category="4"] { border-top-color:#d88980; }
 .ef-forum .forum-card-link[data-category="5"] { border-top-color:#dfafbf; }
 /* More specific than the legacy shared form rules. */
-.ef-forum :is(.create-thread-form,.comment-form,.thread-edit-form,.comment-edit-form) :is(input,textarea) { border:1px solid #aaa18f; border-radius:3px; padding:14px; background:#fcf8f0; font:inherit; font-size:16px; line-height:1.7; color:var(--text); }
+.ef-forum :is(.create-thread-form,.comment-form,.thread-edit-form,.comment-edit-form) :is(input,textarea) { border:1px solid var(--dm-control-border, #aaa18f); border-radius:3px; padding:14px; background:var(--dm-field, #fcf8f0); font:inherit; font-size:16px; line-height:1.7; color:var(--text); }
 .ef-forum .thread-hero .thread-context-link { border-radius:3px; background:var(--ef-soft); border-color:var(--border); }
 
 
@@ -70,9 +70,9 @@
 
 /* Argumentkarten-Link: Normalzustand */
 .ef-forum .thread-hero .thread-context-link {
-  background: #f0e9dc;
-  color: #453d30;
-  border-color: #d4c7b2;
+  background: var(--dm-soft, #f0e9dc);
+  color: var(--dm-text, #453d30);
+  border-color: var(--dm-border, #d4c7b2);
   transition: background-color 180ms ease,
               border-color 180ms ease;
 }
@@ -80,9 +80,9 @@
 /* Beim Darüberfahren und bei Tastaturbedienung */
 .ef-forum .thread-hero .thread-context-link:hover,
 .ef-forum .thread-hero .thread-context-link:focus-visible {
-  background: #e8dfce;
-  color: #453d30;
-  border-color: #a7977e;
+  background: var(--dm-soft, #e8dfce);
+  color: var(--dm-text, #453d30);
+  border-color: var(--dm-control-border, #a7977e);
   box-shadow: none;
 }
 
@@ -93,12 +93,12 @@
 
 /* Kartenhinweis im Formular */
 .ef-forum .form-context {
-  background: #e8dfce;
-  border-left-color: #a7977e;
+  background: var(--dm-soft, #e8dfce);
+  border-left-color: var(--dm-control-border, #a7977e);
 }
 
 .ef-forum .form-context span {
-  color: #453d30;
+  color: var(--dm-text, #453d30);
 }
 
 
@@ -108,20 +108,20 @@
 
 /* Speichern im Thread-Editor */
 .ef-forum .thread-edit-form button[data-thread-save-button] {
-  background: #2d4932;
-  color: #fffaf0;
-  border: 1px solid #2d4932;
+  background: var(--dm-accent, #2d4932);
+  color: var(--dm-on-accent, #fffaf0);
+  border: 1px solid var(--dm-accent, #2d4932);
   border-radius: 4px;
 }
 
 .ef-forum .thread-edit-form button[data-thread-save-button]:hover {
-  background: #233b28;
-  color: #fffaf0;
-  border-color: #233b28;
+  background: var(--dm-accent-hover, #233b28);
+  color: var(--dm-on-accent, #fffaf0);
+  border-color: var(--dm-accent-hover, #233b28);
 }
 
 
 
 .ef-forum .thread-edit-form .comment-actions button[data-thread-save-button] {
-  color: #fffaf0;
+  color: var(--dm-on-accent, #fffaf0);
 }

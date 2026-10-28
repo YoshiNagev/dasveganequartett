@@ -25,7 +25,7 @@ html[data-design="editorial"] {
 html[data-design="editorial"] body { background: var(--background); font-weight: 400; }
 html[data-design="editorial"] :is(h1,h2,h3,p,figure,blockquote) { margin: 0; }
 html[data-design="editorial"] :is(h1,h2,h3) { font-family: var(--ed-serif); letter-spacing: -.045em; font-weight: 600; }
-html[data-design="editorial"] :is(a,button,summary):focus-visible { outline: 3px solid #786018; outline-offset: 5px; }
+html[data-design="editorial"] :is(a,button,summary):focus-visible { outline: 3px solid var(--dm-focus, #786018); outline-offset: 5px; }
 html[data-design="editorial"] .site-main { width: min(100% - 80px, var(--max-width)); }
 html[data-design="editorial"] .site-header { background: var(--background); backdrop-filter: none; border-bottom: 1px solid var(--border); }
 html[data-design="editorial"] .header-inner { width: min(100% - 80px, var(--max-width)); min-height: 100px; padding: 0; gap: 30px; overflow: visible; }
@@ -43,7 +43,7 @@ html[data-design="editorial"] .ed-skip:focus { top: 12px; }
 html[data-design="editorial"] .ed-kicker { font-size: 11px; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 24px; color: var(--muted-text); }
 html[data-design="editorial"] .ed-small { font-size: 13px; color: var(--muted-text); line-height: 1.6; }
 .ed-button { display: inline-flex; align-items: center; justify-content: center; gap: 28px; min-height: 52px; padding: 14px 23px; background: var(--accent); color: var(--accent-text); border: 1px solid var(--accent); border-radius: 4px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background .18s ease, transform .18s ease; }
-.ed-button:hover { background: #203824; transform: translateY(-2px); }
+.ed-button:hover { background: var(--dm-accent-hover, #203824); transform: translateY(-2px); }
 .ed-text-link { display: inline-flex; align-items: center; gap: 16px; padding: 9px 0; color: var(--text); text-decoration: underline; text-underline-offset: 7px; text-decoration-thickness: 1px; font-size: 14px; line-height: 1.45; }
 .ed-text-link:hover { color: var(--accent); }
 .ed-hero { display: grid; grid-template-columns: 1fr 1.04fr; gap: 24px; align-items: center; padding: 55px 0 40px; min-height: 620px; }
@@ -87,7 +87,7 @@ html[data-design="editorial"] .ed-game-intro p:not(.ed-kicker) { margin-top: 22p
 .ed-modes > .ed-text-link { margin-top: 20px; font-size: 12px; }
 .ed-knowledge { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
 .ed-knowledge p:not(.ed-kicker) { margin: 24px 0 16px !important; max-width: 540px; }
-.ed-quote { background: #d2c28f; padding: 34px 40px; color: #302a15; border-radius: 4px; }
+.ed-quote { background: var(--dm-quote, #d2c28f); padding: 34px 40px; color: var(--dm-text, #302a15); border-radius: 4px; }
 .ed-quote-number { font-size: 10px; text-transform: uppercase; letter-spacing: .09em; }
 .ed-quote blockquote { font-family: var(--ed-serif); font-size: clamp(30px,3vw,44px); line-height: 1.18; padding: 36px 0 24px; }
 .ed-buy { display: grid; grid-template-columns: 1fr 1fr .8fr; gap: 48px; align-items: center; }

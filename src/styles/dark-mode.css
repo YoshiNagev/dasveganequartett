@@ -1,0 +1,179 @@
+/* Shared appearance controls and the editorial dark palette.
+   Route styles use var(--dm-…, original-light-value), so light mode retains
+   the existing colors. Dark tokens apply only to screens; print stays light. */
+html[data-design] {
+  --brand-light-display: block;
+  --brand-dark-display: none;
+}
+html[data-theme="light"] { color-scheme: light; }
+.ed-brand-pair { display:inline-block; flex-shrink:0; }
+.ed-brand-pair .ed-brand--light { display:var(--brand-light-display); }
+.ed-brand-pair .ed-brand--dark {
+  display:var(--brand-dark-display);
+  filter:brightness(0) invert(94%) sepia(13%) saturate(180%) hue-rotate(337deg);
+}
+.header-display-controls { display:flex; align-items:center; flex-shrink:0; gap:12px; }
+.theme-picker { display:none; position:relative; color:var(--text); }
+html[data-theme] .theme-picker { display:block; }
+.theme-picker > summary {
+  list-style:none; display:flex; align-items:center; justify-content:center;
+  width:44px; height:44px; border:1px solid var(--border); border-radius:4px;
+  background:transparent; color:var(--text); cursor:pointer;
+}
+.theme-picker > summary::-webkit-details-marker { display:none; }
+.theme-picker > summary:hover, .theme-picker[open] > summary { background:var(--surface); }
+.theme-picker > summary:focus-visible { outline:3px solid var(--dm-focus, #786018); outline-offset:4px; }
+.theme-picker .theme-icon { display:none; }
+html[data-theme-preference="system"] .theme-icon--system,
+html[data-theme-preference="light"] .theme-icon--light,
+html[data-theme-preference="dark"] .theme-icon--dark { display:block; }
+.theme-picker-panel {
+  position:absolute; z-index:450; top:calc(100% + 12px); right:0;
+  width:224px; max-width:calc(100vw - 40px); margin:0; padding:12px;
+  border:1px solid var(--border); border-radius:6px;
+  background:var(--background); color:var(--text); box-shadow:var(--shadow-soft);
+}
+.theme-picker-panel legend { float:left; width:100%; padding:5px 8px 12px; font-size:12px; font-weight:650; letter-spacing:.05em; }
+.theme-picker-panel label { clear:both; display:flex; align-items:center; gap:12px; min-height:44px; padding:10px 8px; border-radius:3px; cursor:pointer; font-size:14px; }
+.theme-picker-panel label:hover { background:var(--surface); }
+.theme-picker-panel input { width:17px; height:17px; margin:0; accent-color:var(--accent); }
+.theme-picker-panel input:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.theme-picker-panel small { display:block; margin-top:3px; font-size:11px; color:var(--muted-text); }
+html[data-design="editorial"] .header-inner { gap:18px; }
+@media(min-width:1201px) and (max-width:1320px) {
+  html[data-design="editorial"] .header-nav { gap:16px; }
+}
+@media(max-width:1200px) {
+  html[data-design="editorial"] .header-inner { gap:12px; }
+  .header-display-controls .theme-picker-panel { right:0; }
+}
+@media(max-width:380px) {
+  html[data-design="editorial"] .header-inner { width:calc(100% - 28px); gap:8px; }
+  html[data-design="editorial"] .header-inner .ed-brand { width:150px; height:66px; }
+  .header-display-controls { gap:8px; }
+}
+
+@media screen {
+  html[data-design][data-theme="dark"] {
+  color-scheme: dark;
+  --background: #151c18;
+  --surface: #202822;
+  --surface-soft: #2b342b;
+  --text: #f0ecdf;
+  --muted-text: #bec2b6;
+  --faint-text: #a7b09e;
+  --accent: #bbd1a5;
+  --accent-2: #dfc38f;
+  --accent-text: #182019;
+  --border: #4b564a;
+  --nav-text: #f0ecdf;
+  --nav-text-hover: #bbd1a5;
+  --shadow-soft: 0 12px 28px rgb(0 0 0 / 25%);
+  --shadow-strong: 0 24px 70px rgb(0 0 0 / 35%);
+  --dm-text: #f0ecdf;
+  --dm-muted: #bec2b6;
+  --dm-faint: #a7b09e;
+  --dm-surface: #202822;
+  --dm-soft: #2b342b;
+  --dm-field: #18201b;
+  --dm-border: #4b564a;
+  --dm-control-border: #78846f;
+  --dm-accent: #bbd1a5;
+  --dm-accent-hover: #d0e1bf;
+  --dm-on-accent: #182019;
+  --dm-focus: #e3c98e;
+  --dm-muted-surface: #354035;
+  --dm-quote: #36392b;
+  --dm-quote-border: #b9a86f;
+  --dm-success-bg: #26382b;
+  --dm-success: #bbd7ac;
+  --dm-success-border: #6d8962;
+  --dm-danger-bg: #402d2a;
+  --dm-danger-bg-hover: #503833;
+  --dm-danger: #f2ada4;
+  --dm-danger-hover: #f6c5be;
+  --dm-danger-border: #a87b70;
+  --dm-info: #b3d5df;
+  --dm-info-bg: #26373b;
+  --dm-info-border: #6e959f;
+  --dm-purple: #d8c4e9;
+  --dm-purple-bg: #38303e;
+  --dm-purple-border: #9580a5;
+  --dm-lavender: #35313d;
+  --dm-aqua: #253b36;
+  --dm-coral: #42322d;
+  --brand-light-display: none;
+  --brand-dark-display: block;
+  }
+}
+
+/* A readable system theme even with JavaScript disabled. */
+@media screen and (prefers-color-scheme: dark) {
+  html[data-design]:not([data-theme]) {
+  color-scheme: dark;
+  --background: #151c18;
+  --surface: #202822;
+  --surface-soft: #2b342b;
+  --text: #f0ecdf;
+  --muted-text: #bec2b6;
+  --faint-text: #a7b09e;
+  --accent: #bbd1a5;
+  --accent-2: #dfc38f;
+  --accent-text: #182019;
+  --border: #4b564a;
+  --nav-text: #f0ecdf;
+  --nav-text-hover: #bbd1a5;
+  --shadow-soft: 0 12px 28px rgb(0 0 0 / 25%);
+  --shadow-strong: 0 24px 70px rgb(0 0 0 / 35%);
+  --dm-text: #f0ecdf;
+  --dm-muted: #bec2b6;
+  --dm-faint: #a7b09e;
+  --dm-surface: #202822;
+  --dm-soft: #2b342b;
+  --dm-field: #18201b;
+  --dm-border: #4b564a;
+  --dm-control-border: #78846f;
+  --dm-accent: #bbd1a5;
+  --dm-accent-hover: #d0e1bf;
+  --dm-on-accent: #182019;
+  --dm-focus: #e3c98e;
+  --dm-muted-surface: #354035;
+  --dm-quote: #36392b;
+  --dm-quote-border: #b9a86f;
+  --dm-success-bg: #26382b;
+  --dm-success: #bbd7ac;
+  --dm-success-border: #6d8962;
+  --dm-danger-bg: #402d2a;
+  --dm-danger-bg-hover: #503833;
+  --dm-danger: #f2ada4;
+  --dm-danger-hover: #f6c5be;
+  --dm-danger-border: #a87b70;
+  --dm-info: #b3d5df;
+  --dm-info-bg: #26373b;
+  --dm-info-border: #6e959f;
+  --dm-purple: #d8c4e9;
+  --dm-purple-bg: #38303e;
+  --dm-purple-border: #9580a5;
+  --dm-lavender: #35313d;
+  --dm-aqua: #253b36;
+  --dm-coral: #42322d;
+  --brand-light-display: none;
+  --brand-dark-display: block;
+  }
+}
+
+/* Native controls, shared notifications and legacy components. */
+html[data-design="editorial"] :is(input,textarea,select) { accent-color:var(--accent); }
+html[data-design="editorial"] .ed-skip { color:var(--accent-text); }
+html[data-design="editorial"] .notification-dropdown { border-color:var(--border); }
+html[data-design="editorial"] .notification-dropdown-item { color:var(--text); }
+html[data-design="editorial"] .notification-dropdown-item:hover { background:var(--surface-soft); }
+html[data-design="editorial"] .notification-dropdown-item.unread { background:var(--dm-success-bg, #e9eddf); }
+html[data-design="editorial"] .notification-dropdown a { color:var(--text); }
+html[data-design="editorial"] .theme-picker-panel { color-scheme:inherit; }
+@media print {
+  html[data-design] { color-scheme:light; }
+  .header-display-controls, .theme-picker { display:none!important; }
+  .ed-brand-pair .ed-brand--dark { display:none!important; }
+  .ed-brand-pair .ed-brand--light { display:block!important; filter:none; }
+}
