@@ -10,7 +10,7 @@ html[data-theme="light"] { color-scheme: light; }
 .ed-brand-pair .ed-brand--light { display:var(--brand-light-display); }
 .ed-brand-pair .ed-brand--dark {
   display:var(--brand-dark-display);
-  filter:brightness(0) invert(94%) sepia(13%) saturate(180%) hue-rotate(337deg);
+  filter:none;
 }
 .header-display-controls { display:flex; align-items:center; flex-shrink:0; gap:12px; }
 .theme-picker { display:none; position:relative; color:var(--text); }
