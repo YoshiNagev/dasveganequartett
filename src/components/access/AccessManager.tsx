@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 
 type License = {
@@ -27,6 +27,16 @@ export default function AccessManager() {
   const [workingId, setWorkingId] = useState("");
   const [message, setMessage] = useState("");
   const [gift, setGift] = useState<Gift | null>(null);
+
+  const giftInput = useRef<HTMLInputElement>(null);
+  const [copyMessage, setCopyMessage] = useState("");
+
+  useEffect(() => {
+    if (gift) {
+      giftInput.current?.focus();
+      giftInput.current?.select();
+    }
+  }, [gift]);
 
   async function loadStatus(token: string) {
     const response = await fetch("/api/access/status", {
@@ -102,7 +112,13 @@ export default function AccessManager() {
     setGift(null);
     try {
       const result = await postAction("/api/access/gift", { licenseId: license.id });
-      setGift({ code: result.code, giftUrl: result.giftUrl });
+      if (typeof result.giftUrl === "string" && result.giftUrl.trim()) {
+        const url = new URL(result.giftUrl, window.location.origin);
+        setCopyMessage("");
+        setGift({ code: result.code, giftUrl: url.href });
+      } else {
+        setMessage("Der Zugang wurde zum Verschenken freigegeben, aber der Server hat keinen vollständigen Geschenklink zurückgegeben.");
+      }
       await loadStatus(accessToken);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Geschenklink konnte nicht erstellt werden.");
@@ -115,9 +131,11 @@ export default function AccessManager() {
     if (!gift) return;
     try {
       await navigator.clipboard.writeText(gift.giftUrl);
-      setMessage("Geschenklink kopiert.");
+      setCopyMessage("Geschenklink kopiert.");
     } catch {
-      setMessage("Automatisches Kopieren ist nicht möglich. Markiere den oben angezeigten Link und kopiere ihn manuell.");
+      giftInput.current?.focus();
+      giftInput.current?.select();
+      setCopyMessage("Der Link ist markiert. Kopiere ihn mit Strg+C, ⌘C oder über das Kopiermenü deines Geräts.");
     }
   }
 
@@ -244,7 +262,7 @@ export default function AccessManager() {
       </section>
 
       {gift && (
-        <section className="gift-result" aria-live="polite">
+        <section className="gift-result" aria-label="Erstellter Geschenklink">
           <p className="eyebrow">Einmaliger Geschenklink</p>
           <h2>Jetzt weitergeben</h2>
           <p>
@@ -252,9 +270,18 @@ export default function AccessManager() {
             einlöst, wird der Zugang fest mit ihrem Profil verbunden. Der
             vollständige Link wird aus Sicherheitsgründen nur jetzt angezeigt.
           </p>
-          <code>{gift.giftUrl}</code>
+          <input
+            ref={giftInput}
+            aria-label="Vollständiger Geschenklink"
+            type="text"
+            readOnly
+            value={gift.giftUrl}
+            onClick={(event) => event.currentTarget.select()}
+            style={{ width: "100%", boxSizing: "border-box", padding: ".75rem", font: "inherit" }}
+          />
           <strong>{gift.code}</strong>
           <button type="button" onClick={copyGiftLink}>Link kopieren</button>
+          <p role="status">{copyMessage}</p>
         </section>
       )}
 
